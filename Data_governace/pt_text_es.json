@@ -1,0 +1,4058 @@
+[
+  {
+    "slide_index": 1,
+    "shape_id": 2506,
+    "type": "text_frame",
+    "text": "Governance Day\n\nDatabricks Brazil\n\n",
+    "translated_text": "Día de la Gobernanza\n\nDatabricks Brasil\n\n"
+  },
+  {
+    "slide_index": 1,
+    "shape_id": 2508,
+    "type": "text_frame",
+    "text": "INIC",
+    "translated_text": "INIC"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2514,
+    "type": "text_frame",
+    "text": "Agenda",
+    "translated_text": "Agenda "
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2515,
+    "type": "text_frame",
+    "text": "Governança de Dados e IA\n",
+    "translated_text": "Gobernanza de datos e IA\n"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2516,
+    "type": "text_frame",
+    "text": "1",
+    "translated_text": "1"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2517,
+    "type": "text_frame",
+    "text": "Maturity Assessment | Dados + IA\n\n",
+    "translated_text": "Evaluación de madurez | Datos + IA\n\n"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2518,
+    "type": "text_frame",
+    "text": "2",
+    "translated_text": "2"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2522,
+    "type": "text_frame",
+    "text": "Como GenAI está transformando Governança\n",
+    "translated_text": "Cómo GenAI está transformando la gobernanza\n"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2523,
+    "type": "text_frame",
+    "text": "3",
+    "translated_text": "3"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2524,
+    "type": "text_frame",
+    "text": "História de Sucesso - Classificação de dados\n\n",
+    "translated_text": "Caso de éxito - Clasificación de datos\n\n"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2525,
+    "type": "text_frame",
+    "text": "Mão na massa - Data Classification + ABAC\n\n",
+    "translated_text": "Mano a mano - Clasificación de datos + ABAC\n\n"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2526,
+    "type": "text_frame",
+    "text": "Encerramento\n",
+    "translated_text": "Cierre\n"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2527,
+    "type": "text_frame",
+    "text": "4",
+    "translated_text": "4"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2528,
+    "type": "text_frame",
+    "text": "5",
+    "translated_text": "5"
+  },
+  {
+    "slide_index": 2,
+    "shape_id": 2529,
+    "type": "text_frame",
+    "text": "6",
+    "translated_text": "6 ."
+  },
+  {
+    "slide_index": 3,
+    "shape_id": 2534,
+    "type": "text_frame",
+    "text": "Bem vindos!",
+    "translated_text": "¡Bienvenidos! "
+  },
+  {
+    "slide_index": 4,
+    "shape_id": 2559,
+    "type": "text_frame",
+    "text": "www.databricks.com/discover/data-governance\n",
+    "translated_text": "www.databricks.com/discover/data-governance\n"
+  },
+  {
+    "slide_index": 4,
+    "shape_id": 2560,
+    "type": "text_frame",
+    "text": "Data Governance",
+    "translated_text": "Data Governance"
+  },
+  {
+    "slide_index": 5,
+    "shape_id": 2566,
+    "type": "text_frame",
+    "text": "Governança de Dados & IA",
+    "translated_text": "Gobierno del dato"
+  },
+  {
+    "slide_index": 5,
+    "shape_id": 2567,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 5,
+    "shape_id": 2568,
+    "type": "text_frame",
+    "text": "Governança de Dados\nFramework formal de processos, políticas e padrões que guiam como o dado é coletado, armazenado, protegido e utilizado na empresa.\nGarante a disponibilidade, usabilidade, integridade e segurança do dado, além da aderência a regulações e políticas internas.  \nUma governança de dados efetiva pode transformar os dados em um asset valioso para a empresa. ",
+    "translated_text": "Gobierno del dato\nMarco formal de procesos, políticas y estándares que guían la forma en que se recopilan, almacenan, protegen y utilizan los datos en la empresa.\nGarantiza la disponibilidad, usabilidad, integridad y seguridad de los datos, así como el cumplimiento de las normativas y políticas internas.\nUn gobierno de datos eficaz puede convertir los datos en un activo valioso para la empresa."
+  },
+  {
+    "slide_index": 5,
+    "shape_id": 2569,
+    "type": "text_frame",
+    "text": "Governança de IA*\nFrameworks, princípios e ferramentas usadas para gerenciar o desenvolvimento e supervisão de sistemas de IA. \nGarante que a IA é desenhada de forma ética, transparente, segura e que está alinhada aos valores organizacionais e societários.  \nComponentes principais incluem gestão de risco, compliance regulatória, privacidade de dados e explicabilidade das decisões.",
+    "translated_text": "Gobierno IA\nMarcos, principios y herramientas utilizados para gestionar el desarrollo y la supervisión de los sistemas de IA.\nGarantiza que la IA se diseñe de manera ética, transparente y segura, y que esté alineada con los valores organizacionales y sociales.\nLos componentes clave incluyen la gestión de riesgos, el cumplimiento normativo, la privacidad de los datos y la explicabilidad de las decisiones."
+  },
+  {
+    "slide_index": 5,
+    "shape_id": 2570,
+    "type": "text_frame",
+    "text": "Governança de Dados & IA\nIntegra os dois frameworks, para garantir coesão entre o ciclo de vida dos dados e do desenvolvimento de IA. \nA Governança de Dados garante dados de alta qualidade para uso responsável em IA; a Governança de IA foca no desenvolvimento e implantação éticos de IA.\nJuntas, elas abordam desafios como a detecção de vieses em modelos de IA por meio de padrões de dados robustos e garantem a conformidade com regulamentações em ambos os domínios.",
+    "translated_text": "Gobierno del dato\nIntegra los dos marcos, para garantizar la cohesión entre el ciclo de vida de los datos y el desarrollo de la IA.\nLa gobernanza de datos garantiza datos de alta calidad para un uso responsable de la IA; la gobernanza de la IA se centra en el desarrollo ético y el despliegue de la IA.\nJuntos, abordan desafíos como detectar sesgos en los modelos de IA a través de estándares de datos sólidos y garantizar el cumplimiento normativo en ambos dominios."
+  },
+  {
+    "slide_index": 5,
+    "shape_id": 2573,
+    "type": "text_frame",
+    "text": "* Including ML, AI Agents, deep learning, …",
+    "translated_text": "* Incluyendo ML, agentes de IA, aprendizaje profundo,..."
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2578,
+    "type": "text_frame",
+    "text": "Oportunidades na Governança de Dados + IA",
+    "translated_text": "Oportunidades en Data Governance + IA"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2579,
+    "type": "text_frame",
+    "text": "Uma forte estrutura de governança de dados pode transformar a complexidade em uma vantagem estratégica, garantindo que os dados permaneçam um ativo confiável e de alto valor",
+    "translated_text": "Una estructura sólida de gobierno de datos puede convertir la complejidad en una ventaja estratégica, asegurando que los datos sigan siendo un activo confiable y de alto valor"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2580,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2581,
+    "type": "text_frame",
+    "text": "Ecossistema Unificado",
+    "translated_text": "Ecosistema unificado"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2582,
+    "type": "text_frame",
+    "text": "Quebrar silos e garantir a consistência entre sistemas permite uma fonte única de verdade para uma melhor tomada de decisões (e também leva a uma gestão de mudanças mais eficiente).",
+    "translated_text": "Romper los silos y garantizar la coherencia entre los sistemas permite una única fuente de información para una mejor toma de decisiones (y también conduce a una gestión del cambio más eficiente)."
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2583,
+    "type": "text_frame",
+    "text": "Práticas padronizadas",
+    "translated_text": "Prácticas estandarizadas"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2584,
+    "type": "text_frame",
+    "text": "Definições claras, formatos e políticas melhoram interoperabilidade e simplificam operações",
+    "translated_text": "Definiciones, formatos y políticas claras mejoran la interoperabilidad y simplifican las operaciones"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2585,
+    "type": "text_frame",
+    "text": "Segurança & Compliance",
+    "translated_text": "Seguridad y compliance"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2586,
+    "type": "text_frame",
+    "text": "Governança proativa ampara a privacidade dos dados, garante a adesão regulatória e fortalece a resiliência contra ameaças.\n",
+    "translated_text": "La gobernanza proactiva respalda la privacidad de los datos, garantiza el cumplimiento normativo y fortalece la resiliencia frente a las amenazas.\n"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2587,
+    "type": "text_frame",
+    "text": "Fácil acesso aos dados",
+    "translated_text": "Fácil acceso a los datos"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2588,
+    "type": "text_frame",
+    "text": "Governança bem estruturada empodera os times com os dados certos na hora certa, aumentando eficiência e inovação.",
+    "translated_text": "La gobernanza bien estructurada empodera a los equipos con los datos correctos en el momento adecuado, aumentando la eficiencia y la innovación."
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2589,
+    "type": "text_frame",
+    "text": "Papeis claros & Responsabilidade",
+    "translated_text": "Roles claros y responsabilidad"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2590,
+    "type": "text_frame",
+    "text": "Papeis e responsabilidades definidos fomentam administração de dados, alinhamento com objetivos de negócio e criação de valor a longo prazo. ",
+    "translated_text": "Las funciones y responsabilidades definidas fomentan la administración de datos, la alineación con los objetivos comerciales y la creación de valor a largo plazo."
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2591,
+    "type": "text_frame",
+    "text": "Aumento do letramento em dados",
+    "translated_text": "Mayor alfabetización de datos"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2592,
+    "type": "text_frame",
+    "text": "Aumenta-se a quantidade de pessoas capazes de entender e trabalhar com os dados.",
+    "translated_text": "Aumenta el número de personas capaces de entender y trabajar con datos."
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2593,
+    "type": "text_frame",
+    "text": "Reduzir duplicação",
+    "translated_text": "Reduce la duplicación"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2594,
+    "type": "text_frame",
+    "text": "Redução da duplicação de dados e processos, reduzindo custos e melhorando time to market.",
+    "translated_text": "Reducción de la duplicación de datos y procesos, reduciendo costes y mejorando el time to market."
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2595,
+    "type": "text_frame",
+    "text": "Colaboração simplificada",
+    "translated_text": "Colaboración simplificada"
+  },
+  {
+    "slide_index": 6,
+    "shape_id": 2596,
+    "type": "text_frame",
+    "text": "Padrões e políticas consistentes permitem colaboração entre sistemas e entre áreas de negócio.",
+    "translated_text": "Las normas y políticas coherentes permiten la colaboración entre sistemas y áreas de negocio."
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2604,
+    "type": "text_frame",
+    "text": "Overview de Governança da Informação",
+    "translated_text": "Descripción general del gobierno de la información"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2605,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2608,
+    "type": "text_frame",
+    "text": "Culture & Ethics",
+    "translated_text": "Cultura y ética"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2609,
+    "type": "text_frame",
+    "text": "USA",
+    "translated_text": "EE.UU"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2610,
+    "type": "text_frame",
+    "text": "Europe",
+    "translated_text": "Europa"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2611,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2612,
+    "type": "text_frame",
+    "text": "Technology Best Practices",
+    "translated_text": "Mejores prácticas tecnológicas"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2613,
+    "type": "text_frame",
+    "text": "IT",
+    "translated_text": "IT"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2614,
+    "type": "text_frame",
+    "text": "Security",
+    "translated_text": "Security"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2615,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2616,
+    "type": "text_frame",
+    "text": "Recommendations",
+    "translated_text": "Recommendations"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2617,
+    "type": "text_frame",
+    "text": "Guidelines externos",
+    "translated_text": "Directrices externas"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2618,
+    "type": "text_frame",
+    "text": "Governança da Informação",
+    "translated_text": "Gobierno de la información"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2620,
+    "type": "text_frame",
+    "text": "Data & AI assets",
+    "translated_text": "Activos de datos e IA"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2622,
+    "type": "text_frame",
+    "text": "apply S&Ps",
+    "translated_text": "aplicar S&P"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2623,
+    "type": "text_frame",
+    "text": "Platforms and systems",
+    "translated_text": "Plataformas y sistemas"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2625,
+    "type": "text_frame",
+    "text": "apply S&Ps",
+    "translated_text": "aplicar S&P"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2628,
+    "type": "text_frame",
+    "text": "Industry Regulations",
+    "translated_text": "Regulaciones de la industria"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2629,
+    "type": "text_frame",
+    "text": "FinServ",
+    "translated_text": "FinServ"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2630,
+    "type": "text_frame",
+    "text": "Telco",
+    "translated_text": "Telco"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2631,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2632,
+    "type": "text_frame",
+    "text": "Laws & Jurisdictions",
+    "translated_text": "Leyes y Jurisdicciones"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2633,
+    "type": "text_frame",
+    "text": "CCPA",
+    "translated_text": "CCPA"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2634,
+    "type": "text_frame",
+    "text": "GDPR",
+    "translated_text": "GDPR"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2635,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2636,
+    "type": "text_frame",
+    "text": "Binding Rules",
+    "translated_text": "Normas vinculantes"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2637,
+    "type": "text_frame",
+    "text": "Compliance Certifications",
+    "translated_text": "Certificaciones de cumplimiento"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2638,
+    "type": "text_frame",
+    "text": "PCI",
+    "translated_text": "PCI"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2639,
+    "type": "text_frame",
+    "text": "ISO …",
+    "translated_text": "ISO"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2640,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2642,
+    "type": "text_frame",
+    "text": "Corporate Standards & Policies",
+    "translated_text": "Normas y políticas corporativas"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2643,
+    "type": "text_frame",
+    "text": "define",
+    "translated_text": "Define:"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2646,
+    "type": "text_frame",
+    "text": "IT Standards & Policies (S&P)",
+    "translated_text": "Estándares y políticas de TI (S&P)"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2649,
+    "type": "text_frame",
+    "text": "compliant",
+    "translated_text": "conforme"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2650,
+    "type": "text_frame",
+    "text": "compliant",
+    "translated_text": "conforme"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2651,
+    "type": "text_frame",
+    "text": "IT Leadership",
+    "translated_text": "Liderazgo de TI"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2653,
+    "type": "text_frame",
+    "text": "define",
+    "translated_text": "Define:"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2655,
+    "type": "text_frame",
+    "text": "Data & AI Standards & Policies",
+    "translated_text": "Estándares y políticas de datos e IA"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2657,
+    "type": "text_frame",
+    "text": "compliant",
+    "translated_text": "conforme"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2658,
+    "type": "text_frame",
+    "text": "AI Governance Committee",
+    "translated_text": "Comité de Gobernanza de IA"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2659,
+    "type": "text_frame",
+    "text": "Data & AI Specialists",
+    "translated_text": "Especialistas en datos e IA"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2662,
+    "type": "text_frame",
+    "text": "define",
+    "translated_text": "Define:"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2665,
+    "type": "text_frame",
+    "text": "IT and Business Units",
+    "translated_text": "Unidades de TI y de Negocio"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2666,
+    "type": "text_frame",
+    "text": "govern",
+    "translated_text": "Govern. "
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2668,
+    "type": "text_frame",
+    "text": "direct",
+    "translated_text": "Directo"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2671,
+    "type": "text_frame",
+    "text": "support",
+    "translated_text": "             suporte"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2672,
+    "type": "text_frame",
+    "text": "Exec Leadership",
+    "translated_text": "Liderazgo ejecutivo"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2673,
+    "type": "text_frame",
+    "text": "Business Unit Leadership",
+    "translated_text": "Liderazgo de la unidad de negocio"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2674,
+    "type": "text_frame",
+    "text": "Legal and Compliance ",
+    "translated_text": "Legal y Cumplimiento"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2675,
+    "type": "text_frame",
+    "text": "Corporate Governance (opt.) ",
+    "translated_text": "Gobierno Corporativo (opt.)"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2677,
+    "type": "text_frame",
+    "text": "support",
+    "translated_text": "             suporte"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2679,
+    "type": "text_frame",
+    "text": "support",
+    "translated_text": "             suporte"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2681,
+    "type": "text_frame",
+    "text": "Business Unit Standards & Policies",
+    "translated_text": "Normas y políticas de la unidad de negocio"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2683,
+    "type": "text_frame",
+    "text": "compliant",
+    "translated_text": "conforme"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2685,
+    "type": "text_frame",
+    "text": "define",
+    "translated_text": "Define:"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2687,
+    "type": "text_frame",
+    "text": "support",
+    "translated_text": "             suporte"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2688,
+    "type": "text_frame",
+    "text": "Governança precisa de uma Definição e de prática de Operações fortes",
+    "translated_text": "La gobernanza necesita una sólida definición y práctica de las operaciones"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2689,
+    "type": "text_frame",
+    "text": "Definition",
+    "translated_text": "Definition"
+  },
+  {
+    "slide_index": 7,
+    "shape_id": 2690,
+    "type": "text_frame",
+    "text": "Operations",
+    "translated_text": "• Operations"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2698,
+    "type": "text_frame",
+    "text": "Governança da Informação com Databricks",
+    "translated_text": "Gobierno de la información con Databricks"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2699,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2700,
+    "type": "text_frame",
+    "text": "Industry Regulations",
+    "translated_text": "Regulaciones de la industria"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2701,
+    "type": "text_frame",
+    "text": "Culture & Ethics",
+    "translated_text": "Cultura y ética"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2702,
+    "type": "text_frame",
+    "text": "Laws & Jurisdictions",
+    "translated_text": "Leyes y Jurisdicciones"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2703,
+    "type": "text_frame",
+    "text": "CCPA",
+    "translated_text": "CCPA"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2704,
+    "type": "text_frame",
+    "text": "GDPR",
+    "translated_text": "GDPR"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2705,
+    "type": "text_frame",
+    "text": "FinServ",
+    "translated_text": "FinServ"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2706,
+    "type": "text_frame",
+    "text": "Telco",
+    "translated_text": "Telco"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2707,
+    "type": "text_frame",
+    "text": "USA",
+    "translated_text": "EE.UU"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2708,
+    "type": "text_frame",
+    "text": "Europe",
+    "translated_text": "Europa"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2709,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2710,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2711,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2712,
+    "type": "text_frame",
+    "text": "Technology Best Practices",
+    "translated_text": "Mejores prácticas tecnológicas"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2713,
+    "type": "text_frame",
+    "text": "IT",
+    "translated_text": "IT"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2714,
+    "type": "text_frame",
+    "text": "Security",
+    "translated_text": "Security"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2715,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2716,
+    "type": "text_frame",
+    "text": "Corporate Standards & Policies",
+    "translated_text": "Normas y políticas corporativas"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2717,
+    "type": "text_frame",
+    "text": "Data & AI Standards & Policies",
+    "translated_text": "Estándares y políticas de datos e IA"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2718,
+    "type": "text_frame",
+    "text": "Data & AI assets",
+    "translated_text": "Activos de datos e IA"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2719,
+    "type": "text_frame",
+    "text": "define",
+    "translated_text": "Define:"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2720,
+    "type": "text_frame",
+    "text": "Exec Leadership",
+    "translated_text": "Liderazgo ejecutivo"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2722,
+    "type": "text_frame",
+    "text": "Binding Rules",
+    "translated_text": "Normas vinculantes"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2723,
+    "type": "text_frame",
+    "text": "Recommendations",
+    "translated_text": "Recommendations"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2724,
+    "type": "text_frame",
+    "text": "Guidelines externos",
+    "translated_text": "Directrices externas"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2726,
+    "type": "text_frame",
+    "text": "apply S&Ps",
+    "translated_text": "aplicar S&P"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2727,
+    "type": "text_frame",
+    "text": "IT Standards & Policies (S&P)",
+    "translated_text": "Estándares y políticas de TI (S&P)"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2728,
+    "type": "text_frame",
+    "text": "Platforms and systems",
+    "translated_text": "Plataformas y sistemas"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2730,
+    "type": "text_frame",
+    "text": "apply S&Ps",
+    "translated_text": "aplicar S&P"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2731,
+    "type": "text_frame",
+    "text": "Governança da Informação",
+    "translated_text": "Gobierno de la información"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2733,
+    "type": "text_frame",
+    "text": "Business Unit Standards & Policies",
+    "translated_text": "Normas y políticas de la unidad de negocio"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2734,
+    "type": "text_frame",
+    "text": "Compliance Certifications",
+    "translated_text": "Certificaciones de cumplimiento"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2735,
+    "type": "text_frame",
+    "text": "PCI",
+    "translated_text": "PCI"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2736,
+    "type": "text_frame",
+    "text": "ISO …",
+    "translated_text": "ISO"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2737,
+    "type": "text_frame",
+    "text": "… ",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2739,
+    "type": "text_frame",
+    "text": "IT and Business Units",
+    "translated_text": "Unidades de TI y de Negocio"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2740,
+    "type": "text_frame",
+    "text": "govern",
+    "translated_text": "Govern. "
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2742,
+    "type": "text_frame",
+    "text": "compliant",
+    "translated_text": "conforme"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2745,
+    "type": "text_frame",
+    "text": "compliant",
+    "translated_text": "conforme"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2746,
+    "type": "text_frame",
+    "text": "compliant",
+    "translated_text": "conforme"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2748,
+    "type": "text_frame",
+    "text": "compliant",
+    "translated_text": "conforme"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2749,
+    "type": "text_frame",
+    "text": "Business Unit Leadership",
+    "translated_text": "Liderazgo de la unidad de negocio"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2751,
+    "type": "text_frame",
+    "text": "IT Leadership",
+    "translated_text": "Liderazgo de TI"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2753,
+    "type": "text_frame",
+    "text": "define",
+    "translated_text": "Define:"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2754,
+    "type": "text_frame",
+    "text": "Legal and Compliance ",
+    "translated_text": "Legal y Cumplimiento"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2755,
+    "type": "text_frame",
+    "text": "AI Governance Committee",
+    "translated_text": "Comité de Gobernanza de IA"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2756,
+    "type": "text_frame",
+    "text": "Data & AI Specialists",
+    "translated_text": "Especialistas en datos e IA"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2759,
+    "type": "text_frame",
+    "text": "define",
+    "translated_text": "Define:"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2761,
+    "type": "text_frame",
+    "text": "define",
+    "translated_text": "Define:"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2763,
+    "type": "text_frame",
+    "text": "direct",
+    "translated_text": "Directo"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2764,
+    "type": "text_frame",
+    "text": "Corporate Governance (opt.) ",
+    "translated_text": "Gobierno Corporativo (opt.)"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2766,
+    "type": "text_frame",
+    "text": "support",
+    "translated_text": "             suporte"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2768,
+    "type": "text_frame",
+    "text": "support",
+    "translated_text": "             suporte"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2770,
+    "type": "text_frame",
+    "text": "support",
+    "translated_text": "             suporte"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2772,
+    "type": "text_frame",
+    "text": "support",
+    "translated_text": "             suporte"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2773,
+    "type": "text_frame",
+    "text": "Databricks oferece um framework aberto para gerenciar assets de dados",
+    "translated_text": "Databricks ofrece un marco abierto para gestionar activos de datos"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2774,
+    "type": "text_frame",
+    "text": "Definition",
+    "translated_text": "Definition"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2775,
+    "type": "text_frame",
+    "text": "Operations",
+    "translated_text": "• Operations"
+  },
+  {
+    "slide_index": 8,
+    "shape_id": 2777,
+    "type": "text_frame",
+    "text": "A Plataforma Databricks apoia a operacionalização de padrões e políticas de governança.﻿",
+    "translated_text": "La plataforma Databricks respalda la operacionalización de estándares y políticas de gobernanza."
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2784,
+    "type": "text_frame",
+    "text": "Nível de maturidade de governança",
+    "translated_text": "Nivel de madurez del gobierno"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2785,
+    "type": "text_frame",
+    "text": "Governança de Dados e IA é específico de cada empresa",
+    "translated_text": "El gobierno de datos y la IA son específicos de cada empresa"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2786,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2787,
+    "type": "text_frame",
+    "text": "Muitos fatores internos e externos influenciam na governança",
+    "translated_text": "Muchos factores internos y externos influyen en la gobernanza"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2788,
+    "type": "text_frame",
+    "text": "Roadmap específico de cada empresa para implementar governança",
+    "translated_text": "Hoja de ruta específica de la empresa para implementar la gobernanza"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2789,
+    "type": "text_frame",
+    "text": "Ambiente Regulatório",
+    "translated_text": "EL ENTORNO REGULATORIO"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2790,
+    "type": "text_frame",
+    "text": "Apetite ao Risco",
+    "translated_text": "Apetito de riesgo"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2791,
+    "type": "text_frame",
+    "text": "Dados Sensíveis",
+    "translated_text": "<g id=\"1\">Datos sensibles. </g>"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2792,
+    "type": "text_frame",
+    "text": "Tamanho e Recursos Organizacionais",
+    "translated_text": "Tamaño y recursos de la organización"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2793,
+    "type": "text_frame",
+    "text": "Infraestrutura Tecnológica",
+    "translated_text": "Infraestructura Tecnológica"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2794,
+    "type": "text_frame",
+    "text": "Considerações Éticas",
+    "translated_text": "Consideraciones Éticas"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2795,
+    "type": "text_frame",
+    "text": "Setor da Indústria",
+    "translated_text": "Función Industria"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2796,
+    "type": "text_frame",
+    "text": "Envolvimento do Stakeholder",
+    "translated_text": "Participación de las partes interesadas"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2797,
+    "type": "text_frame",
+    "text": "Jurisdições Geográficas e Legais",
+    "translated_text": "Jurisdicciones geográficas y legales"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2798,
+    "type": "text_frame",
+    "text": "Objetivos Estratégicos",
+    "translated_text": "Objetivos Estratégicos"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2799,
+    "type": "text_frame",
+    "text": "Dependências de Terceiros﻿",
+    "translated_text": "Dependencias de terceros"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2800,
+    "type": "text_frame",
+    "text": "Preparação para Resposta a Incidentes﻿",
+    "translated_text": "Preparación para la respuesta a incidentes"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2801,
+    "type": "text_frame",
+    "text": "Competências da Força de Trabalho",
+    "translated_text": "Habilidades de la fuerza laboral"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2806,
+    "type": "text_frame",
+    "text": "influencia",
+    "translated_text": "Influencia"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2807,
+    "type": "text_frame",
+    "text": "influencia",
+    "translated_text": "Influencia"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2808,
+    "type": "text_frame",
+    "text": "influencia",
+    "translated_text": "Influencia"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2809,
+    "type": "text_frame",
+    "text": "melhora",
+    "translated_text": "Progressiva"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2810,
+    "type": "text_frame",
+    "text": "Implementação da iniciativa de governança",
+    "translated_text": "Implementación de la iniciativa de gobernanza"
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2812,
+    "type": "text_frame",
+    "text": "Fatores Externos",
+    "translated_text": "Factores externos "
+  },
+  {
+    "slide_index": 9,
+    "shape_id": 2813,
+    "type": "text_frame",
+    "text": "Fatores internos",
+    "translated_text": "Factores internos"
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2818,
+    "type": "text_frame",
+    "text": "Dados e aplicações de baixo riscoPara aplicações de baixo risco, com dados disponíveis publicamente ou dados operacionais não sensíveis, uma governança mais flexível pode ser aplicada. ",
+    "translated_text": "Datos y aplicaciones de bajo riesgoPara aplicaciones de bajo riesgo, con datos disponibles públicamente o datos operativos no confidenciales, se puede aplicar una gobernanza más flexible."
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2819,
+    "type": "text_frame",
+    "text": "Aplicando o nível certo de governança",
+    "translated_text": "Aplicar el nivel adecuado de gobernanza"
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2820,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2821,
+    "type": "text_frame",
+    "text": "Abordagem baseada em risco, balanceando acurácia vs agilidade",
+    "translated_text": "Enfoque basado en el riesgo, equilibrando la precisión frente a la agilidad"
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2822,
+    "type": "text_frame",
+    "text": "Dados e aplicações de alto riscoPara dados de alto risco (dados sensíveis, PII, dados financeiros ou dados sujeitos a requisitos regulatórios) onde violações podem causar multas ou danos reputacionais, um framework de governança. mais estrito é necessário. Isso inclui:",
+    "translated_text": "Datos y aplicaciones de alto riesgoPara los datos de alto riesgo (datos confidenciales, PII, datos financieros o datos sujetos a requisitos reglamentarios) donde las infracciones pueden causar multas o daños a la reputación, se requiere un marco de gobernanza más estricto. Esto incluye:"
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2823,
+    "type": "table_cell",
+    "row": 0,
+    "col": 0,
+    "text": "Dados",
+    "translated_text": "Datos"
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2823,
+    "type": "table_cell",
+    "row": 0,
+    "col": 2,
+    "text": "IA",
+    "translated_text": "IA"
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2823,
+    "type": "table_cell",
+    "row": 1,
+    "col": 0,
+    "text": "Padrões de qualidade para os dados\nControle de acesso granular\nAuditoria de dados\nCompliance de checks com regularidade.",
+    "translated_text": "Estándares de calidad de los datos\nControl de acceso granular\nAuditoría de datos\nCumplimiento de los controles de forma periódica."
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2823,
+    "type": "table_cell",
+    "row": 1,
+    "col": 2,
+    "text": "Padrões de qualidade para os dados\nLog de predições e interações\nTransparência e disponibilidade de informações para os usuários \nSupervisão humana \nControle de acurácia e segurança. ",
+    "translated_text": "Estándares de calidad de los datos\nRegistro DE predicciones E interacciones\nTransparencia y disponibilidad de la información para los usuarios\nSupervisión humana\nControl de precisión y seguridad."
+  },
+  {
+    "slide_index": 10,
+    "shape_id": 2825,
+    "type": "text_frame",
+    "text": "Fatores que ajudam a determinar risco de uma aplicação\nRegulamentação de indústrias\nImpacto em indivíduos e empresas\nEscala de dados e quantos usuários podem ser afetados\nSensitividade e criticalidade dos dados. ",
+    "translated_text": "Factores que ayudan a determinar el riesgo de una aplicación\nRegulación de industrias\nImpacto en particulares y empresas\nEscala de datos y cuántos usuarios pueden verse afectados\nSensibilidad y criticidad de los datos."
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2830,
+    "type": "text_frame",
+    "text": "Aplicações de IA de alto risco",
+    "translated_text": "Aplicaciones de IA de alto riesgo"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2831,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2832,
+    "type": "text_frame",
+    "text": "Governança estrita",
+    "translated_text": "Gobernanza estricta"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2833,
+    "type": "text_frame",
+    "text": "Governança permissiva",
+    "translated_text": "Gobernanza permisiva"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2834,
+    "type": "text_frame",
+    "text": "Baixa responsividade a mudanças\n(Devagar & Controlado)",
+    "translated_text": "Baja capacidad de respuesta al cambio\n(Lento y controlado)"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2835,
+    "type": "text_frame",
+    "text": "Alta responsividade a mudanças\n(Ágil & Ad Hoc)",
+    "translated_text": "Alta capacidad de respuesta al cambio\n(Ágil y Ad Hoc)"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2839,
+    "type": "text_frame",
+    "text": "Produtos de dados certificados\n(e.g. dados para negócios de alto risco como report de compliance, KPIs financeiros e dados sensíveis como PII,…)",
+    "translated_text": "Productos de datos certificados\n(por ejemplo, datos para empresas de alto riesgo, como informes de cumplimiento, KPI financieros y datos confidenciales, como PII,...)"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2840,
+    "type": "text_frame",
+    "text": "Produtos de dados independentes\n(e.g. produtos de dados para um único consumidor ou para processos de negócio de baixo risco, …)",
+    "translated_text": "Productos de datos independientes\n(por ejemplo, productos de datos para un solo consumidor o para procesos comerciales de bajo riesgo,...)"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2841,
+    "type": "text_frame",
+    "text": "Dados não-sensíveis\n(e.g. dados públcios, dados operacionais não sensíveis…) ",
+    "translated_text": "Datos no sensibles\n(por ejemplo, datos públicos, datos operativos no confidenciales...)"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2842,
+    "type": "text_frame",
+    "text": "Experimentos\n(e.g. projetos de data science iniciais)",
+    "translated_text": "Experimentos.\n(por ejemplo, proyectos iniciales de ciencia de datos)"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2847,
+    "type": "text_frame",
+    "text": "Aplicações de IA de baixo risco",
+    "translated_text": "Aplicaciones de IA de bajo riesgo"
+  },
+  {
+    "slide_index": 11,
+    "shape_id": 2848,
+    "type": "text_frame",
+    "text": "Aplicando o nível certo de governança",
+    "translated_text": "Aplicar el nivel adecuado de gobernanza"
+  },
+  {
+    "slide_index": 12,
+    "shape_id": 2853,
+    "type": "text_frame",
+    "text": "Self Assessment - Data & AI Governance",
+    "translated_text": "Autoevaluación - Gobernanza de datos e IA"
+  },
+  {
+    "slide_index": 12,
+    "shape_id": 2855,
+    "type": "text_frame",
+    "text": "6 pilares em consideração\nData Catalog\nData Quality\nData Classification\nData Security\nData Auditing\nAI Guardrails\n",
+    "translated_text": "6 pilares en consideración\nCatálogo de datos\nData Quality\nClasificación de datos\nSeguridad de Datos\nAuditoría de datos\nBarandillas de IA\n"
+  },
+  {
+    "slide_index": 12,
+    "shape_id": 2856,
+    "type": "text_frame",
+    "text": "5-10 minutos para completar\nOutros participantes não poderão ver suas respostas\nResultados podem ser compartilhados com seu time de conta. Recomendamos desenharem um plano em conjunto para ajudar a alcançar seus objetivos. \nO quiz pode ser feito em Português ou Inglês",
+    "translated_text": "5-10 minutos para completar\nOtros participantes no podrán ver tus respuestas\nLos resultados se pueden compartir con el equipo de tu cuenta. Te recomendamos diseñar un plan juntos para ayudarte a alcanzar tus objetivos.\nEl cuestionario se puede hacer en portugués o inglés"
+  },
+  {
+    "slide_index": 12,
+    "shape_id": 2857,
+    "type": "text_frame",
+    "text": "O que vai ser avaliado?",
+    "translated_text": "¿Qué se evaluará?"
+  },
+  {
+    "slide_index": 12,
+    "shape_id": 2858,
+    "type": "text_frame",
+    "text": "Sobre o assessment",
+    "translated_text": "Acerca de la evaluación"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2863,
+    "type": "text_frame",
+    "text": "Modelo de maturidade para Dados & IA",
+    "translated_text": "Modelo de madurez para datos e IA"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2864,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2866,
+    "type": "text_frame",
+    "text": "2 Gerenciado",
+    "translated_text": "2 Gestionado"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2867,
+    "type": "text_frame",
+    "text": "Valor dos dados reconhecido\nConsciência de governança com processos repetíveis\nEsforços formalizados permanecem isolados",
+    "translated_text": "Valor de los datos reconocidos\nConciencia de gobernanza con procesos repetibles\nLos esfuerzos formalizados permanecen aislados"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2869,
+    "type": "text_frame",
+    "text": "1 Inicial",
+    "translated_text": "1. <g id=\"1\">Inicial</g>"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2870,
+    "type": "text_frame",
+    "text": "Práticas de gerenciamento de dados ad hoc e reativas\nEsforços individuais, atividades não coordenadas e não documentadas﻿",
+    "translated_text": "Prácticas de gestión de datos ad hoc y reactivas\nEsfuerzos individuales, actividades descoordinadas e indocumentadas"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2872,
+    "type": "text_frame",
+    "text": "3 Definido",
+    "translated_text": "3 Definido"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2873,
+    "type": "text_frame",
+    "text": "Uma estrutura de governança de dados em toda a empresa está estabelecida\nImplementação consistente de tecnologia em toda a organização﻿",
+    "translated_text": "Existe una estructura de gobierno de datos en toda la empresa\nImplementación consistente de tecnología en toda la organización"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2875,
+    "type": "text_frame",
+    "text": "4 Quantificado",
+    "translated_text": "4 Cuantificado"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2876,
+    "type": "text_frame",
+    "text": "Medição quantitativa da governança de dados\nResultados, impactos e riscos pode",
+    "translated_text": "Medición cuantitativa de la gobernanza de datos\nLos resultados, los impactos y los riesgos pueden"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2878,
+    "type": "text_frame",
+    "text": "5 Otimizado",
+    "translated_text": "5 Optimizado"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2879,
+    "type": "text_frame",
+    "text": "Totalmente incorporado à cultura organizacional\nAutomação por IA\nOs processos evoluem para atender a necessidades em constante mudança﻿",
+    "translated_text": "Totalmente integrado en la cultura organizacional\nAutomatización de IA\nLos procesos evolucionan para satisfacer las necesidades en constante cambio"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2880,
+    "type": "text_frame",
+    "text": "DADOS",
+    "translated_text": "DATOS "
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2881,
+    "type": "text_frame",
+    "text": "IA",
+    "translated_text": "IA"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2882,
+    "type": "text_frame",
+    "text": "Sumário de diferentes modelos de maturidade",
+    "translated_text": "Resumen de los diferentes modelos de vencimiento"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2884,
+    "type": "text_frame",
+    "text": "1 Inicial",
+    "translated_text": "1. <g id=\"1\">Inicial</g>"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2885,
+    "type": "text_frame",
+    "text": "Consciência básica sobre necessidades de governança de IA, mas sem abordagem estruturada\nUso ad hoc de IA com governança mínima ou inexistente﻿",
+    "translated_text": "Conocimiento básico de las necesidades de gobernanza de la IA, pero sin un enfoque estructurado\nUso ad hoc de la IA con una gobernanza mínima o nula"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2887,
+    "type": "text_frame",
+    "text": "2 Gerenciado",
+    "translated_text": "2 Gestionado"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2888,
+    "type": "text_frame",
+    "text": "Experimentação da governança de IA por meio de esforços informais e localizados\nPolíticas básicas começam a surgir, mas são inconsistentes entre departamentos﻿",
+    "translated_text": "Experimentar con la gobernanza de la IA a través de esfuerzos informales y localizados\nLas políticas básicas comienzan a surgir, pero son inconsistentes entre los departamentos"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2890,
+    "type": "text_frame",
+    "text": "3 Definido",
+    "translated_text": "3 Definido"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2891,
+    "type": "text_frame",
+    "text": "Processos formalizados e padronizados de governança de IA são estabelecidos em toda a empresa\nPapéis, políticas e procedimentos claros para projetos de IA﻿",
+    "translated_text": "Los procesos de gobierno de IA formalizados y estandarizados se establecen en toda la empresa\nRoles, políticas y procedimientos claros para los proyectos de IA"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2893,
+    "type": "text_frame",
+    "text": "4 Quantificado",
+    "translated_text": "4 Cuantificado"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2894,
+    "type": "text_frame",
+    "text": "Medição quantitativa da governança de IA\nA governança se alinha aos objetivos estratégicos e é incorporada aos processos de negócio﻿",
+    "translated_text": "Medición cuantitativa de la gobernanza de la IA\nLa gobernanza se alinea con los objetivos estratégicos y está integrada en los procesos comerciales"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2896,
+    "type": "text_frame",
+    "text": "5 Otimizado",
+    "translated_text": "5 Optimizado"
+  },
+  {
+    "slide_index": 13,
+    "shape_id": 2897,
+    "type": "text_frame",
+    "text": "Melhoria contínua e auto-otimização\nVantagem estratégica por meio de inovação responsável\nAdaptação proativa a riscos e mudanças emergentes﻿",
+    "translated_text": "Mejora continua y autooptimización\nVentaja estratégica a través de la innovación responsable\nAdaptación proactiva a los riesgos y cambios emergentes"
+  },
+  {
+    "slide_index": 14,
+    "shape_id": 2902,
+    "type": "text_frame",
+    "text": "Assessment ",
+    "translated_text": "Assessment "
+  },
+  {
+    "slide_index": 14,
+    "shape_id": 2903,
+    "type": "text_frame",
+    "text": "https://data-governance-epl.replit.app/",
+    "translated_text": "https://data-governance-epl.replit.app/"
+  },
+  {
+    "slide_index": 14,
+    "shape_id": 2905,
+    "type": "text_frame",
+    "text": "\nWORKSHOP_GOV_2025_11\n\n\n",
+    "translated_text": "\nWORKSHOP_GOV_2025_11\n\n\n"
+  },
+  {
+    "slide_index": 14,
+    "shape_id": 2906,
+    "type": "text_frame",
+    "text": "Link do App:",
+    "translated_text": "Enlace de la aplicación:"
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2911,
+    "type": "text_frame",
+    "text": "Níveis de maturidade por pilar",
+    "translated_text": "Niveles de madurez por pilar"
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2912,
+    "type": "text_frame",
+    "text": "Data Catalog",
+    "translated_text": "Catálogo de datos"
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2913,
+    "type": "text_frame",
+    "text": "Level 1: Inicial\n\nCatálogo é muito simples, concentrado em poucos schemas e tabelas. Todos os processos são manuais.\n\nO que fazer? Entender padrões de uso e planejar re-catalogação com processos definidos",
+    "translated_text": "Nivel 1: Inicial\n\nEl catálogo es muy simple, concentrado en pocos esquemas y tablas. Todos los procesos son manuales.\n\n¿Qué hacer? Comprender los patrones de uso y planificar la recatalogación con procesos definidos"
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2914,
+    "type": "text_frame",
+    "text": "Level 5: Otimizado\n\nChecks automatizados rodam com frequência definida e cobrem todos os assets de dados. Alertas funcionam e processo de onboarding de novos dados é simples e com esteira clara.\n\nTime to market e Time to insight reduzidos, formação de talentos analíticos, redução de duplicidade de dados.",
+    "translated_text": "Nivel 5: Optimizado\n\nLas comprobaciones automatizadas se ejecutan con una frecuencia establecida y cubren todos los activos de datos. Las alertas funcionan y el proceso de incorporación de nuevos datos es simple y con una cinta de correr clara.\n\nTime to market y Time to insight reducidos, formación de talento analítico, duplicación de datos reducida."
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2915,
+    "type": "text_frame",
+    "text": "Data Classification",
+    "translated_text": "Clasificación de datos"
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2916,
+    "type": "text_frame",
+    "text": "Level 1: Inicial\n\nControle de acessos acima da classificação.\n\nO que fazer? Definir critérios de classificação da sua empresa, utilizar IA para começar mapeamento. ",
+    "translated_text": "Nivel 1: Inicial\n\nControl de acceso por encima de la clasificación.\n\n¿Qué hacer? Defina los criterios de clasificación de su empresa, use IA para comenzar a mapear."
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2917,
+    "type": "text_frame",
+    "text": "Level 5: Otimizado\n\n100% automatizado e com classificação amarrada às regras de classificação da empresa, cobrindo todo asset. Normalmente é AI-Driven.\n\nCompliance com regulações e auditorias.",
+    "translated_text": "Nivel 5: Optimizado\n\n100% automatizado y con clasificación vinculada a las reglas de clasificación de la empresa, cubriendo todos los activos. Por lo general, está impulsado por la IA.\n\nCumplimiento de normativas y auditorías."
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2918,
+    "type": "text_frame",
+    "text": "Data Security",
+    "translated_text": "Seguridad de Datos"
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2919,
+    "type": "text_frame",
+    "text": "Level 1: Inicial\n\nAcesso ao dado é gerenciado caso a caso, com admin dando permissões a indivíduos.\n\nO que fazer? Começar a estruturar por grupos e papéis, revisando acessos e criando um processo auditável de requisição de acessos.",
+    "translated_text": "Nivel 1: Inicial\n\nEl acceso a los datos se gestiona caso por caso, con el administrador dando permisos a las personas.\n\n¿Qué hacer? Comience a estructurar por grupos y roles, revisando los accesos y creando un proceso de solicitud de acceso auditable."
+  },
+  {
+    "slide_index": 15,
+    "shape_id": 2920,
+    "type": "text_frame",
+    "text": "Level 5: Otimizado\n\nPolítica de segurança ampla, com papéis definidos, monitorados e auditados. Regras de segurança são automaticamente aplicadas para novos assets e alavanca-se em políticas de classificação de dados. \n\nTime to insight e market reduzidos, mitigação de risco de vazamento.",
+    "translated_text": "Nivel 5: Optimizado\n\nAmplia política de seguridad, con roles definidos, monitoreados y auditados. Las reglas de seguridad se aplican automáticamente a los nuevos activos y se aprovechan de las políticas de clasificación de datos.\n\nReducción del tiempo de conocimiento y comercialización, mitigación del riesgo de fugas."
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2925,
+    "type": "text_frame",
+    "text": "Níveis de maturidade por pilar",
+    "translated_text": "Niveles de madurez por pilar"
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2926,
+    "type": "text_frame",
+    "text": "Data Audit",
+    "translated_text": "Auditoría de datos"
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2927,
+    "type": "text_frame",
+    "text": "Level 1: Inicial\n\nSem auditoria formal de dados.\n\nO que fazer? Centralizar uso no Unity Catalog, que possui auditoria integrada. Definição de alertas e dashboards a partir de audit log.",
+    "translated_text": "Nivel 1: Inicial\n\nSin auditoría formal de datos.\n\n¿Qué hacer? Centraliza el uso en el Catálogo de Unity, que tiene auditoría integrada. Definición de alertas y cuadros de mando a partir del registro de auditoría."
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2928,
+    "type": "text_frame",
+    "text": "Level 5: Otimizado\n\nLinhagem e auditoria integrados, com alertas e dashboards monitorando acessos e permissões concedidas.\n",
+    "translated_text": "Nivel 5: Optimizado\n\nLinaje y auditoría integrados, con alertas y cuadros de mando que monitorean el acceso y los permisos otorgados.\n"
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2929,
+    "type": "text_frame",
+    "text": "Data Quality",
+    "translated_text": "Data Quality"
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2930,
+    "type": "text_frame",
+    "text": "Level 1: Inicial\n\nNão existe monitoramento de qualidade, 100% ad-hoc ou reativo.\n\nO que fazer? Entender principais tabelas do ambiente e começar por elas. Definição de SLA e expectativas sobre colunas e volume de dados.",
+    "translated_text": "Nivel 1: Inicial\n\nNo hay monitoreo de calidad, 100% ad-hoc o reactivo.\n\n¿Qué hacer? Comprende las tablas clave del entorno y comienza con ellas. Definición de SLA y expectativas sobre columnas y volumen de datos."
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2931,
+    "type": "text_frame",
+    "text": "Level 5: Otimizado\n\nDashboards de qualidade em tempo real, com alertas automatizados e métricas de qualidade definidas. Impacto é monitorado e SLAs são informados.\n",
+    "translated_text": "Nivel 5: Optimizado\n\nPaneles de calidad en tiempo real con alertas automatizadas y métricas de calidad definidas. Se monitorea el impacto y se informan los SLA.\n"
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2932,
+    "type": "text_frame",
+    "text": "AI Guardrails",
+    "translated_text": "Barandillas de IA"
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2933,
+    "type": "text_frame",
+    "text": "Level 1: Inicial\n\nNão há gestão de ciclo de vida de IA, cada unidade de negócios tem um approach diferente e governança em silos.\n\nO que fazer? Definição em alto nível de política interna de IA, com acompanhamento de uso através do Unity Catalog.",
+    "translated_text": "Nivel 1: Inicial\n\nNo existe una gestión del ciclo de vida de la IA, cada unidad de negocio tiene un enfoque diferente y una gobernanza aislada.\n\n¿Qué hacer? Definición de alto nivel de la política interna de IA, con seguimiento de uso a través del Catálogo de Unity."
+  },
+  {
+    "slide_index": 16,
+    "shape_id": 2934,
+    "type": "text_frame",
+    "text": "Level 5: Otimizado\n\nGovernança de IA com rate limits, benchmarks e sistemas explicáveis. Cada projeto de IA contém tags e acompanhamento de inputs e outputs. \n",
+    "translated_text": "Nivel 5: Optimizado\n\nGobernanza de IA con límites de tasas, puntos de referencia y sistemas explicables. Cada proyecto de IA contiene etiquetas y seguimiento de entradas y salidas.\n"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 0,
+    "col": 1,
+    "text": "Governança Centralizada",
+    "translated_text": "Gobernanza centralizada"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 0,
+    "col": 2,
+    "text": "Governança Descentralizada",
+    "translated_text": "Gobernanza descentralizada"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 0,
+    "col": 3,
+    "text": "Governança Federada",
+    "translated_text": "Gobernanza federada"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 0,
+    "col": 4,
+    "text": "Governança Híbrida",
+    "translated_text": "Gobernanza híbrida"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 2,
+    "col": 0,
+    "text": "Definição",
+    "translated_text": "Definición"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 2,
+    "col": 1,
+    "text": "Uma única autoridade controla as políticas de dados e IA",
+    "translated_text": "Una única autoridad controla los datos y las políticas de IA"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 2,
+    "col": 2,
+    "text": "Cada BU gerencia suas políticas de dados e IA (segue Conway’s Laws)",
+    "translated_text": "Cada BU gestiona sus datos y políticas de IA (sigue las leyes de Conway)"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 2,
+    "col": 3,
+    "text": "Coordenação central com independência local",
+    "translated_text": "Coordinación central con independencia local"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 2,
+    "col": 4,
+    "text": "Separação clara (core vs. BU data)",
+    "translated_text": "Separación clara (datos de núcleo frente a BU)"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 3,
+    "col": 0,
+    "text": "Tomada de decisão",
+    "translated_text": "Toma de decisiones"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 3,
+    "col": 1,
+    "text": "Centralizado, de cima para baixo﻿",
+    "translated_text": "Centrado, de arriba a abajo"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 3,
+    "col": 2,
+    "text": "Distribuída, independente",
+    "translated_text": "Distribuido, independiente"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 3,
+    "col": 3,
+    "text": "Federalizada - \u000bOrientação central com execução  local",
+    "translated_text": "Federalizado - \u000bOrientación central con ejecución  local"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 3,
+    "col": 4,
+    "text": "Com tiers (central define regras básicas, cada área cria regras locais)",
+    "translated_text": "Con niveles (central define las reglas básicas, cada área crea reglas locales)"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 4,
+    "col": 0,
+    "text": "Data Ownership",
+    "translated_text": "Propiedad de los datos"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 4,
+    "col": 1,
+    "text": "De responsabilidade de uma equipe central﻿\n(governança centralizada)",
+    "translated_text": "Bajo la responsabilidad de un equipo central\n(gobernanza centralizada)"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 4,
+    "col": 2,
+    "text": "Pertence a times individuais ou BUs",
+    "translated_text": "Pertenece a equipos individuales o unidades de negocio"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 4,
+    "col": 3,
+    "text": "Posse distribuída entre entidades (shared governance)",
+    "translated_text": "Propiedad distribuida entre entidades (gobierno compartido)"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 4,
+    "col": 4,
+    "text": "Dados cores são do time core, e dados de BUs ficam descentralizados. ",
+    "translated_text": "Los datos de color son del equipo central y los datos de las unidades de negocio están descentralizados."
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 5,
+    "col": 0,
+    "text": "Escalabilidade",
+    "translated_text": "Escalable"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 5,
+    "col": 1,
+    "text": "Limitado pela capacidade da equipe central﻿",
+    "translated_text": "Limitado por la capacidad del equipo central"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 5,
+    "col": 2,
+    "text": "Altamente escalável, mas pode faltar coordenação. ",
+    "translated_text": "Altamente escalable, pero puede carecer de coordinación."
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 5,
+    "col": 3,
+    "text": "Escalável com coordenação estruturada.",
+    "translated_text": "Escalable con coordinación estructurada."
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 5,
+    "col": 4,
+    "text": "Moderado (BUs podem escalar moderadamente)",
+    "translated_text": "Moderado (las BU pueden escalar moderadamente)"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 6,
+    "col": 0,
+    "text": "Compliance e Segurança",
+    "translated_text": "Cumplimiento y seguridad"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 6,
+    "col": 1,
+    "text": "Aplicação rigorosa, alta consistência﻿",
+    "translated_text": "Aplicación rigurosa, alta consistencia"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 6,
+    "col": 2,
+    "text": "Variável por time, potencialmente gerando inconsistência",
+    "translated_text": "Variable por equipo, lo que puede generar incoherencias"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 6,
+    "col": 3,
+    "text": "Padrões definidos pela central e implementados localmente.",
+    "translated_text": "Estándares definidos por la planta e implementados localmente."
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 6,
+    "col": 4,
+    "text": "Compliance estrita para dados core, mais flexível para domínios.",
+    "translated_text": "Cumplimiento estricto para los datos principales, más flexible para los dominios."
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 7,
+    "col": 0,
+    "text": "Eficiência Operacional",
+    "translated_text": "Eficiencia Operacional"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 7,
+    "col": 1,
+    "text": "Eficiente, porém burocrático﻿",
+    "translated_text": "Eficiente pero burocrático"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 7,
+    "col": 2,
+    "text": "Ágil mas pode duplicar esforços e criar silos",
+    "translated_text": "Ágil, pero puede duplicar esfuerzos y crear silos"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 7,
+    "col": 3,
+    "text": "Balanceado - eficiente mas flexível, mas alta federação pode introduzir silos.",
+    "translated_text": "Equilibrado: eficiente pero flexible, pero una alta federación puede introducir silos."
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 7,
+    "col": 4,
+    "text": "Pode engargalar em dados core, eficiente no resto.",
+    "translated_text": "Puede ahogarse en los datos centrales, y ser eficiente en el resto."
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 8,
+    "col": 0,
+    "text": "Adequação ao Caso de Uso",
+    "translated_text": "Idoneidad para usar el caso"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 8,
+    "col": 1,
+    "text": "Indústrias altamente reguladas (finanças, saúde)",
+    "translated_text": "Industrias altamente reguladas (finanzas, salud)"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 8,
+    "col": 2,
+    "text": "Business ágeis, startups e setores pautados em inovação",
+    "translated_text": "Negocios ágiles, startups y sectores basados en la innovación"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 8,
+    "col": 3,
+    "text": "Grandes empresas, multinacionais",
+    "translated_text": "Grandes empresas, multinacionales"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2939,
+    "type": "table_cell",
+    "row": 8,
+    "col": 4,
+    "text": "Balanço entre regras de compliance e inovação (ex: fintechs)",
+    "translated_text": "Equilibrio entre las normas de cumplimiento e innovación (por ejemplo, fintechs)"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2940,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2941,
+    "type": "text_frame",
+    "text": "Modelos Operacionais de Governança",
+    "translated_text": "Modelos operativos de gobernanza"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2942,
+    "type": "text_frame",
+    "text": "Diferentes tipos de modelos operacionais e algumas de suas características",
+    "translated_text": "Diferentes tipos de modelos operativos y algunas de sus características"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2945,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2946,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2947,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2948,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2951,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2953,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2955,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2957,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2960,
+    "type": "text_frame",
+    "text": "Gov Boundary",
+    "translated_text": "Límites del Gobierno"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2961,
+    "type": "text_frame",
+    "text": "Business Unit (BU) Boundary",
+    "translated_text": "Boundary Business Unit (BU)"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2963,
+    "type": "text_frame",
+    "text": "Gov Office",
+    "translated_text": "Oficina gubernamental"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2965,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2967,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2970,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2973,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2976,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2978,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2980,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2982,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 17,
+    "shape_id": 2989,
+    "type": "text_frame",
+    "text": "Core",
+    "translated_text": "Core"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 2995,
+    "type": "text_frame",
+    "text": "BU1",
+    "translated_text": "BU1"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3003,
+    "type": "text_frame",
+    "text": "Lakehouse",
+    "translated_text": "Casa del lago"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3002,
+    "type": "text_frame",
+    "text": "Data / Models",
+    "translated_text": "Datos / Modelos"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3004,
+    "type": "text_frame",
+    "text": "Insight",
+    "translated_text": "Insight"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3006,
+    "type": "text_frame",
+    "text": "Data",
+    "translated_text": "Fecha"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3007,
+    "type": "text_frame",
+    "text": "UC",
+    "translated_text": "UC"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3010,
+    "type": "text_frame",
+    "text": "Dependência para implantações Lakehouse",
+    "translated_text": "Dependencia para implementaciones de Lakehouse"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3011,
+    "type": "text_frame",
+    "text": "Implantações diferentes exigem maior maturidade e modelos especiais.",
+    "translated_text": "Las diferentes implementaciones requieren una mayor madurez y modelos especiales."
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3012,
+    "type": "text_frame",
+    "text": "Central Team",
+    "translated_text": "Equipo central"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3019,
+    "type": "text_frame",
+    "text": "Lakehouse",
+    "translated_text": "Casa del lago"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3018,
+    "type": "text_frame",
+    "text": "Data / Models",
+    "translated_text": "Datos / Modelos"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3021,
+    "type": "text_frame",
+    "text": "Data",
+    "translated_text": "Fecha"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3022,
+    "type": "text_frame",
+    "text": "UC",
+    "translated_text": "UC"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3024,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3029,
+    "type": "text_frame",
+    "text": "Data / Models",
+    "translated_text": "Datos / Modelos"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3031,
+    "type": "text_frame",
+    "text": "Insight",
+    "translated_text": "Insight"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3033,
+    "type": "text_frame",
+    "text": "Data",
+    "translated_text": "Fecha"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3035,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3040,
+    "type": "text_frame",
+    "text": "Data / Models",
+    "translated_text": "Datos / Modelos"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3042,
+    "type": "text_frame",
+    "text": "Insight",
+    "translated_text": "Insight"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3044,
+    "type": "text_frame",
+    "text": "Data",
+    "translated_text": "Fecha"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3047,
+    "type": "text_frame",
+    "text": "Multi-Tenant Lakehouse",
+    "translated_text": "Casa del lago de varios inquilinos"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3048,
+    "type": "text_frame",
+    "text": "Lakehouse as a Service",
+    "translated_text": "Lakehouse como servicio"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3049,
+    "type": "text_frame",
+    "text": "Lakehouse Mesh",
+    "translated_text": "Malla Lakehouse"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3050,
+    "type": "text_frame",
+    "text": "Federado",
+    "translated_text": "Federado"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3051,
+    "type": "text_frame",
+    "text": "Centralizado",
+    "translated_text": "Centralizado"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3052,
+    "type": "text_frame",
+    "text": "Modelo Típico",
+    "translated_text": "Modelo típico"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3053,
+    "type": "text_frame",
+    "text": "Descentralizado",
+    "translated_text": "Descentralizado"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3056,
+    "type": "text_frame",
+    "text": "Provision and operate",
+    "translated_text": "Provisión y operación"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3057,
+    "type": "text_frame",
+    "text": "Provision and operate",
+    "translated_text": "Provisión y operación"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3058,
+    "type": "text_frame",
+    "text": "Single-Tenant Lakehouse",
+    "translated_text": "Casa del lago de un solo inquilino"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3059,
+    "type": "text_frame",
+    "text": "Org",
+    "translated_text": "Org. "
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3067,
+    "type": "text_frame",
+    "text": "BU1 Lakehouse",
+    "translated_text": "Casa del lago BU1"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3066,
+    "type": "text_frame",
+    "text": "Data / Models",
+    "translated_text": "Datos / Modelos"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3068,
+    "type": "text_frame",
+    "text": "Insight",
+    "translated_text": "Insight"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3070,
+    "type": "text_frame",
+    "text": "Data",
+    "translated_text": "Fecha"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3071,
+    "type": "text_frame",
+    "text": "UC",
+    "translated_text": "UC"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3081,
+    "type": "text_frame",
+    "text": "BU2 Lakehouse",
+    "translated_text": "Casa del lago BU2"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3080,
+    "type": "text_frame",
+    "text": "Data / Models",
+    "translated_text": "Datos / Modelos"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3082,
+    "type": "text_frame",
+    "text": "Insight",
+    "translated_text": "Insight"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3084,
+    "type": "text_frame",
+    "text": "Data",
+    "translated_text": "Fecha"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3087,
+    "type": "text_frame",
+    "text": "Híbrido",
+    "translated_text": "Híbrido"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3088,
+    "type": "text_frame",
+    "text": "1 Initial/Aware",
+    "translated_text": "1 Inicial/Consciente"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3089,
+    "type": "text_frame",
+    "text": "3 Defined/Proactive ",
+    "translated_text": "3 Definido/Proactivo"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3090,
+    "type": "text_frame",
+    "text": "5 Optimized",
+    "translated_text": "5 Optimizado"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3091,
+    "type": "text_frame",
+    "text": "4 Quantified",
+    "translated_text": "4 Cuantificado"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3092,
+    "type": "text_frame",
+    "text": "Maturidade necessária",
+    "translated_text": "Vencimiento requerido"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3093,
+    "type": "text_frame",
+    "text": "…",
+    "translated_text": "…"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3095,
+    "type": "text_frame",
+    "text": "Hub & Spoke",
+    "translated_text": "Hub & Spoke"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3096,
+    "type": "text_frame",
+    "text": "Harmonized",
+    "translated_text": "Armonizado"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3099,
+    "type": "text_frame",
+    "text": "BU2",
+    "translated_text": "BU2"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3107,
+    "type": "text_frame",
+    "text": "Lakehouse",
+    "translated_text": "Casa del lago"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3106,
+    "type": "text_frame",
+    "text": "Data / Models",
+    "translated_text": "Datos / Modelos"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3108,
+    "type": "text_frame",
+    "text": "Insight",
+    "translated_text": "Insight"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3110,
+    "type": "text_frame",
+    "text": "Data",
+    "translated_text": "Fecha"
+  },
+  {
+    "slide_index": 18,
+    "shape_id": 3111,
+    "type": "text_frame",
+    "text": "UC",
+    "translated_text": "UC"
+  },
+  {
+    "slide_index": 19,
+    "shape_id": 3118,
+    "type": "text_frame",
+    "text": "Como GenAI está mudando a governança de Dados",
+    "translated_text": "Cómo GenAI está cambiando el gobierno de los datos"
+  },
+  {
+    "slide_index": 19,
+    "shape_id": 3119,
+    "type": "text_frame",
+    "text": "Automação e eficiênciaIA Generativa automatiza muitas tarefas de governança, como gestão de catálogos e classificação de dados. ",
+    "translated_text": "Automatización y eficienciaIA Generative automatiza muchas tareas de gobierno, como la gestión de catálogos y la clasificación de datos."
+  },
+  {
+    "slide_index": 19,
+    "shape_id": 3120,
+    "type": "text_frame",
+    "text": "Expansão além dos dados estruturados\nGovernança tradicional sempre foi focada em dados estruturados, mas agora deve expandir para imagens, vídeos, áudios e texto. ",
+    "translated_text": "Expansión más allá de los datos estructurados\nLa gobernanza tradicional siempre se ha centrado en los datos estructurados, pero ahora debe expandirse a imágenes, vídeos, audios y texto."
+  },
+  {
+    "slide_index": 19,
+    "shape_id": 3121,
+    "type": "text_frame",
+    "text": "Considerações éticas e políticas dinâmicas\nAs empresas estão atualizando os frameworks para englobar usos de IA com transparência e garantindo o uso ético. \n",
+    "translated_text": "Consideraciones éticas y políticas dinámicas\nLas empresas están actualizando los marcos para abarcar los usos de la IA con transparencia y garantizar un uso ético.\n"
+  },
+  {
+    "slide_index": 19,
+    "shape_id": 3122,
+    "type": "text_frame",
+    "text": "Inovação com dados sintéticos\nIA Generativa pode criar datasets sintéticos que replicam cenários reais sem comprometer a privacidade ou confidencialidade de dados, abrindo novas possibilidades de desenvolvimentos ágeis sem perder governança.",
+    "translated_text": "Innovación con datos sintéticos\nLa IA generativa puede crear conjuntos de datos sintéticos que replican escenarios del mundo real sin comprometer la privacidad o confidencialidad de los datos, abriendo nuevas posibilidades para desarrollos ágiles sin perder la gobernanza."
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3127,
+    "type": "text_frame",
+    "text": "Previsão: a IA assumirá a maior parte das operações de Governança de Dados e IA.",
+    "translated_text": "Pronóstico: la IA se hará cargo de la mayoría de las operaciones de gobernanza de datos e IA."
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3128,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3131,
+    "type": "text_frame",
+    "text": "Pessoas e Regras",
+    "translated_text": "Personas y normas"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3132,
+    "type": "text_frame",
+    "text": "Tecnologia e Ferramentas",
+    "translated_text": "Tecnología y Herramientas"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3134,
+    "type": "text_frame",
+    "text": "Controles Classicos",
+    "translated_text": "Controles clásicos"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3135,
+    "type": "text_frame",
+    "text": "Controles baseados em IA",
+    "translated_text": "Controles basados en IA"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3139,
+    "type": "text_frame",
+    "text": "Trabalho manual reduzido",
+    "translated_text": "Mano de obra reducida"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3143,
+    "type": "text_frame",
+    "text": "controles",
+    "translated_text": "Controles"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3144,
+    "type": "text_frame",
+    "text": "controles",
+    "translated_text": "Controles"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3145,
+    "type": "text_frame",
+    "text": "esforço",
+    "translated_text": "Esfuerzo "
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3146,
+    "type": "text_frame",
+    "text": "esforço",
+    "translated_text": "Esfuerzo "
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3147,
+    "type": "text_frame",
+    "text": "Governança de IA",
+    "translated_text": "Gobierno IA"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3148,
+    "type": "text_frame",
+    "text": "Controles baseados em IA",
+    "translated_text": "Controles basados en IA"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3149,
+    "type": "text_frame",
+    "text": "Governança de Dados",
+    "translated_text": "Gobierno del dato"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3150,
+    "type": "text_frame",
+    "text": "Aplicações de IA\n(e.g. GenAI)",
+    "translated_text": "Aplicações de IA\n(e.g. GenAI)"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3151,
+    "type": "text_frame",
+    "text": "Dados ",
+    "translated_text": "Dados "
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3157,
+    "type": "text_frame",
+    "text": "As ferramentas de IA irão, cada vez mais, automatizar as tarefas de governança, reduzindo o trabalho manual (por exemplo, detecção de dados pessoais – PII), …",
+    "translated_text": "As ferramentas de IA irão, cada vez mais, automatizar as tarefas de governança, reduzindo o trabalho manual (por exemplo, detecção de dados pessoais – PII), …"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3158,
+    "type": "text_frame",
+    "text": "… no entanto, assim como todas as outras capacidades de IA, elas também precisam ser rigorosamente governadas.",
+    "translated_text": "… no entanto, assim como todas as outras capacidades de IA, elas também precisam ser rigorosamente governadas."
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3159,
+    "type": "text_frame",
+    "text": "governança automática",
+    "translated_text": "governança automática"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3160,
+    "type": "text_frame",
+    "text": "governa",
+    "translated_text": "governa"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3161,
+    "type": "text_frame",
+    "text": "governa",
+    "translated_text": "governa"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3162,
+    "type": "text_frame",
+    "text": "governa",
+    "translated_text": "governa"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3163,
+    "type": "text_frame",
+    "text": "AGORA",
+    "translated_text": "AGORA"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3164,
+    "type": "text_frame",
+    "text": "PREVISÃO",
+    "translated_text": "PREVISÃO"
+  },
+  {
+    "slide_index": 20,
+    "shape_id": 3169,
+    "type": "text_frame",
+    "text": "governança automática",
+    "translated_text": "governança automática"
+  },
+  {
+    "slide_index": 21,
+    "shape_id": 3174,
+    "type": "text_frame",
+    "text": "Considerações Gerais sobre Governança de Dados e IA",
+    "translated_text": "Considerações Gerais sobre Governança de Dados e IA"
+  },
+  {
+    "slide_index": 21,
+    "shape_id": 3175,
+    "type": "text_frame",
+    "text": "A governança de Dados e IA não é uma solução tática para um problema — é uma estratégia que a empresa deve perseguir.  \nNão é possível “comprar” governança de Dados e IA; trata-se de algo que deve ser implementado de forma integrada entre pessoas, processos e tecnologia.  \nEmbora a estratégia de governança de Dados e IA possa ser responsabilidade de uma única equipe, sua implementação e sucesso dependem de todas as equipes.  \nTambém é importante focar nas oportunidades (valor de negócio) ao construir uma estratégia de governança de Dados e IA.  \nComece de forma simples, implementando os requisitos mais imediatos e adicionando tópicos avançados ao longo do tempo. Utilize a estratégia de Dados e IA como guia para esse processo.  \nEscolha com cuidado o nível de governança de Dados e IA apropriado para cada unidade de negócio, conjunto de dados e aplicação de IA (mais flexível e ágil, ou mais rígido e controlado).",
+    "translated_text": "A governança de Dados e IA não é uma solução tática para um problema — é uma estratégia que a empresa deve perseguir.  \nNão é possível “comprar” governança de Dados e IA; trata-se de algo que deve ser implementado de forma integrada entre pessoas, processos e tecnologia.  \nEmbora a estratégia de governança de Dados e IA possa ser responsabilidade de uma única equipe, sua implementação e sucesso dependem de todas as equipes.  \nTambém é importante focar nas oportunidades (valor de negócio) ao construir uma estratégia de governança de Dados e IA.  \nComece de forma simples, implementando os requisitos mais imediatos e adicionando tópicos avançados ao longo do tempo. Utilize a estratégia de Dados e IA como guia para esse processo.  \nEscolha com cuidado o nível de governança de Dados e IA apropriado para cada unidade de negócio, conjunto de dados e aplicação de IA (mais flexível e ágil, ou mais rígido e controlado)."
+  },
+  {
+    "slide_index": 21,
+    "shape_id": 3176,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 22,
+    "shape_id": 3181,
+    "type": "text_frame",
+    "text": "Governança Adaptativa de Dados e Analytics",
+    "translated_text": "Governança Adaptativa de Dados e Analytics"
+  },
+  {
+    "slide_index": 22,
+    "shape_id": 3182,
+    "type": "text_frame",
+    "text": "As abordagens modernas incluem os diferentes estilos e modelos operacionais.",
+    "translated_text": "As abordagens modernas incluem os diferentes estilos e modelos operacionais."
+  },
+  {
+    "slide_index": 22,
+    "shape_id": 3183,
+    "type": "text_frame",
+    "text": "A governança adaptativa de dados e analytics é uma abordagem dinâmica e sensível ao contexto que harmoniza a maturidade, o estilo e o modelo operacional de governança de uma organização, permitindo responder de forma eficaz às necessidades de negócios em evolução, às mudanças tecnológicas e aos cenários regulatórios.\nA governança adaptativa de dados e analytics é caracterizada por:\nResponsividade contextual: as políticas e controles se ajustam com base nos cenários de uso dos dados (por exemplo, controles rigorosos para dados pessoais sensíveis – PII – versus experimentação mais ágil para dados de P&D).  \nTomada de decisão aumentada por IA: modelos de aprendizado de máquina preveem lacunas de governança e recomendam ajustes.  \nEvolução contínua: os frameworks são atualizados quase em tempo real, e não apenas por meio de revisões periódicas.\nOs níveis de maturidade de governança 4–5 (Gerenciado/Otimizados) habilitam capacidades adaptativas por meio de:\nAutomação: aplicação de políticas por meio de ferramentas.  \nMétricas integradas: KPIs que monitoram tanto a conformidade (por exemplo, 98% de aderência ao GDPR) quanto o valor de negócio (por exemplo, 35% de aumento na velocidade de lançamentos de produtos de dados).  \nAnálises preditivas: modelos de aprendizado de máquina que preveem mudanças regulatórias (por exemplo, antecipando atualizações do Ato de IA da União Europeia).",
+    "translated_text": "A governança adaptativa de dados e analytics é uma abordagem dinâmica e sensível ao contexto que harmoniza a maturidade, o estilo e o modelo operacional de governança de uma organização, permitindo responder de forma eficaz às necessidades de negócios em evolução, às mudanças tecnológicas e aos cenários regulatórios.\nA governança adaptativa de dados e analytics é caracterizada por:\nResponsividade contextual: as políticas e controles se ajustam com base nos cenários de uso dos dados (por exemplo, controles rigorosos para dados pessoais sensíveis – PII – versus experimentação mais ágil para dados de P&D).  \nTomada de decisão aumentada por IA: modelos de aprendizado de máquina preveem lacunas de governança e recomendam ajustes.  \nEvolução contínua: os frameworks são atualizados quase em tempo real, e não apenas por meio de revisões periódicas.\nOs níveis de maturidade de governança 4–5 (Gerenciado/Otimizados) habilitam capacidades adaptativas por meio de:\nAutomação: aplicação de políticas por meio de ferramentas.  \nMétricas integradas: KPIs que monitoram tanto a conformidade (por exemplo, 98% de aderência ao GDPR) quanto o valor de negócio (por exemplo, 35% de aumento na velocidade de lançamentos de produtos de dados).  \nAnálises preditivas: modelos de aprendizado de máquina que preveem mudanças regulatórias (por exemplo, antecipando atualizações do Ato de IA da União Europeia)."
+  },
+  {
+    "slide_index": 22,
+    "shape_id": 3184,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 23,
+    "shape_id": 3189,
+    "type": "text_frame",
+    "text": "Mão na massa!",
+    "translated_text": "Mão na massa!"
+  },
+  {
+    "slide_index": 24,
+    "shape_id": 3194,
+    "type": "text_frame",
+    "text": "Inspiração",
+    "translated_text": "Inspiração"
+  },
+  {
+    "slide_index": 24,
+    "shape_id": 3213,
+    "type": "text_frame",
+    "text": "Lakehouse",
+    "translated_text": "Lakehouse"
+  },
+  {
+    "slide_index": 24,
+    "shape_id": 3214,
+    "type": "text_frame",
+    "text": "federation",
+    "translated_text": "federation"
+  },
+  {
+    "slide_index": 24,
+    "shape_id": 3218,
+    "type": "text_frame",
+    "text": "Cenário:\n4000+ tabelas sem descrição\n4 sistemas diferentes\n\nPolítica de classificação de dados por unidade de negócio e sensibilidade do dado\n\nUtilização do Lakehouse Federation + Agente de Governança com IA para criação de descrições e regras de classificação. \n\nEntrega de resultados após 1 semana. \n",
+    "translated_text": "Cenário:\n4000+ tabelas sem descrição\n4 sistemas diferentes\n\nPolítica de classificação de dados por unidade de negócio e sensibilidade do dado\n\nUtilização do Lakehouse Federation + Agente de Governança com IA para criação de descrições e regras de classificação. \n\nEntrega de resultados após 1 semana. \n"
+  },
+  {
+    "slide_index": 25,
+    "shape_id": 3224,
+    "type": "text_frame",
+    "text": "https://github.com/Databricks-BR/data_governance_workshop",
+    "translated_text": "https://github.com/Databricks-BR/data_governance_workshop"
+  },
+  {
+    "slide_index": 25,
+    "shape_id": 3225,
+    "type": "text_frame",
+    "text": "Antes de Começar\n        WI-FI:       databricks-guest\nSenha:     DiscoverLakehouse\nTestem seus acessos na plataforma DATABRICKS FREE https://www.databricks.com/learn/free-edition \nTodos os exercícios estão no LINK abaixo:\n",
+    "translated_text": "Antes de Começar\n        WI-FI:       databricks-guest\nSenha:     DiscoverLakehouse\nTestem seus acessos na plataforma DATABRICKS FREE https://www.databricks.com/learn/free-edition \nTodos os exercícios estão no LINK abaixo:\n"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 0,
+    "col": 0,
+    "text": "1",
+    "translated_text": "1"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 0,
+    "col": 1,
+    "text": "Introdução",
+    "translated_text": "Introdução"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 0,
+    "col": 2,
+    "text": "05 min",
+    "translated_text": "05 min"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 1,
+    "col": 0,
+    "text": "2",
+    "translated_text": "2"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 1,
+    "col": 1,
+    "text": "LAB 00 - Abertura (Carregamento de dados)",
+    "translated_text": "LAB 00 - Abertura (Carregamento de dados)"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 1,
+    "col": 2,
+    "text": "20 min",
+    "translated_text": "20 min"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 2,
+    "col": 0,
+    "text": "3",
+    "translated_text": "3"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 2,
+    "col": 1,
+    "text": "LAB 01 - Gerando comentários em colunas",
+    "translated_text": "LAB 01 - Gerando comentários em colunas"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 2,
+    "col": 2,
+    "text": "30 min",
+    "translated_text": "30 min"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 3,
+    "col": 0,
+    "text": "4",
+    "translated_text": "4"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 3,
+    "col": 1,
+    "text": "LAB 02 - Criando o prompt de classificação",
+    "translated_text": "LAB 02 - Criando o prompt de classificação"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 3,
+    "col": 2,
+    "text": "50 min",
+    "translated_text": "50 min"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 4,
+    "col": 0,
+    "text": "5",
+    "translated_text": "5"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 4,
+    "col": 1,
+    "text": "LAB 03.1 - Aplicando os prompts",
+    "translated_text": "LAB 03.1 - Aplicando os prompts"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 4,
+    "col": 2,
+    "text": "30 min",
+    "translated_text": "30 min"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 5,
+    "col": 0,
+    "text": "6",
+    "translated_text": "6"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 5,
+    "col": 1,
+    "text": "LAB 03.2 - ABAC",
+    "translated_text": "LAB 03.2 - ABAC"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3232,
+    "type": "table_cell",
+    "row": 5,
+    "col": 2,
+    "text": "30 min",
+    "translated_text": "30 min"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3233,
+    "type": "text_frame",
+    "text": "AGENDA",
+    "translated_text": "AGENDA"
+  },
+  {
+    "slide_index": 26,
+    "shape_id": 3235,
+    "type": "text_frame",
+    "text": "Potencializando a Governança de Dados com GenAI",
+    "translated_text": "Potencializando a Governança de Dados com GenAI"
+  },
+  {
+    "slide_index": 27,
+    "shape_id": 3240,
+    "type": "text_frame",
+    "text": "Escopo dos Dados",
+    "translated_text": "Escopo dos Dados"
+  },
+  {
+    "slide_index": 27,
+    "shape_id": 3241,
+    "type": "text_frame",
+    "text": "Dados de um banco digital\nConta de clientes\nTransações realizadas\nSaldos\nCartões \nEstabelecimentos comerciais\n\nEntre outros… ",
+    "translated_text": "Dados de um banco digital\nConta de clientes\nTransações realizadas\nSaldos\nCartões \nEstabelecimentos comerciais\n\nEntre outros… "
+  },
+  {
+    "slide_index": 28,
+    "shape_id": 3249,
+    "type": "text_frame",
+    "text": "Gestor de governança classificando cada tabela manualmente",
+    "translated_text": "Gestor de governança classificando cada tabela manualmente"
+  },
+  {
+    "slide_index": 28,
+    "shape_id": 3250,
+    "type": "text_frame",
+    "text": "Sem Inteligência Artificial",
+    "translated_text": "Sem Inteligência Artificial"
+  },
+  {
+    "slide_index": 29,
+    "shape_id": 3259,
+    "type": "text_frame",
+    "text": "Gestor de governança utilizando IA e melhorando experiência do usuário final",
+    "translated_text": "Gestor de governança utilizando IA e melhorando experiência do usuário final"
+  },
+  {
+    "slide_index": 29,
+    "shape_id": 3261,
+    "type": "text_frame",
+    "text": "Com Inteligência Artificial",
+    "translated_text": "Com Inteligência Artificial"
+  },
+  {
+    "slide_index": 30,
+    "shape_id": 3266,
+    "type": "text_frame",
+    "text": "Passo 1 - Importar o Notebook",
+    "translated_text": "Passo 1 - Importar o Notebook"
+  },
+  {
+    "slide_index": 30,
+    "shape_id": 3278,
+    "type": "text_frame",
+    "text": "https://github.com/Databricks-BR/data_governance_workshop",
+    "translated_text": "https://github.com/Databricks-BR/data_governance_workshop"
+  },
+  {
+    "slide_index": 30,
+    "shape_id": 3281,
+    "type": "text_frame",
+    "text": "https://github.com/Databricks-BR/data_governance_workshop",
+    "translated_text": "https://github.com/Databricks-BR/data_governance_workshop"
+  },
+  {
+    "slide_index": 31,
+    "shape_id": 3288,
+    "type": "text_frame",
+    "text": "Passo 2 - Conectar o recurso de \"compute\"",
+    "translated_text": "Passo 2 - Conectar o recurso de \"compute\""
+  },
+  {
+    "slide_index": 32,
+    "shape_id": 3295,
+    "type": "text_frame",
+    "text": "Passo 3 - Rodar comandos e explorar dados",
+    "translated_text": "Passo 3 - Rodar comandos e explorar dados"
+  },
+  {
+    "slide_index": 33,
+    "shape_id": 3302,
+    "type": "text_frame",
+    "text": "Passo 4 - Explorar catálogo criado",
+    "translated_text": "Passo 4 - Explorar catálogo criado"
+  },
+  {
+    "slide_index": 33,
+    "shape_id": 3303,
+    "type": "text_frame",
+    "text": "Clique em catalog",
+    "translated_text": "Clique em catalog"
+  },
+  {
+    "slide_index": 33,
+    "shape_id": 3305,
+    "type": "text_frame",
+    "text": "Escolha alguma tabela do digital bank",
+    "translated_text": "Escolha alguma tabela do digital bank"
+  },
+  {
+    "slide_index": 33,
+    "shape_id": 3306,
+    "type": "text_frame",
+    "text": "Note que as tabelas não possuem descrição, tags ou comentários nas colunas",
+    "translated_text": "Note que as tabelas não possuem descrição, tags ou comentários nas colunas"
+  },
+  {
+    "slide_index": 34,
+    "shape_id": 3311,
+    "type": "text_frame",
+    "text": "Passo 5 - Executar caderno de geração de comentários ",
+    "translated_text": "Passo 5 - Executar caderno de geração de comentários "
+  },
+  {
+    "slide_index": 35,
+    "shape_id": 3317,
+    "type": "text_frame",
+    "text": "Passo 6 - Criar o prompt ",
+    "translated_text": "Passo 6 - Criar o prompt "
+  },
+  {
+    "slide_index": 35,
+    "shape_id": 3319,
+    "type": "text_frame",
+    "text": "Preencher a célula 2 do notebook \"02_prompt\"",
+    "translated_text": "Preencher a célula 2 do notebook \"02_prompt\""
+  },
+  {
+    "slide_index": 36,
+    "shape_id": 3324,
+    "type": "text_frame",
+    "text": "Passo 7 - Executar o caderno de classificação",
+    "translated_text": "Passo 7 - Executar o caderno de classificação"
+  },
+  {
+    "slide_index": 37,
+    "shape_id": 3330,
+    "type": "text_frame",
+    "text": "AI_Query",
+    "translated_text": "AI_Query"
+  },
+  {
+    "slide_index": 37,
+    "shape_id": 3333,
+    "type": "text_frame",
+    "text": "Escolha fácil de modelo dentro de um argumento da função",
+    "translated_text": "Escolha fácil de modelo dentro de um argumento da função"
+  },
+  {
+    "slide_index": 37,
+    "shape_id": 3335,
+    "type": "text_frame",
+    "text": "Combina prompt prévio com dados das colunas das tabelas",
+    "translated_text": "Combina prompt prévio com dados das colunas das tabelas"
+  },
+  {
+    "slide_index": 37,
+    "shape_id": 3337,
+    "type": "text_frame",
+    "text": "Define formato de resposta. Confiança para pipelines com IA",
+    "translated_text": "Define formato de resposta. Confiança para pipelines com IA"
+  },
+  {
+    "slide_index": 38,
+    "shape_id": 3342,
+    "type": "text_frame",
+    "text": "Onde vejo os modelos disponíveis?",
+    "translated_text": "Onde vejo os modelos disponíveis?"
+  },
+  {
+    "slide_index": 38,
+    "shape_id": 3347,
+    "type": "text_frame",
+    "text": "Serving",
+    "translated_text": "Serving"
+  },
+  {
+    "slide_index": 38,
+    "shape_id": 3348,
+    "type": "text_frame",
+    "text": "Utilize o atalho de Copy Name e cole no argumento da função ai_query",
+    "translated_text": "Utilize o atalho de Copy Name e cole no argumento da função ai_query"
+  },
+  {
+    "slide_index": 39,
+    "shape_id": 3353,
+    "type": "text_frame",
+    "text": "Attribute Based Access Control\nABAC permite ao usuário controlar acesso de forma condicional baseado em propriedades do usuário, do recurso e do request. \nConstruído em cima do modelo de segurança do Unity Catalog, incluindo todos os privilégios já existentes.\nUtilize filtros de linha e mascaramento de colunas para controle granular\nGoverna dados, IA & filesystems\n\n",
+    "translated_text": "Attribute Based Access Control\nABAC permite ao usuário controlar acesso de forma condicional baseado em propriedades do usuário, do recurso e do request. \nConstruído em cima do modelo de segurança do Unity Catalog, incluindo todos os privilégios já existentes.\nUtilize filtros de linha e mascaramento de colunas para controle granular\nGoverna dados, IA & filesystems\n\n"
+  },
+  {
+    "slide_index": 39,
+    "shape_id": 3354,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 39,
+    "shape_id": 3355,
+    "type": "text_frame",
+    "text": "ABAC (não disponível no Free Edition)",
+    "translated_text": "ABAC (não disponível no Free Edition)"
+  },
+  {
+    "slide_index": 40,
+    "shape_id": 3361,
+    "type": "text_frame",
+    "text": "Proteção de dados",
+    "translated_text": "Proteção de dados"
+  },
+  {
+    "slide_index": 40,
+    "shape_id": 3362,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 40,
+    "shape_id": 3363,
+    "type": "text_frame",
+    "text": "Acesso funcional através de políticas",
+    "translated_text": "Acesso funcional através de políticas"
+  },
+  {
+    "slide_index": 40,
+    "shape_id": 3364,
+    "type": "text_frame",
+    "text": "Marcelo, o produtor do dado, quer dar acesso aos analistas para os dados de vendas",
+    "translated_text": "Marcelo, o produtor do dado, quer dar acesso aos analistas para os dados de vendas"
+  },
+  {
+    "slide_index": 40,
+    "shape_id": 3367,
+    "type": "text_frame",
+    "text": "Camila, a CDO, quer ter certeza de que todas as informações PII estão mascaradas.",
+    "translated_text": "Camila, a CDO, quer ter certeza de que todas as informações PII estão mascaradas."
+  },
+  {
+    "slide_index": 40,
+    "shape_id": 3368,
+    "type": "text_frame",
+    "text": "SET POLICY analyst_sales_select\n ON CATALOG business_unit\nGRANT SELECT\n TO `analysts`\n FOR TABLESWHEN TABLE has_tag(‘sales’)",
+    "translated_text": "SET POLICY analyst_sales_select\n ON CATALOG business_unit\nGRANT SELECT\n TO `analysts`\n FOR TABLESWHEN TABLE has_tag(‘sales’)"
+  },
+  {
+    "slide_index": 40,
+    "shape_id": 3369,
+    "type": "text_frame",
+    "text": "SET POLICY analyst_sales_mask\n ON CATALOG business_unit\nCOLUMN MASK mask_pii\n TO `analysts`\nFOR TABLES WHEN has_tag(‘sales’)\n WHEN COLUMNS col_has_tag(‘pii’)",
+    "translated_text": "SET POLICY analyst_sales_mask\n ON CATALOG business_unit\nCOLUMN MASK mask_pii\n TO `analysts`\nFOR TABLES WHEN has_tag(‘sales’)\n WHEN COLUMNS col_has_tag(‘pii’)"
+  },
+  {
+    "slide_index": 41,
+    "shape_id": 3377,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 41,
+    "shape_id": 3378,
+    "type": "text_frame",
+    "text": "Demonstração",
+    "translated_text": "Demonstração"
+  },
+  {
+    "slide_index": 41,
+    "shape_id": 3380,
+    "type": "text_frame",
+    "text": "Via UI ou via código",
+    "translated_text": "Via UI ou via código"
+  },
+  {
+    "slide_index": 42,
+    "shape_id": 3386,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 42,
+    "shape_id": 3387,
+    "type": "text_frame",
+    "text": "Demonstração",
+    "translated_text": "Demonstração"
+  },
+  {
+    "slide_index": 42,
+    "shape_id": 3389,
+    "type": "text_frame",
+    "text": "Aplicável a grupos, indivíduos e service principals\n\nPossibilidade de definir exceções",
+    "translated_text": "Aplicável a grupos, indivíduos e service principals\n\nPossibilidade de definir exceções"
+  },
+  {
+    "slide_index": 42,
+    "shape_id": 3391,
+    "type": "text_frame",
+    "text": "Filtros de linhas ou colunas",
+    "translated_text": "Filtros de linhas ou colunas"
+  },
+  {
+    "slide_index": 42,
+    "shape_id": 3393,
+    "type": "text_frame",
+    "text": "Definição de condições",
+    "translated_text": "Definição de condições"
+  },
+  {
+    "slide_index": 42,
+    "shape_id": 3395,
+    "type": "text_frame",
+    "text": "Função personalizada e governada pelo UC",
+    "translated_text": "Função personalizada e governada pelo UC"
+  },
+  {
+    "slide_index": 43,
+    "shape_id": 3401,
+    "type": "text_frame",
+    "text": "Passo 8 - Testar novamente",
+    "translated_text": "Passo 8 - Testar novamente"
+  },
+  {
+    "slide_index": 44,
+    "shape_id": 3407,
+    "type": "text_frame",
+    "text": "Detecção automática de dados sensíveis em todas as tabelas",
+    "translated_text": "Detecção automática de dados sensíveis em todas as tabelas"
+  },
+  {
+    "slide_index": 44,
+    "shape_id": 3408,
+    "type": "text_frame",
+    "text": "E a feature de Data Classification?",
+    "translated_text": "E a feature de Data Classification?"
+  },
+  {
+    "slide_index": 44,
+    "shape_id": 3410,
+    "type": "text_frame",
+    "text": "Acompanhamento constante\n\nAnálise de impacto através de linhagem\n\nBuilt-in Dashboard",
+    "translated_text": "Acompanhamento constante\n\nAnálise de impacto através de linhagem\n\nBuilt-in Dashboard"
+  },
+  {
+    "slide_index": 45,
+    "shape_id": 3415,
+    "type": "text_frame",
+    "text": "Como levar isso a níveis ainda mais avançados?",
+    "translated_text": "Como levar isso a níveis ainda mais avançados?"
+  },
+  {
+    "slide_index": 45,
+    "shape_id": 3416,
+    "type": "text_frame",
+    "text": "Nós utilizamos somente o nome da tabela, o nome da coluna e o tipo do dado. Embora isso já garanta uma ótima acurácia na classificação, é possível trazer samples de dados de cada tabela (recomendamos poucas linhas) para serem considerados pela IA! ",
+    "translated_text": "Nós utilizamos somente o nome da tabela, o nome da coluna e o tipo do dado. Embora isso já garanta uma ótima acurácia na classificação, é possível trazer samples de dados de cada tabela (recomendamos poucas linhas) para serem considerados pela IA! "
+  },
+  {
+    "slide_index": 45,
+    "shape_id": 3417,
+    "type": "text_frame",
+    "text": "Personalize ainda mais!",
+    "translated_text": "Personalize ainda mais!"
+  },
+  {
+    "slide_index": 45,
+    "shape_id": 3418,
+    "type": "text_frame",
+    "text": "A IA pode ser usada para identificar o tema da tabela, e fazer match com canais de slack ou grupos do Teams onde os usuários possam tirar dúvida. \nEssa informação pode passar a fazer parte da descrição de todas as tabelas. ",
+    "translated_text": "A IA pode ser usada para identificar o tema da tabela, e fazer match com canais de slack ou grupos do Teams onde os usuários possam tirar dúvida. \nEssa informação pode passar a fazer parte da descrição de todas as tabelas. "
+  },
+  {
+    "slide_index": 45,
+    "shape_id": 3419,
+    "type": "text_frame",
+    "text": "Combine com os insights de linhagem e query history do Unity Catalog e peça para a IA classificar as tabelas em níveis de criticidade, baseado em quantidade de usuários e tabelas dependentes (downstream) ou com tempo médio de update da tabela para colocar o SLA na descrição da tabela. ",
+    "translated_text": "Combine com os insights de linhagem e query history do Unity Catalog e peça para a IA classificar as tabelas em níveis de criticidade, baseado em quantidade de usuários e tabelas dependentes (downstream) ou com tempo médio de update da tabela para colocar o SLA na descrição da tabela. "
+  },
+  {
+    "slide_index": 45,
+    "shape_id": 3420,
+    "type": "text_frame",
+    "text": "Sample de dados",
+    "translated_text": "Sample de dados"
+  },
+  {
+    "slide_index": 45,
+    "shape_id": 3421,
+    "type": "text_frame",
+    "text": "Owner Lookup",
+    "translated_text": "Owner Lookup"
+  },
+  {
+    "slide_index": 45,
+    "shape_id": 3422,
+    "type": "text_frame",
+    "text": "SLAs e Criticidade",
+    "translated_text": "SLAs e Criticidade"
+  },
+  {
+    "slide_index": 47,
+    "shape_id": 3431,
+    "type": "text_frame",
+    "text": "Obrigado!",
+    "translated_text": "Obrigado!"
+  },
+  {
+    "slide_index": 47,
+    "shape_id": 3432,
+    "type": "text_frame",
+    "text": "Fiquem ligados no nosso próximo webinar!",
+    "translated_text": "Fiquem ligados no nosso próximo webinar!"
+  },
+  {
+    "slide_index": 47,
+    "shape_id": 3434,
+    "type": "text_frame",
+    "text": "databricks_br",
+    "translated_text": "databricks_br"
+  },
+  {
+    "slide_index": 48,
+    "shape_id": 3440,
+    "type": "text_frame",
+    "text": "Self Assessment - Data & AI Governance",
+    "translated_text": "Self Assessment - Data & AI Governance"
+  },
+  {
+    "slide_index": 48,
+    "shape_id": 3442,
+    "type": "text_frame",
+    "text": "6 pillars are being considered\nData Catalog\nData Quality\nData Classification\nData Security\nData Auditing\nAI Guardrails\n",
+    "translated_text": "6 pillars are being considered\nData Catalog\nData Quality\nData Classification\nData Security\nData Auditing\nAI Guardrails\n"
+  },
+  {
+    "slide_index": 48,
+    "shape_id": 3443,
+    "type": "text_frame",
+    "text": "5-10 minutes to complete\nOther participants won't be able to see your answers \nResults may be shared with your account team. We recommend you develop a plan together to help your company reach its goals. ",
+    "translated_text": "5-10 minutes to complete\nOther participants won't be able to see your answers \nResults may be shared with your account team. We recommend you develop a plan together to help your company reach its goals. "
+  },
+  {
+    "slide_index": 48,
+    "shape_id": 3444,
+    "type": "text_frame",
+    "text": "What will be evaluated?",
+    "translated_text": "What will be evaluated?"
+  },
+  {
+    "slide_index": 48,
+    "shape_id": 3445,
+    "type": "text_frame",
+    "text": "About the assessment",
+    "translated_text": "About the assessment"
+  },
+  {
+    "slide_index": 49,
+    "shape_id": 3450,
+    "type": "text_frame",
+    "text": "Data & AI Governance",
+    "translated_text": "Data & AI Governance"
+  },
+  {
+    "slide_index": 49,
+    "shape_id": 3451,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 49,
+    "shape_id": 3452,
+    "type": "text_frame",
+    "text": "Data Governance\nA formalized framework of processes, policies, and standards that guide how data is collected, stored, protected, and utilized within an organization. \nIt aims to ensure the availability, usability, integrity, and security of data while adhering to regulations and internal policies. \nEffective data governance transforms data into a valuable enterprise asset by ensuring its accuracy, consistency, trustworthiness, and security",
+    "translated_text": "Data Governance\nA formalized framework of processes, policies, and standards that guide how data is collected, stored, protected, and utilized within an organization. \nIt aims to ensure the availability, usability, integrity, and security of data while adhering to regulations and internal policies. \nEffective data governance transforms data into a valuable enterprise asset by ensuring its accuracy, consistency, trustworthiness, and security"
+  },
+  {
+    "slide_index": 49,
+    "shape_id": 3453,
+    "type": "text_frame",
+    "text": "AI Governance*\nFrameworks, principles, and tools used to manage the development, deployment, and oversight of AI systems. \nIt ensures that AI is ethically designed, transparent, secure, and aligned with organizational values and societal norms. \nKey components include risk management, regulatory compliance, fairness in AI models, explainability of decisions, and data privacy protection",
+    "translated_text": "AI Governance*\nFrameworks, principles, and tools used to manage the development, deployment, and oversight of AI systems. \nIt ensures that AI is ethically designed, transparent, secure, and aligned with organizational values and societal norms. \nKey components include risk management, regulatory compliance, fairness in AI models, explainability of decisions, and data privacy protection"
+  },
+  {
+    "slide_index": 49,
+    "shape_id": 3454,
+    "type": "text_frame",
+    "text": "Data & AI Governance\nIntegrates the principles of both frameworks to manage the lifecycle of data and AI systems cohesively. \nWhile data governance ensures high-quality data for responsible use in AI processes, AI governance focuses on ethical AI development and deployment. \nTogether, they address challenges such as bias detection in AI models through robust data standards and ensure compliance with regulations across both domains.",
+    "translated_text": "Data & AI Governance\nIntegrates the principles of both frameworks to manage the lifecycle of data and AI systems cohesively. \nWhile data governance ensures high-quality data for responsible use in AI processes, AI governance focuses on ethical AI development and deployment. \nTogether, they address challenges such as bias detection in AI models through robust data standards and ensure compliance with regulations across both domains."
+  },
+  {
+    "slide_index": 49,
+    "shape_id": 3457,
+    "type": "text_frame",
+    "text": "* Including ML, AI Agents, deep learning, …",
+    "translated_text": "* Including ML, AI Agents, deep learning, …"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3462,
+    "type": "text_frame",
+    "text": "Opportunities of Data & AI Governance",
+    "translated_text": "Opportunities of Data & AI Governance"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3463,
+    "type": "text_frame",
+    "text": "A strong data governance framework can turn complexity into a strategic advantage, ensuring data remains a trusted, high-value asset",
+    "translated_text": "A strong data governance framework can turn complexity into a strategic advantage, ensuring data remains a trusted, high-value asset"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3464,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3465,
+    "type": "text_frame",
+    "text": "Unified Data Ecosystem",
+    "translated_text": "Unified Data Ecosystem"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3466,
+    "type": "text_frame",
+    "text": "Breaking down silos and ensuring consistency across systems enables a single source of truth for better decision-making (it also leads to more efficient change management).",
+    "translated_text": "Breaking down silos and ensuring consistency across systems enables a single source of truth for better decision-making (it also leads to more efficient change management)."
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3467,
+    "type": "text_frame",
+    "text": "Standardized Data Practices",
+    "translated_text": "Standardized Data Practices"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3468,
+    "type": "text_frame",
+    "text": "Clear definitions, formats, and policies enhance interoperability and streamline operations.",
+    "translated_text": "Clear definitions, formats, and policies enhance interoperability and streamline operations."
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3469,
+    "type": "text_frame",
+    "text": "Robust Security & Compliance",
+    "translated_text": "Robust Security & Compliance"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3470,
+    "type": "text_frame",
+    "text": "Proactive governance safeguards data privacy, ensures regulatory adherence and strengthens resilience against threats.",
+    "translated_text": "Proactive governance safeguards data privacy, ensures regulatory adherence and strengthens resilience against threats."
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3471,
+    "type": "text_frame",
+    "text": "Seamless Data Accessibility",
+    "translated_text": "Seamless Data Accessibility"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3472,
+    "type": "text_frame",
+    "text": "Well-structured governance empowers teams with the right data at the right time, driving efficiency and innovation.",
+    "translated_text": "Well-structured governance empowers teams with the right data at the right time, driving efficiency and innovation."
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3473,
+    "type": "text_frame",
+    "text": "Clear Ownership & Accountability",
+    "translated_text": "Clear Ownership & Accountability"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3474,
+    "type": "text_frame",
+    "text": "Defined roles and responsibilities foster strong data stewardship, alignment with business goals, and sustained value creation.",
+    "translated_text": "Defined roles and responsibilities foster strong data stewardship, alignment with business goals, and sustained value creation."
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3475,
+    "type": "text_frame",
+    "text": "Increased data literacy",
+    "translated_text": "Increased data literacy"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3476,
+    "type": "text_frame",
+    "text": "Leading to more people being able to understand data and reasonably work with data.",
+    "translated_text": "Leading to more people being able to understand data and reasonably work with data."
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3477,
+    "type": "text_frame",
+    "text": "Reduce duplication",
+    "translated_text": "Reduce duplication"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3478,
+    "type": "text_frame",
+    "text": "Reduce duplication of data and processes reducing costs or enabling faster time to market.",
+    "translated_text": "Reduce duplication of data and processes reducing costs or enabling faster time to market."
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3479,
+    "type": "text_frame",
+    "text": "Simplified collaboration",
+    "translated_text": "Simplified collaboration"
+  },
+  {
+    "slide_index": 50,
+    "shape_id": 3480,
+    "type": "text_frame",
+    "text": "Consistent standards and policies allow easy collaboration across system and business boundaries.",
+    "translated_text": "Consistent standards and policies allow easy collaboration across system and business boundaries."
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3486,
+    "type": "text_frame",
+    "text": "BU\n",
+    "translated_text": "BU\n"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3487,
+    "type": "text_frame",
+    "text": "Influence Map - Data & AI Governance",
+    "translated_text": "Influence Map - Data & AI Governance"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3488,
+    "type": "text_frame",
+    "text": "A combination of strategic decisions and acquired skills as an organization",
+    "translated_text": "A combination of strategic decisions and acquired skills as an organization"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3489,
+    "type": "text_frame",
+    "text": "‹#›",
+    "translated_text": "‹#›"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3490,
+    "type": "text_frame",
+    "text": "Company\nStrategy",
+    "translated_text": "Company\nStrategy"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3491,
+    "type": "text_frame",
+    "text": "Governance Operating model",
+    "translated_text": "Governance Operating model"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3492,
+    "type": "text_frame",
+    "text": "GovernanceStyle",
+    "translated_text": "GovernanceStyle"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3493,
+    "type": "text_frame",
+    "text": "BU\nStrategy",
+    "translated_text": "BU\nStrategy"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3496,
+    "type": "text_frame",
+    "text": "Company",
+    "translated_text": "Company"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3500,
+    "type": "text_frame",
+    "text": "BU",
+    "translated_text": "BU"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3503,
+    "type": "text_frame",
+    "text": "GovernanceDefinition",
+    "translated_text": "GovernanceDefinition"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3510,
+    "type": "text_frame",
+    "text": "GovernanceOperations",
+    "translated_text": "GovernanceOperations"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3513,
+    "type": "text_frame",
+    "text": "Governance Maturity",
+    "translated_text": "Governance Maturity"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3517,
+    "type": "text_frame",
+    "text": "define",
+    "translated_text": "define"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3518,
+    "type": "text_frame",
+    "text": "defines",
+    "translated_text": "defines"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3521,
+    "type": "text_frame",
+    "text": "influences",
+    "translated_text": "influences"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3522,
+    "type": "text_frame",
+    "text": "influences",
+    "translated_text": "influences"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3523,
+    "type": "text_frame",
+    "text": "influences",
+    "translated_text": "influences"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3524,
+    "type": "text_frame",
+    "text": "influences",
+    "translated_text": "influences"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3525,
+    "type": "text_frame",
+    "text": "drives",
+    "translated_text": "drives"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3526,
+    "type": "text_frame",
+    "text": "drives",
+    "translated_text": "drives"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3527,
+    "type": "text_frame",
+    "text": "influences",
+    "translated_text": "influences"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3528,
+    "type": "text_frame",
+    "text": "influences/limits",
+    "translated_text": "influences/limits"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3529,
+    "type": "text_frame",
+    "text": "influences",
+    "translated_text": "influences"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3530,
+    "type": "text_frame",
+    "text": "Strategic decisions",
+    "translated_text": "Strategic decisions"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3531,
+    "type": "text_frame",
+    "text": "Acquired skills",
+    "translated_text": "Acquired skills"
+  },
+  {
+    "slide_index": 51,
+    "shape_id": 3533,
+    "type": "text_frame",
+    "text": "Improves by experience",
+    "translated_text": "Improves by experience"
+  }
+]
