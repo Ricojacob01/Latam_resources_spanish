@@ -282,15 +282,15 @@ print(f"  al finalizar para evitar costos innecesarios.")
 
 # MAGIC %sql
 # MAGIC -- Descomentar para ver el uso de endpoints de serving
-# MAGIC -- SELECT
-# MAGIC --   usage_date,
-# MAGIC --   sku_name,
-# MAGIC --   usage_quantity,
-# MAGIC --   usage_unit
-# MAGIC -- FROM system.billing.usage
-# MAGIC -- WHERE sku_name LIKE '%VECTOR_SEARCH%'
-# MAGIC -- ORDER BY usage_date DESC
-# MAGIC -- LIMIT 20
+# MAGIC SELECT
+# MAGIC   usage_date,
+# MAGIC   sku_name,
+# MAGIC   usage_quantity,
+# MAGIC   usage_unit
+# MAGIC FROM system.billing.usage
+# MAGIC WHERE sku_name LIKE '%VECTOR_SEARCH%'
+# MAGIC ORDER BY usage_date DESC
+# MAGIC LIMIT 20
 
 # COMMAND ----------
 

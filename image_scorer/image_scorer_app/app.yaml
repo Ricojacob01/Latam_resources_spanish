@@ -1,0 +1,44 @@
+command:
+  - "streamlit"
+  - "run"
+  - "app.py"
+  - "--server.port"
+  - "8000"
+  - "--server.address"
+  - "0.0.0.0"
+  - "--server.enableCORS"
+  - "false"
+  - "--server.enableXsrfProtection"
+  - "false"
+
+env:
+  - name: CATALOG
+    value: "ardemo_classic_dnubtw_catalog"
+  - name: SCHEMA
+    value: "image_score"
+  - name: VOLUME
+    value: "archivos"
+  - name: VS_ENDPOINT_NAME
+    value: "image-scorer-vs-endpoint"
+  - name: VS_INDEX_NAME
+    value: "ardemo_classic_dnubtw_catalog.image_score.displays_index_1"
+  - name: EMBEDDING_ENDPOINT
+    value: "image-embedding-endpoint"
+  - name: EMBEDDING_DIM
+    value: "512"
+  - name: TOP_K
+    value: "5"
+  - name: SCORE_WEIGHT_NEIGHBORS
+    value: "0.7"
+  - name: SCORE_WEIGHT_MODEL
+    value: "0.3"
+
+resources:
+  - name: serving-endpoint
+    serving_endpoint:
+      name: "image-embedding-endpoint"
+      permission: CAN_QUERY
+  - name: vector-search-endpoint
+    serving_endpoint:
+      name: "image-scorer-vs-endpoint"
+      permission: CAN_QUERY
