@@ -34,16 +34,16 @@
 
 # COMMAND ----------
 
-# DBTITLE 1,Instalar dependencias
-# MAGIC %pip install databricks-vectorsearch
-# MAGIC dbutils.library.restartPython()
-
-# COMMAND ----------
-
 import time
 from databricks.vector_search.client import VectorSearchClient
 
 vsc = VectorSearchClient()
+
+# COMMAND ----------
+
+# DBTITLE 1,Instalar dependencias
+# MAGIC %pip install databricks-vectorsearch
+# MAGIC dbutils.library.restartPython()
 
 # COMMAND ----------
 

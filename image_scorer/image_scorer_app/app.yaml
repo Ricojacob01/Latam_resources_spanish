@@ -21,7 +21,7 @@ env:
   - name: VS_ENDPOINT_NAME
     value: "image-scorer-vs-endpoint"
   - name: VS_INDEX_NAME
-    value: "ardemo_classic_dnubtw_catalog.image_score.displays_index_1"
+    value: "ardemo_classic_dnubtw_catalog.image_score.displays_index"
   - name: EMBEDDING_ENDPOINT
     value: "image-embedding-endpoint"
   - name: EMBEDDING_DIM

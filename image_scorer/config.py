@@ -5,7 +5,7 @@
 # COMMAND ----------
 
 # Catalogo y esquema
-CATALOG = "ardemo_classic_dnubtw_catalog"
+CATALOG = "ardemo_classic_dnubtw_catalog" #CONFIGURAR CATALOG
 SCHEMA = "image_score"
 VOLUME = "archivos"
 
@@ -14,11 +14,11 @@ PATH_VOLUME = f"/Volumes/{CATALOG}/{SCHEMA}/{VOLUME}"
 PATH_TABLE = f"{CATALOG}.{SCHEMA}"
 
 # Vector Search
-VS_ENDPOINT_NAME = "image-scorer-vs-endpoint"
+VS_ENDPOINT_NAME = "image-scorer-vs-endpoint" #CONFIGURAR 
 VS_INDEX_NAME = f"{CATALOG}.{SCHEMA}.displays_index"
 
-# Model Serving - Embedding endpoint
-EMBEDDING_ENDPOINT = "image-embedding-endpoint"
+# Model Serving - Embedding endpoint 
+EMBEDDING_ENDPOINT = "image-embedding-endpoint" #CONFIGURAR
 EMBEDDING_DIM = 512
 
 # Parametros del workshop

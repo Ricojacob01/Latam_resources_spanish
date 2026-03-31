@@ -68,6 +68,11 @@
 
 # COMMAND ----------
 
+# MAGIC %pip install --upgrade databricks-sdk
+# MAGIC dbutils.library.restartPython()
+
+# COMMAND ----------
+
 # MAGIC %run "../config"
 
 # COMMAND ----------
@@ -85,10 +90,6 @@
 # MAGIC ```
 # MAGIC
 # MAGIC Vamos a crear cada archivo.
-
-# COMMAND ----------
-
-VS_INDEX_NAME='ardemo_classic_dnubtw_catalog.image_score.displays_index_1'
 
 # COMMAND ----------
 

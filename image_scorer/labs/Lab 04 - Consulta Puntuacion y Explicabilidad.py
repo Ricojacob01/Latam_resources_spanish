@@ -37,12 +37,6 @@
 
 # COMMAND ----------
 
-# DBTITLE 1,Instalar dependencias
-# MAGIC %pip install databricks-vectorsearch
-# MAGIC dbutils.library.restartPython()
-
-# COMMAND ----------
-
 import numpy as np
 import json
 import requests
@@ -54,6 +48,12 @@ index = vsc.get_index(
     endpoint_name=VS_ENDPOINT_NAME,
     index_name=VS_INDEX_NAME
 )
+
+# COMMAND ----------
+
+# DBTITLE 1,Instalar dependencias
+# MAGIC %pip install databricks-vectorsearch
+# MAGIC dbutils.library.restartPython()
 
 # COMMAND ----------
 

@@ -28,12 +28,12 @@
 
 # COMMAND ----------
 
-# MAGIC %run "../config"
+# MAGIC %pip install mlflow typing_extensions --upgrade
+# MAGIC dbutils.library.restartPython()
 
 # COMMAND ----------
 
-# MAGIC %pip install mlflow typing_extensions --upgrade
-# MAGIC dbutils.library.restartPython()
+# MAGIC %run "../config"
 
 # COMMAND ----------
 
