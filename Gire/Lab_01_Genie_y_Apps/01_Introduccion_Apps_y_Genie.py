@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "5"
+# ///
 # MAGIC %md
 # MAGIC # Taller: Introducción a Apps y Genie en Databricks (Parte 1)
 # MAGIC
@@ -15,6 +19,8 @@
 
 # COMMAND ----------
 
+
+
 # COMMAND ----------
 
 # MAGIC %md
@@ -25,15 +31,18 @@
 
 # COMMAND ----------
 
-CATALOG = catalog = CATALOGO = "workshop_databricks"
+CATALOG = catalog = CATALOGO = "ardemo_classic_dnubtw_catalog"
 _user = spark.sql("SELECT current_user()").collect()[0][0]
 SCHEMA = db = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
 
-spark.sql(f"USE CATALOG {CATALOG}")
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-spark.sql(f"USE SCHEMA {CATALOG}.{SCHEMA}")
-spark.conf.set("c.catalog", CATALOG)
-spark.conf.set("c.schema", SCHEMA)
+spark.sql(f"USE CATALOG `{CATALOG}`")
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{CATALOG}`.`{SCHEMA}`")
+spark.sql(f"USE SCHEMA `{SCHEMA}`")
+try:
+    spark.conf.set("c.catalog", CATALOG)
+    spark.conf.set("c.schema", SCHEMA)
+except Exception:
+    pass  # Not available on Serverless
 
 print(f"Catalog: {CATALOG}")
 print(f"Schema:  {SCHEMA}")
@@ -51,7 +60,6 @@ TABLA = "inventario_insumos_oficina"
 print(f"Catálogo: {CATALOGO}")
 print(f"Esquema:   {ESQUEMA}")
 print(f"Tabla:     {TABLA}")
-
 
 # COMMAND ----------
 
@@ -220,4 +228,3 @@ for c, d in col_desc.items():
     spark.sql(f"COMMENT ON COLUMN `{CATALOGO}`.`{ESQUEMA}`.`{TABLA}`.{c} IS '{d}'")
 
 print("✓ Descripciones aplicadas a tabla y columnas")
-
