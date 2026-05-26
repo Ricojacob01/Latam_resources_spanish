@@ -7,6 +7,8 @@
 
 -- COMMAND ----------
 
+
+
 -- COMMAND ----------
 
 -- MAGIC %md
@@ -18,16 +20,20 @@
 -- COMMAND ----------
 
 -- MAGIC %python
--- MAGIC CATALOG = catalog = CATALOGO = "workshop_databricks"
+-- MAGIC CATALOG = catalog = CATALOGO = "ardemo_classic_dnubtw_catalog"
 -- MAGIC _user = spark.sql("SELECT current_user()").collect()[0][0]
 -- MAGIC SCHEMA = db = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
--- MAGIC spark.sql(f"USE CATALOG {CATALOG}")
--- MAGIC spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
--- MAGIC spark.sql(f"USE SCHEMA {CATALOG}.{SCHEMA}")
--- MAGIC spark.conf.set("c.catalog", CATALOG)
--- MAGIC spark.conf.set("c.schema", SCHEMA)
+-- MAGIC spark.sql(f"USE CATALOG `{CATALOG}`")
+-- MAGIC spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{CATALOG}`.`{SCHEMA}`")
+-- MAGIC spark.sql(f"USE SCHEMA `{SCHEMA}`")
+-- MAGIC try:
+-- MAGIC     spark.conf.set("c.catalog", CATALOG)
+-- MAGIC     spark.conf.set("c.schema", SCHEMA)
+-- MAGIC except Exception:
+-- MAGIC     pass  # Not available on Serverless
 -- MAGIC print(f"Catalog: {CATALOG}\nSchema:  {SCHEMA}\nUser:    {_user}")
 
+-- COMMAND ----------
 
 -- MAGIC %md
 -- MAGIC ### Utilice un cluster Serverless Environment 2 para ejecutar este notebook
