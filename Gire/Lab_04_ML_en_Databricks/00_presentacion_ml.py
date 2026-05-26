@@ -8,8 +8,6 @@
 
 # COMMAND ----------
 
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC ## Setup del lab
 # MAGIC
@@ -24,15 +22,21 @@ SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").r
 
 spark.sql(f"USE CATALOG {CATALOG}")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-spark.sql(f"USE SCHEMA {CATALOG}.{SCHEMA}")
-spark.conf.set("c.catalog", CATALOG)
-spark.conf.set("c.schema", SCHEMA)
+spark.sql(f"USE SCHEMA {SCHEMA}")
+try:
+    spark.conf.set("c.catalog", CATALOG)
+    spark.conf.set("c.schema", SCHEMA)
+except Exception:
+    pass  # Not available on Serverless
 
 print(f"Catalog: {CATALOG}")
 print(f"Schema:  {SCHEMA}")
 print(f"User:    {_user}")
 
+# COMMAND ----------
 
+# MAGIC %md
+# MAGIC
 # MAGIC %md
 # MAGIC # Demostración de MLOps end-to-end con MLFlow, AutoML y Modelos en Unity Catalog
 # MAGIC
@@ -95,12 +99,6 @@ print(f"User:    {_user}")
 
 # COMMAND ----------
 
-# MAGIC %pip install --quiet mlflow --upgrade
-# MAGIC
-# MAGIC %restart_python
-
-# COMMAND ----------
-
 # MAGIC %run ./_resources/00-setup
 
 # COMMAND ----------
@@ -121,11 +119,3 @@ print(f"User:    {_user}")
 # DBTITLE 1,Telco customer dataset exploration
 telcoDF = spark.table("mlops_churn_bronze_customers")
 display(telcoDF)
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ## Unity Catalog
-# MAGIC Antes de empezar con la parte de analítica, vamos a echar un vistazo rápido a algunas funciones de control de acceso de Unity Catalog.
-# MAGIC
-# MAGIC Siguiente: [Gobernanza con Unity Catalog]($./01_2_unity_catalog_data_governance)

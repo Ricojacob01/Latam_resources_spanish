@@ -7,8 +7,6 @@
 
 # COMMAND ----------
 
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC ## Setup del lab
 # MAGIC
@@ -23,14 +21,18 @@ SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").r
 
 spark.sql(f"USE CATALOG {CATALOG}")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-spark.sql(f"USE SCHEMA {CATALOG}.{SCHEMA}")
-spark.conf.set("c.catalog", CATALOG)
-spark.conf.set("c.schema", SCHEMA)
+spark.sql(f"USE SCHEMA {SCHEMA}")
+try:
+    spark.conf.set("c.catalog", CATALOG)
+    spark.conf.set("c.schema", SCHEMA)
+except Exception:
+    pass  # Not available on Serverless
 
 print(f"Catalog: {CATALOG}")
 print(f"Schema:  {SCHEMA}")
 print(f"User:    {_user}")
 
+# COMMAND ----------
 
 # MAGIC %md
 # MAGIC # Gestión del ciclo de vida del modelo en Unity Catalog
@@ -217,4 +219,4 @@ client.set_registered_model_alias(
 # MAGIC
 # MAGIC Si el modelo pasa todas las pruebas, será promovido a `Champion`.
 # MAGIC
-# MAGIC Próximo: Descubre cómo se está probando el modelo antes de ser promovido a `Champion` [usando el notebook de validación de modelos]($./02_5_challenger_validation)
+# MAGIC Próximo: Descubre cómo se está probando el modelo antes de ser promovido a `Champion` [usando el notebook de validación de modelos]($./05_challenger_validation)

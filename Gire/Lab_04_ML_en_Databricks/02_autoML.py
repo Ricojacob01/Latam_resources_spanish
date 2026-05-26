@@ -31,6 +31,7 @@ print(f"Catalog: {CATALOG}")
 print(f"Schema:  {SCHEMA}")
 print(f"User:    {_user}")
 
+# COMMAND ----------
 
 # MAGIC %md
 # MAGIC ## AutoML para acelerar el desarrollo

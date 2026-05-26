@@ -7,8 +7,6 @@
 
 # COMMAND ----------
 
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC ## Setup del lab
 # MAGIC
@@ -23,14 +21,18 @@ SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").r
 
 spark.sql(f"USE CATALOG {CATALOG}")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-spark.sql(f"USE SCHEMA {CATALOG}.{SCHEMA}")
-spark.conf.set("c.catalog", CATALOG)
-spark.conf.set("c.schema", SCHEMA)
+spark.sql(f"USE SCHEMA {SCHEMA}")
+try:
+    spark.conf.set("c.catalog", CATALOG)
+    spark.conf.set("c.schema", SCHEMA)
+except Exception:
+    pass  # Not available on Serverless
 
 print(f"Catalog: {CATALOG}")
 print(f"Schema:  {SCHEMA}")
 print(f"User:    {_user}")
 
+# COMMAND ----------
 
 # MAGIC %md
 # MAGIC # Entrena un modelo de `LightGBM`
@@ -48,12 +50,6 @@ print(f"User:    {_user}")
 # MAGIC ### Utilice el cluster «mlops_workshop_databricks» para ejecutar este notebook
 # MAGIC Para ejecutar esta demostración, simplemente selecciona el cluster `mlops_workshop_databricks` en el menú desplegable.
 # MAGIC
-
-# COMMAND ----------
-
-# MAGIC %pip install --quiet lightgbm mlflow --upgrade
-# MAGIC
-# MAGIC %restart_python
 
 # COMMAND ----------
 
@@ -239,7 +235,8 @@ X_train, X_val, Y_train, Y_val = train_test_split(X.drop(label_col, axis=1), X[l
 
 # COMMAND ----------
 
-import lightgbm
+!pip install lightgbm
+
 from lightgbm import LGBMClassifier
 
 
@@ -380,6 +377,7 @@ displayHTML(f"<a href=#mlflow/experiments/{mlflow_run.info.experiment_id}/runs/{
 
 # COMMAND ----------
 
+import os
 import uuid
 from IPython.display import Image
 
@@ -426,4 +424,4 @@ display(Image(filename=eval_pr_curve_path))
 # MAGIC %md
 # MAGIC ### Automatizar la validación de promoción de modelos
 # MAGIC
-# MAGIC Próximo paso: [Buscar ejecuciones y activar la validación de promoción de modelos]($./02_4_from_notebook_to_models_in_uc)
+# MAGIC Próximo paso: [Buscar ejecuciones y activar la validación de promoción de modelos]($./04_models_in_uc)

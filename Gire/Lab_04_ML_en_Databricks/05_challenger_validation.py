@@ -31,6 +31,7 @@ print(f"Catalog: {CATALOG}")
 print(f"Schema:  {SCHEMA}")
 print(f"User:    {_user}")
 
+# COMMAND ----------
 
 # MAGIC %md
 # MAGIC # Validación del modelo Challenger
@@ -348,4 +349,4 @@ else:
 # MAGIC
 # MAGIC Ahora tenemos la certeza de que nuestro modelo está listo para ser utilizado en canalizaciones de inferencia y endpoints de servicio en tiempo real, ya que cumple con nuestros estándares de validación.
 # MAGIC
-# MAGIC Siguiente: [Ejecutar inferencia por lotes desde nuestro nuevo modelo Champion promovido]($./02_6_batch_inference)
+# MAGIC Siguiente: [Ejecutar inferencia por lotes desde nuestro nuevo modelo Champion promovido]($./06_batch_inference)

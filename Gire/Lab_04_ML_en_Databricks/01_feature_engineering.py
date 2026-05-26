@@ -7,8 +7,6 @@
 
 # COMMAND ----------
 
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC ## Setup del lab
 # MAGIC
@@ -23,14 +21,18 @@ SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").r
 
 spark.sql(f"USE CATALOG {CATALOG}")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-spark.sql(f"USE SCHEMA {CATALOG}.{SCHEMA}")
-spark.conf.set("c.catalog", CATALOG)
-spark.conf.set("c.schema", SCHEMA)
+spark.sql(f"USE SCHEMA {SCHEMA}")
+try:
+    spark.conf.set("c.catalog", CATALOG)
+    spark.conf.set("c.schema", SCHEMA)
+except Exception:
+    pass  # Not available on Serverless
 
 print(f"Catalog: {CATALOG}")
 print(f"Schema:  {SCHEMA}")
 print(f"User:    {_user}")
 
+# COMMAND ----------
 
 # MAGIC %md
 # MAGIC # Churn Prediction Feature Engineering
@@ -54,13 +56,6 @@ print(f"User:    {_user}")
 # MAGIC %md
 # MAGIC
 # MAGIC ![](https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/version2-serverless.png)
-
-# COMMAND ----------
-
-# MAGIC %pip install --quiet mlflow --upgrade
-# MAGIC
-# MAGIC
-# MAGIC %restart_python
 
 # COMMAND ----------
 
