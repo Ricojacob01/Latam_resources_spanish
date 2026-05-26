@@ -101,16 +101,24 @@ requirements_path = ModelsArtifactRepository(f"models:/{catalog}.{db}.mlops_chur
 # COMMAND ----------
 
 # DBTITLE 1,In a Python notebook
+import subprocess
+subprocess.check_call(["pip", "install", "lightgbm", "-q"])
+
 import mlflow
 
 
 # Load customer features to be scored
 inference_df = spark.read.table(f"mlops_churn_inference")
-# Load champion model as a Spark UDF. You can use virtual env manager for the demo to avoid version conflict (you can remove the pip install above with virtual env)
-champion_model = mlflow.pyfunc.spark_udf(spark, model_uri=f"models:/{catalog}.{db}.mlops_churn@Champion", env_manager="virtualenv")
+# Load champion model directly (pandas-based prediction for serverless compatibility)
+champion_model = mlflow.pyfunc.load_model(model_uri=f"models:/{catalog}.{db}.mlops_churn@Champion")
 
-# Batch score
-preds_df = inference_df.withColumn('predictions', champion_model(*champion_model.metadata.get_input_schema().input_names()))
+# Get input column names from model schema
+input_cols = champion_model.metadata.get_input_schema().input_names()
+
+# Batch score using pandas
+inference_pd = inference_df.toPandas()
+inference_pd['predictions'] = champion_model.predict(inference_pd[input_cols])
+preds_df = spark.createDataFrame(inference_pd)
 
 display(preds_df)
 
