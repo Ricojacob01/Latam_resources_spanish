@@ -13,7 +13,7 @@
 # MAGIC Este notebook valida que tienes todo lo necesario para ejecutar el workshop:
 # MAGIC
 # MAGIC 1. Compute correcto (Serverless v2 para la mayoría de los labs)
-# MAGIC 2. Acceso al catálogo compartido `workshop_databricks`
+# MAGIC 2. Acceso al catálogo compartido `ardemo_classic_dnubtw_catalog`
 # MAGIC 3. Permisos para crear tu schema personal (`ws_<usuario>`)
 # MAGIC 4. Librerías ML disponibles (para Lab 04)
 # MAGIC
@@ -24,14 +24,14 @@
 # MAGIC %md
 # MAGIC ## Setup del lab
 # MAGIC
-# MAGIC Catálogo compartido: `workshop_databricks`. Schema personal por usuario: `ws_<usuario>`.
+# MAGIC Catálogo compartido: `ardemo_classic_dnubtw_catalog`. Schema personal por usuario: `ws_<usuario>`.
 # MAGIC Esta es la misma celda que verás al principio de cada lab.
 
 # COMMAND ----------
 
 CATALOG = catalog = CATALOGO = "ardemo_classic_dnubtw_catalog"
 _user = spark.sql("SELECT current_user()").collect()[0][0]
-SCHEMA = db = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
+SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
 
 print(f"Usuario: {_user}")
 print(f"Catalog: {CATALOG}")

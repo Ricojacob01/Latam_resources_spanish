@@ -10,7 +10,7 @@ El flujo va de menor a mayor complejidad técnica: empezamos con **Genie** (leng
 
 Todos los notebooks usan el mismo patrón:
 
-- **Catálogo compartido**: `workshop_databricks`
+- **Catálogo compartido**: `ardemo_classic_dnubtw_catalog`
 - **Schema personal por usuario**: `ws_<usuario>` (ej. `ws_juan_perez`)
 
 La primera celda **Setup del lab** de cada notebook valida acceso y crea tu schema si no existe — no necesitas configurar nada manualmente.
@@ -56,7 +56,7 @@ Gire/
 ## Prerrequisitos
 
 - Acceso al workspace de Databricks (Gire)
-- Catálogo `workshop_databricks` con permisos `CREATE SCHEMA` y `CREATE TABLE`
+- Catálogo `ardemo_classic_dnubtw_catalog` con permisos `CREATE SCHEMA` y `CREATE TABLE`
 - Cluster Serverless Environment v2 (Labs 01–03)
 - Cluster clásico `ml_workshop_databricks` para los notebooks de ML (Lab 04)
 

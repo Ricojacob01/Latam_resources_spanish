@@ -19,7 +19,7 @@ setup_inference_data = dbutils.widgets.get("setup_inference_data") == "true"
 current_user = dbutils.notebook.entry_point.getDbutils().notebook().getContext().userName().get()
 reformat_current_user = current_user.split("@")[0].lower().replace(".", "_").replace("-", "_")
 
-catalog = "workshop_databricks"
+catalog = "ardemo_classic_dnubtw_catalog"
 dbName = db = f"ws_{reformat_current_user}"
 
 print(f"User:    {current_user}")

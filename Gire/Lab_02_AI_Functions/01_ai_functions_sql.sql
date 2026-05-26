@@ -14,7 +14,7 @@
 -- MAGIC %md
 -- MAGIC ## Setup del lab
 -- MAGIC
--- MAGIC Catálogo compartido: `workshop_databricks`. Schema personal por usuario: `ws_<usuario>`.
+-- MAGIC Catálogo compartido: `ardemo_classic_dnubtw_catalog`. Schema personal por usuario: `ws_<usuario>`.
 -- MAGIC Esta celda valida acceso y crea tu schema si no existe.
 
 -- COMMAND ----------
@@ -22,7 +22,7 @@
 -- MAGIC %python
 -- MAGIC CATALOG = catalog = CATALOGO = "ardemo_classic_dnubtw_catalog"
 -- MAGIC _user = spark.sql("SELECT current_user()").collect()[0][0]
--- MAGIC SCHEMA = db = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
+-- MAGIC SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
 -- MAGIC spark.sql(f"USE CATALOG `{CATALOG}`")
 -- MAGIC spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{CATALOG}`.`{SCHEMA}`")
 -- MAGIC spark.sql(f"USE SCHEMA `{SCHEMA}`")
@@ -190,13 +190,13 @@ FROM (
 
 -- (replaced by setup cell)
 
-CREATE VOLUME IF NOT EXISTS IDENTIFIER('workshop_databricks.' || (SELECT 'ws_' || replace(replace(split(current_user(),'@')[0],'.','_'),'-','_')) || '.archivos'); -- sustituye nombre por el tuyo
+CREATE VOLUME IF NOT EXISTS archivos;
 
 -- COMMAND ----------
 
 -- MAGIC %python
 -- MAGIC
--- MAGIC catalog = "workshop_databricks"
+-- MAGIC # catalog ya definido en setup cell
 -- MAGIC # (replaced by setup cell) schema override removed
 -- MAGIC volume = "archivos"
 -- MAGIC
@@ -222,7 +222,7 @@ CREATE VOLUME IF NOT EXISTS IDENTIFIER('workshop_databricks.' || (SELECT 'ws_' |
 
 -- COMMAND ----------
 
-CREATE OR REPLACE TABLE workshop_databricks.demo_ai_functions.reviews_structured AS
+CREATE OR REPLACE TABLE reviews_structured AS
 SELECT
   ai_query(
     "databricks-meta-llama-3-3-70b-instruct",
@@ -255,17 +255,17 @@ SELECT
                         }
                       }'
    ) AS structured_review, *
-   FROM workshop_databricks.demo_ai_functions.reviews;                   
+   FROM reviews;                   
 
 
 -- COMMAND ----------
 
-SELECT * FROM workshop_databricks.demo_ai_functions.reviews_structured;
+SELECT * FROM reviews_structured;
 
 -- COMMAND ----------
 
  -- Now that we've got results, lets unpack the JSON so we can view as a table
-CREATE OR REPLACE TABLE workshop_databricks.demo_ai_functions.reviews_structured_gold AS
+CREATE OR REPLACE TABLE reviews_structured_gold AS
 SELECT
   parse_json(structured_review):location::string AS location,
   parse_json(structured_review):service_score::int AS service_score,
@@ -274,17 +274,17 @@ SELECT
   parse_json(structured_review):sentiment::string AS sentiment,
   parse_json(structured_review):product_name::string AS product_name,
   *
-FROM workshop_databricks.demo_ai_functions.reviews_structured;
+FROM reviews_structured;
 
 -- COMMAND ----------
 
-SELECT * FROM workshop_databricks.demo_ai_functions.reviews_structured_gold;
+SELECT * FROM reviews_structured_gold;
 
 -- COMMAND ----------
 
 -- With our AI augmented data ready, we can use it to narrow down just the reviews that we should be taking action on
 select product_name, location, sentiment, review_es, franchiseID, review_date
-from workshop_databricks.demo_ai_functions.reviews_structured_gold
+from reviews_structured_gold
 where sentiment = 'negative';
 
 -- COMMAND ----------

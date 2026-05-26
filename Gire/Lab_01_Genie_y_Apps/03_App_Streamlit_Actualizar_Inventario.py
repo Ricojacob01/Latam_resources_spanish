@@ -22,14 +22,14 @@
 # MAGIC %md
 # MAGIC ## Setup del lab
 # MAGIC
-# MAGIC Catálogo compartido: `workshop_databricks`. Schema personal por usuario: `ws_<usuario>`.
+# MAGIC Catálogo compartido: `ardemo_classic_dnubtw_catalog`. Schema personal por usuario: `ws_<usuario>`.
 # MAGIC Esta celda valida acceso y crea tu schema si no existe.
 
 # COMMAND ----------
 
 CATALOG = catalog = CATALOGO = "ardemo_classic_dnubtw_catalog"
 _user = spark.sql("SELECT current_user()").collect()[0][0]
-SCHEMA = db = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
+SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
 
 spark.sql(f"USE CATALOG `{CATALOG}`")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{CATALOG}`.`{SCHEMA}`")
@@ -69,7 +69,7 @@ from databricks.sdk import WorkspaceClient ####
 # -----------------------------
 # CONFIGURACIÓN DEL CATÁLOGO/TABLA
 # -----------------------------
-CATALOGO = CATALOG  # del setup cell (workshop_databricks)
+CATALOGO = CATALOG  # del setup cell (ardemo_classic_dnubtw_catalog)
 ESQUEMA = SCHEMA  # schema personal (definido en celda Setup)
 TABLA = "inventario_insumos_oficina"  # tu tabla
 
