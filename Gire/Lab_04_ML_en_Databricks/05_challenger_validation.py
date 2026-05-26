@@ -7,8 +7,6 @@
 
 # COMMAND ----------
 
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC ## Setup del lab
 # MAGIC
@@ -23,9 +21,12 @@ SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").r
 
 spark.sql(f"USE CATALOG {CATALOG}")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-spark.sql(f"USE SCHEMA {CATALOG}.{SCHEMA}")
-spark.conf.set("c.catalog", CATALOG)
-spark.conf.set("c.schema", SCHEMA)
+spark.sql(f"USE SCHEMA {SCHEMA}")
+try:
+    spark.conf.set("c.catalog", CATALOG)
+    spark.conf.set("c.schema", SCHEMA)
+except Exception:
+    pass  # Not available on Serverless
 
 print(f"Catalog: {CATALOG}")
 print(f"Schema:  {SCHEMA}")
@@ -71,12 +72,6 @@ print(f"User:    {_user}")
 
 # COMMAND ----------
 
-# MAGIC %pip install --quiet mlflow --upgrade
-# MAGIC
-# MAGIC %restart_python
-
-# COMMAND ----------
-
 # MAGIC %run ./_resources/00-setup
 
 # COMMAND ----------
@@ -85,17 +80,6 @@ from mlflow.store.artifact.models_artifact_repo import ModelsArtifactRepository
 
 
 requirements_path = ModelsArtifactRepository(f"models:/{catalog}.{db}.mlops_churn@Challenger").download_artifacts(artifact_path="requirements.txt") # download model from remote registry
-
-# COMMAND ----------
-
-# MAGIC %pip install --quiet -r $requirements_path
-# MAGIC
-# MAGIC
-# MAGIC %restart_python
-
-# COMMAND ----------
-
-# MAGIC %run ./_resources/00-setup
 
 # COMMAND ----------
 
@@ -196,7 +180,15 @@ print(f"Loaded evaluation dataset with {len(eval_pdf)} rows")
 
 # COMMAND ----------
 
+# DBTITLE 1,Install lightgbm dependency
+# MAGIC %pip install lightgbm --quiet
+
+# COMMAND ----------
+
 # DBTITLE 1,Cell 18
+import subprocess, sys
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'lightgbm', '-q'])
+
 import pandas as pd
 import plotly.express as px
 from sklearn.metrics import confusion_matrix
@@ -288,7 +280,7 @@ training_params = {
 # Train a new model with different hyperparameters
 print("Training new model with custom hyperparameters...")
 
-dbutils.notebook.run("./02_3_train_lightGBM", timeout_seconds=600, arguments=training_params)
+dbutils.notebook.run("./03_train_lightGBM", timeout_seconds=600, arguments=training_params)
 
 # Register the new model to Unity Catalog (creates new version)
 print("\nRegistering model to Unity Catalog...")

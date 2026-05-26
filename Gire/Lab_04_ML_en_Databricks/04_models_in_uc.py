@@ -68,13 +68,6 @@ print(f"User:    {_user}")
 
 # COMMAND ----------
 
-# DBTITLE 1,Install MLflow version for model lineage in UC [for MLR < 15.2]
-# MAGIC %pip install --quiet mlflow --upgrade
-# MAGIC
-# MAGIC %restart_python
-
-# COMMAND ----------
-
 # MAGIC %run ./_resources/00-setup
 
 # COMMAND ----------
@@ -90,7 +83,8 @@ model_name = f"{catalog}.{db}.mlops_churn"
 
 # COMMAND ----------
 
-print(f"Finding best run from {xp_name} and pushing new model version to {model_name}")
+xp_name = 'your_xp_name'  # Define xp_name with the appropriate valueprint(f"Finding best run from {xp_name} and pushing new model version to {model_name}")
+
 mlflow.set_experiment(f"{xp_path}/{xp_name}")
 
 # COMMAND ----------
