@@ -284,7 +284,7 @@ dbutils.notebook.run("./03_train_lightGBM", timeout_seconds=600, arguments=train
 
 # Register the new model to Unity Catalog (creates new version)
 print("\nRegistering model to Unity Catalog...")
-dbutils.notebook.run("./02_4_from_notebook_to_models_in_uc", timeout_seconds=300)
+dbutils.notebook.run("./04_models_in_uc", timeout_seconds=300)
 
 print("\n✅ New model trained and registered successfully!")
 
