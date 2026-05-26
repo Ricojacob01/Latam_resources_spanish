@@ -48,13 +48,6 @@ print(f"User:    {_user}")
 
 # COMMAND ----------
 
-# DBTITLE 1,Install MLflow version for model lineage in UC [for MLR < 15.2]
-# MAGIC %pip install --quiet mlflow --upgrade
-# MAGIC
-# MAGIC %restart_python
-
-# COMMAND ----------
-
 # MAGIC %run ./_resources/00-setup $setup_inference_data=true
 
 # COMMAND ----------
@@ -114,7 +107,7 @@ import mlflow
 # Load customer features to be scored
 inference_df = spark.read.table(f"mlops_churn_inference")
 # Load champion model as a Spark UDF. You can use virtual env manager for the demo to avoid version conflict (you can remove the pip install above with virtual env)
-champion_model = mlflow.pyfunc.spark_udf(spark, model_uri=f"models:/{catalog}.{db}.mlops_churn@Champion") #Use env_manager="virtualenv" to recreate a venv with the same python version if needed
+champion_model = mlflow.pyfunc.spark_udf(spark, model_uri=f"models:/{catalog}.{db}.mlops_churn@Champion", env_manager="virtualenv")
 
 # Batch score
 preds_df = inference_df.withColumn('predictions', champion_model(*champion_model.metadata.get_input_schema().input_names()))
