@@ -27,7 +27,7 @@ SELECT
   _metadata.file_name AS source_file
 FROM STREAM read_files( -- Procesa incrementalmente archivos nuevos con Auto Loader
   "${source}/orders",  -- Usa la variable de configuración 'source' del pipeline
-  format => 'json"
+  format => 'json'
 );
 
 -------------------------------------------------------
@@ -80,4 +80,3 @@ GROUP BY date(order_timestamp);
 -- 4. Las tablas en streaming usan checkpoints para procesamiento incremental
 -- 5. Las vistas materializadas manejan eficientemente refrescos completos
 -------------------------------------------------------
-
