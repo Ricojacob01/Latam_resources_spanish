@@ -1,0 +1,2780 @@
+{
+  "datasets": [
+    {
+      "name": "kpi_today",
+      "displayName": "KPIs hoy",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  COUNT(*) AS total_requests,\n",
+        "  ROUND(AVG(execution_duration_ms), 0) AS avg_latency_ms,\n",
+        "  ROUND(percentile(execution_duration_ms, 0.95), 0) AS p95_latency_ms,\n",
+        "  SUM(CASE WHEN status_code >= 400 THEN 1 ELSE 0 END) AS errores,\n",
+        "  ROUND(100.0 * SUM(CASE WHEN status_code >= 400 THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0), 2) AS error_rate_pct,\n",
+        "  COUNT(DISTINCT requester) AS unique_users\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.agente_inference_payload\n",
+        "WHERE request_date >= current_date()\n"
+      ]
+    },
+    {
+      "name": "kpi_gold",
+      "displayName": "KPIs del agente (gold)",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  SUM(total_runs) AS total_runs,\n",
+        "  SUM(runs_exitosos) AS runs_exitosos,\n",
+        "  ROUND(100.0 * SUM(runs_exitosos) / NULLIF(SUM(total_runs), 0), 2) AS pct_exitosos,\n",
+        "  ROUND(AVG(latencia_p95_ms), 0) AS avg_p95,\n",
+        "  ROUND(SUM(costo_usd), 4) AS costo_usd_total,\n",
+        "  ROUND(AVG(feedback_score_avg), 3) AS feedback_avg\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.metricas_agente_gold\n"
+      ]
+    },
+    {
+      "name": "latency_trend",
+      "displayName": "Latencia en el tiempo",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  hora,\n",
+        "  model,\n",
+        "  latencia_promedio_ms,\n",
+        "  latencia_p95_ms,\n",
+        "  total_runs\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.metricas_agente_gold\n",
+        "ORDER BY hora\n"
+      ]
+    },
+    {
+      "name": "volume_by_hour",
+      "displayName": "Volumen por hora",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  hora,\n",
+        "  SUM(total_runs) AS total_runs,\n",
+        "  SUM(runs_exitosos) AS exitosos,\n",
+        "  SUM(total_runs - runs_exitosos) AS errores\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.metricas_agente_gold\n",
+        "GROUP BY hora\n",
+        "ORDER BY hora\n"
+      ]
+    },
+    {
+      "name": "intents_top",
+      "displayName": "Top intents",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  intent,\n",
+        "  COUNT(*) AS total,\n",
+        "  ROUND(AVG(latency_ms), 0) AS latencia_avg,\n",
+        "  SUM(CASE WHEN success THEN 0 ELSE 1 END) AS errores\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.eventos_agente_silver\n",
+        "GROUP BY intent\n",
+        "ORDER BY total DESC\n"
+      ]
+    },
+    {
+      "name": "feedback_trend",
+      "displayName": "Feedback diario",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  date(timestamp) AS dia,\n",
+        "  SUM(CASE WHEN user_feedback='thumbs_up' THEN 1 ELSE 0 END) AS positivos,\n",
+        "  SUM(CASE WHEN user_feedback='thumbs_down' THEN 1 ELSE 0 END) AS negativos,\n",
+        "  COUNT(*) AS total\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.eventos_agente_silver\n",
+        "GROUP BY dia\n",
+        "ORDER BY dia\n"
+      ]
+    },
+    {
+      "name": "tokens_by_model",
+      "displayName": "Tokens por modelo",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  model,\n",
+        "  SUM(tokens_input) AS tokens_in,\n",
+        "  SUM(tokens_output) AS tokens_out,\n",
+        "  ROUND(SUM(costo_usd_aprox), 4) AS costo_aprox\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.eventos_agente_silver\n",
+        "GROUP BY model\n"
+      ]
+    },
+    {
+      "name": "inference_recent",
+      "displayName": "Últimas inferencias (real)",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  request_time,\n",
+        "  status_code,\n",
+        "  execution_duration_ms,\n",
+        "  requester,\n",
+        "  substring(request, 1, 80) AS request_preview,\n",
+        "  substring(response, 1, 80) AS response_preview\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.agente_inference_payload\n",
+        "ORDER BY request_time DESC\n",
+        "LIMIT 20\n"
+      ]
+    },
+    {
+      "name": "cost_by_sku_7d",
+      "displayName": "Consumo DBU 7d",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  date(usage_start_time) AS dia,\n",
+        "  sku_name,\n",
+        "  ROUND(SUM(usage_quantity), 2) AS dbus\n",
+        "FROM system.billing.usage\n",
+        "WHERE usage_start_time >= current_date() - INTERVAL 7 DAYS\n",
+        "GROUP BY dia, sku_name\n",
+        "ORDER BY dia, sku_name\n"
+      ]
+    },
+    {
+      "name": "cost_total_7d",
+      "displayName": "DBUs totales 7d",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  ROUND(SUM(usage_quantity), 2) AS dbus_total_7d,\n",
+        "  ROUND(SUM(usage_quantity) / 7, 2) AS dbus_diarios_avg,\n",
+        "  COUNT(DISTINCT sku_name) AS skus_usados\n",
+        "FROM system.billing.usage\n",
+        "WHERE usage_start_time >= current_date() - INTERVAL 7 DAYS\n"
+      ]
+    },
+    {
+      "name": "audit_recent",
+      "displayName": "Actividad reciente",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  event_time,\n",
+        "  user_identity.email AS user_email,\n",
+        "  service_name,\n",
+        "  action_name,\n",
+        "  response.status_code AS status\n",
+        "FROM system.access.audit\n",
+        "WHERE event_date = current_date()\n",
+        "  AND user_identity.email = current_user()\n",
+        "ORDER BY event_time DESC\n",
+        "LIMIT 20\n"
+      ]
+    },
+    {
+      "name": "lineage",
+      "displayName": "Lineage",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  source_table_full_name AS source,\n",
+        "  target_table_full_name AS target,\n",
+        "  source_type,\n",
+        "  MAX(event_time) AS last_access\n",
+        "FROM system.access.table_lineage\n",
+        "WHERE source_table_full_name LIKE 'ardemo_classic_dnubtw_catalog.comfama.%'\n",
+        "   OR target_table_full_name LIKE 'ardemo_classic_dnubtw_catalog.comfama.%'\n",
+        "GROUP BY source, target, source_type\n",
+        "ORDER BY last_access DESC\n",
+        "LIMIT 30\n"
+      ]
+    },
+    {
+      "name": "drift_metrics",
+      "displayName": "Drift metrics (Lakehouse Monitor)",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  window.start AS hora,\n",
+        "  slice_value AS modelo,\n",
+        "  column_name,\n",
+        "  ROUND(js_distance, 4) AS js_distance,\n",
+        "  ROUND(wasserstein_distance, 4) AS wasserstein,\n",
+        "  ROUND(population_stability_index, 4) AS psi,\n",
+        "  ROUND(avg_delta, 4) AS avg_delta,\n",
+        "  drift_type\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.metricas_agente_gold_drift_metrics\n",
+        "WHERE column_name IN ('latencia_promedio_ms','latencia_p95_ms','feedback_score_avg','costo_usd','total_runs')\n",
+        "ORDER BY hora DESC\n",
+        "LIMIT 30\n"
+      ]
+    },
+    {
+      "name": "vs_health",
+      "displayName": "Vector Search docs",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  COUNT(*) AS total_docs,\n",
+        "  COUNT(DISTINCT categoria) AS categorias,\n",
+        "  SUM(longitud_chars) AS chars_totales,\n",
+        "  ROUND(AVG(longitud_chars), 0) AS chars_avg\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.documentos_subsidios\n"
+      ]
+    },
+    {
+      "name": "tables_in_schema",
+      "displayName": "Tablas + tipo + owner",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  table_name,\n",
+        "  table_type,\n",
+        "  table_owner,\n",
+        "  created,\n",
+        "  comment\n",
+        "FROM ardemo_classic_dnubtw_catalog.information_schema.tables\n",
+        "WHERE table_schema = 'comfama'\n",
+        "ORDER BY created DESC\n"
+      ]
+    },
+    {
+      "name": "column_tags",
+      "displayName": "Tags por columna",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  table_name,\n",
+        "  column_name,\n",
+        "  tag_name,\n",
+        "  tag_value\n",
+        "FROM ardemo_classic_dnubtw_catalog.information_schema.column_tags\n",
+        "WHERE schema_name = 'comfama'\n",
+        "ORDER BY table_name, column_name\n"
+      ]
+    },
+    {
+      "name": "permissions",
+      "displayName": "Permisos sobre el schema",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  privilege_type,\n",
+        "  grantor,\n",
+        "  grantee,\n",
+        "  inherited_from\n",
+        "FROM ardemo_classic_dnubtw_catalog.information_schema.table_privileges\n",
+        "WHERE table_schema = 'comfama'\n",
+        "LIMIT 50\n"
+      ]
+    },
+    {
+      "name": "quality_summary",
+      "displayName": "Calidad por modelo (gold)",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  model,\n",
+        "  COUNT(*) AS ventanas,\n",
+        "  ROUND(AVG(latencia_promedio_ms), 0) AS lat_avg_ms,\n",
+        "  ROUND(percentile(latencia_p95_ms, 0.95), 0) AS lat_p95_max,\n",
+        "  ROUND(100.0 * SUM(runs_exitosos) / NULLIF(SUM(total_runs), 0), 2) AS success_rate_pct,\n",
+        "  ROUND(AVG(feedback_score_avg), 3) AS feedback_avg,\n",
+        "  ROUND(SUM(costo_usd), 4) AS costo_usd\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.metricas_agente_gold\n",
+        "GROUP BY model\n"
+      ]
+    },
+    {
+      "name": "quality_trend_latency",
+      "displayName": "Latencia y P95 en el tiempo",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  hora,\n",
+        "  model,\n",
+        "  latencia_promedio_ms,\n",
+        "  latencia_p95_ms\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.metricas_agente_gold\n",
+        "ORDER BY hora\n"
+      ]
+    },
+    {
+      "name": "quality_trend_success",
+      "displayName": "Success rate por hora",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  hora,\n",
+        "  model,\n",
+        "  ROUND(100.0 * runs_exitosos / NULLIF(total_runs, 0), 2) AS success_rate_pct,\n",
+        "  feedback_score_avg\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.metricas_agente_gold\n",
+        "ORDER BY hora\n"
+      ]
+    },
+    {
+      "name": "feedback_breakdown",
+      "displayName": "Feedback breakdown",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  user_feedback,\n",
+        "  COUNT(*) AS total\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.eventos_agente_silver\n",
+        "WHERE user_feedback IS NOT NULL\n",
+        "GROUP BY user_feedback\n"
+      ]
+    },
+    {
+      "name": "audit_all_schema",
+      "displayName": "Audit todo el schema",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  event_time,\n",
+        "  user_identity.email AS user_email,\n",
+        "  service_name,\n",
+        "  action_name,\n",
+        "  CASE WHEN response.status_code BETWEEN 200 AND 299 THEN '✅ ok'\n",
+        "       WHEN response.status_code >= 400 THEN '❌ error'\n",
+        "       ELSE CAST(response.status_code AS STRING) END AS resultado,\n",
+        "  request_params.full_name_arg AS objeto\n",
+        "FROM system.access.audit\n",
+        "WHERE event_date >= current_date() - INTERVAL 7 DAYS\n",
+        "  AND (\n",
+        "    request_params.full_name_arg LIKE 'ardemo_classic_dnubtw_catalog.comfama.%'\n",
+        "    OR request_params.target_full_name LIKE 'ardemo_classic_dnubtw_catalog.comfama.%'\n",
+        "    OR request_params.commandText LIKE '%comfama.%'\n",
+        "  )\n",
+        "ORDER BY event_time DESC\n",
+        "LIMIT 100\n"
+      ]
+    },
+    {
+      "name": "audit_by_user",
+      "displayName": "Audit por usuario",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  user_identity.email AS user_email,\n",
+        "  COUNT(*) AS acciones,\n",
+        "  COUNT(DISTINCT action_name) AS tipos_distintos,\n",
+        "  MAX(event_time) AS ultima_actividad\n",
+        "FROM system.access.audit\n",
+        "WHERE event_date >= current_date() - INTERVAL 7 DAYS\n",
+        "  AND request_params.full_name_arg LIKE 'ardemo_classic_dnubtw_catalog.comfama.%'\n",
+        "GROUP BY user_email\n",
+        "ORDER BY acciones DESC\n",
+        "LIMIT 20\n"
+      ]
+    },
+    {
+      "name": "audit_failed",
+      "displayName": "Accesos denegados / fallidos",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  event_time,\n",
+        "  user_identity.email AS user_email,\n",
+        "  action_name,\n",
+        "  response.status_code AS status,\n",
+        "  response.error_message AS error,\n",
+        "  request_params.full_name_arg AS objeto\n",
+        "FROM system.access.audit\n",
+        "WHERE event_date >= current_date() - INTERVAL 7 DAYS\n",
+        "  AND response.status_code >= 400\n",
+        "  AND (request_params.full_name_arg LIKE 'ardemo_classic_dnubtw_catalog.comfama.%' OR request_params.commandText LIKE '%comfama.%')\n",
+        "ORDER BY event_time DESC\n",
+        "LIMIT 30\n"
+      ]
+    },
+    {
+      "name": "endpoint_invocations",
+      "displayName": "Invocaciones al endpoint (inference table)",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  date_trunc('hour', request_time) AS hora,\n",
+        "  COUNT(*) AS invocaciones,\n",
+        "  COUNT(DISTINCT requester) AS usuarios_unicos,\n",
+        "  SUM(CASE WHEN status_code >= 400 THEN 1 ELSE 0 END) AS errores,\n",
+        "  ROUND(AVG(execution_duration_ms), 0) AS lat_avg\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.agente_inference_payload\n",
+        "WHERE request_date >= current_date() - INTERVAL 7 DAYS\n",
+        "GROUP BY hora\n",
+        "ORDER BY hora\n"
+      ]
+    },
+    {
+      "name": "endpoint_users",
+      "displayName": "Usuarios del agente",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  requester AS usuario,\n",
+        "  COUNT(*) AS invocaciones,\n",
+        "  ROUND(AVG(execution_duration_ms), 0) AS lat_avg_ms,\n",
+        "  SUM(CASE WHEN status_code >= 400 THEN 1 ELSE 0 END) AS errores,\n",
+        "  MIN(request_time) AS primer_uso,\n",
+        "  MAX(request_time) AS ultimo_uso\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.agente_inference_payload\n",
+        "WHERE request_date >= current_date() - INTERVAL 7 DAYS\n",
+        "GROUP BY requester\n",
+        "ORDER BY invocaciones DESC\n"
+      ]
+    },
+    {
+      "name": "sql_alerts_status",
+      "displayName": "SQL Alerts queries existentes",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  display_name AS nombre,\n",
+        "  query_text AS query,\n",
+        "  created_by,\n",
+        "  created_at,\n",
+        "  last_modified_at\n",
+        "FROM system.lakeflow.sql_queries\n",
+        "WHERE display_name LIKE '%comfama%'\n",
+        "   OR query_text LIKE '%comfama%'\n",
+        "ORDER BY last_modified_at DESC\n",
+        "LIMIT 20\n"
+      ]
+    },
+    {
+      "name": "alert_query_results",
+      "displayName": "Resultado actual de la alert query",
+      "queryLines": [
+        "\n",
+        "SELECT\n",
+        "  model,\n",
+        "  ROUND(percentile(latency_ms, 0.95), 0) AS p95_latency_ms,\n",
+        "  COUNT(*) AS total_runs,\n",
+        "  SUM(CASE WHEN NOT success THEN 1 ELSE 0 END) AS errores\n",
+        "FROM ardemo_classic_dnubtw_catalog.comfama.eventos_agente_silver\n",
+        "WHERE timestamp >= current_timestamp() - INTERVAL 1 HOUR\n",
+        "GROUP BY model\n"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "overview",
+      "displayName": "🏠 Overview",
+      "layout": [
+        {
+          "widget": {
+            "name": "p1_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# 🤝 Comfama Agent — Control Center\n",
+                "_Real-time monitoring de agente conversacional · Powered by Databricks_"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "kpi_today",
+                  "fields": [
+                    {
+                      "name": "total_requests",
+                      "expression": "`total_requests`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "total_requests",
+                  "rowNumber": 0,
+                  "displayName": "Requests hoy"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Requests hoy"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "kpi_today",
+                  "fields": [
+                    {
+                      "name": "avg_latency_ms",
+                      "expression": "`avg_latency_ms`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg_latency_ms",
+                  "rowNumber": 0,
+                  "displayName": "Latencia avg (ms)"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Latencia avg (ms)"
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi3",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "kpi_today",
+                  "fields": [
+                    {
+                      "name": "p95_latency_ms",
+                      "expression": "`p95_latency_ms`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "p95_latency_ms",
+                  "rowNumber": 0,
+                  "displayName": "Latencia P95 (ms)"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Latencia P95 (ms)"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi4",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "kpi_today",
+                  "fields": [
+                    {
+                      "name": "error_rate_pct",
+                      "expression": "`error_rate_pct`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "error_rate_pct",
+                  "rowNumber": 0,
+                  "displayName": "Error rate %"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Error rate %"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi5",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "kpi_today",
+                  "fields": [
+                    {
+                      "name": "unique_users",
+                      "expression": "`unique_users`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "unique_users",
+                  "rowNumber": 0,
+                  "displayName": "Usuarios únicos hoy"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Usuarios únicos hoy"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi6",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "kpi_gold",
+                  "fields": [
+                    {
+                      "name": "costo_usd_total",
+                      "expression": "`costo_usd_total`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "costo_usd_total",
+                  "rowNumber": 0,
+                  "displayName": "Costo total USD"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Costo total USD"
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "trend_lat",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "latency_trend",
+                  "fields": [
+                    {
+                      "name": "hora",
+                      "expression": "`hora`"
+                    },
+                    {
+                      "name": "latencia_p95_ms",
+                      "expression": "`latencia_p95_ms`"
+                    },
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "hora",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "hora"
+                },
+                "y": {
+                  "fieldName": "latencia_p95_ms",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "latencia_p95_ms"
+                },
+                "color": {
+                  "fieldName": "model",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Latencia P95 por modelo"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "trend_vol",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "volume_by_hour",
+                  "fields": [
+                    {
+                      "name": "hora",
+                      "expression": "`hora`"
+                    },
+                    {
+                      "name": "total_runs",
+                      "expression": "`total_runs`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "hora",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "hora"
+                },
+                "y": {
+                  "fieldName": "total_runs",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "total_runs"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Volumen por hora"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 3,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "intents",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "intents_top",
+                  "fields": [
+                    {
+                      "name": "intent",
+                      "expression": "`intent`"
+                    },
+                    {
+                      "name": "total",
+                      "expression": "`total`"
+                    },
+                    {
+                      "name": "latencia_avg",
+                      "expression": "`latencia_avg`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "intent",
+                    "displayName": "Intent"
+                  },
+                  {
+                    "fieldName": "total",
+                    "displayName": "Total"
+                  },
+                  {
+                    "fieldName": "latencia_avg",
+                    "displayName": "Latencia avg"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Top intents"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 7,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "feedback_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "feedback_trend",
+                  "fields": [
+                    {
+                      "name": "dia",
+                      "expression": "`dia`"
+                    },
+                    {
+                      "name": "positivos",
+                      "expression": "`positivos`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "dia",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "dia"
+                },
+                "y": {
+                  "fieldName": "positivos",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "positivos"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Feedback diario"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 7,
+            "width": 3,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "ops",
+      "displayName": "🤖 Agent Ops",
+      "layout": [
+        {
+          "widget": {
+            "name": "p2_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# 🤖 Agent Operations\n",
+                "_Inference table real + tokens + actividad por modelo_"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "tokens",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "tokens_by_model",
+                  "fields": [
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    },
+                    {
+                      "name": "tokens_in",
+                      "expression": "`tokens_in`"
+                    },
+                    {
+                      "name": "tokens_out",
+                      "expression": "`tokens_out`"
+                    },
+                    {
+                      "name": "costo_aprox",
+                      "expression": "`costo_aprox`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "model",
+                    "displayName": "Modelo"
+                  },
+                  {
+                    "fieldName": "tokens_in",
+                    "displayName": "Tokens IN"
+                  },
+                  {
+                    "fieldName": "tokens_out",
+                    "displayName": "Tokens OUT"
+                  },
+                  {
+                    "fieldName": "costo_aprox",
+                    "displayName": "Costo USD"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Tokens y costo por modelo"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "vs_docs",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "vs_health",
+                  "fields": [
+                    {
+                      "name": "total_docs",
+                      "expression": "`total_docs`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "total_docs",
+                  "rowNumber": 0,
+                  "displayName": "Documentos en VS"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Documentos en VS"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "vs_cats",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "vs_health",
+                  "fields": [
+                    {
+                      "name": "categorias",
+                      "expression": "`categorias`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "categorias",
+                  "rowNumber": 0,
+                  "displayName": "Categorías"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Categorías"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "vs_chars",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "vs_health",
+                  "fields": [
+                    {
+                      "name": "chars_avg",
+                      "expression": "`chars_avg`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "chars_avg",
+                  "rowNumber": 0,
+                  "displayName": "Chars/doc avg"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Chars/doc avg"
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "recent_req",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "inference_recent",
+                  "fields": [
+                    {
+                      "name": "request_time",
+                      "expression": "`request_time`"
+                    },
+                    {
+                      "name": "status_code",
+                      "expression": "`status_code`"
+                    },
+                    {
+                      "name": "execution_duration_ms",
+                      "expression": "`execution_duration_ms`"
+                    },
+                    {
+                      "name": "requester",
+                      "expression": "`requester`"
+                    },
+                    {
+                      "name": "request_preview",
+                      "expression": "`request_preview`"
+                    },
+                    {
+                      "name": "response_preview",
+                      "expression": "`response_preview`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "request_time",
+                    "displayName": "Hora"
+                  },
+                  {
+                    "fieldName": "status_code",
+                    "displayName": "Status"
+                  },
+                  {
+                    "fieldName": "execution_duration_ms",
+                    "displayName": "Latencia ms"
+                  },
+                  {
+                    "fieldName": "requester",
+                    "displayName": "Usuario"
+                  },
+                  {
+                    "fieldName": "request_preview",
+                    "displayName": "Request"
+                  },
+                  {
+                    "fieldName": "response_preview",
+                    "displayName": "Response"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Últimas inferencias reales (inference table)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 5,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "finops",
+      "displayName": "💰 FinOps",
+      "layout": [
+        {
+          "widget": {
+            "name": "p3_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# 💰 FinOps — Costos & Consumo DBU\n",
+                "_System tables (oficial) + tendencias_"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "c1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cost_total_7d",
+                  "fields": [
+                    {
+                      "name": "dbus_total_7d",
+                      "expression": "`dbus_total_7d`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "dbus_total_7d",
+                  "rowNumber": 0,
+                  "displayName": "DBUs últimos 7d"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "DBUs últimos 7d"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "c2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cost_total_7d",
+                  "fields": [
+                    {
+                      "name": "dbus_diarios_avg",
+                      "expression": "`dbus_diarios_avg`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "dbus_diarios_avg",
+                  "rowNumber": 0,
+                  "displayName": "DBUs / día (avg)"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "DBUs / día (avg)"
+              }
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 1,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "c3",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cost_total_7d",
+                  "fields": [
+                    {
+                      "name": "skus_usados",
+                      "expression": "`skus_usados`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "skus_usados",
+                  "rowNumber": 0,
+                  "displayName": "SKUs activos"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "SKUs activos"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "cost_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cost_by_sku_7d",
+                  "fields": [
+                    {
+                      "name": "dia",
+                      "expression": "`dia`"
+                    },
+                    {
+                      "name": "dbus",
+                      "expression": "`dbus`"
+                    },
+                    {
+                      "name": "sku_name",
+                      "expression": "`sku_name`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "dia",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "dia"
+                },
+                "y": {
+                  "fieldName": "dbus",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "dbus"
+                },
+                "color": {
+                  "fieldName": "sku_name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Consumo DBU por día x SKU"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 6,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "cost_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "cost_by_sku_7d",
+                  "fields": [
+                    {
+                      "name": "dia",
+                      "expression": "`dia`"
+                    },
+                    {
+                      "name": "sku_name",
+                      "expression": "`sku_name`"
+                    },
+                    {
+                      "name": "dbus",
+                      "expression": "`dbus`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "dia",
+                    "displayName": "Día"
+                  },
+                  {
+                    "fieldName": "sku_name",
+                    "displayName": "SKU"
+                  },
+                  {
+                    "fieldName": "dbus",
+                    "displayName": "DBUs"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Detalle de consumo"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 6,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "governance",
+      "displayName": "🛡️ Governance",
+      "layout": [
+        {
+          "widget": {
+            "name": "p4_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# 🛡️ Governance & Audit\n",
+                "_Unity Catalog: tablas, tags, permisos, lineage, auditoría_"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "tables",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "tables_in_schema",
+                  "fields": [
+                    {
+                      "name": "table_name",
+                      "expression": "`table_name`"
+                    },
+                    {
+                      "name": "table_type",
+                      "expression": "`table_type`"
+                    },
+                    {
+                      "name": "table_owner",
+                      "expression": "`table_owner`"
+                    },
+                    {
+                      "name": "created",
+                      "expression": "`created`"
+                    },
+                    {
+                      "name": "comment",
+                      "expression": "`comment`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "table_name",
+                    "displayName": "Tabla"
+                  },
+                  {
+                    "fieldName": "table_type",
+                    "displayName": "Tipo"
+                  },
+                  {
+                    "fieldName": "table_owner",
+                    "displayName": "Owner"
+                  },
+                  {
+                    "fieldName": "created",
+                    "displayName": "Creada"
+                  },
+                  {
+                    "fieldName": "comment",
+                    "displayName": "Descripción"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Tablas del schema (information_schema.tables)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "tags",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "column_tags",
+                  "fields": [
+                    {
+                      "name": "table_name",
+                      "expression": "`table_name`"
+                    },
+                    {
+                      "name": "column_name",
+                      "expression": "`column_name`"
+                    },
+                    {
+                      "name": "tag_name",
+                      "expression": "`tag_name`"
+                    },
+                    {
+                      "name": "tag_value",
+                      "expression": "`tag_value`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "table_name",
+                    "displayName": "Tabla"
+                  },
+                  {
+                    "fieldName": "column_name",
+                    "displayName": "Columna"
+                  },
+                  {
+                    "fieldName": "tag_name",
+                    "displayName": "Tag"
+                  },
+                  {
+                    "fieldName": "tag_value",
+                    "displayName": "Valor"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Tags por columna (information_schema.column_tags)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 5,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "perms",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "permissions",
+                  "fields": [
+                    {
+                      "name": "privilege_type",
+                      "expression": "`privilege_type`"
+                    },
+                    {
+                      "name": "grantee",
+                      "expression": "`grantee`"
+                    },
+                    {
+                      "name": "grantor",
+                      "expression": "`grantor`"
+                    },
+                    {
+                      "name": "inherited_from",
+                      "expression": "`inherited_from`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "privilege_type",
+                    "displayName": "Privilege"
+                  },
+                  {
+                    "fieldName": "grantee",
+                    "displayName": "Grantee"
+                  },
+                  {
+                    "fieldName": "grantor",
+                    "displayName": "Grantor"
+                  },
+                  {
+                    "fieldName": "inherited_from",
+                    "displayName": "Heredado de"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Permisos sobre el schema"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 5,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "lineage_tbl",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "lineage",
+                  "fields": [
+                    {
+                      "name": "source",
+                      "expression": "`source`"
+                    },
+                    {
+                      "name": "target",
+                      "expression": "`target`"
+                    },
+                    {
+                      "name": "source_type",
+                      "expression": "`source_type`"
+                    },
+                    {
+                      "name": "last_access",
+                      "expression": "`last_access`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "source",
+                    "displayName": "Source"
+                  },
+                  {
+                    "fieldName": "target",
+                    "displayName": "Target"
+                  },
+                  {
+                    "fieldName": "source_type",
+                    "displayName": "Tipo"
+                  },
+                  {
+                    "fieldName": "last_access",
+                    "displayName": "Último acceso"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Data lineage (system.access.table_lineage)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "audit_tbl",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "audit_recent",
+                  "fields": [
+                    {
+                      "name": "event_time",
+                      "expression": "`event_time`"
+                    },
+                    {
+                      "name": "user_email",
+                      "expression": "`user_email`"
+                    },
+                    {
+                      "name": "service_name",
+                      "expression": "`service_name`"
+                    },
+                    {
+                      "name": "action_name",
+                      "expression": "`action_name`"
+                    },
+                    {
+                      "name": "status",
+                      "expression": "`status`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "event_time",
+                    "displayName": "Hora"
+                  },
+                  {
+                    "fieldName": "user_email",
+                    "displayName": "Usuario"
+                  },
+                  {
+                    "fieldName": "service_name",
+                    "displayName": "Servicio"
+                  },
+                  {
+                    "fieldName": "action_name",
+                    "displayName": "Acción"
+                  },
+                  {
+                    "fieldName": "status",
+                    "displayName": "Status"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Tu actividad hoy (system.access.audit, filtrado por current_user)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 13,
+            "width": 6,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "access_alerts",
+      "displayName": "🔐 Access & Alerts",
+      "layout": [
+        {
+          "widget": {
+            "name": "acc_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# 🔐 Access & Alerts\n",
+                "_Audit de accesos al schema + alerts SQL + uso del agente_"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "invocations_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "endpoint_invocations",
+                  "fields": [
+                    {
+                      "name": "hora",
+                      "expression": "`hora`"
+                    },
+                    {
+                      "name": "invocaciones",
+                      "expression": "`invocaciones`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "hora",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "hora"
+                },
+                "y": {
+                  "fieldName": "invocaciones",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "invocaciones"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Invocaciones del agente (last 7d)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "audit_by_user_bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "audit_by_user",
+                  "fields": [
+                    {
+                      "name": "user_email",
+                      "expression": "`user_email`"
+                    },
+                    {
+                      "name": "acciones",
+                      "expression": "`acciones`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "user_email",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "user_email"
+                },
+                "y": {
+                  "fieldName": "acciones",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "acciones"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Top usuarios del schema"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "width": 2,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "audit_all",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "audit_all_schema",
+                  "fields": [
+                    {
+                      "name": "event_time",
+                      "expression": "`event_time`"
+                    },
+                    {
+                      "name": "user_email",
+                      "expression": "`user_email`"
+                    },
+                    {
+                      "name": "service_name",
+                      "expression": "`service_name`"
+                    },
+                    {
+                      "name": "action_name",
+                      "expression": "`action_name`"
+                    },
+                    {
+                      "name": "resultado",
+                      "expression": "`resultado`"
+                    },
+                    {
+                      "name": "objeto",
+                      "expression": "`objeto`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "event_time",
+                    "displayName": "Hora"
+                  },
+                  {
+                    "fieldName": "user_email",
+                    "displayName": "Usuario"
+                  },
+                  {
+                    "fieldName": "service_name",
+                    "displayName": "Servicio"
+                  },
+                  {
+                    "fieldName": "action_name",
+                    "displayName": "Acción"
+                  },
+                  {
+                    "fieldName": "resultado",
+                    "displayName": "Resultado"
+                  },
+                  {
+                    "fieldName": "objeto",
+                    "displayName": "Objeto"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Audit completo del schema (últimos 7 días)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 6,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "audit_failed_tbl",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "audit_failed",
+                  "fields": [
+                    {
+                      "name": "event_time",
+                      "expression": "`event_time`"
+                    },
+                    {
+                      "name": "user_email",
+                      "expression": "`user_email`"
+                    },
+                    {
+                      "name": "action_name",
+                      "expression": "`action_name`"
+                    },
+                    {
+                      "name": "status",
+                      "expression": "`status`"
+                    },
+                    {
+                      "name": "error",
+                      "expression": "`error`"
+                    },
+                    {
+                      "name": "objeto",
+                      "expression": "`objeto`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "event_time",
+                    "displayName": "Hora"
+                  },
+                  {
+                    "fieldName": "user_email",
+                    "displayName": "Usuario"
+                  },
+                  {
+                    "fieldName": "action_name",
+                    "displayName": "Acción"
+                  },
+                  {
+                    "fieldName": "status",
+                    "displayName": "Status"
+                  },
+                  {
+                    "fieldName": "error",
+                    "displayName": "Error"
+                  },
+                  {
+                    "fieldName": "objeto",
+                    "displayName": "Objeto"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "❌ Accesos denegados / fallidos"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "endpoint_users_tbl",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "endpoint_users",
+                  "fields": [
+                    {
+                      "name": "usuario",
+                      "expression": "`usuario`"
+                    },
+                    {
+                      "name": "invocaciones",
+                      "expression": "`invocaciones`"
+                    },
+                    {
+                      "name": "lat_avg_ms",
+                      "expression": "`lat_avg_ms`"
+                    },
+                    {
+                      "name": "errores",
+                      "expression": "`errores`"
+                    },
+                    {
+                      "name": "primer_uso",
+                      "expression": "`primer_uso`"
+                    },
+                    {
+                      "name": "ultimo_uso",
+                      "expression": "`ultimo_uso`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "usuario",
+                    "displayName": "Usuario"
+                  },
+                  {
+                    "fieldName": "invocaciones",
+                    "displayName": "Invocaciones"
+                  },
+                  {
+                    "fieldName": "lat_avg_ms",
+                    "displayName": "Lat avg ms"
+                  },
+                  {
+                    "fieldName": "errores",
+                    "displayName": "Errores"
+                  },
+                  {
+                    "fieldName": "primer_uso",
+                    "displayName": "Primer uso"
+                  },
+                  {
+                    "fieldName": "ultimo_uso",
+                    "displayName": "Último uso"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Usuarios del agente (inference table)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 13,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "sql_queries_tbl",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "sql_alerts_status",
+                  "fields": [
+                    {
+                      "name": "nombre",
+                      "expression": "`nombre`"
+                    },
+                    {
+                      "name": "created_by",
+                      "expression": "`created_by`"
+                    },
+                    {
+                      "name": "last_modified_at",
+                      "expression": "`last_modified_at`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "nombre",
+                    "displayName": "Nombre"
+                  },
+                  {
+                    "fieldName": "created_by",
+                    "displayName": "Creado por"
+                  },
+                  {
+                    "fieldName": "last_modified_at",
+                    "displayName": "Última modificación"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "SQL queries (base de alerts)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 17,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "alert_now",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "alert_query_results",
+                  "fields": [
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    },
+                    {
+                      "name": "p95_latency_ms",
+                      "expression": "`p95_latency_ms`"
+                    },
+                    {
+                      "name": "total_runs",
+                      "expression": "`total_runs`"
+                    },
+                    {
+                      "name": "errores",
+                      "expression": "`errores`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "model",
+                    "displayName": "Modelo"
+                  },
+                  {
+                    "fieldName": "p95_latency_ms",
+                    "displayName": "P95 latency"
+                  },
+                  {
+                    "fieldName": "total_runs",
+                    "displayName": "Runs"
+                  },
+                  {
+                    "fieldName": "errores",
+                    "displayName": "Errores"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "🚨 Estado actual de la alert query (última hora)"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 17,
+            "width": 3,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "quality",
+      "displayName": "🔍 Quality",
+      "layout": [
+        {
+          "widget": {
+            "name": "p5_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# 🔍 Quality\n",
+                "_Métricas de calidad del agente — latencia, success rate, feedback, drift_"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "q_summary",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "quality_summary",
+                  "fields": [
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    },
+                    {
+                      "name": "ventanas",
+                      "expression": "`ventanas`"
+                    },
+                    {
+                      "name": "lat_avg_ms",
+                      "expression": "`lat_avg_ms`"
+                    },
+                    {
+                      "name": "lat_p95_max",
+                      "expression": "`lat_p95_max`"
+                    },
+                    {
+                      "name": "success_rate_pct",
+                      "expression": "`success_rate_pct`"
+                    },
+                    {
+                      "name": "feedback_avg",
+                      "expression": "`feedback_avg`"
+                    },
+                    {
+                      "name": "costo_usd",
+                      "expression": "`costo_usd`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "model",
+                    "displayName": "Modelo"
+                  },
+                  {
+                    "fieldName": "ventanas",
+                    "displayName": "Ventanas"
+                  },
+                  {
+                    "fieldName": "lat_avg_ms",
+                    "displayName": "Lat avg ms"
+                  },
+                  {
+                    "fieldName": "lat_p95_max",
+                    "displayName": "Lat P95 max"
+                  },
+                  {
+                    "fieldName": "success_rate_pct",
+                    "displayName": "Success %"
+                  },
+                  {
+                    "fieldName": "feedback_avg",
+                    "displayName": "Feedback avg"
+                  },
+                  {
+                    "fieldName": "costo_usd",
+                    "displayName": "Costo USD"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Resumen de calidad por modelo"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 6,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "q_latency",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "quality_trend_latency",
+                  "fields": [
+                    {
+                      "name": "hora",
+                      "expression": "`hora`"
+                    },
+                    {
+                      "name": "latencia_p95_ms",
+                      "expression": "`latencia_p95_ms`"
+                    },
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "hora",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "hora"
+                },
+                "y": {
+                  "fieldName": "latencia_p95_ms",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "latencia_p95_ms"
+                },
+                "color": {
+                  "fieldName": "model",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Latencia P95 ms (drift visual)"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "q_success",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "quality_trend_success",
+                  "fields": [
+                    {
+                      "name": "hora",
+                      "expression": "`hora`"
+                    },
+                    {
+                      "name": "success_rate_pct",
+                      "expression": "`success_rate_pct`"
+                    },
+                    {
+                      "name": "model",
+                      "expression": "`model`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "hora",
+                  "scale": {
+                    "type": "temporal"
+                  },
+                  "displayName": "hora"
+                },
+                "y": {
+                  "fieldName": "success_rate_pct",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "success_rate_pct"
+                },
+                "color": {
+                  "fieldName": "model",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Success rate % por hora"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 4,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "feedback_pie",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "feedback_breakdown",
+                  "fields": [
+                    {
+                      "name": "user_feedback",
+                      "expression": "`user_feedback`"
+                    },
+                    {
+                      "name": "total",
+                      "expression": "`total`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "total",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "user_feedback",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Distribución de feedback"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "drift_tbl",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "drift_metrics",
+                  "fields": [
+                    {
+                      "name": "hora",
+                      "expression": "`hora`"
+                    },
+                    {
+                      "name": "modelo",
+                      "expression": "`modelo`"
+                    },
+                    {
+                      "name": "column_name",
+                      "expression": "`column_name`"
+                    },
+                    {
+                      "name": "js_distance",
+                      "expression": "`js_distance`"
+                    },
+                    {
+                      "name": "wasserstein",
+                      "expression": "`wasserstein`"
+                    },
+                    {
+                      "name": "psi",
+                      "expression": "`psi`"
+                    },
+                    {
+                      "name": "drift_type",
+                      "expression": "`drift_type`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "hora",
+                    "displayName": "Hora"
+                  },
+                  {
+                    "fieldName": "modelo",
+                    "displayName": "Modelo"
+                  },
+                  {
+                    "fieldName": "column_name",
+                    "displayName": "Columna"
+                  },
+                  {
+                    "fieldName": "js_distance",
+                    "displayName": "JS"
+                  },
+                  {
+                    "fieldName": "wasserstein",
+                    "displayName": "Wasserstein"
+                  },
+                  {
+                    "fieldName": "psi",
+                    "displayName": "PSI"
+                  },
+                  {
+                    "fieldName": "drift_type",
+                    "displayName": "Tipo"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Drift metrics (Lakehouse Monitor — requiere refresh)"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 8,
+            "width": 3,
+            "height": 4
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ]
+}
