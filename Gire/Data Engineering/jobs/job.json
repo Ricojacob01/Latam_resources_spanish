@@ -1,0 +1,32 @@
+{
+  "_comment": "El mismo Job como payload de la Jobs API 2.1. Crear con: databricks jobs create --json @job.json  (o POST /api/2.1/jobs/create). Sustituye <pipeline_id> y la ruta del notebook por las de tu workspace.",
+  "name": "gire_de_job",
+  "tasks": [
+    {
+      "task_key": "01_pipeline",
+      "pipeline_task": {
+        "pipeline_id": "<pipeline_id>"
+      }
+    },
+    {
+      "task_key": "02_kpis",
+      "depends_on": [
+        { "task_key": "01_pipeline" }
+      ],
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/<usuario>/Latam_resources_spanish/Gire/Data Engineering/tasks/refrescar_kpis"
+      },
+      "max_retries": 2,
+      "min_retry_interval_millis": 30000
+    }
+  ],
+  "schedule": {
+    "quartz_cron_expression": "0 0 * * * ?",
+    "timezone_id": "America/Bogota",
+    "pause_status": "PAUSED"
+  },
+  "email_notifications": {
+    "on_failure": ["<usuario>@databricks.com"]
+  },
+  "queue": { "enabled": true }
+}

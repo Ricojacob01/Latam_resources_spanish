@@ -1,0 +1,54 @@
+# =============================================================================
+# Databricks Asset Bundle — Job de orquestación del track Data Engineering
+# =============================================================================
+# El mismo Job que construyes en la Jobs UI (módulo 04), pero como CÓDIGO.
+#
+#   databricks bundle validate
+#   databricks bundle deploy -t dev
+#   databricks bundle run gire_de_pipeline_job -t dev
+#
+# Sustituye <pipeline_id> por el id del pipeline del módulo 03 (o usa el bloque
+# `resources.pipelines` para que el bundle también cree el pipeline).
+# =============================================================================
+bundle:
+  name: gire_de_orquestacion
+
+variables:
+  source_volume:
+    description: Path del Volume raw del usuario
+    default: /Volumes/ardemo_classic_dnubtw_catalog/ws_CAMBIA_USUARIO/raw_de
+  pipeline_id:
+    description: Pipeline id del SDP del módulo 03
+    default: "<pipeline_id>"
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://fevm-ardemo-classic-dnubtw.cloud.databricks.com
+
+resources:
+  jobs:
+    gire_de_pipeline_job:
+      name: gire_de_job_${workspace.current_user.short_name}
+      tasks:
+        - task_key: 01_pipeline
+          pipeline_task:
+            pipeline_id: ${var.pipeline_id}
+        - task_key: 02_kpis
+          depends_on:
+            - task_key: 01_pipeline
+          notebook_task:
+            notebook_path: ../tasks/refrescar_kpis
+          max_retries: 2
+          min_retry_interval_millis: 30000
+      schedule:
+        quartz_cron_expression: "0 0 * * * ?"   # cada hora
+        timezone_id: America/Bogota
+        pause_status: PAUSED                      # pausado para el lab
+      email_notifications:
+        on_failure:
+          - ${workspace.current_user.userName}
+      queue:
+        enabled: true
