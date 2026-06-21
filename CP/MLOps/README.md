@@ -20,9 +20,11 @@ Caso de uso: **predicción de churn (abandono) de clientes** de telecom.
 | 02 | **Feature Engineering y Gobernanza** | Features + gobernanza de la tabla en UC | **Code (+ inspección UI)** |
 | 03 | **AutoML, Entrenamiento y Tracking** | AutoML + LightGBM + MLflow | **Lado a lado (UI ↔ API)** |
 | 04 | **Registro en UC y Champion/Challenger** | `register_model`, alias, validación, promoción | **Code → UI** |
+| 04b | **Política de Uso de Datos (No-Entrenamiento)** | Postura no-training + verificación de logging/aislamiento | **Secuencial (Prosa/UI → Code)** |
 | 05 | **Model Serving (UI + API)** ⭐ | Crear, consultar y gobernar un endpoint REST | **Secuencial (UI → Code)** |
 | 06 | **Batch Inference** | Scoring masivo con `spark_udf` y `ai_query` | **Code (+ inspección UI)** |
 | 07 | **Orquestación — Job del pipeline ML** ⭐ | Job multi-tarea con schedule, reintentos, alertas | **Secuencial (UI → Code)** |
+| 07b | **Auditoría y Trazabilidad (system tables)** | Queries a `system.access.audit_logs` + lineage | **Lado a lado (Catalog UI ↔ SQL)** |
 | 08 | **Cierre y Recap** | Recap + monitoreo + qué sigue | — |
 
 ⭐ = lo nuevo respecto a `ML_workshop`.
@@ -40,6 +42,8 @@ Igual que en los tracks de Gire, este workshop hace vivir **las dos caras** de D
 - **02 Feature eng — Code (+ UI):** las transformaciones son código; la tabla resultante se inspecciona/gobierna en Catalog Explorer.
 - **03 AutoML — Lado a lado:** AutoML en la UI glass-box *y* por API; LightGBM en código con MLflow, comparado en Experiments UI.
 - **04 Registro — Code → UI:** registras y asignas alias por API; gobiernas en *Models in Unity Catalog*.
+- **04b Uso de datos — Prosa/UI → Code:** documentas la postura no-training y los toggles (UI), luego verificas por código qué loggea cada endpoint y dónde viven datos/modelo. Cierra el gap opt-out/no-training (1c).
+- **07b Auditoría — Lado a lado (Catalog UI ↔ SQL):** descubres las system tables en Catalog Explorer y respondes "quién hizo qué" en SQL sobre `system.access.audit_logs` + lineage. Cierra los gaps de audit-log queries (3a, 6a).
 - **05 Model Serving — UI → Code:** primero creas y pruebas el endpoint en la **Serving UI** (intuición: estado, scale-to-zero, query panel), luego lo creas/consultas/actualizas por **API** para automatizar.
 - **06 Batch — Code (+ UI):** `spark_udf`/`ai_query` para puntuar; tabla en Catalog Explorer.
 - **07 Orquestación — UI → Code:** armas el Job multi-tarea en la **Jobs UI** (grafo, schedule, reintentos), luego lo defines como **Asset Bundle / JSON** para CI/CD. El Job reutiliza los notebooks de `pipeline/`.
@@ -57,3 +61,4 @@ Igual que en los tracks de Gire, este workshop hace vivir **las dos caras** de D
 3. **Modelo servido** en un endpoint REST (faltaba).
 4. **Pipeline orquestado** como Job + Asset Bundle (faltaba).
 5. Nota explícita **UI vs Code** por módulo.
+6. Módulos de **gobernanza/trazabilidad** (`04b` no-training, `07b` auditoría con system tables) que cierran gaps de la scorecard de proveedores de IA.

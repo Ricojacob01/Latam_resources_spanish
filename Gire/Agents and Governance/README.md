@@ -11,6 +11,7 @@ Gobernanza con **Unity Catalog** (incluyendo clasificación y enmascaramiento **
 | 00 | **Bienvenida y Agenda** | 5 min | Objetivos, agenda, pre-check | — |
 | 01 | **Product Tour (UC + Genie + Agent Bricks)** | 20 min | El "por qué": gobernanza → NLQ → agentes | Conceptual |
 | 02 | **LAB Gobernanza con Unity Catalog** | 30 min | Comentarios con `ai_gen`, clasificación con `ai_query`, tags y *column masking* | **Secuencial (UI → Code)** |
+| 02b | **Residencia, Soberanía y Cifrado de Datos** | 20 min | Región de workspace/metastore/serverless, storage locations, CMK, TLS | **Secuencial (UI → Code)** |
 | 03 | **LAB AI Functions (SQL)** | 25 min | `ai_query`, `ai_classify`, `ai_extract`, `ai_analyze_sentiment`, batch inference | **Lado a lado (Playground UI ↔ SQL)** |
 | 04 | **LAB Genie y Apps** | 35 min | Crear un Genie space + una App Streamlit que lo consume | **Secuencial (UI → Code)** |
 | 05 | **LAB Agent Bricks (Knowledge Assistant)** | 30 min | Agente RAG sobre un PDF, sin escribir el retriever | **Secuencial (Code → UI)** |
@@ -27,6 +28,7 @@ Contiene el contenido hands-on detallado que estos módulos enmarcan (reutilizad
 ## 🧭 Decisiones UI vs Code de este track (resumen)
 
 - **02 Gobernanza — UI → Code.** Primero etiquetas/ocultas una columna **a mano en Catalog Explorer** (clicks: tags, *column mask*) para *entender* el control; luego lo **automatizas con IA** (`ai_gen` para comentarios, `ai_query` para clasificar, `ALTER ... SET TAGS/MASK` en bucle) sobre todo el esquema. La UI enseña el concepto; el código lo escala.
+- **02b Residencia y Cifrado — UI → Code.** La región (workspace/metastore/serverless) y las llaves de cifrado se **definen en la UI** (Account Console/Catalog); luego **verificas por código** (`metastores.summary()`, `information_schema.catalogs`, external locations) para que la residencia y el cifrado sean **auditables**, no solo un screenshot. Cierra los gaps de residencia (1b) y cifrado (1d).
 - **03 AI Functions — Lado a lado.** El **Playground/AI Functions UI** y el **SQL** son intercambiables para la misma tarea (clasificar, extraer, resumir). El participante prueba un prompt en el Playground y a la vez ejecuta el `ai_query` equivalente en SQL — ve que es la *misma* capacidad.
 - **04 Genie y Apps — UI → Code.** El **Genie space** se crea en la UI (intuición de NLQ y *instructions*); luego una **App Streamlit (código)** lo consume vía el SDK (`w.genie...`) para llevarlo a una experiencia productiva.
 - **05 Agent Bricks — Code → UI.** El **código** prepara los datos (parseo de PDF con `ai_parse_document`, tabla Delta con CDF); luego el agente RAG completo (chunking, embeddings, Vector Search, endpoint) se construye **sin código en la UI de Agent Bricks**. El código alimenta; la UI ensambla el agente.
