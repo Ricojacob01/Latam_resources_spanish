@@ -1,0 +1,53 @@
+{
+  "_comment": "El mismo Job como payload de la Jobs API 2.1. Crear con: databricks jobs create --json @job.json. Sustituye <usuario> por tu ruta de workspace.",
+  "name": "cp_mlops_churn",
+  "job_clusters": [
+    {
+      "job_cluster_key": "ml_cluster",
+      "new_cluster": {
+        "spark_version": "15.4.x-cpu-ml-scala2.12",
+        "node_type_id": "i3.xlarge",
+        "num_workers": 1
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "task_key": "feature_engineering",
+      "job_cluster_key": "ml_cluster",
+      "notebook_task": { "notebook_path": "/Workspace/Users/<usuario>/Latam_resources_spanish/CP/MLOps/pipeline/01_feature_engineering" }
+    },
+    {
+      "task_key": "train_and_register",
+      "job_cluster_key": "ml_cluster",
+      "depends_on": [{ "task_key": "feature_engineering" }],
+      "notebook_task": { "notebook_path": "/Workspace/Users/<usuario>/Latam_resources_spanish/CP/MLOps/pipeline/02_train_and_register" }
+    },
+    {
+      "task_key": "validate_and_promote",
+      "job_cluster_key": "ml_cluster",
+      "depends_on": [{ "task_key": "train_and_register" }],
+      "notebook_task": { "notebook_path": "/Workspace/Users/<usuario>/Latam_resources_spanish/CP/MLOps/pipeline/03_validate_and_promote" },
+      "max_retries": 1
+    },
+    {
+      "task_key": "deploy_serving",
+      "job_cluster_key": "ml_cluster",
+      "depends_on": [{ "task_key": "validate_and_promote" }],
+      "notebook_task": { "notebook_path": "/Workspace/Users/<usuario>/Latam_resources_spanish/CP/MLOps/pipeline/04_deploy_serving" }
+    },
+    {
+      "task_key": "batch_scoring",
+      "job_cluster_key": "ml_cluster",
+      "depends_on": [{ "task_key": "validate_and_promote" }],
+      "notebook_task": { "notebook_path": "/Workspace/Users/<usuario>/Latam_resources_spanish/CP/MLOps/pipeline/05_batch_scoring" }
+    }
+  ],
+  "schedule": {
+    "quartz_cron_expression": "0 0 6 ? * MON",
+    "timezone_id": "America/Bogota",
+    "pause_status": "PAUSED"
+  },
+  "email_notifications": { "on_failure": ["<usuario>@databricks.com"] },
+  "queue": { "enabled": true }
+}
