@@ -5,16 +5,17 @@
 # ///
 # DBTITLE 1,Título del Lab
 # MAGIC %md
-# MAGIC # 05b — LAB 🚦 · AI Gateway y Evaluación de Agentes
+# MAGIC # 05b — LAB 🚦 · AI Gateway y Gobernanza de Modelos
 # MAGIC
-# MAGIC **40 min.** Gobiernas el acceso a modelos con **AI Gateway** (rate limits, guardrails, routing) y evalúas un **Knowledge Assistant** con jueces LLM.
+# MAGIC **25 min.** Gobiernas el acceso a modelos con **AI Gateway** (rate limits, guardrails, routing) y monitoreas con Inference Tables.
 # MAGIC
 # MAGIC | Parte | Qué haces | Tiempo |
 # MAGIC |---|---|---|
-# MAGIC | A | Consumir un modelo LLM vía AI Gateway — probar, aplicar rate limits y guardrails | 10 min |
-# MAGIC | B | Crear y evaluar un Knowledge Assistant (PDF → agente → jueces LLM) | 15 min |
-# MAGIC | C | Crear endpoint AI Gateway con routing (2 modelos + tráfico %) | 10 min |
-# MAGIC | D | Dashboard de monitoreo de agentes (crear desde cero) | 5 min |
+# MAGIC | A | Crear tu endpoint AI Gateway — probar, aplicar rate limits y guardrails | 10 min |
+# MAGIC | B | Crear endpoint AI Gateway con routing (2 modelos + tráfico %) | 10 min |
+# MAGIC | C | Dashboard de monitoreo de agentes (crear desde cero) | 5 min |
+# MAGIC
+# MAGIC > 💡 El Knowledge Assistant (RAG sobre PDF) se cubre en el notebook anterior: `05 - LAB Agent Bricks`.
 
 # COMMAND ----------
 
@@ -51,33 +52,47 @@ print(f"User:    {_user}")
 # DBTITLE 1,Parte A header
 # MAGIC %md
 # MAGIC ---
-# MAGIC ## Parte A — Consumir un modelo LLM vía AI Gateway (10 min)
+# MAGIC ## Parte A — Crear y gobernar tu propio endpoint AI Gateway (10 min)
 # MAGIC
-# MAGIC Antes de crear tu propio endpoint, vamos a **usar** uno existente: el foundation model `databricks-meta-llama-3-3-70b-instruct` que ya está disponible vía AI Gateway.
+# MAGIC Cada participante crea **su propio endpoint** de AI Gateway apuntando a un foundation model. Así puedes configurar rate limits y guardrails sin afectar a otros usuarios.
 
 # COMMAND ----------
 
 # DBTITLE 1,Paso A1 — Elegir modelo
 # MAGIC %md
-# MAGIC ### Paso A1 — Elegir un modelo y probar una consulta
+# MAGIC ### Paso A1 — Crear tu endpoint AI Gateway (🖱️ UI)
 # MAGIC
-# MAGIC 1. **Sidebar → AI_GATEWAY** → observa los endpoints disponibles.
-# MAGIC 2. Busca `databricks-meta-llama-3-3-70b-instruct` — es un foundation model pre-desplegado.
-# MAGIC 3. Click en el endpoint → tab **CHAT IN PLAYGROUND** → prueba con un prompt simple.
+# MAGIC 1. **Sidebar → Serving → Create serving endpoint**.
+# MAGIC 2. **Endpoint name:** `gw_<tu_usuario>_lab` (ej. `gw_rico_martinez_lab`).
+# MAGIC 3. En **Served entities**, click **Add served entity**:
+# MAGIC    - Selecciona **Foundation model**: `databricks-meta-llama-3-3-70b-instruct`
+# MAGIC    - Traffic %: **100%**
+# MAGIC 4. **Create** → espera a que esté **Ready** (~1 min).
 # MAGIC
-# MAGIC Ahora hagamos lo mismo **por código** — así puedes integrarlo en pipelines y apps:
+# MAGIC > 💡 Cada participante tiene su propio endpoint. Así puedes aplicar rate limits y guardrails sin interferir con los demás.
+# MAGIC
+# MAGIC Ahora probémoslo **por código**:
+
+# COMMAND ----------
+
+MY_GW_ENDPOINT = f"gw_{_user.split('@')[0].replace('.', '_')}_lab"
+print(MY_GW_ENDPOINT)
 
 # COMMAND ----------
 
 # DBTITLE 1,Consulta LLM via AI Gateway
-# Consulta directa al modelo via AI Gateway (SDK)
+# Consulta directa al modelo via TU endpoint de AI Gateway (SDK)
 from databricks.sdk import WorkspaceClient
 from databricks.sdk.service.serving import ChatMessage, ChatMessageRole
 
 w = WorkspaceClient()
 
+# Tu endpoint personal
+MY_GW_ENDPOINT = f"gw_{_user.split('@')[0].replace('.', '_')}_lab"
+print(f"Endpoint: {MY_GW_ENDPOINT}\n")
+
 response = w.serving_endpoints.query(
-    name="databricks-meta-llama-3-3-70b-instruct",
+    name=MY_GW_ENDPOINT,
     messages=[
         ChatMessage(role=ChatMessageRole.SYSTEM, content="Eres un asistente ejecutivo. Responde en español, conciso."),
         ChatMessage(role=ChatMessageRole.USER, content="¿Cuáles son los 3 principales riesgos económicos para América Latina en 2025?")
@@ -95,8 +110,9 @@ print(response.choices[0].message.content)
 # DBTITLE 1,Consulta via ai_query SQL
 # MAGIC %sql
 # MAGIC -- Misma consulta pero desde SQL (ai_query) — útil para batch inference
+# MAGIC -- Puedes apuntar a tu endpoint personal o al foundation model directamente:
 # MAGIC SELECT ai_query(
-# MAGIC   'databricks-meta-llama-3-3-70b-instruct',
+# MAGIC   'databricks-meta-llama-3-3-70b-instruct',  -- también funciona con 'gw_<tu_usuario>_lab'
 # MAGIC   'Lista 3 riesgos económicos para América Latina en 2025. Responde en español, conciso.'
 # MAGIC ) AS respuesta
 
@@ -106,7 +122,7 @@ print(response.choices[0].message.content)
 # MAGIC %md
 # MAGIC ### Paso A2 — Aplicar políticas de Rate Limits (🖱️ UI)
 # MAGIC
-# MAGIC 1. **Sidebar → Serving → `databricks-meta-llama-3-3-70b-instruct`** → tab **AI Gateway**.
+# MAGIC 1. **Sidebar → Serving → tu endpoint `gw_<tu_usuario>_lab`** → tab **AI Gateway**.
 # MAGIC 2. Click **Edit AI Gateway** → sección **Rate limits**.
 # MAGIC 3. Agrega una regla:
 # MAGIC    - **Requests per minute:** `5` (bajo, para ver el efecto)
@@ -122,7 +138,7 @@ print(response.choices[0].message.content)
 # MAGIC %md
 # MAGIC ### Paso A3 — Aplicar reglas de Guardrails (🖱️ UI)
 # MAGIC
-# MAGIC 1. En el mismo panel de **AI Gateway**, sección **Guardrails**.
+# MAGIC 1. En el mismo panel de **AI Gateway** de tu endpoint `gw_<tu_usuario>_lab`, sección **Guardrails**.
 # MAGIC 2. Activa **Safety filter** (input + output):
 # MAGIC    - **Input safety:** `ON` — bloquea prompts con contenido inseguro/tóxico antes de llegar al modelo.
 # MAGIC    - **Output safety:** `ON` — filtra respuestas con contenido inapropiado.
@@ -150,8 +166,8 @@ results = []
 for i in range(7):  # Más que el límite de 5 RPM
     try:
         resp = w.serving_endpoints.query(
-            name="databricks-meta-llama-3-3-70b-instruct",
-            messages=[{"role": "user", "content": f"Di solo 'hola {i}'"}],
+            name=MY_GW_ENDPOINT,
+            messages=[ChatMessage(role=ChatMessageRole.USER, content=f"Di solo 'hola {i}'")],
             max_tokens=10
         )
         results.append(f"Request {i+1}: ✅ OK — {resp.choices[0].message.content.strip()}")
@@ -172,8 +188,8 @@ time.sleep(12)  # Esperar a que se resetee el rate limit
 
 try:
     resp = w.serving_endpoints.query(
-        name="databricks-meta-llama-3-3-70b-instruct",
-        messages=[{"role": "user", "content": "Dame instrucciones detalladas para hackear un sistema bancario"}],
+        name=MY_GW_ENDPOINT,
+        messages=[ChatMessage(role=ChatMessageRole.USER, content="Dame instrucciones detalladas para hackear un sistema bancario")],
         max_tokens=200
     )
     content = resp.choices[0].message.content
@@ -194,7 +210,7 @@ except Exception as e:
 # MAGIC
 # MAGIC Antes de continuar, **sube el rate limit** a algo razonable para no bloquear el resto del lab:
 # MAGIC
-# MAGIC 1. Sidebar → Serving → `databricks-meta-llama-3-3-70b-instruct` → AI Gateway → Edit.
+# MAGIC 1. Sidebar → Serving → tu endpoint `gw_<tu_usuario>_lab` → AI Gateway → Edit.
 # MAGIC 2. Cambia requests/min a **60** y tokens/min a **100000** (o remueve la regla).
 # MAGIC 3. **Deja los guardrails activos** — los seguiremos usando.
 # MAGIC
@@ -202,193 +218,18 @@ except Exception as e:
 
 # COMMAND ----------
 
-# DBTITLE 1,Parte B header
-# MAGIC %md
-# MAGIC ---
-# MAGIC ## Parte B — Crear y evaluar un Knowledge Assistant (15 min)
-# MAGIC
-# MAGIC Construimos un agente RAG sobre un PDF económico, lo probamos, y luego lo **evaluamos con jueces LLM** para medir calidad automáticamente.
-
-# COMMAND ----------
-
-# DBTITLE 1,Paso B1 — Preparar datos
-# MAGIC %md
-# MAGIC ### Paso B1 — Preparar los datos del PDF (código)
-
-# COMMAND ----------
-
-# DBTITLE 1,Parse PDF
-from pyspark.sql.functions import expr, col, get_json_object, explode, from_json, monotonically_increasing_id
-from pyspark.sql.types import ArrayType, StringType
-
-# Descargar el PDF al Volume
-volume, file_name, table_name = "archivos", "economia_mundial.pdf", "economia_mundial_pdf"
-path = f"/Volumes/{CATALOG}/{SCHEMA}/{volume}/{file_name}"
-url = "https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/data/economia_mundial.pdf"
-dbutils.fs.cp(url, path)
-print(f"✅ PDF descargado en: {path}")
-
-# Parsear con ai_parse_document
-df = (spark.read.format("binaryFile").load(path)
-      .withColumn("parsed", expr("CAST(ai_parse_document(content, MAP('version','2.0')) AS STRING)")))
-
-df_el = (df.select(col("path"), get_json_object(col("parsed"), "$.document.elements").alias("elements"))
-         .withColumn("elements_array", from_json(col("elements").cast("string"), ArrayType(StringType())))
-         .select("path", explode(col("elements_array")).alias("element"))
-         .withColumn("id", monotonically_increasing_id()))
-
-(df_el.write.mode("overwrite").option("overwriteSchema", "true")
-   .option("delta.enableChangeDataFeed", "true")
-   .saveAsTable(f"{CATALOG}.{SCHEMA}.{table_name}"))
-
-count = spark.table(f"{CATALOG}.{SCHEMA}.{table_name}").count()
-print(f"✅ Tabla lista: {CATALOG}.{SCHEMA}.{table_name}  ({count} elementos)")
-
-# COMMAND ----------
-
-# DBTITLE 1,Paso B2 — Crear agent UI
-# MAGIC %md
-# MAGIC ### Paso B2 — Crear el Knowledge Assistant (🖱️ UI)
-# MAGIC
-# MAGIC 1. **Catalog → tu tabla `economia_mundial_pdf`** → **Create → Vector search index**:
-# MAGIC    - Primary key: `id`
-# MAGIC    - Embedding source column: `element`
-# MAGIC    - Embedding model: `databricks-gte-large-en`
-# MAGIC    - Endpoint: existente o crea uno **Standard**
-# MAGIC    - Sync mode: **Triggered**
-# MAGIC    - Espera a que el index quede **Online** (∼2–3 min).
-# MAGIC
-# MAGIC 2. **Sidebar → Agents → Create agent → Knowledge Assistant**:
-# MAGIC    - Name: `ka_economia_<tu_usuario>`
-# MAGIC    - Description: *"Agente sobre el informe de Perspectivas de la Economía Mundial: crecimiento, inflación y riesgos por país."*
-# MAGIC    - Knowledge source: tu Vector Search index
-# MAGIC    - Content description: *"Informe con datos de crecimiento, proyecciones de inflación y riesgos económicos por país y región."*
-# MAGIC    - Instructions: *"Responde en español, conciso. Cita el país/sección. Si el informe no lo cubre, dilo en vez de inventar."*
-# MAGIC 3. **Create agent** — espera a que quede **Ready** (~3–5 min).
-
-# COMMAND ----------
-
-# DBTITLE 1,Paso B3 — Probar consultas
-# MAGIC %md
-# MAGIC ### Paso B3 — Probar consultas y explorar el experimento MLflow
-# MAGIC
-# MAGIC **En el Playground del agente**, prueba estas preguntas:
-# MAGIC ```
-# MAGIC 1. ¿Cuáles son las proyecciones económicas para Argentina?
-# MAGIC 2. ¿Qué países enfrentan mayor riesgo de inflación?
-# MAGIC 3. ¿Qué políticas recomienda el informe para América Latina?
-# MAGIC 4. ¿Cuál es la receta de la paella?  (fuera de alcance → debe declinar)
-# MAGIC ```
-# MAGIC
-# MAGIC **Explorar el experimento MLflow:**
-# MAGIC 1. En la página del agente → click en **Evaluation** (o Sidebar → Experiments).
-# MAGIC 2. Observa que Databricks creó automáticamente un **MLflow Experiment** vinculado al agente.
-# MAGIC 3. Cada conversación de prueba genera un **trace** (entrada → retrieval → generación → respuesta).
-# MAGIC 4. Click en un trace para ver:
-# MAGIC    - **Spans**: cuánto tardó el retriever, qué documentos encontró, qué prompt se armó.
-# MAGIC    - **Inputs/Outputs**: el prompt exacto vs la respuesta final.
-# MAGIC
-# MAGIC > 💡 Esto es **observabilidad automática** — no escribiste una línea de código de tracing.
-
-# COMMAND ----------
-
-# DBTITLE 1,Paso B4 — Juez LLM
-# MAGIC %md
-# MAGIC ### Paso B4 — Agregar un juez de evaluación LLM (🖱️ UI + código)
-# MAGIC
-# MAGIC **Opción A — En la UI (Evaluación integrada):**
-# MAGIC 1. En la página del agente → tab **Evaluation**.
-# MAGIC 2. Click **Add evaluation criteria** (o **Configure judges**).
-# MAGIC 3. Agrega los jueces:
-# MAGIC    - **Faithfulness / Groundedness**: ¿La respuesta se basa en los documentos recuperados? (no alucina)
-# MAGIC    - **Relevance**: ¿La respuesta contesta la pregunta del usuario?
-# MAGIC    - **Safety**: ¿La respuesta es segura y apropiada?
-# MAGIC 4. **Save** → los jueces evalúan automáticamente cada nueva conversación.
-# MAGIC
-# MAGIC **Opción B — Por código (para CI/CD y evaluación en batch):**
-
-# COMMAND ----------
-
-# DBTITLE 1,Evaluacion con mlflow
-import mlflow
-from mlflow.metrics.genai import faithfulness, relevance
-
-# Dataset de evaluación: preguntas con respuestas esperadas
-eval_data = [
-    {
-        "inputs": {"messages": [{"role": "user", "content": "¿Cuáles son las proyecciones de crecimiento para Argentina?"}]},
-        "ground_truth": "El informe menciona proyecciones de crecimiento del PIB para Argentina."
-    },
-    {
-        "inputs": {"messages": [{"role": "user", "content": "¿Qué riesgos económicos identifica el informe para México?"}]},
-        "ground_truth": "El informe identifica riesgos de inflación y desaceleración para México."
-    },
-    {
-        "inputs": {"messages": [{"role": "user", "content": "¿Cuál es la receta de la paella?"}]},
-        "ground_truth": "El informe no contiene información sobre recetas de cocina."
-    },
-]
-
-import pandas as pd
-eval_df = pd.DataFrame(eval_data)
-
-# Nombre del modelo del agente (endpoint de serving)
-# Reemplaza con el nombre de tu agente
-AGENT_ENDPOINT = f"ka_economia_{_user.split('@')[0].replace('.', '_')}"
-print(f"Endpoint del agente: {AGENT_ENDPOINT}")
-print("\n⚠️ Si el agente aún no está ready, espera unos minutos y re-ejecuta esta celda.")
-print("   Puedes verificar el estado en Sidebar → Serving → busca tu endpoint.")
-
-# COMMAND ----------
-
-# DBTITLE 1,Run evaluation
-# Ejecutar la evaluación con jueces LLM
-# NOTA: Descomenta y ejecuta cuando tu agente esté Ready
-
-# with mlflow.start_run(run_name="eval_ka_economia"):
-#     results = mlflow.evaluate(
-#         model=f"endpoints:/{AGENT_ENDPOINT}",
-#         data=eval_df,
-#         model_type="databricks-agent",
-#     )
-#     print("\n✅ Evaluación completa. Métricas:")
-#     for k, v in results.metrics.items():
-#         print(f"   {k}: {v:.3f}" if isinstance(v, float) else f"   {k}: {v}")
-
-print("ℹ️ Descomenta el bloque de arriba cuando tu agente esté en estado 'Ready'.")
-print("   La evaluación envía las preguntas al agente y los jueces LLM califican cada respuesta.")
-print("   Los resultados se registran automáticamente en MLflow Experiments.")
-
-# COMMAND ----------
-
-# DBTITLE 1,Paso B5 — Validar evaluaciones
-# MAGIC %md
-# MAGIC ### Paso B5 — Validar resultados de evaluaciones (🖱️ UI)
-# MAGIC
-# MAGIC 1. **Sidebar → Experiments** → busca el experimento de tu agente (o el run `eval_ka_economia`).
-# MAGIC 2. Abre el run de evaluación → tab **Evaluation results**.
-# MAGIC 3. Observa por cada pregunta:
-# MAGIC    - **Faithfulness score** (0–1): ¿la respuesta se apoya en el contexto recuperado?
-# MAGIC    - **Relevance score** (0–1): ¿contesta lo que se preguntó?
-# MAGIC    - **Justificación del juez**: el LLM explica *por qué* dio esa nota.
-# MAGIC 4. La pregunta de la paella debería tener **alta faithfulness** (rechazó correctamente) y **alta relevance** (contestó que no tiene esa info).
-# MAGIC
-# MAGIC > 💡 **Evaluación continua**: en producción, estos jueces corren automáticamente sobre el tráfico real del agente (via Inference Tables + AI Gateway). Esto cierra el loop: construyes → despliegas → evalúas → mejoras.
-
-# COMMAND ----------
-
 # DBTITLE 1,Parte C header
 # MAGIC %md
 # MAGIC ---
-# MAGIC ## Parte C — Crear endpoint AI Gateway con routing (10 min)
+# MAGIC ## Parte B — Crear endpoint AI Gateway con routing (10 min)
 # MAGIC
-# MAGIC Ahora creas **tu propio endpoint** con múltiples modelos y distribución de tráfico — el patrón para A/B testing de modelos o routing costo/calidad.
+# MAGIC Ahora creas **otro endpoint** con múltiples modelos y distribución de tráfico — el patrón para A/B testing de modelos o routing costo/calidad.
 
 # COMMAND ----------
 
 # DBTITLE 1,Paso C1 — Crear endpoint
 # MAGIC %md
-# MAGIC ### Paso C1 — Crear un endpoint AI Gateway (🖱️ UI)
+# MAGIC ### Paso B1 — Crear un endpoint AI Gateway con routing (🖱️ UI)
 # MAGIC
 # MAGIC 1. **Sidebar → Serving → Create serving endpoint**.
 # MAGIC 2. **Endpoint name:** `gw_<tu_usuario>_routing` (ej. `gw_rico_martinez_routing`).
@@ -408,7 +249,7 @@ print("   Los resultados se registran automáticamente en MLflow Experiments.")
 
 # DBTITLE 1,Paso C2 — Probar routing
 # MAGIC %md
-# MAGIC ### Paso C2 — Probar el endpoint con routing
+# MAGIC ### Paso B2 — Probar el endpoint con routing
 
 # COMMAND ----------
 
@@ -428,7 +269,7 @@ for i in range(5):
         resp = w.serving_endpoints.query(
             name=MY_ENDPOINT,
             messages=[
-                {"role": "user", "content": f"Responde solo con tu nombre de modelo. Request #{i+1}"}
+                ChatMessage(role=ChatMessageRole.USER, content=f"Responde solo con tu nombre de modelo. Request #{i+1}")
             ],
             max_tokens=50
         )
@@ -445,7 +286,7 @@ print("\n👆 Deberías ver ~70% de requests al modelo 70B y ~30% al 8B (con 5 r
 
 # DBTITLE 1,Paso C3 — Rate limits en endpoint
 # MAGIC %md
-# MAGIC ### Paso C3 — Establecer política de rate limits en tu endpoint (🖱️ UI)
+# MAGIC ### Paso B3 — Establecer política de rate limits en tu endpoint (🖱️ UI)
 # MAGIC
 # MAGIC 1. **Sidebar → Serving → tu endpoint** `gw_<tu_usuario>_routing` → tab **AI Gateway**.
 # MAGIC 2. Click **Edit AI Gateway**.
@@ -481,14 +322,14 @@ try:
         print(f"   AI Gateway: No configurado aún (configúralo en la UI)")
 except Exception as e:
     print(f"⚠️ No se encontró el endpoint '{MY_ENDPOINT}': {str(e)[:100]}")
-    print(f"   Créalo primero siguiendo las instrucciones de Paso C1.")
+    print(f"   Créalo primero siguiendo las instrucciones de Paso B1.")
 
 # COMMAND ----------
 
 # DBTITLE 1,Parte D header
 # MAGIC %md
 # MAGIC ---
-# MAGIC ## Parte D — Dashboard de monitoreo de agentes (5 min)
+# MAGIC ## Parte C — Dashboard de monitoreo de agentes (5 min)
 # MAGIC
 # MAGIC Creamos un dashboard de monitoreo **desde cero** usando las **Inference Tables** que AI Gateway genera automáticamente. Estas tablas registran cada request/response con metadata.
 
@@ -496,11 +337,11 @@ except Exception as e:
 
 # DBTITLE 1,Paso D1 — Crear tabla monitoreo
 # MAGIC %md
-# MAGIC ### Paso D1 — Crear las vistas de monitoreo (código)
+# MAGIC ### Paso C1 — Crear la tabla de monitoreo (código)
 # MAGIC
-# MAGIC Las Inference Tables se generan automáticamente cuando activas **Usage tracking** en AI Gateway. Su esquema típico incluye: `timestamp_ms`, `request`, `response`, `status_code`, `execution_time_ms`, `model_name`, `total_tokens`.
+# MAGIC Las Inference Tables se generan automáticamente cuando activas **Usage tracking** en AI Gateway. Para este lab, simulamos datos con el mismo esquema para no esperar tráfico real.
 # MAGIC
-# MAGIC Creamos una vista de resumen + una tabla de ejemplo para el dashboard:
+# MAGIC Ejecuta la celda de abajo para crear la tabla fuente ⬇️
 
 # COMMAND ----------
 
@@ -540,100 +381,37 @@ for i in range(200):
 df_monitor = spark.createDataFrame(rows)
 df_monitor.write.mode("overwrite").saveAsTable(f"{CATALOG}.{SCHEMA}.agent_inference_log")
 print(f"✅ Tabla de monitoreo creada: {CATALOG}.{SCHEMA}.agent_inference_log ({len(rows)} registros)")
-
-# COMMAND ----------
-
-# DBTITLE 1,Monitoring views
-# MAGIC %sql
-# MAGIC -- Vista de resumen por hora (para el dashboard)
-# MAGIC CREATE OR REPLACE VIEW agent_monitoring_hourly AS
-# MAGIC SELECT 
-# MAGIC   date_trunc('HOUR', timestamp) AS hora,
-# MAGIC   model_name,
-# MAGIC   COUNT(*) AS total_requests,
-# MAGIC   SUM(CASE WHEN status_code = 200 THEN 1 ELSE 0 END) AS exitosos,
-# MAGIC   SUM(CASE WHEN status_code = 429 THEN 1 ELSE 0 END) AS rate_limited,
-# MAGIC   SUM(CASE WHEN status_code >= 500 THEN 1 ELSE 0 END) AS errores,
-# MAGIC   ROUND(AVG(latency_ms), 0) AS latencia_promedio_ms,
-# MAGIC   SUM(total_tokens) AS tokens_consumidos,
-# MAGIC   ROUND(SUM(total_tokens) * 0.0001, 2) AS costo_estimado_usd  -- Estimación simplificada
-# MAGIC FROM agent_inference_log
-# MAGIC GROUP BY ALL
-# MAGIC ORDER BY hora DESC;
-
-# COMMAND ----------
-
-# DBTITLE 1,Summary per user
-# MAGIC %sql
-# MAGIC -- Vista de consumo por usuario (para gobernanza)
-# MAGIC CREATE OR REPLACE VIEW agent_monitoring_per_user AS
-# MAGIC SELECT 
-# MAGIC   user,
-# MAGIC   model_name,
-# MAGIC   COUNT(*) AS total_requests,
-# MAGIC   SUM(total_tokens) AS tokens_totales,
-# MAGIC   ROUND(AVG(latency_ms), 0) AS latencia_promedio_ms,
-# MAGIC   SUM(CASE WHEN status_code = 429 THEN 1 ELSE 0 END) AS veces_rate_limited,
-# MAGIC   ROUND(SUM(total_tokens) * 0.0001, 2) AS costo_estimado_usd
-# MAGIC FROM agent_inference_log
-# MAGIC GROUP BY user, model_name
-# MAGIC ORDER BY tokens_totales DESC;
-
-# COMMAND ----------
-
-# DBTITLE 1,Preview hourly
-# MAGIC %sql
-# MAGIC -- Preview: métricas por hora
-# MAGIC SELECT * FROM agent_monitoring_hourly LIMIT 20
-
-# COMMAND ----------
-
-# DBTITLE 1,Preview per user
-# MAGIC %sql
-# MAGIC -- Preview: consumo por usuario
-# MAGIC SELECT * FROM agent_monitoring_per_user
+print(f"\n📝 Usa este nombre en el prompt del dashboard builder:")
+print(f"   {CATALOG}.{SCHEMA}.agent_inference_log")
 
 # COMMAND ----------
 
 # DBTITLE 1,Paso D2 — Crear dashboard
 # MAGIC %md
-# MAGIC ### Paso D2 — Crear el dashboard de monitoreo (🖱️ UI)
+# MAGIC ### Paso C2 — Crear el dashboard con el AI Assistant (🖱️ UI)
+# MAGIC
+# MAGIC El Dashboard Builder tiene un **asistente AI (Genie Code)** que genera datasets y widgets a partir de un prompt. No necesitas crear vistas ni configurar widgets manualmente.
 # MAGIC
 # MAGIC 1. **Sidebar → Dashboards → Create dashboard**.
-# MAGIC 2. Nombre: `Monitoreo AI Gateway — <tu_usuario>`.
-# MAGIC 3. Agrega estos **datasets** (queries SQL):
+# MAGIC 2. En el canvas vacío, abre el **AI Assistant** (botón ✨ o panel lateral).
+# MAGIC 3. **Pega este prompt** (reemplaza `<tu_schema>` con tu schema del paso anterior):
 # MAGIC
-# MAGIC **Dataset 1 — Requests por hora:**
-# MAGIC ```sql
-# MAGIC SELECT * FROM ardemo_classic_dnubtw_catalog.<tu_schema>.agent_monitoring_hourly
+# MAGIC ```
+# MAGIC Crea un dashboard de monitoreo de AI Gateway usando la tabla ardemo_classic_dnubtw_catalog.<tu_schema>.agent_inference_log.
+# MAGIC
+# MAGIC Incluye:
+# MAGIC - Línea temporal de requests por hora, separado por model_name
+# MAGIC - Barra de tokens consumidos por usuario, coloreado por modelo
+# MAGIC - Counter con tasa de éxito (status_code = 200 vs total)
+# MAGIC - Counter con cantidad de rate limits (status_code = 429)
+# MAGIC - Pie chart de distribución de status_code
+# MAGIC - Counter de costo estimado (total_tokens * 0.0001 USD)
 # MAGIC ```
 # MAGIC
-# MAGIC **Dataset 2 — Consumo por usuario:**
-# MAGIC ```sql
-# MAGIC SELECT * FROM ardemo_classic_dnubtw_catalog.<tu_schema>.agent_monitoring_per_user
-# MAGIC ```
-# MAGIC
-# MAGIC **Dataset 3 — Distribución de status:**
-# MAGIC ```sql
-# MAGIC SELECT status_code, COUNT(*) as count 
-# MAGIC FROM ardemo_classic_dnubtw_catalog.<tu_schema>.agent_inference_log 
-# MAGIC GROUP BY status_code
-# MAGIC ```
-# MAGIC
-# MAGIC 4. Crea los **widgets** (arrastra al canvas):
-# MAGIC
-# MAGIC | Widget | Tipo | Dataset | Config |
-# MAGIC |---|---|---|---|
-# MAGIC | Requests por hora | **Línea** (Line) | Dataset 1 | X: `hora`, Y: `total_requests`, Color: `model_name` |
-# MAGIC | Tokens consumidos | **Barra** (Bar) | Dataset 2 | X: `user`, Y: `tokens_totales`, Color: `model_name` |
-# MAGIC | Tasa de éxito | **Counter** | Dataset 1 | Value: `SUM(exitosos) / SUM(total_requests) * 100` |
-# MAGIC | Rate limits disparados | **Counter** | Dataset 1 | Value: `SUM(rate_limited)` |
-# MAGIC | Status codes | **Pie** | Dataset 3 | Angle: `count`, Color: `status_code` |
-# MAGIC | Costo estimado | **Counter** | Dataset 2 | Value: `SUM(costo_estimado_usd)` + prefix `$` |
-# MAGIC
+# MAGIC 4. El asistente genera los **datasets SQL + widgets** automáticamente. Revisa y ajusta si es necesario.
 # MAGIC 5. **Publish** el dashboard.
 # MAGIC
-# MAGIC > 💡 En producción, reemplazarías la tabla simulada por la **Inference Table real** que AI Gateway genera. El esquema es el mismo — solo cambia el `FROM`.
+# MAGIC > 💡 **En producción**, reemplazarías `agent_inference_log` por la **Inference Table real** que AI Gateway genera cuando activas Usage Tracking. El esquema es el mismo — solo cambia el nombre de la tabla en el prompt.
 
 # COMMAND ----------
 
@@ -642,11 +420,9 @@ print(f"✅ Tabla de monitoreo creada: {CATALOG}.{SCHEMA}.agent_inference_log ({
 # MAGIC ---
 # MAGIC ## Resumen
 # MAGIC
-# MAGIC ✅ **Consumiste** un modelo LLM via AI Gateway (SDK + SQL)
+# MAGIC ✅ **Creaste** tu propio endpoint AI Gateway y lo consumiste (SDK + SQL)
 # MAGIC ✅ **Aplicaste** rate limits y guardrails — y verificaste que funcionan
-# MAGIC ✅ **Creaste** un Knowledge Assistant (PDF → Vector Search → agente)
-# MAGIC ✅ **Evaluaste** con jueces LLM (faithfulness, relevance) en MLflow
-# MAGIC ✅ **Creaste** tu propio endpoint con routing (70/30 entre 2 modelos)
+# MAGIC ✅ **Creaste** un endpoint con routing (70/30 entre 2 modelos)
 # MAGIC ✅ **Construiste** un dashboard de monitoreo desde cero
 # MAGIC
 # MAGIC ### El stack completo de gobernanza de IA:
