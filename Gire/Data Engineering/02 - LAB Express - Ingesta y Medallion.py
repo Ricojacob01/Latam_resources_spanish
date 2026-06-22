@@ -212,3 +212,19 @@ display(spark.table("bronze_orders").groupBy("source_file").count())
 # MAGIC **El Volume `raw_de` queda listo** — lo reutiliza el pipeline del módulo `03`.
 # MAGIC
 # MAGIC ## Continuar → `03 - LAB Spark Declarative Pipeline (Calidad + CDC)`
+
+# COMMAND ----------
+
+# DBTITLE 1,Limpieza para Lab 03
+# MAGIC %md
+# MAGIC ## Limpieza — preparar para Lab 03 (Pipeline)
+# MAGIC
+# MAGIC Antes de ejecutar el pipeline del módulo 03, eliminamos las tablas creadas manualmente en este lab para evitar conflictos de ownership. El pipeline necesita ser dueño de estas tablas.
+
+# COMMAND ----------
+
+# DBTITLE 1,Drop tables for pipeline
+# MAGIC %sql
+# MAGIC DROP TABLE IF EXISTS bronze_orders;
+# MAGIC DROP TABLE IF EXISTS silver_orders_clean;
+# MAGIC DROP TABLE IF EXISTS gold_order_summary;
