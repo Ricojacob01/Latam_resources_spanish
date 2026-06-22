@@ -26,6 +26,7 @@
 # MAGIC 3. **Tarea 2 — KPIs (depende de la 1):**
 # MAGIC    - **+ Add task** → Type: **Notebook**
 # MAGIC    - Notebook: este folder → `tasks/refrescar_kpis`
+# MAGIC    - **!!!IMPORTANTE!!!!** : Edita el archivo `tasks/refrescar_kpis` para usar to catalago
 # MAGIC    - **Depends on:** `01_pipeline`
 # MAGIC 4. **Schedule & Triggers:** **Add trigger** → Scheduled → cada 1 hora (cron `0 0 * * * ?`). Para el lab puedes dejarlo **Paused**.
 # MAGIC 5. **Reintentos:** en la tarea, **Retries** = 2, con backoff.
