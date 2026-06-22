@@ -84,6 +84,23 @@
 
 # COMMAND ----------
 
+# DBTITLE 1,Acto 7 — AI Gateway
+# MAGIC %md
+# MAGIC # 🎬 Acto 7 — AI Gateway: gobernar el modelo servido 🚦
+# MAGIC
+# MAGIC Una vez el modelo está en un endpoint (serving), necesitas **gobernar quién lo consume y cómo**. **AI Gateway** es esa capa:
+# MAGIC
+# MAGIC - **Rate limits** — cuotas por usuario/app/key para evitar abuso o sobrecosto.
+# MAGIC - **Guardrails** — filtrado de seguridad en entrada/salida (contenido inseguro, toxicidad).
+# MAGIC - **PII detection** — detecta y enmascara datos personales antes de llegar al modelo.
+# MAGIC - **Routing & fallback** — envía tráfico a distintos modelos (A/B testing, costo vs calidad) con fallback si uno falla.
+# MAGIC - **Spend controls** — presupuesto máximo por endpoint/periodo.
+# MAGIC - **Usage tracking** — Inference Tables registran cada request (quién, cuándo, tokens, latencia).
+# MAGIC
+# MAGIC > En el ciclo MLOps, AI Gateway cierra el loop: entrenas → registras → validas → sirves → **gobiernas el consumo**. Sin él, el modelo está en producción pero sin control de acceso ni visibilidad de costos.
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC # 🧩 Recap
 # MAGIC
@@ -91,6 +108,7 @@
 # MAGIC features → AutoML/train (MLflow tracking) → register en UC (@Challenger)
 # MAGIC          → validar → promover (@Champion) → batch inference
 # MAGIC          → [CP/MLOps] Model Serving endpoint + Job de orquestación
+# MAGIC          → AI Gateway (rate limits · guardrails · PII · routing · spend controls)
 # MAGIC ```
 # MAGIC
 # MAGIC ## ¿Listo? → `02 - LAB - Del notebook a Unity Catalog`

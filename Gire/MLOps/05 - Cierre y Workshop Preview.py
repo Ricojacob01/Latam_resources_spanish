@@ -32,5 +32,12 @@
 # MAGIC - Feature Store / Feature Engineering in UC, online features.
 # MAGIC - Model monitoring (drift) con Lakehouse Monitoring + Inference Tables.
 # MAGIC - A/B testing y canary en Model Serving.
+# MAGIC - **AI Gateway** — la capa de gobernanza sobre el endpoint servido:
+# MAGIC   - *Rate limits* por usuario/app (requests y tokens) para controlar costos y evitar abuso.
+# MAGIC   - *Guardrails* de entrada/salida (toxicidad, contenido inseguro).
+# MAGIC   - *PII detection* — enmascara datos personales antes de llegar al modelo.
+# MAGIC   - *Routing & fallback* — A/B testing gobernado entre versiones del modelo con fallback automático.
+# MAGIC   - *Spend controls* — presupuesto máximo por periodo.
+# MAGIC   - Se configura en **Sidebar → Serving → AI Gateway** (UI) o vía API/SDK.
 # MAGIC
 # MAGIC ## ¡Gracias! 🎉 — continúa en **CP/MLOps** para el end-to-end con serving + orquestación.

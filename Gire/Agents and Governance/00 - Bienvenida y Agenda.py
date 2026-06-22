@@ -15,6 +15,7 @@
 # MAGIC 2. **AI Functions** en SQL: `ai_query`, `ai_classify`, `ai_extract`, `ai_analyze_sentiment`, `ai_summarize`… y batch inference a escala.
 # MAGIC 3. **Genie**: preguntar a tus datos en español; y una **App** que lo consume.
 # MAGIC 4. **Agent Bricks**: un Knowledge Assistant (RAG) sobre un PDF, sin construir el retriever a mano.
+# MAGIC 5. **AI Gateway**: gobernar el acceso a modelos (rate limits, guardrails, routing, monitoreo) y evaluar agentes con jueces LLM.
 
 # COMMAND ----------
 
@@ -29,6 +30,7 @@
 # MAGIC | 03 AI Functions | **Lado a lado** | Playground UI y SQL son la *misma* capacidad; las usas en paralelo. |
 # MAGIC | 04 Genie y Apps | **UI → Code** | Genie se crea en UI; una App (código) lo consume vía SDK. |
 # MAGIC | 05 Agent Bricks | **Code → UI** | El código prepara datos; el agente RAG se ensambla sin código en la UI. |
+# MAGIC | 05b AI Gateway | **UI → Code → UI** | Configuras rate limits/guardrails en UI, consumes por código, monitoreas en dashboard. |
 
 # COMMAND ----------
 
@@ -42,8 +44,9 @@
 # MAGIC | 25–55 | **LAB Gobernanza UC** | `02` |
 # MAGIC | 55–80 | **LAB AI Functions** | `03` |
 # MAGIC | 80–115 | **LAB Genie y Apps** | `04` |
-# MAGIC | 115–145 | **LAB Agent Bricks** | `05` |
-# MAGIC | 145–155 | **Cierre** | `06` |
+# MAGIC | 115–135 | **LAB Agent Bricks** (intro) | `05` |
+# MAGIC | 135–175 | **LAB AI Gateway y Evaluación** | `05b` |
+# MAGIC | 175–185 | **Cierre** | `06` |
 
 # COMMAND ----------
 

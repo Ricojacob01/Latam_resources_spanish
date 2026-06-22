@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "1"
+# ///
 # MAGIC %md
 # MAGIC # 01 — Product Tour 📊 · Governance, Genie & Agent Bricks
 # MAGIC
@@ -64,6 +68,25 @@
 
 # COMMAND ----------
 
+# DBTITLE 1,Acto 6 — AI Gateway
+# MAGIC %md
+# MAGIC # 🎬 Acto 6 — AI Gateway: gobernar el acceso a los modelos 🚦
+# MAGIC
+# MAGIC Todo lo anterior (AI Functions, Genie, Agent Bricks) **consume modelos** — foundation models o endpoints custom. **AI Gateway** es la capa de gobernanza sobre ese consumo:
+# MAGIC
+# MAGIC | Control | Qué hace |
+# MAGIC |---|---|
+# MAGIC | **Rate limits** | Cuotas de requests/tokens por usuario, app o key — evita que un consumidor monopolice el modelo |
+# MAGIC | **Guardrails** | Filtrado de seguridad en entrada y salida (toxicidad, contenido inseguro) |
+# MAGIC | **PII detection** | Detecta y enmascara datos personales antes de que lleguen al LLM |
+# MAGIC | **Routing & fallback** | Dirige tráfico a distintos modelos (A/B, costo/calidad) con fallback automático si uno falla |
+# MAGIC | **Spend controls** | Presupuesto máximo por endpoint/periodo — el modelo deja de responder antes de exceder el budget |
+# MAGIC | **Usage tracking** | Quién llamó qué, cuándo, cuántos tokens — auditable en Inference Tables |
+# MAGIC
+# MAGIC > Sin AI Gateway, despliegas un agente pero no sabes quién lo usa, cuánto cuesta, ni si filtra datos sensibles. Con AI Gateway, la misma gobernanza de UC se extiende al **consumo de IA**.
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC # 🧩 Recap — cómo se conecta
 # MAGIC
@@ -72,7 +95,10 @@
 # MAGIC        │  datos descritos, seguros, gobernados
 # MAGIC        ├─► AI Functions (SQL)  ── enriquecer/clasificar a escala
 # MAGIC        ├─► Genie                ── NLQ para negocio  ──► App (SDK)
-# MAGIC        └─► Agent Bricks         ── agentes RAG/tools ──► Model Serving endpoint
+# MAGIC        ├─► Agent Bricks         ── agentes RAG/tools ──► Model Serving endpoint
+# MAGIC        │                                                    │
+# MAGIC        └─► AI Gateway ── rate limits · guardrails · PII · routing · spend controls
+# MAGIC            (gobierna el consumo de TODOS los modelos de arriba)
 # MAGIC ```
 # MAGIC
 # MAGIC ## ¿Listo? → `02 - LAB Gobernanza con Unity Catalog`

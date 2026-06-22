@@ -22,9 +22,11 @@
 # MAGIC %md
 # MAGIC ## Cómo conecta con los otros tracks
 # MAGIC
-# MAGIC - 🥇 Las tablas **gold** que produjiste son la entrada de **Agents and Governance** (Genie/AI Functions) y de **MLOps** (features).
-# MAGIC - El **dashboard + Genie** sobre `gold_order_summary` es la puerta al track de Agents.
+# MAGIC > ⚠️ Cada track es **independiente** — no necesitas haber corrido uno para hacer otro. Cada sesión crea sus propios datos.
+# MAGIC
+# MAGIC - 🥇 Los **patrones** que aprendiste (medallion, Auto Loader, CDC) se aplican en **Agents and Governance** (donde se gobiernan datos similares con UC + IA) y en **MLOps** (features).
 # MAGIC - El patrón de **Jobs** se reutiliza en MLOps para orquestar entrenamiento → registro → serving (ver `../../CP/MLOps/`).
+# MAGIC - En producción real, las tablas gold que produces aquí alimentarían Genie y agentes — pero en el workshop cada track genera sus propios datos de ejemplo para ser autocontenido.
 
 # COMMAND ----------
 

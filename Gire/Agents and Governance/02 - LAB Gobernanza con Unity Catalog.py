@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "1"
+# ///
 # MAGIC %md
 # MAGIC # 02 — LAB 🛡️ · Gobernanza con Unity Catalog (asistida por IA)
 # MAGIC
@@ -46,7 +50,7 @@ display(spark.table("gov_clientes"))
 # MAGIC %md
 # MAGIC ## Parte A — Gobernanza a MANO en la UI (🖱️) — entender el control
 # MAGIC
-# MAGIC 1. **Catalog → `ardemo_classic_dnubtw_catalog` → `ws_<usuario>` → `gov_clientes`**.
+# MAGIC 1. **Catalog → `tu_catalogo` → `ws_<usuario>` → `gov_clientes`**.
 # MAGIC 2. Tab **Columns** → columna `documento_id` → menú **⋮ → Set tags** → agrega `clasificacion = SENSIBLE`. (Así se etiqueta a mano.)
 # MAGIC 3. Tab **Permissions** → **Grant** → observa cómo darías `SELECT` a un grupo con clicks.
 # MAGIC 4. (Opcional) **Lineage**: si esta tabla viniera de un pipeline, verías su origen.
@@ -67,7 +71,7 @@ def comentario_ia(table, col, dtype):
               f"'{col}' (tipo {dtype}) de la tabla '{table}' en el contexto de un banco digital. "
               f"No repitas el nombre de la columna ni el tipo. Empieza el texto con '[IA] '. "
               f"Devuelve solo el comentario, sin comillas.")
-    return spark.sql(f"SELECT ai_gen('{prompt}') AS c").collect()[0]["c"]
+    return spark.sql(f"SELECT ai_gen(\"" + prompt.replace('"', '\\"') + "\") AS c").collect()[0]["c"]
 
 cols = spark.sql(f"""
   SELECT table_name, column_name, data_type
