@@ -121,7 +121,6 @@ from pyspark.sql import functions as F
 clasificadas = (clasificadas
     .withColumn("classification", F.get_json_object("json_clf", "$.classification"))
     .withColumn("reasoning", F.get_json_object("json_clf", "$.reasoning")))
-clasificadas.cache()
 display(clasificadas.select("column_name", "classification", "reasoning"))
 
 # COMMAND ----------
