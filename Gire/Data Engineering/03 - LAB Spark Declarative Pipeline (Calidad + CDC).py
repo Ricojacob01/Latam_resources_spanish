@@ -89,6 +89,24 @@ print(f"\n  Código fuente del pipeline (este folder): ./pipelines/orders_pipeli
 
 # COMMAND ----------
 
+# DBTITLE 1,Expectations - Resumen
+# MAGIC %md
+# MAGIC ### 📏 ¿Qué son las Expectations?
+# MAGIC
+# MAGIC Las **expectations** son reglas de calidad declarativas que validan cada fila antes de escribirla en la tabla destino. Se definen con `CONSTRAINT ... EXPECT (condición)` y permiten monitorear (y actuar sobre) datos inválidos sin escribir lógica imperativa.
+# MAGIC
+# MAGIC | Acción | Sintaxis | Comportamiento |
+# MAGIC | --- | --- | --- |
+# MAGIC | **Warn** (default) | `EXPECT (condición)` | Registra la violación en métricas, pero **deja pasar** la fila |
+# MAGIC | **Drop Row** | `EXPECT (condición) ON VIOLATION DROP ROW` | **Descarta** silenciosamente las filas que no cumplen la condición |
+# MAGIC | **Fail Update** | `EXPECT (condición) ON VIOLATION FAIL UPDATE` | **Aborta** todo el update del pipeline si alguna fila viola la regla |
+# MAGIC
+# MAGIC **Ejemplo del pipeline de orders:**
+# MAGIC - `valid_order_id EXPECT (order_id IS NOT NULL) ON VIOLATION FAIL UPDATE` → si llega un pedido sin ID, el pipeline **se detiene** (dato crítico, no debe continuar)
+# MAGIC - `valid_amount EXPECT (amount > 0) ON VIOLATION DROP ROW` → montos negativos o cero se **descartan** (dato corrupto pero no crítico)
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ## Parte D — Verificar resultados en código
 # MAGIC
