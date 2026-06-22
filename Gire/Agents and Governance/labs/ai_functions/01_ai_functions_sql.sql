@@ -7,10 +7,6 @@
 
 -- COMMAND ----------
 
-
-
--- COMMAND ----------
-
 -- MAGIC %md
 -- MAGIC ## Setup del lab
 -- MAGIC

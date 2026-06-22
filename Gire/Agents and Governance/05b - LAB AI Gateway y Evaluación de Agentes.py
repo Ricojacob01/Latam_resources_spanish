@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "5"
+# ///
 # DBTITLE 1,Título del Lab
 # MAGIC %md
 # MAGIC # 05b — LAB 🚦 · AI Gateway y Evaluación de Agentes
@@ -57,9 +61,9 @@ print(f"User:    {_user}")
 # MAGIC %md
 # MAGIC ### Paso A1 — Elegir un modelo y probar una consulta
 # MAGIC
-# MAGIC 1. **Sidebar → Serving** → observa los endpoints disponibles.
+# MAGIC 1. **Sidebar → AI_GATEWAY** → observa los endpoints disponibles.
 # MAGIC 2. Busca `databricks-meta-llama-3-3-70b-instruct` — es un foundation model pre-desplegado.
-# MAGIC 3. Click en el endpoint → tab **Query endpoint** → prueba con un prompt simple.
+# MAGIC 3. Click en el endpoint → tab **CHAT IN PLAYGROUND** → prueba con un prompt simple.
 # MAGIC
 # MAGIC Ahora hagamos lo mismo **por código** — así puedes integrarlo en pipelines y apps:
 
@@ -68,14 +72,15 @@ print(f"User:    {_user}")
 # DBTITLE 1,Consulta LLM via AI Gateway
 # Consulta directa al modelo via AI Gateway (SDK)
 from databricks.sdk import WorkspaceClient
+from databricks.sdk.service.serving import ChatMessage, ChatMessageRole
 
 w = WorkspaceClient()
 
 response = w.serving_endpoints.query(
     name="databricks-meta-llama-3-3-70b-instruct",
     messages=[
-        {"role": "system", "content": "Eres un asistente ejecutivo. Responde en español, conciso."},
-        {"role": "user", "content": "¿Cuáles son los 3 principales riesgos económicos para América Latina en 2025?"}
+        ChatMessage(role=ChatMessageRole.SYSTEM, content="Eres un asistente ejecutivo. Responde en español, conciso."),
+        ChatMessage(role=ChatMessageRole.USER, content="¿Cuáles son los 3 principales riesgos económicos para América Latina en 2025?")
     ],
     max_tokens=300
 )
