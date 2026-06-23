@@ -1,8 +1,13 @@
 # Databricks notebook source
+# DBTITLE 1,Intro with banner
 # MAGIC %md
+# MAGIC <div style="text-align: center; line-height: 0; padding-top: 9px;">
+# MAGIC   <img src=https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/hands-on.png>
+# MAGIC </div>
+# MAGIC
 # MAGIC # 07 — ⭐ Orquestación · Job del pipeline ML 🗓️
 # MAGIC
-# MAGIC Encadenamos todo el pipeline en un **Lakeflow Job** que corre solo, en schedule, con reintentos y alertas. **Esto es lo que faltaba en `ML_workshop`.**
+# MAGIC Encadenamos todo el pipeline en un **Lakeflow Job** que corre solo, en schedule, con reintentos y alertas. **Módulo avanzado que completa el ciclo MLOps.**
 # MAGIC
 # MAGIC ## 🧭 Enfoque UI vs Code — **Secuencial (UI → Code)**
 # MAGIC Primero armas el Job **en la Jobs UI** (ves el grafo de tareas, el schedule, los reintentos, las alertas — intuición). Luego lo defines como **código** (Databricks Asset Bundle / JSON) para versionarlo en Git y llevarlo a CI/CD. El Job reutiliza los notebooks de `pipeline/`.

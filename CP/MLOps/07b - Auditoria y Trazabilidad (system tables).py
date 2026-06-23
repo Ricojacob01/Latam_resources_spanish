@@ -1,10 +1,11 @@
 # Databricks notebook source
+# DBTITLE 1,Intro
 # MAGIC %md
 # MAGIC # 07b — 🔎 Auditoría y Trazabilidad con System Tables
 # MAGIC
 # MAGIC **25 min.** Lab hands-on para responder *quién hizo qué, cuándo y sobre qué* usando las **system tables** de Databricks: `system.access.audit_logs`, lineage y eventos de despliegue de modelos. Observabilidad y traza para gobernanza.
 # MAGIC
-# MAGIC > Módulo **aditivo** — complementa la orquestación del `07`. Cierra los gaps de **audit-log queries (concerns 3a y 6a)** de la scorecard de gobernanza de proveedores de IA.
+# MAGIC > Módulo **aditivo** — complementa la orquestación del `07`. Consultas de auditoría para gobernanza de modelos y datos.
 
 # COMMAND ----------
 

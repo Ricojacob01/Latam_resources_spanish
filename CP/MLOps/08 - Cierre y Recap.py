@@ -6,6 +6,7 @@
 
 # COMMAND ----------
 
+# DBTITLE 1,Recap table
 # MAGIC %md
 # MAGIC ## El ciclo completo que recorriste
 # MAGIC
@@ -14,11 +15,11 @@
 # MAGIC | 02 | Feature engineering + gobernanza UC | Code (+ UI) |
 # MAGIC | 03 | AutoML + LightGBM + MLflow | Lado a lado |
 # MAGIC | 04 | Registro UC + Champion/Challenger | Code → UI |
-# MAGIC | 05 | ⭐ **Model Serving** (endpoint REST) | UI → Code |
+# MAGIC | 05 | ⭐ **Model Serving + AI Gateway** (endpoint REST gobernado) | UI → Code |
 # MAGIC | 06 | Batch inference | Code (+ UI) |
 # MAGIC | 07 | ⭐ **Orquestación** (Job + Asset Bundle) | UI → Code |
 # MAGIC
-# MAGIC ⭐ = lo que agregamos respecto al `ML_workshop` original.
+# MAGIC ⭐ = módulos avanzados que completan el ciclo MLOps end-to-end.
 
 # COMMAND ----------
 

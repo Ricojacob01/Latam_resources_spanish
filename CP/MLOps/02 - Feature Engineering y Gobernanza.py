@@ -1,7 +1,13 @@
 # Databricks notebook source
 # DBTITLE 1,Intro
 # MAGIC %md
+# MAGIC <div style="text-align: center; line-height: 0; padding-top: 9px;">
+# MAGIC   <img src=https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/hands-on.png>
+# MAGIC </div>
+# MAGIC
 # MAGIC # 02 — Feature Engineering y Gobernanza 🧹🛡️
+# MAGIC
+# MAGIC <img src="https://github.com/databricks-demos/dbdemos-resources/blob/main/images/product/mlops/mlops-uc-end2end-1-v2.png?raw=true" width="1200">
 # MAGIC
 # MAGIC Limpiamos y construimos features de churn, dejamos la tabla `mlops_churn_training` y la **gobernamos** en Unity Catalog.
 # MAGIC

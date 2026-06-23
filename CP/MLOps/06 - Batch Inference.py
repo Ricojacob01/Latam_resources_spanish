@@ -1,6 +1,13 @@
 # Databricks notebook source
+# DBTITLE 1,Intro with images
 # MAGIC %md
+# MAGIC <div style="text-align: center; line-height: 0; padding-top: 9px;">
+# MAGIC   <img src=https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/hands-on.png>
+# MAGIC </div>
+# MAGIC
 # MAGIC # 06 — Batch Inference 📦
+# MAGIC
+# MAGIC <img src="https://github.com/databricks-demos/dbdemos-resources/blob/main/images/product/mlops/mlops-uc-end2end-5-v2.png?raw=true" width="1200">
 # MAGIC
 # MAGIC Puntuamos un volumen de clientes con el modelo **@Champion**, sin endpoint, directamente en Spark.
 # MAGIC

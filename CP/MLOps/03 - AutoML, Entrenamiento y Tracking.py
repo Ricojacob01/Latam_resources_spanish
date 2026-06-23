@@ -1,6 +1,13 @@
 # Databricks notebook source
+# DBTITLE 1,Intro with images
 # MAGIC %md
+# MAGIC <div style="text-align: center; line-height: 0; padding-top: 9px;">
+# MAGIC   <img src=https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/hands-on.png>
+# MAGIC </div>
+# MAGIC
 # MAGIC # 03 — AutoML, Entrenamiento y Tracking 🤖📒
+# MAGIC
+# MAGIC <img src="https://github.com/databricks-demos/dbdemos-resources/blob/main/images/product/mlops/mlops-uc-end2end-2-v2.png?raw=true" width="1200">
 # MAGIC
 # MAGIC Generamos un baseline con **AutoML** y entrenamos un **LightGBM** con **MLflow tracking**.
 # MAGIC
@@ -13,10 +20,21 @@
 
 # COMMAND ----------
 
+# DBTITLE 1,AutoML con screenshots
 # MAGIC %md
 # MAGIC ## Paso 1 — AutoML lado a lado
 # MAGIC
 # MAGIC **UI (🖱️):** Experiments → **Create AutoML Experiment** → *Classification* → dataset `mlops_churn_training`, target `churn`, *timeout* 10 min. AutoML genera trials + el **notebook glass-box** del mejor modelo.
+# MAGIC
+# MAGIC <img src="https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/automl.png" width="350">
+# MAGIC
+# MAGIC **Rellena los valores como en el ejemplo:**
+# MAGIC
+# MAGIC <img src="https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/automl3.png" width="1000">
+# MAGIC
+# MAGIC **Resultados de AutoML:**
+# MAGIC
+# MAGIC <img src="https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/automl4.png" width="1000">
 # MAGIC
 # MAGIC **API (código):** lo de abajo hace lo mismo de forma reproducible. (Descomenta para correrlo; tarda ~10 min.)
 
@@ -44,6 +62,9 @@ print(f"Dataset: mlops_churn_training en {catalog}.{db}")
 # COMMAND ----------
 
 # DBTITLE 1,LightGBM training pipeline
+import subprocess
+subprocess.check_call(["pip", "install", "lightgbm", "-q"])
+
 import mlflow
 from mlflow.models import Model, infer_signature, ModelSignature
 from mlflow.pyfunc import PyFuncModel
@@ -110,7 +131,8 @@ except Exception:
 
 # --- 5. Función de entrenamiento ---
 def train_fn(params):
-  with mlflow.start_run(experiment_id=experiment_id, run_name=params["run_name"]) as mlflow_run:
+  run_name = params.pop("run_name", "light_gbm_baseline")
+  with mlflow.start_run(experiment_id=experiment_id, run_name=run_name) as mlflow_run:
     lgbmc_classifier = LGBMClassifier(**params)
     model = Pipeline([
         ("preprocessor", preprocessor),

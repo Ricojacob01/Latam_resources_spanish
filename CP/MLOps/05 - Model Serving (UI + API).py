@@ -1,8 +1,13 @@
 # Databricks notebook source
+# DBTITLE 1,Intro with banner
 # MAGIC %md
+# MAGIC <div style="text-align: center; line-height: 0; padding-top: 9px;">
+# MAGIC   <img src=https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/hands-on.png>
+# MAGIC </div>
+# MAGIC
 # MAGIC # 05 — ⭐ Model Serving (UI + API) 🌐
 # MAGIC
-# MAGIC Tomamos el modelo **@Champion** y lo exponemos como **endpoint REST en tiempo real** con Databricks Model Serving. **Esto es lo que faltaba en `ML_workshop`.**
+# MAGIC Tomamos el modelo **@Champion** y lo exponemos como **endpoint REST en tiempo real** con Databricks Model Serving. **Módulo avanzado que completa el ciclo MLOps.**
 # MAGIC
 # MAGIC ## 🧭 Enfoque UI vs Code — **Secuencial (UI → Code)**
 # MAGIC Primero creas y pruebas el endpoint en la **Serving UI** para construir intuición (estado, scale-to-zero, panel de query, latencia). Luego haces **lo mismo por API** (`mlflow.deployments` / `WorkspaceClient`) — porque en producción el endpoint lo crea/actualiza un **Job** (módulo 07), no una persona con clicks.
@@ -21,6 +26,7 @@ print(f"Nombre del endpoint: {SERVING_ENDPOINT}")
 
 # COMMAND ----------
 
+# DBTITLE 1,Parte A - UI instructions
 # MAGIC %md
 # MAGIC ## Parte A — Crear el endpoint en la UI (🖱️) — construir intuición
 # MAGIC
@@ -34,10 +40,12 @@ print(f"Nombre del endpoint: {SERVING_ENDPOINT}")
 # MAGIC    ```json
 # MAGIC    {"dataframe_records": [
 # MAGIC      {"gender":"Female","senior_citizen":"No","partner":"Yes","dependents":"No",
-# MAGIC       "tenure":2,"phone_service":"Yes","online_security":"No","online_backup":"No",
-# MAGIC       "device_protection":"No","tech_support":"No","streaming_tv":"Yes","streaming_movies":"Yes",
-# MAGIC       "contract":"Month-to-month","monthly_charges":89.9,"total_charges":180.2,
-# MAGIC       "num_optional_services":2}
+# MAGIC       "tenure":2,"phone_service":"Yes","multiple_lines":"No",
+# MAGIC       "internet_service":"DSL","online_security":"No","online_backup":"No",
+# MAGIC       "device_protection":"No","tech_support":"No","streaming_tv":"Yes",
+# MAGIC       "streaming_movies":"Yes","contract":"Month-to-month",
+# MAGIC       "paperless_billing":"Yes","payment_method":"Electronic check",
+# MAGIC       "monthly_charges":89.9,"total_charges":180.2,"num_optional_services":2}
 # MAGIC    ]}
 # MAGIC    ```
 # MAGIC
@@ -102,14 +110,17 @@ for _ in range(60):  # hasta ~10 min
 
 # COMMAND ----------
 
+# DBTITLE 1,Query endpoint by code
 from mlflow.deployments import get_deploy_client
 client = get_deploy_client("databricks")
 
 ejemplo = {"dataframe_records": [{
     "gender": "Female", "senior_citizen": "No", "partner": "Yes", "dependents": "No",
-    "tenure": 2, "phone_service": "Yes", "online_security": "No", "online_backup": "No",
+    "tenure": 2, "phone_service": "Yes", "multiple_lines": "No",
+    "internet_service": "DSL", "online_security": "No", "online_backup": "No",
     "device_protection": "No", "tech_support": "No", "streaming_tv": "Yes",
     "streaming_movies": "Yes", "contract": "Month-to-month",
+    "paperless_billing": "Yes", "payment_method": "Electronic check",
     "monthly_charges": 89.9, "total_charges": 180.2, "num_optional_services": 2,
 }]}
 
@@ -129,13 +140,14 @@ except Exception as e:
 
 # COMMAND ----------
 
+# DBTITLE 1,Curl example
 host = spark.conf.get("spark.databricks.workspaceUrl")
 print("Ejemplo de llamada (sustituye $DATABRICKS_TOKEN):\n")
 print(f"""curl -s -X POST \\
   https://{host}/serving-endpoints/{SERVING_ENDPOINT}/invocations \\
   -H "Authorization: Bearer $DATABRICKS_TOKEN" \\
   -H "Content-Type: application/json" \\
-  -d '{{"dataframe_records":[{{"gender":"Female","senior_citizen":"No","tenure":2,"contract":"Month-to-month","monthly_charges":89.9,"total_charges":180.2,"num_optional_services":2,"partner":"Yes","dependents":"No","phone_service":"Yes","online_security":"No","online_backup":"No","device_protection":"No","tech_support":"No","streaming_tv":"Yes","streaming_movies":"Yes"}}]}}'""")
+  -d '{{"dataframe_records":[{{"gender":"Female","senior_citizen":"No","partner":"Yes","dependents":"No","tenure":2,"phone_service":"Yes","multiple_lines":"No","internet_service":"DSL","online_security":"No","online_backup":"No","device_protection":"No","tech_support":"No","streaming_tv":"Yes","streaming_movies":"Yes","contract":"Month-to-month","paperless_billing":"Yes","payment_method":"Electronic check","monthly_charges":89.9,"total_charges":180.2,"num_optional_services":2}}]}}'""")
 
 # COMMAND ----------
 

@@ -1,5 +1,10 @@
 # Databricks notebook source
+# DBTITLE 1,Intro with banner
 # MAGIC %md
+# MAGIC <div style="text-align: center; line-height: 0; padding-top: 9px;">
+# MAGIC   <img src=https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/hands-on.png>
+# MAGIC </div>
+# MAGIC
 # MAGIC # 04 — Registro en UC y Champion/Challenger 🏛️
 # MAGIC
 # MAGIC Registramos el mejor modelo en Unity Catalog, le ponemos alias **@Challenger**, lo **validamos** y lo promovemos a **@Champion**.

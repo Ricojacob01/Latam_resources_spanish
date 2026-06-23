@@ -79,8 +79,8 @@ except NameError:
     _slug = reformat_current_user
     MODEL_NAME = f"{catalog}.{db}.mlops_churn"
     SERVING_ENDPOINT = f"mlops_churn_{_slug}"
-    reset_all_data = False
-    setup_inference_data = False
+    reset_all_data = dbutils.widgets.get("reset_all_data") == "true"
+    setup_inference_data = dbutils.widgets.get("setup_inference_data") == "true"
     spark.sql(f"USE CATALOG {catalog}")
     spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog}.{db}")
     spark.sql(f"USE SCHEMA {db}")

@@ -20,8 +20,7 @@ Caso de uso: **predicción de churn (abandono) de clientes** de telecom.
 | 02 | **Feature Engineering y Gobernanza** | Features + gobernanza de la tabla en UC | **Code (+ inspección UI)** |
 | 03 | **AutoML, Entrenamiento y Tracking** | AutoML + LightGBM + MLflow | **Lado a lado (UI ↔ API)** |
 | 04 | **Registro en UC y Champion/Challenger** | `register_model`, alias, validación, promoción | **Code → UI** |
-| 04b | **Política de Uso de Datos (No-Entrenamiento)** | Postura no-training + verificación de logging/aislamiento | **Secuencial (Prosa/UI → Code)** |
-| 05 | **Model Serving (UI + API)** ⭐ | Crear, consultar y gobernar un endpoint REST | **Secuencial (UI → Code)** |
+| 05 | **Model Serving + AI Gateway (UI + API)** ⭐ | Crear endpoint REST + gobernanza con AI Gateway | **Secuencial (UI → Code)** |
 | 06 | **Batch Inference** | Scoring masivo con `spark_udf` y `ai_query` | **Code (+ inspección UI)** |
 | 07 | **Orquestación — Job del pipeline ML** ⭐ | Job multi-tarea con schedule, reintentos, alertas | **Secuencial (UI → Code)** |
 | 07b | **Auditoría y Trazabilidad (system tables)** | Queries a `system.access.audit_logs` + lineage | **Lado a lado (Catalog UI ↔ SQL)** |
@@ -31,33 +30,32 @@ Caso de uso: **predicción de churn (abandono) de clientes** de telecom.
 
 ## Carpetas
 
-- `_resources/00-setup` — setup compartido (catálogo/schema + datos sintéticos de churn). Lo carga cada módulo con `%run`.
+- `_resources/00-setup` — setup compartido (catálogo/schema + descarga del dataset IBM Telco Churn). Lo carga cada módulo con `%run`.
 - `pipeline/` — **notebooks de tarea** diseñados para automatización (los encadena el Job del módulo 07): feature → train+register → validate+promote → deploy serving → batch scoring.
 - `bundle/` — el Job como **código**: `databricks.yml` (Databricks Asset Bundle) y `job.json` (Jobs API 2.1).
 
 ## 🧭 Patrón UI vs Code (decisiones, resumen)
 
-Igual que en los tracks de Gire, este workshop hace vivir **las dos caras** de Databricks, y cada módulo declara su elección:
+Este workshop hace vivir **las dos caras** de Databricks, y cada módulo declara su elección:
 
 - **02 Feature eng — Code (+ UI):** las transformaciones son código; la tabla resultante se inspecciona/gobierna en Catalog Explorer.
 - **03 AutoML — Lado a lado:** AutoML en la UI glass-box *y* por API; LightGBM en código con MLflow, comparado en Experiments UI.
 - **04 Registro — Code → UI:** registras y asignas alias por API; gobiernas en *Models in Unity Catalog*.
-- **04b Uso de datos — Prosa/UI → Code:** documentas la postura no-training y los toggles (UI), luego verificas por código qué loggea cada endpoint y dónde viven datos/modelo. Cierra el gap opt-out/no-training (1c).
-- **07b Auditoría — Lado a lado (Catalog UI ↔ SQL):** descubres las system tables en Catalog Explorer y respondes "quién hizo qué" en SQL sobre `system.access.audit_logs` + lineage. Cierra los gaps de audit-log queries (3a, 6a).
+- **07b Auditoría — Lado a lado (Catalog UI ↔ SQL):** descubres las system tables en Catalog Explorer y respondes "quién hizo qué" en SQL sobre `system.access.audit_logs` + lineage.
 - **05 Model Serving — UI → Code:** primero creas y pruebas el endpoint en la **Serving UI** (intuición: estado, scale-to-zero, query panel), luego lo creas/consultas/actualizas por **API** para automatizar.
 - **06 Batch — Code (+ UI):** `spark_udf`/`ai_query` para puntuar; tabla en Catalog Explorer.
 - **07 Orquestación — UI → Code:** armas el Job multi-tarea en la **Jobs UI** (grafo, schedule, reintentos), luego lo defines como **Asset Bundle / JSON** para CI/CD. El Job reutiliza los notebooks de `pipeline/`.
 
 ## Prerrequisitos
 
-- Cluster clásico **`ml_workshop_databricks`** (ML Runtime), no Serverless.
+- **Serverless** o un cluster con **ML Runtime**. El setup instala automáticamente las librerías necesarias vía `%pip install`.
 - Catálogo `ardemo_classic_dnubtw_catalog`, schema personal `ws_<usuario>` (se crea solo).
 - Permiso para crear endpoints de Model Serving y Jobs.
 
 ## Mejoras respecto a `ML_workshop`
 
 1. Estructura unificada estilo workshop (Bienvenida → Tour → LABs → Cierre) y narrativa en español consistente.
-2. Setup self-contained con **datos sintéticos** (no depende de datasets externos).
+2. Setup self-contained con el dataset **IBM Telco Churn** (descarga automática).
 3. **Modelo servido** en un endpoint REST (faltaba).
 4. **Pipeline orquestado** como Job + Asset Bundle (faltaba).
 5. Nota explícita **UI vs Code** por módulo.
