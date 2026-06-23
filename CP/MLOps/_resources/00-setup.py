@@ -1,95 +1,168 @@
 # Databricks notebook source
+# DBTITLE 1,Setup header
 # MAGIC %md
 # MAGIC # _resources/00-setup — Setup compartido (CP/MLOps)
 # MAGIC
 # MAGIC Lo carga cada módulo y cada tarea del pipeline con `%run ../_resources/00-setup`.
-# MAGIC Define catálogo/schema/nombres y genera **datos sintéticos de churn** (workshop self-contained).
+# MAGIC Define catálogo/schema/nombres y descarga el dataset **IBM Telco Churn** si no existe.
 # MAGIC
-# MAGIC Variables expuestas: `CATALOG`, `SCHEMA`, `MODEL_NAME`, `SERVING_ENDPOINT`, helpers.
+# MAGIC Variables expuestas: `CATALOG`/`catalog`, `SCHEMA`/`db`, `MODEL_NAME`, `SERVING_ENDPOINT`, `xp_path`, `xp_name`, helpers.
 
 # COMMAND ----------
 
-import mlflow
-from mlflow import MlflowClient
+# DBTITLE 1,Widgets and variables
+dbutils.widgets.dropdown("reset_all_data", "false", ["true", "false"], "Reset all data")
+dbutils.widgets.dropdown("setup_inference_data", "false", ["true", "false"], "Setup inference data")
+reset_all_data = dbutils.widgets.get("reset_all_data") == "true"
+setup_inference_data = dbutils.widgets.get("setup_inference_data") == "true"
 
-CATALOG = "ardemo_classic_dnubtw_catalog"
-_user = spark.sql("SELECT current_user()").collect()[0][0]
-_slug = _user.split("@")[0].replace(".", "_").replace("-", "_")
-SCHEMA = "ws_" + _slug
+# --- Variables principales (ambos naming conventions) ---
+current_user = dbutils.notebook.entry_point.getDbutils().notebook().getContext().userName().get()
+reformat_current_user = current_user.split("@")[0].lower().replace(".", "_").replace("-", "_")
 
-spark.sql(f"USE CATALOG `{CATALOG}`")
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{CATALOG}`.`{SCHEMA}`")
-spark.sql(f"USE SCHEMA `{SCHEMA}`")
+# Gire-style names (used by lab notebooks)
+catalog = "ardemo_classic_dnubtw_catalog"
+dbName = db = f"ws_{reformat_current_user}"
 
-MODEL_NAME = f"{CATALOG}.{SCHEMA}.mlops_churn"
-SERVING_ENDPOINT = f"mlops_churn_{_slug}"     # nombre del endpoint de Model Serving
+# CP-style names (used by CP-only notebooks like 05, 07, 07b)
+CATALOG = catalog
+SCHEMA = db
+_user = current_user
+_slug = reformat_current_user
+MODEL_NAME = f"{catalog}.{db}.mlops_churn"
+SERVING_ENDPOINT = f"mlops_churn_{_slug}"
 
-mlflow.set_registry_uri("databricks-uc")
+spark.sql(f"USE CATALOG {catalog}")
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog}.{db}")
+spark.sql(f"USE SCHEMA {db}")
 
-print(f"Usuario:           {_user}")
-print(f"Catalog.Schema:    {CATALOG}.{SCHEMA}")
+print(f"Usuario:           {current_user}")
+print(f"Catalog.Schema:    {catalog}.{db}")
 print(f"Modelo (UC):       {MODEL_NAME}")
 print(f"Serving endpoint:  {SERVING_ENDPOINT}")
 
 # COMMAND ----------
 
-# MAGIC %md
-# MAGIC ## Generar datos sintéticos de churn (idempotente)
+# DBTITLE 1,Pip install section
+# MAGIC %pip install mlflow typing_extensions --upgrade -q
 
 # COMMAND ----------
 
-def _generate_churn_data():
-    """Crea mlops_churn_bronze_customers si no existe (datos sintéticos de telecom)."""
-    if spark.catalog.tableExists(f"{CATALOG}.{SCHEMA}.mlops_churn_bronze_customers"):
-        print("✓ mlops_churn_bronze_customers ya existe — se omite la generación")
-        return
+# DBTITLE 1,Imports, MLflow config, and data loading
+# Only restart if mlflow couldn't be loaded (i.e., pip install was needed)
+try:
+    import mlflow
+except ImportError:
+    dbutils.library.restartPython()
 
-    import numpy as np, pandas as pd
-    rng = np.random.default_rng(42)
-    n = 5000
+import mlflow
+import pandas as pd
+import re
+import warnings
+import logging
+from mlflow import MlflowClient
 
-    yn = lambda p=0.5: rng.choice(["Yes", "No"], n, p=[p, 1 - p])
-    tenure = rng.integers(0, 73, n)
-    monthly = np.round(rng.uniform(18, 120, n), 2)
-    contract = rng.choice(["Month-to-month", "One year", "Two year"], n, p=[0.55, 0.25, 0.20])
-    senior = rng.choice([0, 1], n, p=[0.84, 0.16])
+warnings.filterwarnings("ignore")
+logging.getLogger("mlflow").setLevel(logging.ERROR)
 
-    df = pd.DataFrame({
-        "customer_id": [f"CUST{i:06d}" for i in range(n)],
-        "gender": rng.choice(["Male", "Female"], n),
-        "senior_citizen": senior,
-        "partner": yn(0.48),
-        "dependents": yn(0.30),
-        "tenure": tenure,
-        "phone_service": yn(0.90),
-        "online_security": yn(0.35),
-        "online_backup": yn(0.35),
-        "device_protection": yn(0.35),
-        "tech_support": yn(0.30),
-        "streaming_tv": yn(0.40),
-        "streaming_movies": yn(0.40),
-        "contract": contract,
-        "monthly_charges": monthly,
-        "total_charges": np.round(monthly * np.maximum(tenure, 1) * rng.uniform(0.9, 1.1, n), 2),
-    })
+# Re-define variables if lost after restartPython
+try:
+    current_user
+except NameError:
+    current_user = dbutils.notebook.entry_point.getDbutils().notebook().getContext().userName().get()
+    reformat_current_user = current_user.split("@")[0].lower().replace(".", "_").replace("-", "_")
+    catalog = "ardemo_classic_dnubtw_catalog"
+    dbName = db = f"ws_{reformat_current_user}"
+    CATALOG = catalog
+    SCHEMA = db
+    _user = current_user
+    _slug = reformat_current_user
+    MODEL_NAME = f"{catalog}.{db}.mlops_churn"
+    SERVING_ENDPOINT = f"mlops_churn_{_slug}"
+    reset_all_data = False
+    setup_inference_data = False
+    spark.sql(f"USE CATALOG {catalog}")
+    spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog}.{db}")
+    spark.sql(f"USE SCHEMA {db}")
 
-    # churn correlacionado con tenure bajo, contrato mes-a-mes y cargo alto
-    risk = (0.45 * (df.tenure < 12) + 0.30 * (df.contract == "Month-to-month")
-            + 0.15 * (df.monthly_charges > 80) + 0.10 * (df.senior_citizen == 1))
-    df["churn"] = np.where(rng.uniform(0, 1, n) < risk.clip(0, 0.9), "Yes", "No")
+# Unity Catalog como registro de modelos
+mlflow.set_registry_uri("databricks-uc")
+client = MlflowClient()
 
-    (spark.createDataFrame(df)
-        .write.mode("overwrite").option("overwriteSchema", "true")
-        .saveAsTable(f"{CATALOG}.{SCHEMA}.mlops_churn_bronze_customers"))
-    print(f"✓ Generados {n} clientes sintéticos en mlops_churn_bronze_customers")
+# Experiment del lab — se crea bajo el usuario
+xp_path = f"/Users/{current_user}/experiments"
+xp_name = f"mlops_experiment_{current_user}"
+try:
+    from databricks.sdk import WorkspaceClient
+    w = WorkspaceClient()
+    w.workspace.mkdirs(path=xp_path)
+except Exception as e:
+    print(f"AVISO: no se pudo crear la carpeta de experiments en {xp_path}: {e}")
 
-_generate_churn_data()
+# --- Cargar dataset IBM Telco Churn si no existe ---
+bronze_table_name = "mlops_churn_bronze_customers"
+
+# Auto-detect: si la bronze existe pero total_charges no es string, fuerza reload.
+needs_reload = reset_all_data or not spark.catalog.tableExists(bronze_table_name)
+if not needs_reload:
+    existing_dtypes = dict(spark.table(bronze_table_name).dtypes)
+    if existing_dtypes.get("total_charges") != "string":
+        print(f"Detectado bronze con total_charges={existing_dtypes.get('total_charges')} — forzando recarga.")
+        needs_reload = True
+
+if needs_reload:
+    import requests
+    from io import StringIO
+    print("Descargando dataset Telco Churn...")
+    csv = requests.get(
+        "https://raw.githubusercontent.com/IBM/telco-customer-churn-on-icp4d/master/data/Telco-Customer-Churn.csv"
+    ).text
+    df = pd.read_csv(StringIO(csv), sep=",")
+
+    # Normalizar nombres de columnas a snake_case
+    df.columns = [re.sub(r"(?<!^)(?=[A-Z])", "_", n).lower().replace("__", "_") for n in df.columns]
+    df.columns = [re.sub(r"[\(\)]", "", n).lower() for n in df.columns]
+    df.columns = [re.sub(r"[ -]", "_", n).lower() for n in df.columns]
+    df = df.rename(columns={"streaming_t_v": "streaming_tv", "customer_i_d": "customer_id"})
+
+    spark.createDataFrame(df).write.mode("overwrite").option("overwriteSchema", "true").saveAsTable(bronze_table_name)
+    print(f"OK — tabla {catalog}.{db}.{bronze_table_name} creada con {len(df)} filas")
+else:
+    print(f"Tabla {catalog}.{db}.{bronze_table_name} ya existe, omitiendo carga")
 
 # COMMAND ----------
 
+# DBTITLE 1,Inference data setup and helpers
+# --- Setup de datos de inferencia (si se solicita) ---
+quickstart_training_table_name = "mlops_churn_training"
+quickstart_unlabelled_table_name = "mlops_churn_inference"
+
+if setup_inference_data:
+    if spark.catalog.tableExists(f"{catalog}.{db}.{quickstart_training_table_name}"):
+        if not spark.catalog.tableExists(f"{catalog}.{db}.{quickstart_unlabelled_table_name}"):
+            print("Creando tabla sin labels para inferencia...")
+            (spark.read.table(quickstart_training_table_name)
+                .drop("churn")
+                .write.mode("overwrite").option("overwriteSchema", "true")
+                .saveAsTable(quickstart_unlabelled_table_name))
+    else:
+        print(f"Tabla {quickstart_training_table_name} no existe. Ejecuta primero 01_feature_engineering.")
+
+# --- Helpers ---
 def get_latest_model_version(model_name=MODEL_NAME):
     """Última versión registrada del modelo (útil para serving/jobs)."""
     versions = [int(v.version) for v in MlflowClient().search_model_versions(f"name='{model_name}'")]
     return max(versions) if versions else None
 
-print("Setup listo. Helpers: get_latest_model_version()")
+def delete_feature_store_table(catalog, db, feature_table_name):
+    """Helper para limpiar tablas del Feature Store en re-ejecuciones."""
+    from databricks.feature_engineering import FeatureEngineeringClient
+    fe = FeatureEngineeringClient()
+    try:
+        fe.drop_table(name=f"{catalog}.{db}.{feature_table_name}")
+        spark.sql(f"DROP TABLE IF EXISTS {catalog}.{db}.{feature_table_name}")
+        print(f"Drop Feature Table {catalog}.{db}.{feature_table_name}")
+    except ValueError:
+        print(f"Feature Table {catalog}.{db}.{feature_table_name} no existe")
+
+print("Setup listo ✓")

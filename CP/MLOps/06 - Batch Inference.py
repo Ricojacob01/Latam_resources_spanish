@@ -9,32 +9,60 @@
 
 # COMMAND ----------
 
-# MAGIC %run ./_resources/00-setup
+# DBTITLE 1,Setup with inference data
+# MAGIC %run ./_resources/00-setup $setup_inference_data=true
 
 # COMMAND ----------
 
+# DBTITLE 1,Opcion A header
 # MAGIC %md
-# MAGIC ## Opción A — `spark_udf` (modelo Python distribuido)
+# MAGIC ## Opción A — Inferencia con `pyfunc` (compatible con Serverless)
+# MAGIC
+# MAGIC Cargamos el modelo **@Champion** directamente como pyfunc y predecimos en pandas. Este enfoque funciona en Serverless y clusters clásicos.
 
 # COMMAND ----------
+
+# DBTITLE 1,Batch inference with pyfunc
+import subprocess
+subprocess.check_call(["pip", "install", "lightgbm", "-q"])
 
 import mlflow
-udf = mlflow.pyfunc.spark_udf(spark, f"models:/{MODEL_NAME}@Champion", env_manager="virtualenv")
-cols = udf.metadata.get_input_schema().input_names()
 
-inference_df = spark.table("mlops_churn_training").filter("split = 'test'")
-scored = inference_df.withColumn("churn_prediction", udf(*[c for c in cols]))
-scored.write.mode("overwrite").option("overwriteSchema", "true").saveAsTable("mlops_churn_predictions")
+# Load customer features to be scored
+inference_df = spark.read.table("mlops_churn_inference")
 
+# Load champion model directly (pandas-based prediction for serverless compatibility)
+champion_model = mlflow.pyfunc.load_model(model_uri=f"models:/{catalog}.{db}.mlops_churn@Champion")
+
+# Get input column names from model schema
+input_cols = champion_model.metadata.get_input_schema().input_names()
+
+# Batch score using pandas
+inference_pd = inference_df.toPandas()
+inference_pd['predictions'] = champion_model.predict(inference_pd[input_cols])
+preds_df = spark.createDataFrame(inference_pd)
+
+# Save predictions table
+preds_df.write.mode("overwrite").option("overwriteSchema", "true").saveAsTable("mlops_churn_predictions")
 print("✓ mlops_churn_predictions:", spark.table("mlops_churn_predictions").count(), "filas")
-display(spark.table("mlops_churn_predictions").select("customer_id", "churn", "churn_prediction").limit(10))
+display(preds_df)
 
 # COMMAND ----------
 
+# DBTITLE 1,Opcion B header
 # MAGIC %md
-# MAGIC ## Opción B — `ai_query` contra el endpoint de Serving (SQL)
+# MAGIC ## Opción B — `spark_udf` (distribuido en cluster clásico)
 # MAGIC
-# MAGIC Si el endpoint del módulo 05 está **Ready**, puedes puntuar desde SQL llamando al endpoint. Útil cuando el consumidor es un analista en SQL.
+# MAGIC Si estás en un cluster clásico (no Serverless), puedes usar `spark_udf` para distribuir la inferencia:
+# MAGIC
+# MAGIC ```python
+# MAGIC import mlflow
+# MAGIC udf = mlflow.pyfunc.spark_udf(spark, f"models:/{catalog}.{db}.mlops_churn@Champion", env_manager="virtualenv")
+# MAGIC cols = udf.metadata.get_input_schema().input_names()
+# MAGIC scored = inference_df.withColumn("churn_prediction", udf(*[c for c in cols]))
+# MAGIC ```
+# MAGIC
+# MAGIC Y también `ai_query` contra el endpoint de Serving (si el endpoint del módulo 05 está **Ready**).
 
 # COMMAND ----------
 
@@ -56,9 +84,12 @@ display(spark.table("mlops_churn_predictions").select("customer_id", "churn", "c
 
 # COMMAND ----------
 
+# DBTITLE 1,Conclusion
 # MAGIC %md
 # MAGIC ## Inspección en la UI (🖱️)
 # MAGIC
 # MAGIC Abre `mlops_churn_predictions` en **Catalog Explorer** → **Sample Data** y **Lineage** (verás el modelo como origen del scoring).
+# MAGIC
+# MAGIC ¡Eso es todo! Ahora los datos pueden ser reutilizados por el equipo de Análisis de Datos / Marketing para tomar acciones especiales y reducir el riesgo de Churn. ¡Tus datos también estarán disponibles en Genie para responder cualquier pregunta relacionada con churn!
 # MAGIC
 # MAGIC ## Continuar → `07 - Orquestacion - Job del pipeline ML` ⭐
