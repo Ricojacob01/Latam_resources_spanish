@@ -15,25 +15,6 @@
 
 # COMMAND ----------
 
-CATALOG = catalog = CATALOGO = "ardemo_classic_dnubtw_catalog"
-_user = spark.sql("SELECT current_user()").collect()[0][0]
-SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
-
-spark.sql(f"USE CATALOG {CATALOG}")
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-spark.sql(f"USE SCHEMA {SCHEMA}")
-try:
-    spark.conf.set("c.catalog", CATALOG)
-    spark.conf.set("c.schema", SCHEMA)
-except Exception:
-    pass  # Not available on Serverless
-
-print(f"Catalog: {CATALOG}")
-print(f"Schema:  {SCHEMA}")
-print(f"User:    {_user}")
-
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC # Inferencia del Modelo de Churn
 # MAGIC
@@ -48,7 +29,8 @@ print(f"User:    {_user}")
 
 # COMMAND ----------
 
-# MAGIC %run ./_resources/00-setup $setup_inference_data=true
+# MAGIC %run ./_resources/00-setup 
+# MAGIC $setup_inference_data=true
 
 # COMMAND ----------
 
