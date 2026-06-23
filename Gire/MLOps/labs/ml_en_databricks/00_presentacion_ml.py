@@ -13,25 +13,8 @@
 # MAGIC
 # MAGIC Catálogo compartido: `ardemo_classic_dnubtw_catalog`. Schema personal por usuario: `ws_<usuario>`.
 # MAGIC Esta celda valida acceso y crea tu schema si no existe.
-
-# COMMAND ----------
-
-CATALOG = catalog = CATALOGO = "ardemo_classic_dnubtw_catalog"
-_user = spark.sql("SELECT current_user()").collect()[0][0]
-SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
-
-spark.sql(f"USE CATALOG {CATALOG}")
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-spark.sql(f"USE SCHEMA {SCHEMA}")
-try:
-    spark.conf.set("c.catalog", CATALOG)
-    spark.conf.set("c.schema", SCHEMA)
-except Exception:
-    pass  # Not available on Serverless
-
-print(f"Catalog: {CATALOG}")
-print(f"Schema:  {SCHEMA}")
-print(f"User:    {_user}")
+# MAGIC
+# MAGIC IMPORTANTE: Configurar Notebook de "00-setup"
 
 # COMMAND ----------
 
@@ -90,12 +73,6 @@ print(f"User:    {_user}")
 # MAGIC Para ejecutar esta demostración, simplemente selecciona el cluster `Serverless` en el menú desplegable.
 # MAGIC Comprueba que la versión del cluster serverless es la número 2 <br />
 # MAGIC
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC
-# MAGIC ![](https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/version2-serverless.png)
 
 # COMMAND ----------
 

@@ -79,6 +79,7 @@ client = MlflowClient()
 
 # Experiment del lab — se crea bajo el usuario
 xp_path = f"/Users/{current_user}/experiments"
+xp_name = f"mlops_experiment_{current_user}"
 try:
     from databricks.sdk import WorkspaceClient
     w = WorkspaceClient()

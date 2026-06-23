@@ -83,7 +83,8 @@ model_name = f"{catalog}.{db}.mlops_churn"
 
 # COMMAND ----------
 
-xp_name = 'your_xp_name'  # Define xp_name with the appropriate valueprint(f"Finding best run from {xp_name} and pushing new model version to {model_name}")
+# xp_name is defined in _resources/00-setup
+print(f"Finding best run from {xp_name} and pushing new model version to {model_name}")
 
 mlflow.set_experiment(f"{xp_path}/{xp_name}")
 
@@ -91,7 +92,7 @@ mlflow.set_experiment(f"{xp_path}/{xp_name}")
 
 import mlflow
 
-xp_name = "dbdemos_mlops_churn_demo_experiment"
+# xp_name is defined in _resources/00-setup
 print(f"Finding best run from {xp_name}_* and pushing new model version to {model_name}")
 
 experiment_name = f"{xp_path}/{xp_name}"

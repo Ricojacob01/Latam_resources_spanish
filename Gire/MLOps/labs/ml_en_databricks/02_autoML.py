@@ -7,29 +7,11 @@
 
 # COMMAND ----------
 
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC ## Setup del lab
 # MAGIC
 # MAGIC Catálogo compartido: `ardemo_classic_dnubtw_catalog`. Schema personal por usuario: `ws_<usuario>`.
 # MAGIC Esta celda valida acceso y crea tu schema si no existe.
-
-# COMMAND ----------
-
-CATALOG = catalog = CATALOGO = "ardemo_classic_dnubtw_catalog"
-_user = spark.sql("SELECT current_user()").collect()[0][0]
-SCHEMA = db = schema = ESQUEMA = "ws_" + _user.split("@")[0].replace(".", "_").replace("-", "_")
-
-spark.sql(f"USE CATALOG {CATALOG}")
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG}.{SCHEMA}")
-spark.sql(f"USE SCHEMA {CATALOG}.{SCHEMA}")
-spark.conf.set("c.catalog", CATALOG)
-spark.conf.set("c.schema", SCHEMA)
-
-print(f"Catalog: {CATALOG}")
-print(f"Schema:  {SCHEMA}")
-print(f"User:    {_user}")
 
 # COMMAND ----------
 
