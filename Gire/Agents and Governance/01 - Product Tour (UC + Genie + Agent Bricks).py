@@ -33,6 +33,13 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ![Gobernanza unificada de datos y modelos con Unity Catalog](../_assets/slides/agents_governance/deckB_uc_gobernanza_datos_modelos.png)
+# MAGIC
+# MAGIC *Unity Catalog gobierna nativamente todos los activos — tablas, archivos, modelos, notebooks y dashboards — con descubrimiento, control de acceso, lineage y auditoría en un solo lugar.*
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # 🎬 Acto 3 — AI Functions: IA en SQL 🧮
 # MAGIC
 # MAGIC Funciones SQL que llaman un LLM gobernado, sin salir del data warehouse:
@@ -68,6 +75,27 @@
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ![Agentes que razonan sobre tus datos y usan herramientas](../_assets/slides/agents_governance/deckB_agentes_razonan_datos.png)
+# MAGIC
+# MAGIC *Los agentes combinan datos estructurados y no estructurados con modelos, funciones y cadenas — razonando de forma segura sobre el lakehouse, sin alucinaciones.*
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Paso 1: preparar datos y crear herramientas en Unity Catalog](../_assets/slides/agents_governance/deckB_agentes_preparar_datos_tools.png)
+# MAGIC
+# MAGIC *Paso 1 — Prepara datos y crea herramientas: ETL con notebooks/DLT/Jobs, indexa datos no estructurados con Vector Search y crea tools en Python o SQL. Genie Spaces integra text2sql en tus agentes.*
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Paso 2: prototipado rápido con AI Playground](../_assets/slides/agents_governance/deckB_agentes_prototipo_playground.png)
+# MAGIC
+# MAGIC *Paso 2 — Prototipado rápido: AI Playground te deja crear e iterar un agente sin código, evaluar la calidad inicial con LLM judges y exportar código listo para producción.*
+
+# COMMAND ----------
+
 # DBTITLE 1,Acto 6 — AI Gateway
 # MAGIC %md
 # MAGIC # 🎬 Acto 6 — AI Gateway: gobernar el acceso a los modelos 🚦
@@ -84,6 +112,27 @@
 # MAGIC | **Usage tracking** | Quién llamó qué, cuándo, cuántos tokens — auditable en Inference Tables |
 # MAGIC
 # MAGIC > Sin AI Gateway, despliegas un agente pero no sabes quién lo usa, cuánto cuesta, ni si filtra datos sensibles. Con AI Gateway, la misma gobernanza de UC se extiende al **consumo de IA**.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![AI Gateway: una sola capa de gobernanza para modelos GenAI](../_assets/slides/agents_governance/deckA_gateway_overview.png)
+# MAGIC
+# MAGIC *AI Gateway es una única capa de gobernanza sobre todos los modelos GenAI: una interfaz estándar de consulta, permisos, rate limits, guardrails y observabilidad unificada de costos y calidad.*
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Gobernanza: permisos y rate limits por endpoint y usuario](../_assets/slides/agents_governance/deckA_gateway_gobernanza.png)
+# MAGIC
+# MAGIC *Gobernanza: controla quién accede y cuánto — rate limits por endpoint o usuario y permisos de acceso a los endpoints servidos.*
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![AI Guardrails: filtros de seguridad y detección de PII](../_assets/slides/agents_governance/deckA_gateway_guardrails.png)
+# MAGIC
+# MAGIC *AI Guardrails: previene fugas de datos y solicitudes/respuestas inseguras con filtros de seguridad, detección y enmascarado de PII, keyword matching y moderación de temas.*
 
 # COMMAND ----------
 

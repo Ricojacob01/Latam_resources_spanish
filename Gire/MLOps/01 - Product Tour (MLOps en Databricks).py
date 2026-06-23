@@ -21,6 +21,17 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ![Qué es MLOps](../_assets/slides/mlops/deckB_what_is_mlops.png)
+# MAGIC
+# MAGIC *MLOps = DataOps + DevOps + ModelOps: procesos y automatización para gestionar datos, código y modelos.*
+# MAGIC
+# MAGIC ![Mosaic AI](../_assets/slides/mlops/deckA_mosaic_ai_overview.png)
+# MAGIC
+# MAGIC *Mosaic AI: soporte integral para todo el ciclo de ML y GenAI (MLflow, AutoML, Model Serving, y más).*
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # 🎬 Acto 2 — MLflow Tracking 📒
 # MAGIC
 # MAGIC Cada entrenamiento queda registrado: params, métricas, artefactos, **signature**, y el **dataset** usado (lineage). `mlflow.autolog()` captura casi todo solo.
@@ -35,6 +46,13 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ![MLflow](../_assets/slides/mlops/deckA_mlflow.png)
+# MAGIC
+# MAGIC *MLflow: plataforma open-source para el ciclo de vida de ML, con seguimiento y reproducibilidad automáticos.*
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # 🎬 Acto 3 — AutoML 🤖
 # MAGIC
 # MAGIC Genera modelos de referencia (baseline) y un **notebook glass-box** del mejor modelo — no es una caja negra. Lo lanzas en la **UI** o por **API**:
@@ -43,6 +61,13 @@
 # MAGIC from databricks import automl
 # MAGIC run = automl.classify(dataset=df, target_col="churn", timeout_minutes=10)
 # MAGIC ```
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![AutoML](../_assets/slides/mlops/deckA_automl.png)
+# MAGIC
+# MAGIC *AutoML: del dato a un modelo listo para producción — regresión, forecasting y clasificación, integrado con Unity Catalog.*
 
 # COMMAND ----------
 
@@ -61,6 +86,11 @@
 # MAGIC - **@Champion** — el que sirve producción.
 
 # COMMAND ----------
+# MAGIC %md
+# MAGIC ![Modelos en Unity Catalog](../_assets/slides/mlops/deckA_models_unity_catalog.png)
+# MAGIC
+# MAGIC *El Model Registry vive en Unity Catalog: control de acceso centralizado, auditoría y linaje del modelo, y modelos compartibles entre workspaces.*
+# COMMAND ----------
 
 # MAGIC %md
 # MAGIC # 🎬 Acto 5 — Validación + Batch inference ✅
@@ -75,12 +105,34 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ![Lakehouse Monitoring](../_assets/slides/mlops/deckB_lakehouse_monitoring.png)
+# MAGIC
+# MAGIC *Lakehouse Monitoring: calidad de datos y modelos, métricas de drift y dashboards automáticos para validar calidad.*
+# MAGIC
+# MAGIC ![Batch Inference con AI Functions](../_assets/slides/mlops/deckA_batch_inference_ai_functions.png)
+# MAGIC
+# MAGIC *Batch inference con `ai_query()` / AI Functions: aplica modelos a gran escala desde SQL, Notebooks y Jobs.*
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # 🎬 Acto 6 — Lo que sigue: Serving + Jobs (en CP/MLOps) 🚀
 # MAGIC
 # MAGIC Este track deja el **Champion listo en UC**. El workshop ampliado `../../CP/MLOps/` lo lleva a producción:
 # MAGIC
 # MAGIC - **Model Serving**: un endpoint REST en tiempo real (UI + API).
 # MAGIC - **Job de orquestación**: train → register → validate → deploy/serve → batch, en schedule, con reintentos.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Model Serving](../_assets/slides/mlops/deckB_model_serving.png)
+# MAGIC
+# MAGIC *Model Serving: despliegue serverless en tiempo real — el modelo como API lista para producción.*
+# MAGIC
+# MAGIC ![Producción (dev/staging/prod)](../_assets/slides/mlops/deckB_production_dev_staging_prod.png)
+# MAGIC
+# MAGIC *Vista multi-entorno dev → staging → producción: cómo el modelo Champion llega a producción de forma gobernada.*
 
 # COMMAND ----------
 

@@ -23,11 +23,32 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ![Es difícil construir y operar pipelines confiables](../_assets/slides/data_engineering/deckA_problema_pipelines.png)
+# MAGIC
+# MAGIC *Construir y operar pipelines confiables a mano implica gestionar dependencias, checkpoints, reintentos, backfills, calidad y gobierno — todo código frágil que tú mantienes.*
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # 🎬 Acto 2 — Lakehouse + Delta Lake 🏞️
 # MAGIC
 # MAGIC **Delta Lake** es el formato de tabla abierto que da: transacciones ACID, time travel, schema enforcement/evolution, y `MERGE`/CDC sobre data lake barato (object storage).
 # MAGIC
 # MAGIC El **Lakehouse** = la confiabilidad del warehouse + la flexibilidad y costo del data lake, todo gobernado por **Unity Catalog**.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Plataforma de Inteligencia de Datos](../_assets/slides/data_engineering/deckB_data_intelligence_platform.png)
+# MAGIC
+# MAGIC *La Databricks Data Intelligence Platform unifica ETL, streaming, warehousing y AI sobre una sola arquitectura Lakehouse.*
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Fundación abierta y serverless](../_assets/slides/data_engineering/deckA_open_foundation.png)
+# MAGIC
+# MAGIC *Construido sobre una base abierta: cómputo serverless gestionado, gobierno unificado (Unity Catalog) y almacenamiento confiable en formato abierto (Delta Lake).*
 
 # COMMAND ----------
 
@@ -54,6 +75,20 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ![Data Engineering en Databricks](../_assets/slides/data_engineering/deckA_de_architecture.png)
+# MAGIC
+# MAGIC *Arquitectura de Data Engineering: ingesta → transformación → orquestación, sobre cómputo serverless, gobierno unificado y almacenamiento confiable.*
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Pipelines de ETL en producción](../_assets/slides/data_engineering/deckB_production_etl_medallion.png)
+# MAGIC
+# MAGIC *El flujo bronze → silver → gold se construye como un pipeline de producción con calidad, observabilidad, CI/CD y orquestación integradas.*
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # 🎬 Acto 4 — Spark Declarative Pipelines (Lakeflow) 🧱
 # MAGIC
 # MAGIC Antes llamado *Delta Live Tables (DLT)*. Defines tus tablas en SQL o Python y el pipeline:
@@ -68,6 +103,20 @@
 # MAGIC AS SELECT *, _metadata.file_name AS source_file
 # MAGIC FROM STREAM read_files("${source}/orders", format => 'json');
 # MAGIC ```
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![DLT en resumen](../_assets/slides/data_engineering/deckB_dlt_summarized.png)
+# MAGIC
+# MAGIC *Delta Live Tables (Lakeflow Declarative Pipelines) es un framework de ETL declarativo: defines las transformaciones y la plataforma gestiona el resto.*
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Flujo de DLT](../_assets/slides/data_engineering/deckB_dlt_flow.png)
+# MAGIC
+# MAGIC *El pipeline infiere el grafo de dependencias entre tablas y procesa los datos de forma incremental, en batch o streaming, con el mismo código.*
 
 # COMMAND ----------
 
@@ -93,6 +142,20 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ![Validación de calidad de datos](../_assets/slides/data_engineering/deckB_data_quality_validation.png)
+# MAGIC
+# MAGIC *Define controles de calidad e integridad dentro del pipeline con expectations, y resuelve errores con políticas flexibles: fail, drop o alert.*
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Expectations - Acciones](../_assets/slides/data_engineering/deckB_expectations_actions.png)
+# MAGIC
+# MAGIC *Cada expectation puede retener, descartar o fallar las filas que la violan, y todas las métricas quedan registradas en el panel de calidad del pipeline.*
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # 🎬 Acto 6 — CDC declarativo con `AUTO CDC INTO` 🔄
 # MAGIC
 # MAGIC Aplica INSERT/UPDATE/DELETE a una tabla destino **sin escribir MERGE a mano**:
@@ -111,6 +174,13 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ![CDC declarativo con APPLY CHANGES INTO](../_assets/slides/data_engineering/deckB_cdc_apply_changes.png)
+# MAGIC
+# MAGIC *La API declarativa de CDC procesa inserts/updates/deletes, maneja eventos fuera de orden, evolución de esquema y SCD tipo 1 o 2 — sin MERGE manual.*
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC # 🎬 Acto 7 — Orquestación con Lakeflow Jobs 🗓️
 # MAGIC
 # MAGIC Un **Job** encadena tareas (pipeline → query/dashboard → notebook), con **schedule**, **dependencias**, **reintentos** y **alertas** — sin orquestador externo.
@@ -121,6 +191,13 @@
 # MAGIC ```
 # MAGIC
 # MAGIC Lo construyes visual en la **Jobs UI** y luego lo defines como **código** (Databricks Asset Bundle / JSON) para llevarlo a CI/CD.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ![Workflows: orquestación unificada](../_assets/slides/data_engineering/deckB_workflows_orchestration.png)
+# MAGIC
+# MAGIC *Databricks Workflows orquesta pipelines, queries, dashboards y notebooks sobre toda la plataforma Lakehouse, sin necesidad de un orquestador externo.*
 
 # COMMAND ----------
 
