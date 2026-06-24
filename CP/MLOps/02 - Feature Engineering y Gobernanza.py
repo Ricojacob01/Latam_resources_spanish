@@ -23,6 +23,11 @@
 
 # COMMAND ----------
 
+# MAGIC %sql
+# MAGIC SELECT * FROM mlops_churn_bronze_customers
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ## Paso 1 — Limpieza + features (código)
 

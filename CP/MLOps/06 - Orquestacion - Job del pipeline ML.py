@@ -5,7 +5,7 @@
 # MAGIC   <img src=https://raw.githubusercontent.com/aestaire/ml_workshop/refs/heads/main/files/images/hands-on.png>
 # MAGIC </div>
 # MAGIC
-# MAGIC # 07 — ⭐ Orquestación · Job del pipeline ML 🗓️
+# MAGIC # 06 — ⭐ Orquestación · Job del pipeline ML 🗓️
 # MAGIC
 # MAGIC Encadenamos todo el pipeline en un **Lakeflow Job** que corre solo, en schedule, con reintentos y alertas. **Módulo avanzado que completa el ciclo MLOps.**
 # MAGIC
@@ -113,6 +113,7 @@ print("Celda demostrativa — usa bundle/databricks.yml para la versión declara
 
 # COMMAND ----------
 
+# DBTITLE 1,Resumen
 # MAGIC %md
 # MAGIC ## Resumen
 # MAGIC
@@ -122,4 +123,4 @@ print("Celda demostrativa — usa bundle/databricks.yml para la versión declara
 # MAGIC ✅ El Job **despliega el endpoint** y corre **batch scoring** automáticamente
 # MAGIC ✅ Patrón **UI → Code** para industrializar (CI/CD)
 # MAGIC
-# MAGIC ## Continuar → `08 - Cierre y Recap`
+# MAGIC ## Continuar → `07 - Cierre y Recap`

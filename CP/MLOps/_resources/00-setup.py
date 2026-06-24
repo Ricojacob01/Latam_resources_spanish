@@ -20,7 +20,7 @@ setup_inference_data = dbutils.widgets.get("setup_inference_data") == "true"
 current_user = dbutils.notebook.entry_point.getDbutils().notebook().getContext().userName().get()
 reformat_current_user = current_user.split("@")[0].lower().replace(".", "_").replace("-", "_")
 
-# Gire-style names (used by lab notebooks)
+#Style names (used by lab notebooks)
 catalog = "ardemo_classic_dnubtw_catalog"
 dbName = db = f"ws_{reformat_current_user}"
 
@@ -48,13 +48,16 @@ print(f"Serving endpoint:  {SERVING_ENDPOINT}")
 
 # COMMAND ----------
 
-# DBTITLE 1,Imports, MLflow config, and data loading
+# DBTITLE 1,Restart Python if needed (isolated cell)
 # Only restart if mlflow couldn't be loaded (i.e., pip install was needed)
 try:
     import mlflow
 except ImportError:
     dbutils.library.restartPython()
 
+# COMMAND ----------
+
+# DBTITLE 1,Imports, MLflow config, and data loading
 import mlflow
 import pandas as pd
 import re

@@ -240,11 +240,11 @@ px.bar(data, x='Model Alias', y='Potential Revenue Gain', color='Model Alias',
 # Pass hyperparameters as arguments to create a model with different F1 score
 # Modify these values to experiment with different model performance:
 training_params = {
-    "learning_rate": "0.200",
-    "max_bin": "400",      # Lower learning rate (default: 0.0678)
-    "max_depth": "15",            # Shallower trees (default: 8)
-    "num_leaves": "180",           # Fewer leaves (default: 100)
-    "n_estimators": "500"         # Fewer trees (default: 250)
+    "learning_rate": "0.300",
+    "max_bin": "200",      # Lower learning rate (default: 0.0678)
+    "max_depth": "20",            # Shallower trees (default: 8)
+    "num_leaves": "200",           # Fewer leaves (default: 100)
+    "n_estimators": "600"         # Fewer trees (default: 250)
 }
 
 # Alternative parameter sets to try (uncomment one):

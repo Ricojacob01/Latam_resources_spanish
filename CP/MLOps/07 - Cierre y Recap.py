@@ -1,6 +1,7 @@
 # Databricks notebook source
+# DBTITLE 1,Title
 # MAGIC %md
-# MAGIC # 08 — Cierre y Recap 🎬 · Workshop MLOps end-to-end
+# MAGIC # 07 — Cierre y Recap 🎬 · Workshop MLOps end-to-end
 # MAGIC
 # MAGIC **10 min.** Lo que construiste y qué sigue.
 
@@ -15,9 +16,8 @@
 # MAGIC | 02 | Feature engineering + gobernanza UC | Code (+ UI) |
 # MAGIC | 03 | AutoML + LightGBM + MLflow | Lado a lado |
 # MAGIC | 04 | Registro UC + Champion/Challenger | Code → UI |
-# MAGIC | 05 | ⭐ **Model Serving + AI Gateway** (endpoint REST gobernado) | UI → Code |
-# MAGIC | 06 | Batch inference | Code (+ UI) |
-# MAGIC | 07 | ⭐ **Orquestación** (Job + Asset Bundle) | UI → Code |
+# MAGIC | 05 | ⭐ **Model Serving + Batch Inference** (endpoint REST + scoring masivo) | UI → Code |
+# MAGIC | 06 | ⭐ **Orquestación** (Job + Asset Bundle) | UI → Code |
 # MAGIC
 # MAGIC ⭐ = módulos avanzados que completan el ciclo MLOps end-to-end.
 
@@ -31,12 +31,13 @@
 
 # COMMAND ----------
 
+# DBTITLE 1,Monitoreo
 # MAGIC %md
 # MAGIC ## Monitoreo (siguiente paso natural)
 # MAGIC
 # MAGIC - **Inference Tables** del endpoint → cada request loggeado en Delta.
 # MAGIC - **Lakehouse Monitoring** sobre esa tabla → detectar **drift** de datos/predicciones.
-# MAGIC - Si hay drift → el **Job** del módulo 07 reentrena y revalida → cierra el ciclo MLOps.
+# MAGIC - Si hay drift → el **Job** del módulo 06 reentrena y revalida → cierra el ciclo MLOps.
 
 # COMMAND ----------
 

@@ -123,7 +123,7 @@
 # MAGIC - **Reintentos + alertas** — robustez ante fallos transitorios.
 # MAGIC - **Definido como código** (Declarative Automation Bundle) — versionado en Git para CI/CD.
 # MAGIC
-# MAGIC Lo construyes en la **Jobs UI** (intuición) y lo industrializas como código en el módulo 07.
+# MAGIC Lo construyes en la **Jobs UI** (intuición) y lo industrializas como código en el módulo 06.
 
 # COMMAND ----------
 
@@ -136,8 +136,7 @@
 # MAGIC | 02 | Limpiar datos y crear features gobernadas en Unity Catalog |
 # MAGIC | 03 | Entrenar un modelo con MLflow tracking y AutoML |
 # MAGIC | 04 | Registrar en UC, validar y promover con el patrón Champion/Challenger |
-# MAGIC | 05 | Desplegar como endpoint REST + configurar AI Gateway (rate limits, guardrails) |
-# MAGIC | 06 | Scoring masivo en batch |
-# MAGIC | 07 | Automatizar todo como un Job con schedule |
+# MAGIC | 05 | Desplegar como endpoint REST + Batch Inference (scoring masivo) |
+# MAGIC | 06 | Automatizar todo como un Job con schedule |
 # MAGIC
 # MAGIC ## ¿Listo? → `02 - Feature Engineering y Gobernanza`

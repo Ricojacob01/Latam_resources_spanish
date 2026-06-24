@@ -1,11 +1,11 @@
 # Databricks notebook source
 # DBTITLE 1,Intro
 # MAGIC %md
-# MAGIC # 07b — 🔎 Auditoría y Trazabilidad con System Tables
+# MAGIC # 06b — 🔎 Auditoría y Trazabilidad con System Tables
 # MAGIC
 # MAGIC **25 min.** Lab hands-on para responder *quién hizo qué, cuándo y sobre qué* usando las **system tables** de Databricks: `system.access.audit_logs`, lineage y eventos de despliegue de modelos. Observabilidad y traza para gobernanza.
 # MAGIC
-# MAGIC > Módulo **aditivo** — complementa la orquestación del `07`. Consultas de auditoría para gobernanza de modelos y datos.
+# MAGIC > Módulo **aditivo** — complementa la orquestación del `06`. Consultas de auditoría para gobernanza de modelos y datos.
 
 # COMMAND ----------
 
@@ -141,13 +141,14 @@ Si alguna sale ❌, un account admin la habilita una vez:
 
 # COMMAND ----------
 
+# DBTITLE 1,Paso 5
 # MAGIC %md
 # MAGIC ## Paso 5 — Convertir una query de auditoría en control continuo (🖱️ + código)
 # MAGIC
 # MAGIC Una query de auditoría sirve poco si se corre a mano una vez. Dos formas de operacionalizarla:
 # MAGIC
 # MAGIC - **UI:** guarda la query del Paso 2 en **SQL Editor**, créale una **Alert** (p.ej. "avísame si alguien crea/actualiza un serving endpoint fuera del Job de CI/CD") y/o un **dashboard AI/BI** de auditoría.
-# MAGIC - **Código:** agrégala como una **tarea de auditoría** al Job del módulo 07 (o un Job aparte) para materializar diariamente una tabla `gold_auditoria_mlops` y monitorearla.
+# MAGIC - **Código:** agrégala como una **tarea de auditoría** al Job del módulo 06 (o un Job aparte) para materializar diariamente una tabla `gold_auditoria_mlops` y monitorearla.
 
 # COMMAND ----------
 
@@ -174,6 +175,7 @@ except Exception as e:
 
 # COMMAND ----------
 
+# DBTITLE 1,Resumen
 # MAGIC %md
 # MAGIC ## Resumen
 # MAGIC
@@ -183,4 +185,4 @@ except Exception as e:
 # MAGIC ✅ Operacionalizaste la auditoría: Alert/dashboard en la UI o tarea de Job en código.
 # MAGIC ✅ Patrón **Lado a lado (Catalog UI ↔ SQL)**: descubrir en la UI, responder en SQL.
 # MAGIC
-# MAGIC ## Continuar → `08 - Cierre y Recap`
+# MAGIC ## Continuar → `07 - Cierre y Recap`
