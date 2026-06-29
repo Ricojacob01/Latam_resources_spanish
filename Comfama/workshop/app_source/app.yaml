@@ -1,0 +1,5 @@
+
+command: ["streamlit", "run", "app.py"]
+env:
+  - name: AGENT_ENDPOINT
+    value: "agente_afiliados_rico_martinez"

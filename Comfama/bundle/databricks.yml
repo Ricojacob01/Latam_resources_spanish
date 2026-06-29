@@ -1,0 +1,49 @@
+
+bundle:
+  name: agente-afiliados-comfama
+
+variables:
+  catalog:   {default: ardemo_classic_dnubtw_catalog}
+  schema:    {default: ws_rico_martinez}
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://fevm-ardemo-classic-dnubtw.cloud.databricks.com
+  prod:
+    mode: production
+    workspace:
+      host: https://fevm-ardemo-classic-dnubtw.cloud.databricks.com
+
+resources:
+
+  jobs:
+    construir_agente:
+      name: "[Comfama] Construir y desplegar agente"
+      tasks:
+        - task_key: setup_kb
+          notebook_task: {notebook_path: ../Sesion 1 - Construir y Servir el Agente/02 - Setup & Knowledge Base}
+        - task_key: lakebase
+          depends_on: [{task_key: setup_kb}]
+          notebook_task: {notebook_path: ../Sesion 1 - Construir y Servir el Agente/03 - Lakebase (datos del afiliado)}
+        - task_key: construir
+          depends_on: [{task_key: lakebase}]
+          notebook_task: {notebook_path: ../Sesion 1 - Construir y Servir el Agente/04 - Construir el Agente}
+        - task_key: servir
+          depends_on: [{task_key: construir}]
+          notebook_task: {notebook_path: ../Sesion 1 - Construir y Servir el Agente/05 - Servir el Agente}
+      schedule:
+        quartz_cron_expression: "0 0 6 * * ?"   # reconstrucción diaria 6am
+        timezone_id: "America/Bogota"
+
+  apps:
+    asistente_afiliados:
+      name: agente-afiliados-rico-martinez
+      source_code_path: ../app_source
+      resources:
+        - name: agente
+          serving_endpoint:
+            name: agente_afiliados_rico_martinez
+            permission: CAN_QUERY
