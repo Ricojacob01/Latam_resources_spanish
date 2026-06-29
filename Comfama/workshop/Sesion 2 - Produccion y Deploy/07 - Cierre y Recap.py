@@ -53,6 +53,22 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ## 🔎 Qué revisar en la UI (lo que construiste)
+# MAGIC Recorre estos cuatro lugares para *ver* el resultado del workshop, no solo el código:
+# MAGIC
+# MAGIC | Qué | Dónde mirar |
+# MAGIC |---|---|
+# MAGIC | **Trazas (Observabilidad)** | *Machine Learning → Experiments → `comfama_agente_obs`* (y el experimento del agente) → pestaña **Traces**: spans de RAG + tool calls, latencia y tokens |
+# MAGIC | **Gobernanza** | *Catalog → `ardemo_classic_dnubtw_catalog` → tu schema `ws_<usuario>` → `afiliados`*: `documento`/`email` **enmascarados** + pestaña **Lineage** (`kb_documentos → kb_index → agente`) |
+# MAGIC | **Monitoreo** | *Catalog → `reservas_delta` → pestaña **Quality**: perfil + drift + dashboard del monitor |
+# MAGIC | **Deploy-as-Code** | En el workspace: `…/workshop/bundle/databricks.yml` (Asset Bundle) y `…/workshop/app_source/` (código de la App) |
+# MAGIC
+# MAGIC > Y los **recursos vivos**: la **App** (URL desde *Compute → Apps*), el **endpoint del agente** (*Serving*) y la
+# MAGIC > **instancia Lakebase** (*Compute → Database instances*) — prueba una reserva en la App y mira cómo baja el cupo.
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ## 💡 Qué se llevan
 # MAGIC - Un **agente de afiliados** real: RAG + 3 tools transaccionales sobre **Lakebase**, servido y con **App**.
 # MAGIC - Gobierno, observabilidad, monitoreo, alertas y FinOps **incluidos en la plataforma** (no como código a mantener).

@@ -42,6 +42,22 @@
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ## 🔎 Qué revisar en la UI (lo que construiste hoy)
+# MAGIC Recorre estos lugares para *ver* el resultado, no solo el código:
+# MAGIC
+# MAGIC | Qué | Dónde mirar |
+# MAGIC |---|---|
+# MAGIC | **Vector Search (RAG)** | *Compute → Vector Search* → endpoint `comfama_vs_endpoint`; el índice en *Catalog → tu schema `ws_<usuario>` → `kb_index`* (estado **Online**) |
+# MAGIC | **Lakebase (OLTP)** | *Compute → Database instances → `comfama-afiliados`* → base `comfama`; revisa la tabla `reservas` y cómo baja `programas.cupos_disponibles` con cada reserva |
+# MAGIC | **Agente registrado** | *Catalog → `ardemo_classic_dnubtw_catalog` → tu schema → Models → `agente_afiliados`*: versiones, firma y **recursos** declarados (FM, índice VS, **Lakebase**) |
+# MAGIC | **Endpoint del agente** | *Serving → `agente_afiliados_<usuario>`*: estado **READY**, scale-to-zero, panel **Query**; + sus **inference tables** (registro de requests) |
+# MAGIC
+# MAGIC > 💡 Pruébalo: en *Serving → endpoint → **Query*** (o el Playground con el **endpoint del agente** seleccionado) pide
+# MAGIC > *"reserva el programa X para el afiliado Y"* — verás aparecer la fila en `reservas` y el cupo bajar en `programas`.
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC ## 🔮 Sesión 2 — Producción y Deploy
 # MAGIC
 # MAGIC | # | Módulo | Equivale a |

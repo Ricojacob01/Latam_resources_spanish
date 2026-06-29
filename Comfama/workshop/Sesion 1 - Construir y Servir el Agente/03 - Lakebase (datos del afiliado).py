@@ -40,20 +40,19 @@
 # MAGIC 1. Menú izquierdo → **Compute** → pestaña **Database instances** (Lakebase).
 # MAGIC 2. **Create database instance**:
 # MAGIC    - **Name**: el valor de `LAKEBASE_PROJECT` (mostrado abajo).
-# MAGIC    - **Tier**: *Autoscaling* (scale-to-zero + branching). Capacidad min 0.5 CU.
+# MAGIC    - **Capacity**: **CU_1** (lo que usa el código por SDK).
 # MAGIC    - **Create**. Espera a estado **Available** (1–2 min).
 # MAGIC 3. Abre la instancia → botón **Connect**. Verás el **host** y un botón para **generar un token** (OAuth).
 # MAGIC    Cópialos: los pegaremos abajo (o los obtenemos por SDK en la celda siguiente).
 # MAGIC 4. En la pestaña **Databases** de la instancia → **Create database** → nombre: el valor de `LAKEBASE_DB`.
 # MAGIC
-# MAGIC > 💡 La instancia es un recurso **compartido del workspace** (créala una vez). Más abajo cada asistente crea su
-# MAGIC > **branch** personal — esa es la feature estrella de Lakebase para dev/test.
+# MAGIC > 💡 La **instancia** es compartida (créala una vez; ideal: el instructor). Cada asistente usa su **propia base de
+# MAGIC > datos** `comfama_<usuario>` (`LAKEBASE_DB`) para **aislar** sus reservas/cupos del resto.
 
 # COMMAND ----------
 
-print(f"Instancia (LAKEBASE_PROJECT): {LAKEBASE_PROJECT}")
-print(f"Base de datos (LAKEBASE_DB) : {LAKEBASE_DB}")
-print(f"Branch personal             : {LAKEBASE_BRANCH}")
+print(f"Instancia compartida (LAKEBASE_PROJECT): {LAKEBASE_PROJECT}")
+print(f"Tu base de datos por-asistente (LAKEBASE_DB): {LAKEBASE_DB}")
 
 # COMMAND ----------
 
@@ -71,13 +70,17 @@ from databricks.sdk.service.database import DatabaseInstance
 w = WorkspaceClient()
 EMAIL = w.current_user.me().user_name
 
-# Crear la instancia si no existe (idempotente)
+# Crear la instancia si no existe (COMPARTIDA; a prueba de carreras entre asistentes)
+# 💡 En un workshop con varios asistentes, lo ideal es que el INSTRUCTOR cree esta instancia una vez.
 try:
     inst = w.database.get_database_instance(name=LAKEBASE_PROJECT)
     print(f"Instancia {LAKEBASE_PROJECT} ya existe (estado {inst.state}).")
 except Exception:
     print(f"Creando instancia {LAKEBASE_PROJECT} (CU_1) ...")
-    w.database.create_database_instance(DatabaseInstance(name=LAKEBASE_PROJECT, capacity="CU_1"))
+    try:
+        w.database.create_database_instance(DatabaseInstance(name=LAKEBASE_PROJECT, capacity="CU_1"))
+    except Exception as e:
+        print(f"  (otra sesión la está creando: {type(e).__name__}) — esperando AVAILABLE...")
 
 # Esperar a AVAILABLE
 for _ in range(40):
@@ -280,9 +283,10 @@ print("Beneficios de María (1001):", consultar_beneficios(1001))
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 🌿 Branching (dev/test) — feature estrella
+# MAGIC ## 🌿 Branching (dev/test) — feature del tier Autoscaling
 # MAGIC
-# MAGIC Cada asistente puede crear un **branch** copy-on-write de la base, instantáneo, para probar sin tocar producción.
+# MAGIC > En este lab (tier *provisioned*) el aislamiento entre asistentes ya es por **base de datos** (`comfama_<usuario>`).
+# MAGIC > En el tier **Autoscaling**, además, cada asistente puede crear un **branch** copy-on-write instantáneo para dev/test:
 # MAGIC
 # MAGIC **🖱️ UI:** en la instancia → pestaña **Branches** → **Create branch** desde `production` → nombre `LAKEBASE_BRANCH`.
 # MAGIC
@@ -308,7 +312,7 @@ print("Beneficios de María (1001):", consultar_beneficios(1001))
 # MAGIC ```bash
 # MAGIC databricks database create-synced-database-table \
 # MAGIC   ardemo_classic_dnubtw_catalog.ws_<usuario>.programas \
-# MAGIC   --database-instance-name comfama-afiliados --logical-database-name comfama
+# MAGIC   --database-instance-name comfama-afiliados --logical-database-name comfama_<usuario>
 # MAGIC ```
 
 # COMMAND ----------

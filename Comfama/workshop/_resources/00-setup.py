@@ -61,19 +61,22 @@ EMBEDDING_MODEL = "databricks-gte-large-en"   # FM de embeddings managed (ajusta
 LLM_ENDPOINT      = "databricks-meta-llama-3-3-70b-instruct"  # FM que razona el agente
 AGENT_MODEL_NAME  = f"{CATALOG}.{SCHEMA}.agente_afiliados"     # modelo del agente en UC
 AGENT_ENDPOINT    = f"agente_afiliados_{username}"            # serving endpoint del agente
+EXPERIMENT_PATH   = f"/Users/{current_user}/comfama_agente"    # experimento MLflow POR ASISTENTE
 
-# Lakebase (Autoscaling)
-LAKEBASE_PROJECT   = "comfama-afiliados"        # proyecto compartido (uno por workspace)
-LAKEBASE_BRANCH    = f"ws-{username}".replace("_", "-")  # branch personal por asistente
-LAKEBASE_DB        = "comfama"                   # base de datos lógica
+# Lakebase (provisioned tier)
+LAKEBASE_PROJECT   = "comfama-afiliados"        # INSTANCIA compartida (una por workspace; ideal: la crea el instructor)
+LAKEBASE_DB        = f"comfama_{username}"        # base de datos POR ASISTENTE → aísla reservas/cupos
+LAKEBASE_BRANCH    = f"ws-{username}".replace("_", "-")  # (solo tier Autoscaling) branch personal
 
 # Databricks App
 APP_NAME = f"agente-afiliados-{username}".replace("_", "-")
 
+# Compartido (una vez por workspace) vs por-asistente — útil tenerlo claro en un workshop multiusuario
 print("Constantes cargadas:")
 for k in ["VS_ENDPOINT","VS_INDEX","EMBEDDING_MODEL","LLM_ENDPOINT","AGENT_MODEL_NAME",
-          "AGENT_ENDPOINT","LAKEBASE_PROJECT","LAKEBASE_BRANCH","LAKEBASE_DB","APP_NAME"]:
+          "AGENT_ENDPOINT","EXPERIMENT_PATH","LAKEBASE_PROJECT","LAKEBASE_DB","APP_NAME"]:
     print(f"  {k:18}= {eval(k)}")
+print("\n  (compartidos por workspace: VS_ENDPOINT, LAKEBASE_PROJECT, LLM_ENDPOINT — el resto es por-asistente)")
 
 # COMMAND ----------
 

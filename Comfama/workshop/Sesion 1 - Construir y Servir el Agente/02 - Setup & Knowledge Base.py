@@ -68,11 +68,25 @@ from databricks.vector_search.client import VectorSearchClient
 
 vsc = VectorSearchClient(disable_notice=True)
 
-# --- A. Endpoint (crear si no existe) ---
+# --- A. Endpoint (compartido; crear si no existe, a prueba de carreras entre asistentes) ---
+# 💡 En un workshop con varios asistentes, lo ideal es que el INSTRUCTOR cree este endpoint una vez.
 existing_endpoints = [e["name"] for e in vsc.list_endpoints().get("endpoints", [])]
 if VS_ENDPOINT not in existing_endpoints:
     print(f"Creando endpoint {VS_ENDPOINT} ...")
-    vsc.create_endpoint_and_wait(name=VS_ENDPOINT, endpoint_type="STANDARD")
+    try:
+        vsc.create_endpoint_and_wait(name=VS_ENDPOINT, endpoint_type="STANDARD")
+    except Exception as e:
+        # Otro asistente lo creó al mismo tiempo: esperamos a que esté ONLINE
+        print(f"  (otra sesión lo está creando: {type(e).__name__}) — esperando ONLINE...")
+        import time
+        for _ in range(60):
+            try:
+                st = (vsc.get_endpoint(VS_ENDPOINT) or {}).get("endpoint_status", {}).get("state", "")
+                if st == "ONLINE":
+                    break
+            except Exception:
+                pass
+            time.sleep(15)
 else:
     print(f"Endpoint {VS_ENDPOINT} ya existe ✅")
 

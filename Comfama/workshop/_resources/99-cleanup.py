@@ -19,7 +19,7 @@
 
 # COMMAND ----------
 
-# MAGIC %pip install -U databricks-sdk databricks-vectorsearch mlflow
+# MAGIC %pip install -U databricks-sdk databricks-vectorsearch mlflow psycopg2-binary
 # MAGIC dbutils.library.restartPython()
 
 # COMMAND ----------
@@ -38,6 +38,7 @@ VS_INDEX = f"{CATALOG}.{SCHEMA}.kb_index"
 AGENT_MODEL_NAME = f"{CATALOG}.{SCHEMA}.agente_afiliados"
 AGENT_ENDPOINT = f"agente_afiliados_{username}"
 LAKEBASE_PROJECT = "comfama-afiliados"
+LAKEBASE_DB = f"comfama_{username}"
 APP_NAME = f"agente-afiliados-{username}".replace("_", "-")
 
 from databricks.sdk import WorkspaceClient
@@ -72,6 +73,20 @@ def _del_model():
     from mlflow import MlflowClient
     MlflowClient(registry_uri="databricks-uc").delete_registered_model(AGENT_MODEL_NAME)
 borrar(f"Modelo {AGENT_MODEL_NAME}", _del_model)
+
+# Tu base de datos Lakebase (dentro de la instancia compartida) — la instancia NO se borra aquí
+def _drop_lakebase_db():
+    import psycopg2, uuid
+    inst = w.database.get_database_instance(name=LAKEBASE_PROJECT)
+    tok = w.database.generate_database_credential(
+        request_id=str(uuid.uuid4()), instance_names=[LAKEBASE_PROJECT]).token
+    con = psycopg2.connect(host=inst.read_write_dns, port=5432, dbname="databricks_postgres",
+                           user=user, password=tok, sslmode="require")
+    con.autocommit = True
+    with con.cursor() as cur:
+        cur.execute(f'DROP DATABASE IF EXISTS {LAKEBASE_DB} WITH (FORCE)')
+    con.close()
+borrar(f"Lakebase DB {LAKEBASE_DB}", _drop_lakebase_db)
 
 for r in resultados: print(r)
 

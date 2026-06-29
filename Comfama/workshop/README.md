@@ -136,9 +136,9 @@ workshop/
 | Sistema de registro operacional (OLTP) | `afiliados`, `programas` (`cupos`), `reservas`, `beneficios_afiliado`, `casos` | lecturas/escrituras transaccionales de baja latencia |
 | Memoria conversacional / estado de sesión | `conversaciones`, `mensajes` | lectura de historial + escritura por turno (sub-10ms) |
 | Integración lakehouse | `programas` (Delta→Lakebase synced) · `reservas`/`mensajes` (Lakebase→UC) | synced tables (reverse-ETL) + database catalog en UC |
-| Dev/test + aislamiento del workshop | — | **branching** por asistente (copy-on-write) + **scale-to-zero** |
+| Dev/test + aislamiento del workshop | — | **base de datos por asistente** (`comfama_<usuario>`); branching + scale-to-zero en el tier Autoscaling |
 
-> Tier **Autoscaling** (`databricks postgres`): jerarquía Project → Branch → Endpoint. Cada asistente crea **su propio branch** desde `production` para aislar su trabajo y, de paso, ver la feature en vivo. En la UI: *Compute → Database instances*.
+> Tier **provisioned** (`w.database`): **instancia compartida** `comfama-afiliados` + **una base de datos por asistente** (`comfama_<usuario>`) para aislar reservas/cupos. El tier **Autoscaling** (`databricks postgres`, Project→Branch→Endpoint) añade además branching copy-on-write y scale-to-zero. En la UI: *Compute → Database instances*.
 
 ---
 
@@ -146,7 +146,7 @@ workshop/
 
 - **Serverless** o cluster DBR 15.4+ con Unity Catalog.
 - Catálogo `ardemo_classic_dnubtw_catalog`, schema personal `ws_<usuario>` (se crea solo en el setup).
-- Proyecto Lakebase (Autoscaling) — creado en la Sesión 1; cada asistente usa su branch.
+- Instancia Lakebase compartida `comfama-afiliados` (creada en la Sesión 1 / idealmente por el instructor); cada asistente usa su propia base `comfama_<usuario>`.
 - Permiso para crear endpoints de Model Serving, Vector Search, Apps y Jobs.
 - El setup instala automáticamente las librerías necesarias vía `%pip install`.
 

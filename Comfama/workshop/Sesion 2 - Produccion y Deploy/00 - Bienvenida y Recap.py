@@ -46,6 +46,7 @@
 
 # COMMAND ----------
 
+# DBTITLE 1,Cell 6
 from databricks.sdk import WorkspaceClient
 w = WorkspaceClient()
 print("Verificando assets de la Sesión 1...\n")
@@ -60,12 +61,11 @@ except Exception as e:
 
 # Modelo registrado
 try:
-    from mlflow import MlflowClient
-    mc = MlflowClient(registry_uri="databricks-uc")
-    v = max(int(x.version) for x in mc.search_model_versions(f"name='{AGENT_MODEL_NAME}'"))
+    mvs = list(w.model_versions.list(full_name=AGENT_MODEL_NAME))
+    v = max(int(mv.version) for mv in mvs) if mvs else "—"
     print(f"Modelo en UC ({AGENT_MODEL_NAME}): v{v} ✅")
 except Exception as e:
-    print(f"⚠️ Modelo {AGENT_MODEL_NAME} no encontrado ({type(e).__name__})")
+    print(f"⚠️ Modelo {AGENT_MODEL_NAME} no encontrado ({type(e).__name__}: {e})")
 
 # Tablas semilla
 tablas = [r.tableName for r in spark.sql(f"SHOW TABLES IN {CATALOG}.{SCHEMA}").collect()]
@@ -77,4 +77,3 @@ print("\nSi todo está ✅, continúa con el módulo 01.")
 
 # MAGIC %md
 # MAGIC ### ▶️ Siguiente: `01 - Databricks App`
-

@@ -24,7 +24,8 @@
 # MAGIC %md
 # MAGIC ## 🖱️ Camino UI — trazas automáticas del agente servido
 # MAGIC El agente desplegado con `agents.deploy` **traza automáticamente** cada request.
-# MAGIC 1. **Machine Learning** → **Experiments** → experimento del agente `agente_afiliados`.
+# MAGIC 1. **Machine Learning** → **Experiments** → abre el experimento del agente `comfama_agente`
+# MAGIC    (y `comfama_agente_obs`, que crea el camino código de abajo). Ambos son **por-asistente**.
 # MAGIC 2. Pestaña **Traces**: cada fila es una conversación. Ábrela para ver el **árbol de spans**:
 # MAGIC    `chat → tool_call(buscar_conocimiento) → retrieval → tool_call(crear_reserva) → respuesta`, con latencia y tokens.
 # MAGIC 3. También en **Serving** → endpoint del agente → pestaña de **traces** las ves en vivo.
@@ -79,4 +80,3 @@ display(traces)
 # MAGIC Estas trazas se persisten y son la base de **evaluación de calidad** y del **monitoreo** (módulo 04).
 # MAGIC
 # MAGIC ### ▶️ Siguiente: `03 - Gobernanza (Unity Catalog)`
-

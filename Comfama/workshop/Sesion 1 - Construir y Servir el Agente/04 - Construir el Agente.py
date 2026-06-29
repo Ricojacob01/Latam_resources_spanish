@@ -196,6 +196,7 @@ from mlflow.models.resources import (DatabricksServingEndpoint, DatabricksVector
                                      DatabricksLakebase)
 
 mlflow.set_registry_uri("databricks-uc")
+mlflow.set_experiment(EXPERIMENT_PATH)  # experimento POR ASISTENTE (evita mezclar runs/trazas entre usuarios)
 
 with mlflow.start_run(run_name="agente_afiliados"):
     info = mlflow.pyfunc.log_model(

@@ -2,8 +2,8 @@
 # MAGIC %md
 # MAGIC # 🛡️ Sesión 1 · 06 — AI Gateway
 # MAGIC
-# MAGIC **Meta:** poner **gobierno** sobre el agente servido (módulo 05) con **AI Gateway**: límites de tasa, **guardrails**
-# MAGIC (PII y seguridad) y **tracking de uso** — la telemetría que alimentará **FinOps** (Sesión 2).
+# MAGIC **Meta:** poner **gobierno** sobre la **capa de modelo** (el LLM que usa el agente) con **AI Gateway**: límites de
+# MAGIC tasa, **guardrails** (PII y seguridad) y **tracking de uso** — la telemetría que alimentará **FinOps** (Sesión 2).
 # MAGIC
 # MAGIC > **Equivale a: `LLMConfig + TokenProvider`.** La gestión de llaves, límites y ruteo de modelos que Comfama hace
 # MAGIC > a mano la centraliza AI Gateway, gobernado por Unity Catalog.
@@ -22,9 +22,10 @@
 # MAGIC   Agente ──────────▶ [AI Gateway: unifica FMs · fallback · llaves] ──▶  LLM / modelos externos (saliente)
 # MAGIC ```
 # MAGIC
-# MAGIC - **Entrante** (lo principal hoy): protege el **endpoint del agente** — quién puede, cuánto, y qué entra/sale.
-# MAGIC - **Saliente**: unifica el acceso a modelos (FM de Databricks o externos como OpenAI/Anthropic) detrás de un
-# MAGIC   único endpoint con fallback. *Esto es lo que reemplaza a `LLMConfig + TokenProvider`.*
+# MAGIC - **Saliente — donde SÍ va AI Gateway**: gobierna el **modelo que el agente llama** (límites, guardrails PII,
+# MAGIC   tracking, fallback, unificación de FMs/externos detrás de un endpoint). *Esto reemplaza a `LLMConfig + TokenProvider`.*
+# MAGIC - **Entrante (usuario → agente)**: AI Gateway **no** aplica al endpoint de agente custom; ese control va por
+# MAGIC   **permisos del endpoint / la App (OBO)**. El uso del agente lo registran las **inference tables** de `agents.deploy`.
 
 # COMMAND ----------
 
@@ -38,21 +39,24 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 🖱️ Camino UI — pestaña *AI Gateway* del endpoint
-# MAGIC 1. **Serving** → abre el endpoint `AGENT_ENDPOINT` → pestaña **AI Gateway** → **Edit**.
-# MAGIC 2. **Rate limits**: agrega un límite, p.ej. **120 queries/min** por endpoint (protege de picos/abuso).
+# MAGIC ## 🖱️ Camino UI — pestaña *AI Gateway* del endpoint de **modelo**
+# MAGIC > Aplica AI Gateway sobre el **endpoint del LLM que usa el agente** (no sobre el endpoint del agente), e idealmente
+# MAGIC > uno **que tú controlas** (Provisioned Throughput o External Model). Sobre el FM del **sistema compartido** puede
+# MAGIC > estar restringido o **afectar a todos** los usuarios.
+# MAGIC 1. **Serving** → abre tu **endpoint de modelo** → pestaña **AI Gateway** → **Edit**.
+# MAGIC 2. **Rate limits**: agrega un límite, p.ej. **120 llamadas/min** (protege de picos/abuso).
 # MAGIC 3. **Guardrails**:
 # MAGIC    - **PII**: `BLOCK` (o `MASK`) en entrada y salida → evita filtrar datos del afiliado.
 # MAGIC    - **Safety**: activa el filtro de contenido inseguro.
 # MAGIC    - *(Opcional)* **Invalid keywords / topics**: restringe a temas de servicios Comfama.
 # MAGIC 4. **Update**.
 # MAGIC
-# MAGIC > 💡 El **registro de uso (inference tables)** del agente ya lo crea `agents.deploy` (módulo 05). El *usage
-# MAGIC > tracking* de AI Gateway está pensado para endpoints de **Foundation Models / modelos externos** (sección saliente).
+# MAGIC > 💡 El **registro de uso** del agente ya lo crea `agents.deploy` (inference tables, módulo 05). El *usage tracking*
+# MAGIC > de AI Gateway aplica aquí, en la **capa de modelo**.
 
 # COMMAND ----------
 
-print(f"Endpoint a gobernar: {AGENT_ENDPOINT}")
+print(f"Endpoint de modelo a gobernar (LLM del agente): {LLM_ENDPOINT}")
 
 # COMMAND ----------
 
@@ -70,38 +74,46 @@ from databricks.sdk.service.serving import (
 
 w = WorkspaceClient()
 
-# ⚠️ AI Gateway se aplica a endpoints de **Foundation Models / modelos externos**, NO a endpoints
-# de agente (pyfunc) custom. Según el workspace, intentar configurarlo sobre el endpoint del agente
-# devuelve "not supported for this endpoint type". Lo intentamos y reportamos con claridad.
-GATEWAY_TARGET = AGENT_ENDPOINT  # cámbialo por un endpoint de FM/modelo externo donde AI Gateway esté habilitado
-try:
-    w.serving_endpoints.put_ai_gateway(
-        name=GATEWAY_TARGET,
-        rate_limits=[AiGatewayRateLimit(
-            calls=120, renewal_period=AiGatewayRateLimitRenewalPeriod.MINUTE,
-            key=AiGatewayRateLimitKey.ENDPOINT)],
-        guardrails=AiGatewayGuardrails(
-            input=AiGatewayGuardrailParameters(
-                pii=AiGatewayGuardrailPiiBehavior(
-                    behavior=AiGatewayGuardrailPiiBehaviorBehavior.BLOCK)),
-            output=AiGatewayGuardrailParameters(
-                pii=AiGatewayGuardrailPiiBehavior(
-                    behavior=AiGatewayGuardrailPiiBehaviorBehavior.BLOCK)),
-        ),
-    )
-    print("✅ AI Gateway (rate limits + guardrails PII) configurado sobre", GATEWAY_TARGET)
-except Exception as e:
-    print("ℹ️ AI Gateway no soportado sobre este endpoint en este workspace:")
-    print("  ", str(e)[:160])
-    print("   → Aplícalo sobre un endpoint de Foundation Model / modelo externo (sección 'saliente').")
-    print("   → El registro de uso del AGENTE ya lo dan las inference tables de agents.deploy (módulo 05).")
+# AI Gateway va sobre la CAPA DE MODELO: el endpoint del LLM que usa el agente, NO el del agente.
+GATEWAY_TARGET = LLM_ENDPOINT
+
+# ⚠️ Ejecuta SOLO si GATEWAY_TARGET es un endpoint que TÚ controlas (Provisioned Throughput / External Model).
+# Sobre el FM del sistema COMPARTIDO no lo apliques: tu config (límites/guardrails) afectaría a TODOS los usuarios.
+APLICAR = False   # pon True cuando GATEWAY_TARGET apunte a tu propio endpoint de modelo
+
+if APLICAR:
+    try:
+        w.serving_endpoints.put_ai_gateway(
+            name=GATEWAY_TARGET,
+            rate_limits=[AiGatewayRateLimit(
+                calls=120, renewal_period=AiGatewayRateLimitRenewalPeriod.MINUTE,
+                key=AiGatewayRateLimitKey.ENDPOINT)],
+            guardrails=AiGatewayGuardrails(
+                input=AiGatewayGuardrailParameters(
+                    pii=AiGatewayGuardrailPiiBehavior(
+                        behavior=AiGatewayGuardrailPiiBehaviorBehavior.BLOCK)),
+                output=AiGatewayGuardrailParameters(
+                    pii=AiGatewayGuardrailPiiBehavior(
+                        behavior=AiGatewayGuardrailPiiBehaviorBehavior.BLOCK)),
+            ),
+        )
+        print("✅ AI Gateway (rate limits + guardrails PII) configurado sobre", GATEWAY_TARGET)
+    except Exception as e:
+        print("ℹ️ No se pudo configurar AI Gateway sobre", GATEWAY_TARGET, ":", str(e)[:160])
+        print("   → Usa un endpoint de modelo propio (Provisioned Throughput / External Model) — sección 'saliente'.")
+else:
+    print("⏭️  Demo segura: NO se aplicó AI Gateway sobre", GATEWAY_TARGET,
+          "(es el FM del sistema compartido).")
+    print("   Apunta GATEWAY_TARGET a tu propio endpoint de modelo y pon APLICAR=True para configurarlo.")
+    print("   El uso del AGENTE ya lo registran las inference tables de agents.deploy (módulo 05).")
 
 # COMMAND ----------
 
 # MAGIC %md
 # MAGIC ## 🧪 Probar los guardrails
-# MAGIC Enviamos un mensaje con datos sensibles. **Si** el guardrail de PII está activo (endpoint de FM/externo con AI
-# MAGIC Gateway), la request se bloquea; si no, el agente responde normal. Sirve para ver el comportamiento esperado.
+# MAGIC Llamamos al **agente** (que internamente invoca el LLM gobernado). **Si** el guardrail de PII está activo en la
+# MAGIC capa de modelo, la PII se bloquea/enmascara en esa llamada; si el modelo no tiene Gateway (como en esta demo
+# MAGIC con `APLICAR=False`), el agente responde normal.
 
 # COMMAND ----------
 
@@ -135,9 +147,9 @@ except Exception as e:
 
 # MAGIC %md
 # MAGIC ## ✅ Resultado
-# MAGIC El agente queda **gobernado**: con **límites de tasa** y **guardrails de PII**. El **registro de uso** (inference
-# MAGIC tables del agente, creadas por `agents.deploy`) + el usage tracking del Gateway en endpoints de FM son la fuente
-# MAGIC de **FinOps** (Sesión 2 · 05).
+# MAGIC Gobierno en la **capa de modelo** (límites, guardrails PII, usage tracking) sobre el endpoint del LLM que usa el
+# MAGIC agente — el patrón que reemplaza a `LLMConfig + TokenProvider`. El **registro de uso del agente** lo dan las
+# MAGIC inference tables de `agents.deploy`; ese uso + el del Gateway alimentan **FinOps** (Sesión 2 · 05).
 # MAGIC
 # MAGIC ### ▶️ Siguiente: `07 - Cierre Sesión 1`
 
