@@ -26,7 +26,7 @@ from pyspark.sql import functions as F
 from datetime import date
 
 # Catálogo del workspace (ya existe). Schema personal por asistente para evitar colisiones.
-CATALOG = "ardemo_classic_dnubtw_catalog"
+CATALOG = "classic_stable_paco_catalog"
 current_user = spark.sql("SELECT current_user()").collect()[0][0]
 username = current_user.split("@")[0].replace(".", "_").replace("-", "_")
 SCHEMA = f"ws_{username}"
@@ -58,7 +58,7 @@ VS_INDEX    = f"{CATALOG}.{SCHEMA}.kb_index"  # índice por asistente
 EMBEDDING_MODEL = "databricks-gte-large-en"   # FM de embeddings managed (ajusta si tu workspace usa otro)
 
 # Agente / Model Serving / AI Gateway
-LLM_ENDPOINT      = "databricks-meta-llama-3-3-70b-instruct"  # FM que razona el agente
+LLM_ENDPOINT      = "system.ai.gpt-5-4-nano"  # FM que razona el agente
 AGENT_MODEL_NAME  = f"{CATALOG}.{SCHEMA}.agente_afiliados"     # modelo del agente en UC
 AGENT_ENDPOINT    = f"agente_afiliados_{username}"            # serving endpoint del agente
 EXPERIMENT_PATH   = f"/Users/{current_user}/comfama_agente"    # experimento MLflow POR ASISTENTE

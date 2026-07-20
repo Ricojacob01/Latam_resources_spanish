@@ -1,11 +1,11 @@
 # agent.py — generado por el notebook 04
-CATALOG = 'ardemo_classic_dnubtw_catalog'
+CATALOG = 'classic_stable_paco_catalog'
 SCHEMA = 'ws_rico_martinez'
 VS_ENDPOINT = 'comfama_vs_endpoint'
-VS_INDEX = 'ardemo_classic_dnubtw_catalog.ws_rico_martinez.kb_index'
+VS_INDEX = 'classic_stable_paco_catalog.ws_rico_martinez.kb_index'
 LLM_ENDPOINT = 'databricks-meta-llama-3-3-70b-instruct'
 LAKEBASE_PROJECT = 'comfama-afiliados'
-LAKEBASE_DB = 'comfama'
+LAKEBASE_DB = 'comfama_rico_martinez'
 
 import json, uuid
 import psycopg2
