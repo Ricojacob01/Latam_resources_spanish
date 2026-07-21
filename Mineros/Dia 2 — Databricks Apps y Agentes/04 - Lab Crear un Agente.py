@@ -431,6 +431,289 @@
 # MAGIC %md
 # MAGIC # ¡Felicidades!
 # MAGIC
-# MAGIC ¡Has completado el laboratorio de **Creando un agente**!
+# MAGIC ¡Has completado la construcción y el despliegue del agente!
 # MAGIC
-# MAGIC Ahora pasemos al siguiente laboratorio: [Lab 03 - Usando Batch Inference]($./Lab 03 - Usando Batch Inference)
+# MAGIC A continuación, en el **Apéndice** de este mismo laboratorio, veremos cómo aplicar
+# MAGIC estas mismas AI Functions **a escala** con Batch Inference sobre todo el conjunto de opiniones.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ---
+# MAGIC # 📎 Apéndice — Batch Inference con AI Functions
+# MAGIC ## Análisis de sentimiento, extracción de información y generación de texto a escala
+# MAGIC
+# MAGIC En la parte principal del laboratorio construimos un agente que usa herramientas de a una
+# MAGIC consulta. En este apéndice aplicamos las mismas ideas de IA Generativa **de forma masiva**
+# MAGIC (batch) sobre todas las opiniones usando **AI Functions** en SQL.
+# MAGIC
+# MAGIC ### Caso de uso: aumentar la satisfacción del cliente con análisis automático de valoraciones
+# MAGIC Tomamos las opiniones en texto libre y las enriquecemos con información extraída por LLMs.
+# MAGIC Para cada valoración:
+# MAGIC - Identificamos el sentimiento y extraemos los productos mencionados.
+# MAGIC - Generamos una respuesta personalizada (next best action) para atención al cliente.
+# MAGIC
+# MAGIC <img src="https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/product/sql-ai-functions/sql-ai-query-function-review.png" width="100%">
+# MAGIC
+# MAGIC > Usa el mismo dataset del laboratorio: `academia.ia` (tablas **opiniones** y **clientes**).
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC USE academia.ia
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Ap.1 - Analizar el sentimiento y extraer información
+# MAGIC Queremos extraer, de cada opinión:
+# MAGIC - Productos mencionados
+# MAGIC - Sentimiento del cliente
+# MAGIC - Si es negativo, el motivo de la insatisfacción
+# MAGIC
+# MAGIC ### Usando AI Functions
+# MAGIC Las **[AI Functions](https://docs.databricks.com/en/large-language-models/ai-functions.html)**
+# MAGIC permiten ejecutar modelos de IA Generativa directamente desde SQL sobre tus tablas.
+# MAGIC
+# MAGIC | Gen AI SQL Function | Descripción |
+# MAGIC | -- | -- |
+# MAGIC | [ai_analyze_sentiment](https://docs.databricks.com/pt/sql/language-manual/functions/ai_analyze_sentiment.html) | Análisis de sentimiento |
+# MAGIC | [ai_classify](https://docs.databricks.com/pt/sql/language-manual/functions/ai_classify.html) | Clasifica el texto según categorías |
+# MAGIC | [ai_extract](https://docs.databricks.com/pt/sql/language-manual/functions/ai_extract.html) | Extrae la información deseada |
+# MAGIC | [ai_fix_grammar](https://docs.databricks.com/pt/sql/language-manual/functions/ai_fix_grammar.html) | Corrige la gramática |
+# MAGIC | [ai_gen](https://docs.databricks.com/pt/sql/language-manual/functions/ai_gen.html) | Genera texto según la instrucción |
+# MAGIC | [ai_mask](https://docs.databricks.com/pt/sql/language-manual/functions/ai_mask.html) | Enmascara datos sensibles |
+# MAGIC | [ai_query](https://docs.databricks.com/pt/sql/language-manual/functions/ai_query.html) | Envía instrucciones al modelo deseado |
+# MAGIC | [ai_similarity](https://docs.databricks.com/pt/sql/language-manual/functions/ai_similarity.html) | Similitud entre dos expresiones |
+# MAGIC | [ai_summarize](https://docs.databricks.com/pt/sql/language-manual/functions/ai_summarize.html) | Resume el texto |
+# MAGIC | [ai_translate](https://docs.databricks.com/pt/sql/language-manual/functions/ai_translate.html) | Traduce el texto |
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### A. Análisis de sentimiento
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT
+# MAGIC   opinion,
+# MAGIC   ai_analyze_sentiment(opinion) AS sentimiento
+# MAGIC FROM opiniones
+# MAGIC LIMIT 10;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### B. Extracción de los productos mencionados
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT
+# MAGIC   opinion,
+# MAGIC   ai_extract(opinion, array('producto')) AS productos_mencionados
+# MAGIC FROM opiniones
+# MAGIC LIMIT 10;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### C. Extracción del motivo de la insatisfacción
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT
+# MAGIC   opinion,
+# MAGIC   ai_extract(opinion, array('motivo de la insatisfacción del cliente')) AS motivo
+# MAGIC FROM opiniones
+# MAGIC LIMIT 10;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Ap.2 - Análisis y extracción a escala
+# MAGIC Encapsulamos toda la extracción en una función SQL con `ai_query()` para aplicarla sobre
+# MAGIC todo el conjunto de datos con una sola llamada por opinión.
+# MAGIC
+# MAGIC <img src="https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/product/sql-ai-functions/sql-ai-query-function-review-wrapper.png" width="1200px">
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### A. Crear una función para extraer toda la información
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE FUNCTION REVISAR_OPINION(opinion STRING)
+# MAGIC RETURNS STRUCT<
+# MAGIC   producto_nombre: STRING,
+# MAGIC   producto_categoria: STRING,
+# MAGIC   sentimiento: STRING,
+# MAGIC   motivo: STRING
+# MAGIC >
+# MAGIC RETURN FROM_JSON(
+# MAGIC   REGEXP_REPLACE(
+# MAGIC     AI_QUERY(
+# MAGIC       'databricks-meta-llama-3-3-70b-instruct',
+# MAGIC       CONCAT(
+# MAGIC         'Analiza la siguiente valoración y devuelve un JSON **válido y compacto**, sin texto adicional. ',
+# MAGIC         'Campos obligatorios: producto_nombre, producto_categoria, sentimiento, motivo. ',
+# MAGIC         'Formato exacto: {"producto_nombre":"","producto_categoria":"","sentimiento":"","motivo":""} ',
+# MAGIC         'Opinión: ', opinion
+# MAGIC       )
+# MAGIC     ),
+# MAGIC     '\\n', ''  -- eliminar saltos de línea
+# MAGIC   ),
+# MAGIC   'STRUCT<
+# MAGIC     producto_nombre: STRING,
+# MAGIC     producto_categoria: STRING,
+# MAGIC     sentimiento: STRING,
+# MAGIC     motivo: STRING
+# MAGIC   >'
+# MAGIC );
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### B. Probar el análisis de una opinión
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT
+# MAGIC   REVISAR_OPINION(
+# MAGIC     'Compré una aspiradora de la marca Electrolux y quedé muy decepcionada.
+# MAGIC     El producto hace mucho ruido y la succión es débil.
+# MAGIC     Esperaba más por el rango de precio.
+# MAGIC     Me gustaría que la empresa se pusiera en contacto para resolver el problema.'
+# MAGIC   ) AS resultado;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### C. Analizar todas las opiniones
+# MAGIC Ahora aplicamos la función sobre el conjunto de datos completo.
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE TABLE opiniones_revisadas AS
+# MAGIC SELECT *, resultado.*
+# MAGIC FROM (
+# MAGIC   SELECT
+# MAGIC     opinion,
+# MAGIC     REVISAR_OPINION(opinion) AS resultado
+# MAGIC   FROM opiniones
+# MAGIC   LIMIT 10
+# MAGIC );
+# MAGIC
+# MAGIC SELECT * FROM opiniones_revisadas;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Ap.3 - Generar una sugerencia de respuesta
+# MAGIC Con la información extraída (y datos estructurados de clientes) generamos borradores de
+# MAGIC respuesta personalizados para el equipo de atención.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### A. Crear una función para generar la respuesta
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE FUNCTION GENERAR_RESPUESTA(
+# MAGIC     nombre STRING,
+# MAGIC     apellido STRING,
+# MAGIC     num_pedidos INT,
+# MAGIC     producto STRING,
+# MAGIC     motivo STRING
+# MAGIC )
+# MAGIC RETURNS TABLE(resposta STRING)
+# MAGIC COMMENT 'Si el cliente muestra insatisfacción con algún producto, use esta función para generar una respuesta personalizada'
+# MAGIC RETURN
+# MAGIC SELECT AI_QUERY(
+# MAGIC     'databricks-meta-llama-3-3-70b-instruct',
+# MAGIC     CONCAT(
+# MAGIC         'Eres un asistente virtual responsable de generar una respuesta amigable y profesional para un cliente que está insatisfecho. ',
+# MAGIC         'Tu objetivo es tranquilizar al cliente, reconocer el problema y, si corresponde, sugerir una solución o un cambio dentro de la política de la empresa. ',
+# MAGIC         'Evita generar información falsa o inventar detalles sobre el cliente o sus pedidos. ',
+# MAGIC         'Controla el tamaño del mensaje para que sea claro y objetivo (máx. 150 palabras). ',
+# MAGIC         'Usa un tono cordial, empático y profesional. ',
+# MAGIC         'Datos del cliente: Nombre: ', generar_respuesta.nombre, ' ', generar_respuesta.apellido,
+# MAGIC         ', Número de pedidos anteriores: ', CAST(generar_respuesta.num_pedidos AS STRING), '. ',
+# MAGIC         'Producto: ', generar_respuesta.producto, '. ',
+# MAGIC         'Motivo de la insatisfacción: ', generar_respuesta.motivo, '. ',
+# MAGIC         'Genere una respuesta personalizada considerando esta información.'
+# MAGIC     )
+# MAGIC );
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### B. Generar respuestas para todas las opiniones negativas
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE TABLE opiniones_revisadas AS
+# MAGIC SELECT
+# MAGIC   a.id_opinion,
+# MAGIC   a.id_cliente,
+# MAGIC   c.nombre,
+# MAGIC   c.apellido,
+# MAGIC   c.num_pedidos,
+# MAGIC   a.opinion,
+# MAGIC   REVISAR_OPINION(a.opinion) AS resultado
+# MAGIC FROM opiniones a
+# MAGIC JOIN clientes c ON a.id_cliente = c.id_cliente;
+# MAGIC
+# MAGIC SELECT * FROM opiniones_revisadas;
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE TABLE respuestas AS
+# MAGIC SELECT
+# MAGIC   r.id_opinion,
+# MAGIC   r.id_cliente,
+# MAGIC   r.nombre,
+# MAGIC   r.apellido,
+# MAGIC   r.num_pedidos,
+# MAGIC   r.resultado.producto_nombre AS producto_nombre,
+# MAGIC   r.resultado.producto_categoria AS producto_categoria,
+# MAGIC   r.resultado.sentimiento AS sentimiento,
+# MAGIC   r.resultado.motivo AS motivo,
+# MAGIC   CASE
+# MAGIC     WHEN LOWER(r.resultado.sentimiento) = 'negativo' THEN (
+# MAGIC       SELECT * FROM GENERAR_RESPUESTA(
+# MAGIC         r.nombre,
+# MAGIC         r.apellido,
+# MAGIC         r.num_pedidos,
+# MAGIC         r.resultado.producto_nombre,
+# MAGIC         r.resultado.motivo
+# MAGIC       )
+# MAGIC     )
+# MAGIC     ELSE NULL
+# MAGIC   END AS borrador
+# MAGIC FROM opiniones_revisadas r;
+# MAGIC
+# MAGIC SELECT * FROM respuestas;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # ¡Felicidades! 🎉
+# MAGIC
+# MAGIC Completaste el laboratorio de **Creando un Agente** + el **Apéndice de Batch Inference**.
+# MAGIC
+# MAGIC Ahora sabes usar Foundation Models, Playground, herramientas de agente y AI Functions para
+# MAGIC analizar sentimiento, identificar motivos y generar respuestas personalizadas — de forma
+# MAGIC interactiva (agente) y a escala (batch).
+# MAGIC
+# MAGIC ➡️ **Siguiente:** `05 - Lab Agent Bricks`.
