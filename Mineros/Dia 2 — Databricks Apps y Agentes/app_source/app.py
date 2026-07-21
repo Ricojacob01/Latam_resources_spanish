@@ -1,12 +1,16 @@
 """
-Databricks App — Panel de Pedidos + Chatbot Genie
-==================================================
+Databricks App — Panel de Pedidos + Notas + Chatbot Genie
+=========================================================
 App Streamlit que:
   1. Muestra un panel de analítica (solo lectura) sobre las tablas del Día 1.
-  2. Integra el espacio Genie del Día 1 como chatbot.
+  2. Escribe notas de seguimiento (write-back) sobre una tabla propia de la app.
+  3. Integra el espacio Genie del Día 1 como chatbot.
 
 Autenticación: usa el Service Principal de la App (sin tokens hardcodeados).
-Configura las variables en app.yaml (GENIE_SPACE_ID, SQL_HTTP_PATH, CATALOG).
+Configura las variables en app.yaml (GENIE_SPACE_ID, SQL_HTTP_PATH, CATALOG, SCHEMA).
+
+Nota: la app NO modifica las tablas del pipeline (Lakeflow, solo lectura). El
+write-back apunta a `app_notas_clientes`, una tabla propia creada en el notebook.
 """
 
 import os
@@ -26,11 +30,12 @@ GENIE_SPACE_ID = os.getenv("GENIE_SPACE_ID", "")        # ID del espacio Genie (
 
 # Prefijo de esquema totalmente calificado para las consultas
 NS = f"{CATALOG}.{SCHEMA}"
+NOTES_TABLE = f"{NS}.app_notas_clientes"                # tabla de write-back (creada en el notebook)
 
 cfg = Config()  # Resuelve host + credenciales del Service Principal de la App
 st.set_page_config(page_title="Pedidos & Clientes · Genie", layout="wide")
 st.title("📦 Panel de Pedidos y Clientes")
-st.caption("Datos del pipeline Lakeflow (Día 1) · Chatbot con Genie")
+st.caption("Datos del pipeline Lakeflow (Día 1) · Notas · Chatbot con Genie")
 
 
 # -----------------------------------------------------------------------------
@@ -49,6 +54,13 @@ def run_query(query: str, conn) -> pd.DataFrame:
     with conn.cursor() as cursor:
         cursor.execute(query)
         return cursor.fetchall_arrow().to_pandas()
+
+
+def execute(statement: str, conn, params=None) -> None:
+    """Ejecuta una sentencia sin resultado (MERGE/INSERT/UPDATE). Usa parámetros
+    para evitar inyección de SQL con la entrada del usuario."""
+    with conn.cursor() as cursor:
+        cursor.execute(statement, params or {})
 
 
 # -----------------------------------------------------------------------------
@@ -96,6 +108,54 @@ if http_path:
     if not por_ciudad.empty:
         st.bar_chart(por_ciudad.set_index("city")["total_pedidos"])
         st.dataframe(por_ciudad, use_container_width=True)
+
+    # -------------------------------------------------------------------------
+    # Notas de seguimiento (write-back sobre la tabla propia de la app)
+    # -------------------------------------------------------------------------
+    st.markdown("---")
+    st.subheader("📝 Notas de seguimiento del cliente")
+    st.caption(
+        "Escribe sobre `app_notas_clientes` (tabla propia de la app). "
+        "Las tablas del pipeline son de solo lectura."
+    )
+
+    with st.form("form_nota", clear_on_submit=True):
+        col_a, col_b = st.columns([2, 1])
+        f_customer = col_a.text_input("Customer ID", placeholder="Ej.: CUST0001")
+        f_prioridad = col_b.selectbox("Prioridad", ["baja", "media", "alta"], index=1)
+        f_nota = st.text_area("Nota", placeholder="Ej.: Cliente pidió cambio; contactar la próxima semana.")
+        enviado = st.form_submit_button("Guardar nota")
+
+    if enviado:
+        if not f_customer.strip() or not f_nota.strip():
+            st.warning("Ingresa un Customer ID y una nota.")
+        else:
+            # MERGE idempotente (upsert por customer_id). Parámetros → sin inyección de SQL.
+            execute(
+                f"""
+                MERGE INTO {NOTES_TABLE} t
+                USING (SELECT :cid AS customer_id, :nota AS nota,
+                              :prio AS prioridad, current_user() AS autor,
+                              current_timestamp() AS actualizado) s
+                ON t.customer_id = s.customer_id
+                WHEN MATCHED THEN UPDATE SET *
+                WHEN NOT MATCHED THEN INSERT *
+                """,
+                conn,
+                params={"cid": f_customer.strip(), "nota": f_nota.strip(), "prio": f_prioridad},
+            )
+            st.success(f"Nota guardada para {f_customer.strip()}.")
+
+    # Mostrar las notas existentes
+    notas = run_query(
+        f"SELECT customer_id, prioridad, nota, autor, actualizado "
+        f"FROM {NOTES_TABLE} ORDER BY actualizado DESC",
+        conn,
+    )
+    if not notas.empty:
+        st.dataframe(notas, use_container_width=True)
+    else:
+        st.info("Aún no hay notas registradas.")
 
 
 # -----------------------------------------------------------------------------

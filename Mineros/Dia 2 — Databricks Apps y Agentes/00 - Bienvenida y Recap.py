@@ -12,7 +12,7 @@
 # MAGIC
 # MAGIC ## Al terminar el Día 2, sabrás:
 # MAGIC - Qué son las **Databricks Apps** y cuándo usarlas.
-# MAGIC - Construir y **desplegar una App Streamlit** que consume tus datos + **chat de Genie**.
+# MAGIC - Construir y **desplegar una App Streamlit** que lee tus datos, **escribe notas** (write-back) e integra **chat de Genie**.
 # MAGIC - Los fundamentos de **agentes** en Databricks (Foundation Models, herramientas, AI Playground).
 # MAGIC - Crear un agente y un **Knowledge Assistant con Agent Bricks** (UI-first).
 # MAGIC

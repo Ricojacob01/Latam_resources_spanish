@@ -50,7 +50,7 @@ Carpeta: **`Dia 2 — Databricks Apps y Agentes/`**
 |---|----------|----------|----------------|
 | 00 | Bienvenida y Recap | 15 min | Repaso del Día 1 |
 | 01 | Intro a Apps y Genie | 20 min | Conceptos de Databricks Apps |
-| 02 | Lab App Streamlit + Genie | 60 min | Desplegar App que integra Genie |
+| 02 | Lab App Streamlit + Genie | 60 min | App que lee datos, escribe notas (write-back) e integra Genie |
 | 03 | Intro a Agentes | 20 min | De Genie a agentes con herramientas |
 | 04 | Lab Crear un Agente | 50 min | Foundation Models, Playground, tools + Apéndice: Batch Inference (AI Functions) |
 | 05 | Lab Agent Bricks | 20 min | Knowledge Assistant (UI) |
