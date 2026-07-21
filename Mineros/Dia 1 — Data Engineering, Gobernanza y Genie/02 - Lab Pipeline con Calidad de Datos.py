@@ -13,7 +13,12 @@
 -- MAGIC ## Duración: ~50 minutos
 -- MAGIC
 -- MAGIC ## Prerrequisitos
--- MAGIC - Haber ejecutado el cuaderno **0-SETUP.py**
+-- MAGIC - Haber ejecutado el cuaderno **01 - Setup**
+-- MAGIC
+-- MAGIC ## Modelo de nombres (importante)
+-- MAGIC - Catálogo compartido **`academia`** · esquema propio **`<tu_apellido>`**.
+-- MAGIC - La capa medallion se distingue por el **sufijo** de la tabla:
+-- MAGIC   `orders_bronze` → `orders_silver` → `order_summary_gold`.
 
 -- COMMAND ----------
 
@@ -57,17 +62,17 @@
 -- MAGIC
 -- MAGIC ### Nuestro pipeline:
 -- MAGIC
--- MAGIC 1. **Bronze**: `bronze.orders`
+-- MAGIC 1. **Bronze**: `orders_bronze`
 -- MAGIC    - Ingesta archivos JSON sin procesar desde el almacenamiento
 -- MAGIC    - Conserva todos los datos fuente
 -- MAGIC    - Agrega metadatos (hora de procesamiento, archivo de origen)
 -- MAGIC
--- MAGIC 2. **Silver**: `silver.orders_clean`
+-- MAGIC 2. **Silver**: `orders_silver`
 -- MAGIC    - Analiza y valida tipos de datos
 -- MAGIC    - Aplica expectativas de calidad de datos
 -- MAGIC    - Selecciona columnas relevantes
 -- MAGIC
--- MAGIC 3. **Gold**: `gold.order_summary`
+-- MAGIC 3. **Gold**: `order_summary_gold`
 -- MAGIC    - Agregaciones de negocio
 -- MAGIC    - Resúmenes diarios de pedidos
 -- MAGIC    - Listo para analítica/reportes
@@ -89,11 +94,10 @@
 -- MAGIC 1. **Nombre del pipeline**: `SDP Workshop - [tu-usuario]`
 -- MAGIC    - Ejemplo: `SDP Workshop - john_doe`
 -- MAGIC
--- MAGIC 2. **Catálogo predeterminado**: Tu catálogo
--- MAGIC    - Fue creado por el cuaderno de setup
--- MAGIC    - Formato `sdp_workshop_john_doe`
+-- MAGIC 2. **Catálogo predeterminado (Default catalog)**: `academia` (compartido)
 -- MAGIC
--- MAGIC 3. **Esquema predeterminado**: `bronze`
+-- MAGIC 3. **Esquema predeterminado (Default schema)**: tu esquema `<tu_apellido>`
+-- MAGIC    - Fue creado por el cuaderno de setup (p. ej. `john_doe`)
 -- MAGIC
 -- MAGIC 4. **Opción de creación**: Selecciona **"Add existing assets"**
 -- MAGIC    - Pipeline root folder: selecciona la carpeta que importaste **Build Data Pipelines with Lakeflow Spark Declarative Pipeline**
@@ -165,8 +169,8 @@
 -- MAGIC
 -- MAGIC ### Paso 4: Confirmar ubicación predeterminada
 -- MAGIC
--- MAGIC - **Default catalog**: Tu catálogo
--- MAGIC - **Default schema**: `bronze`
+-- MAGIC - **Default catalog**: `academia`
+-- MAGIC - **Default schema**: tu esquema `<tu_apellido>`
 -- MAGIC - Determinan dónde se crean tablas si no se especifica
 -- MAGIC
 -- MAGIC ### Paso 5: Configurar cómputo
@@ -182,9 +186,9 @@
 -- MAGIC 1. En **Configuration**, haz clic en **Add configuration**
 -- MAGIC 2. **Key**: `source`
 -- MAGIC 3. **Value**: Tu ruta de volumen del setup
--- MAGIC    - Formato: `/Volumes/{tu-catalogo}/default/raw`
--- MAGIC    - Ejemplo: `/Volumes/sdp_workshop_john_doe/default/raw`
--- MAGIC    - Si no recuerdas: Revisa la salida de 0-SETUP
+-- MAGIC    - Formato: `/Volumes/academia/{tu_apellido}/raw`
+-- MAGIC    - Ejemplo: `/Volumes/academia/john_doe/raw`
+-- MAGIC    - Si no recuerdas: Revisa la salida de `01 - Setup`
 -- MAGIC 4. Haz clic en **Save**
 -- MAGIC
 -- MAGIC ### Paso 7: Guardar ajustes
@@ -204,7 +208,7 @@
 -- MAGIC ### Capa Bronze - Ingesta Raw
 -- MAGIC
 -- MAGIC ```sql
--- MAGIC CREATE OR REFRESH STREAMING TABLE bronze.orders
+-- MAGIC CREATE OR REFRESH STREAMING TABLE orders_bronze
 -- MAGIC   COMMENT "Datos de pedidos sin procesar ingeridos desde archivos JSON"
 -- MAGIC   TBLPROPERTIES ("pipelines.reset.allowed" = false)
 -- MAGIC AS 
@@ -223,12 +227,12 @@
 -- MAGIC ### Capa Silver - Datos limpios
 -- MAGIC
 -- MAGIC ```sql
--- MAGIC CREATE OR REFRESH STREAMING TABLE silver.orders_clean
+-- MAGIC CREATE OR REFRESH STREAMING TABLE orders_silver
 -- MAGIC   (
 -- MAGIC     CONSTRAINT valid_order_id EXPECT (order_id IS NOT NULL) ON VIOLATION FAIL UPDATE,
 -- MAGIC     CONSTRAINT valid_timestamp EXPECT (order_timestamp > "2020-01-01")
 -- MAGIC   )
--- MAGIC AS SELECT ... FROM STREAM bronze.orders;
+-- MAGIC AS SELECT ... FROM STREAM orders_bronze;
 -- MAGIC ```
 -- MAGIC
 -- MAGIC **Conceptos clave**:
@@ -239,9 +243,9 @@
 -- MAGIC ### Capa Gold - Lógica de negocio
 -- MAGIC
 -- MAGIC ```sql
--- MAGIC CREATE OR REFRESH MATERIALIZED VIEW gold.orders_summary
+-- MAGIC CREATE OR REFRESH MATERIALIZED VIEW order_summary_gold
 -- MAGIC AS SELECT date(order_timestamp) AS order_date, count(*) AS total_daily_orders
--- MAGIC FROM silver.orders_clean
+-- MAGIC FROM orders_silver
 -- MAGIC GROUP BY date(order_timestamp);
 -- MAGIC ```
 -- MAGIC
@@ -269,7 +273,7 @@
 -- MAGIC Tras completar:
 -- MAGIC
 -- MAGIC 1. **Pipeline Graph** (panel derecho):
--- MAGIC    - Debe mostrar 3 nodos: `orders` → `orders_clean` → `orders_summary`
+-- MAGIC    - Debe mostrar 3 nodos: `orders_bronze` → `orders_silver` → `order_summary_gold`
 -- MAGIC    - Flechas muestran el flujo
 -- MAGIC    - No deben aparecer errores
 -- MAGIC
@@ -303,13 +307,13 @@
 -- MAGIC
 -- MAGIC El nuevo IDE facilita construir y probar iterativamente. En lugar de ejecutar todo el pipeline, puedes ejecutar solo una tabla.
 -- MAGIC
--- MAGIC 1. Haz clic en `dataset actions`(▶️) arriba de `CREATE OR REFRESH STREAMING TABLE bronze.orders`
--- MAGIC 2. Selecciona **Run table** `sdp_workshop_{your_name}.bronze.orders`
+-- MAGIC 1. Haz clic en `dataset actions`(▶️) arriba de `CREATE OR REFRESH STREAMING TABLE orders_bronze`
+-- MAGIC 2. Selecciona **Run table** `academia.{tu_apellido}.orders_bronze`
 -- MAGIC 2. En el Pipeline Graph verás solo la tabla de pedidos ejecutada
 -- MAGIC
 -- MAGIC Tras completar, deberías ver:
 -- MAGIC
--- MAGIC - **orders** (bronze): 174 filas
+-- MAGIC - **orders_bronze**: 174 filas
 -- MAGIC   - Se procesó un archivo JSON (00.json)
 -- MAGIC   - Todos los datos raw preservados
 
@@ -337,11 +341,11 @@
 -- MAGIC
 -- MAGIC ### Paso 3: Resultados esperados (primer run)
 -- MAGIC
--- MAGIC - **orders_clean** (silver): 174 filas
+-- MAGIC - **orders_silver**: 174 filas
 -- MAGIC   - Mismo conteo (validación pasó)
 -- MAGIC   - Se cumplieron los constraints
 -- MAGIC
--- MAGIC - **order_summary** (gold): ~30 filas
+-- MAGIC - **order_summary_gold**: ~30 filas
 -- MAGIC   - Agregado por fecha
 -- MAGIC   - ~30 fechas únicas en los datos
 
@@ -354,7 +358,7 @@
 -- MAGIC
 -- MAGIC ### Paso 1: Calidad de datos
 -- MAGIC
--- MAGIC 1. Clic en **orders_clean**
+-- MAGIC 1. Clic en **orders_silver**
 -- MAGIC 2. Busca la sección **Expectations**
 -- MAGIC 3. Deberías ver:
 -- MAGIC    - **valid_order_id**: 174 cumplidas (0 violaciones)
@@ -363,7 +367,7 @@
 -- MAGIC
 -- MAGIC ### Paso 2: Ver datos agregados
 -- MAGIC
--- MAGIC 1. Clic en **order_summary**
+-- MAGIC 1. Clic en **order_summary_gold**
 -- MAGIC 2. En la pestaña **Data** verás:
 -- MAGIC    - `order_date`: La fecha
 -- MAGIC    - `total_daily_orders`: Conteo por fecha
@@ -418,7 +422,7 @@
 -- MAGIC # Limpiar username para nombres (remover caracteres especiales)
 -- MAGIC clean_username = re.sub(r'[^a-z0-9]', '_', username.lower())
 -- MAGIC
--- MAGIC working_dir = f'/Volumes/sdp_workshop_{clean_username}/default/raw'
+-- MAGIC working_dir = f'/Volumes/academia/{clean_username}/raw'
 -- MAGIC
 -- MAGIC result = add_orders_file(spark, working_dir, file_number=1, num_orders=25)
 -- MAGIC print(result)
@@ -458,43 +462,43 @@
 -- MAGIC current_user = spark.sql("SELECT current_user()").collect()[0][0]
 -- MAGIC username = current_user.split("@")[0]
 -- MAGIC clean_username = re.sub(r'[^a-z0-9]', '_', username.lower())
--- MAGIC catalog_name = f"sdp_workshop_{clean_username}"
 -- MAGIC
--- MAGIC # Usar como catálogo por defecto
--- MAGIC spark.sql(f"USE CATALOG {catalog_name}")
--- MAGIC print(f"✓ Usando catálogo: {catalog_name}")
--- MAGIC print("  Todas las consultas SQL usarán este catálogo automáticamente")
+-- MAGIC # Catálogo compartido + tu esquema como contexto por defecto
+-- MAGIC spark.sql("USE CATALOG academia")
+-- MAGIC spark.sql(f"USE SCHEMA {clean_username}")
+-- MAGIC print(f"✓ Contexto: academia.{clean_username}")
+-- MAGIC print("  Todas las consultas SQL sin prefijo usarán este esquema automáticamente")
 
 -- COMMAND ----------
 
 -- Consultar la tabla bronze
-SELECT * FROM bronze.orders LIMIT 10;
+SELECT * FROM orders_bronze LIMIT 10;
 
 -- COMMAND ----------
 
 -- Consultar la tabla silver
-SELECT order_id, order_timestamp, customer_id 
-FROM silver.orders_clean 
+SELECT order_id, order_timestamp, customer_id
+FROM orders_silver
 ORDER BY order_timestamp DESC
 LIMIT 10;
 
 -- COMMAND ----------
 
 -- Consultar la agregación gold
-SELECT * FROM gold.order_summary 
+SELECT * FROM order_summary_gold
 ORDER BY order_date;
 
 -- COMMAND ----------
 
 -- Verificar conteos totales
-SELECT 
-  'orders' AS table_name, COUNT(*) AS row_count FROM bronze.orders
+SELECT
+  'orders_bronze' AS table_name, COUNT(*) AS row_count FROM orders_bronze
 UNION ALL
-SELECT 
-  'orders_clean' AS table_name, COUNT(*) AS row_count FROM silver.orders_clean
+SELECT
+  'orders_silver' AS table_name, COUNT(*) AS row_count FROM orders_silver
 UNION ALL
-SELECT 
-  'order_summary' AS table_name, COUNT(*) AS row_count FROM gold.order_summary;
+SELECT
+  'order_summary_gold' AS table_name, COUNT(*) AS row_count FROM order_summary_gold;
 
 -- COMMAND ----------
 

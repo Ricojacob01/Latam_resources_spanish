@@ -21,7 +21,7 @@ y agentes de IA. Todo el material está en **español** y usa un **único caso d
   BI Dashboard + Genie  ─────────────────────▶ (se reutiliza en la App del Día 2)
 ```
 
-El mismo catálogo `sdp_workshop_<usuario>` y sus tablas Gold conectan ambos días.
+El mismo esquema `academia.<tu_apellido>` y sus tablas Gold conectan ambos días.
 
 ---
 
@@ -32,7 +32,7 @@ Carpeta: **`Dia 1 — Data Engineering, Gobernanza y Genie/`**
 | # | Notebook | Duración | Qué se aprende |
 |---|----------|----------|----------------|
 | 00 | Bienvenida y Agenda | 15 min | Contexto y caso de negocio |
-| 01 | Setup | 15 min | Catálogo, esquemas, volumen, datos de ejemplo |
+| 01 | Setup | 15 min | Tu esquema en `academia`, volumen raw, datos de ejemplo |
 | 02 | Lab Pipeline con Calidad de Datos | 45 min | Medallion, Auto Loader, expectativas |
 | 03 | Lab CDC y Producción | 50 min | AUTO CDC, SCD1, scheduling |
 | 04 | Gobernanza (Unity Catalog) | 30 min | Permisos, linaje, seguridad |
@@ -72,7 +72,7 @@ Recursos compartidos: **`_recursos/`** (datos de agentes, imágenes, utilidades)
 
 ## 🔑 Datos que el participante debe anotar al final del Día 1
 
-1. **Catálogo:** `sdp_workshop_<usuario>` (se deriva del usuario automáticamente).
+1. **Catálogo/esquema:** `academia.<tu_apellido>` (el esquema se deriva del usuario automáticamente).
 2. **Genie Space ID** (de la Lección 6).
 3. **HTTP Path** del SQL Warehouse.
 
@@ -82,7 +82,7 @@ Estos tres valores se usan en la App del Día 2 (`app_source/app.yaml`).
 
 ## 🗂️ Notas de diseño
 
-- **Aislamiento por usuario:** cada participante trabaja en su propio catálogo `sdp_workshop_<usuario>`.
+- **Aislamiento por usuario:** catálogo compartido `academia`, cada participante en su propio esquema `academia.<tu_apellido>`; la capa medallion se distingue por el sufijo de tabla (`_bronze`/`_silver`/`_gold`).
 - **Genie y App sobre el mismo dataset:** la App del Día 2 consume las tablas Gold del Día 1
   (pedidos/clientes). Es **solo lectura** porque las tablas las gestiona el pipeline
   (streaming tables / materialized views); el patrón de escritura se muestra en el

@@ -9,7 +9,7 @@
 # MAGIC **Referencia:** databricks-apps-cookbook — https://github.com/databricks-solutions/databricks-apps-cookbook
 # MAGIC
 # MAGIC **Prerrequisitos:**
-# MAGIC - Día 1 completo (tablas `silver.orders_clean`, `silver.customers`, `gold.order_summary`).
+# MAGIC - Día 1 completo (tablas `orders_silver`, `customers_silver`, `order_summary_gold` en `academia.<tu_apellido>`).
 # MAGIC - Un espacio Genie creado (Día 1, Lección 6) — necesitas su **Genie Space ID**.
 # MAGIC - Un **SQL Warehouse** (anota su *HTTP Path*).
 # MAGIC
@@ -28,10 +28,12 @@ import re
 current_user = spark.sql("SELECT current_user()").collect()[0][0]
 clean_username = re.sub(r'[^a-z0-9]', '_', current_user.split("@")[0].lower())
 
-CATALOGO = f"sdp_workshop_{clean_username}"
-spark.sql(f"USE CATALOG `{CATALOGO}`")
-print(f"Catálogo: {CATALOGO}")
-print(f"Tablas: {CATALOGO}.silver.orders_clean · {CATALOGO}.silver.customers · {CATALOGO}.gold.order_summary")
+CATALOGO = "academia"           # catálogo compartido
+ESQUEMA = clean_username         # tu esquema (Día 1)
+spark.sql(f"USE CATALOG {CATALOGO}")
+spark.sql(f"USE SCHEMA {ESQUEMA}")
+print(f"Catálogo/Esquema: {CATALOGO}.{ESQUEMA}")
+print(f"Tablas: orders_silver · customers_silver · order_summary_gold")
 
 # COMMAND ----------
 
@@ -42,15 +44,15 @@ print(f"Tablas: {CATALOGO}.silver.orders_clean · {CATALOGO}.silver.customers ·
 # COMMAND ----------
 
 # Vista de pedidos por día (para la gráfica de tendencia)
-display(spark.sql("SELECT order_date, total_daily_orders, unique_customers FROM gold.order_summary ORDER BY order_date"))
+display(spark.sql("SELECT order_date, total_daily_orders, unique_customers FROM order_summary_gold ORDER BY order_date"))
 
 # COMMAND ----------
 
 # Pedidos por ciudad (JOIN pedidos ↔ clientes) — para la tabla y el gráfico de barras
 display(spark.sql("""
   SELECT c.city, COUNT(o.order_id) AS total_pedidos, COUNT(DISTINCT o.customer_id) AS clientes_unicos
-  FROM silver.orders_clean o
-  JOIN silver.customers c ON o.customer_id = c.customer_id
+  FROM orders_silver o
+  JOIN customers_silver c ON o.customer_id = c.customer_id
   GROUP BY c.city
   ORDER BY total_pedidos DESC
 """))
@@ -80,7 +82,8 @@ display(spark.sql("""
 # MAGIC 1. **Edita `app_source/app.yaml`** y define tus variables (o pásalas como *App resources*):
 # MAGIC    - `GENIE_SPACE_ID` — el ID del espacio Genie del Día 1.
 # MAGIC    - `SQL_HTTP_PATH` — el HTTP Path de tu SQL Warehouse.
-# MAGIC    - `CATALOG` — tu `sdp_workshop_<usuario>`.
+# MAGIC    - `CATALOG` — `academia` (compartido).
+# MAGIC    - `SCHEMA` — tu esquema `<tu_apellido>`.
 # MAGIC 2. **Crea la App** (UI): *Compute → Apps → Create App → Custom*, o por CLI:
 # MAGIC    ```bash
 # MAGIC    databricks apps create pedidos-genie-<apellido>
@@ -89,7 +92,7 @@ display(spark.sql("""
 # MAGIC        --source-code-path /Workspace/Users/<tu_usuario>/pedidos-genie/app_source
 # MAGIC    ```
 # MAGIC 3. **Permisos:** dale al *Service Principal* de la App acceso `CAN USE` al SQL Warehouse,
-# MAGIC    `CAN RUN` al espacio Genie, y `SELECT` sobre el catálogo `sdp_workshop_<usuario>`.
+# MAGIC    `CAN RUN` al espacio Genie, y `SELECT` sobre tu esquema `academia.<tu_apellido>`.
 # MAGIC 4. Abre la URL de la App y prueba el panel + el chat de Genie.
 
 # COMMAND ----------

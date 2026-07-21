@@ -5,30 +5,30 @@ Este ejercicio amplía el dashboard de KPIs para:
 - Habilitar interacciones de drill‑down (detalle al hacer clic en una fecha o barra).
 - Activar Genie para preguntas en lenguaje natural.
 
-Tablas usadas:
-- `${silver}.orders_clean` (obligatoria)
-- `${gold}.order_summary` (obligatoria)
-- `${silver}.customers` (opcional, si completaste Lección 2)
+Tablas usadas (catálogo compartido `academia`, tu esquema `<tu_apellido>`):
+- `orders_silver` (obligatoria)
+- `order_summary_gold` (obligatoria)
+- `customers_silver` (opcional, si completaste la Lección 3)
 
-## 1) Catálogo y variables
-En un cuaderno SQL:
+## 1) Catálogo y esquema
+En un cuaderno SQL, fija tu contexto una sola vez:
 ```sql
-USE CATALOG ${catalog};  -- o USE CATALOG <tu_catalogo>
-SET bronze = 'sdp_workshop_${clean_username}_bronze';
-SET silver = 'sdp_workshop_${clean_username}_silver';
-SET gold   = 'sdp_workshop_${clean_username}_gold';
+USE CATALOG academia;
+USE SCHEMA <tu_apellido>;   -- el mismo esquema que creaste en el Setup
 ```
+Con esto puedes referirte a las tablas por su nombre corto (`orders_silver`,
+`order_summary_gold`, `customers_silver`) sin prefijo de esquema.
 
 ## 2) Consultas base y de detalle
 En este directorio encontrarás `kpis.sql` con:
 - KPIs de pedidos (total, tendencia, promedio).
 - Consultas de detalle por fecha (para tabla drill‑down).
-- (Opcional) Métricas por ciudad si existe `${silver}.customers`.
+- (Opcional) Métricas por ciudad si existe `customers_silver`.
 
 Importante para filtros y drill‑down:
 - Asegúrate de que las consultas expongan campos de filtro con nombres consistentes:
-  - `order_date` para fechas (desde `${gold}.order_summary` o calculado con `date(order_timestamp)`).
-  - `city` (si usas la unión con `${silver}.customers`).
+  - `order_date` para fechas (desde `order_summary_gold` o calculado con `date(order_timestamp)`).
+  - `city` (si usas la unión con `customers_silver`).
 
 ## 3) Crear el dashboard en DBSQL
 1. Entra en la vista SQL (DBSQL) y usa un SQL Warehouse.
@@ -72,9 +72,9 @@ Opcional (drill‑through a otro dashboard):
    - “Lista de pedidos del 2024‑01‑05.”
 
 ## 7) Métricas adicionales (ideas)
-- Máximo/mínimo de `pedidos_diarios`.
+- Máximo/mínimo de `pedidos_diarios` (desde `order_summary_gold`).
 - Variación semana a semana.
-- (CDC) clientes “activos” por ciudad o tendencia de clientes.
+- (CDC) clientes “activos” por ciudad o tendencia de clientes (`customers_silver`).
 
 ## Archivos
 - `kpis.sql`: consultas con campos `order_date` (y `city` opcional) para filtros y drill‑down.

@@ -141,8 +141,14 @@
 
 -- COMMAND ----------
 
-USE CATALOG ardemo_classic_dnubtw_catalog;
-USE SCHEMA sdp_workshop_rico_martinez_bronze;
+-- MAGIC %python
+-- MAGIC # Catálogo compartido + tu esquema (mismo que en el Setup)
+-- MAGIC import re
+-- MAGIC current_user = spark.sql("SELECT current_user()").collect()[0][0]
+-- MAGIC clean_username = re.sub(r'[^a-z0-9]', '_', current_user.split("@")[0].lower())
+-- MAGIC spark.sql("USE CATALOG academia")
+-- MAGIC spark.sql(f"USE SCHEMA {clean_username}")
+-- MAGIC print(f"✓ Contexto: academia.{clean_username}")
 
 -- COMMAND ----------
 

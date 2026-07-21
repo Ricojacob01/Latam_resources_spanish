@@ -9,6 +9,9 @@
 -- - Operaciones INSERT (nuevos clientes)
 -- - Operaciones UPDATE (cambios de clientes)
 -- - Operaciones DELETE (eliminaciones de clientes)
+--
+-- MODELO DE NOMBRES: catálogo por defecto = academia, esquema por defecto = <tu_apellido>.
+-- Las tablas se nombran SIN esquema y usan sufijos de capa (_raw/_clean/_silver/_gold).
 -------------------------------------------------------
 
 -------------------------------------------------------
@@ -18,7 +21,7 @@
 -- Cada registro contiene: campos + tipo de operación
 -------------------------------------------------------
 
-CREATE OR REFRESH STREAMING TABLE bronze.customers_raw
+CREATE OR REFRESH STREAMING TABLE customers_raw
   COMMENT "Eventos CDC raw para datos de clientes"
   TBLPROPERTIES (
     "quality" = "bronze",
@@ -41,7 +44,7 @@ FROM STREAM read_files(
 -- Transformar timestamp para secuenciamiento correcto
 -------------------------------------------------------
 
-CREATE OR REFRESH STREAMING TABLE bronze.customers_clean
+CREATE OR REFRESH STREAMING TABLE customers_clean
   (
     -- Validaciones críticas - fallar la actualización si se violan
     CONSTRAINT valid_id EXPECT (customer_id IS NOT NULL) ON VIOLATION FAIL UPDATE,
@@ -70,7 +73,7 @@ SELECT
   *,
   -- Convertir Unix timestamp a timestamp para secuenciar
   CAST(from_unixtime(timestamp) AS timestamp) AS timestamp_datetime
-FROM STREAM bronze.customers_raw;
+FROM STREAM customers_raw;
 
 -------------------------------------------------------
 -- CAPA SILVER: Aplicar CDC con AUTO CDC INTO
@@ -79,7 +82,7 @@ FROM STREAM bronze.customers_raw;
 -- Será actualizada automáticamente por el flujo CDC
 -------------------------------------------------------
 
-CREATE OR REFRESH STREAMING TABLE silver.customers
+CREATE OR REFRESH STREAMING TABLE customers_silver
   COMMENT "Estado actual de clientes (SCD Tipo 1)";
 
 -------------------------------------------------------
@@ -91,9 +94,9 @@ CREATE OR REFRESH STREAMING TABLE silver.customers
 -- - DELETE: Elimina clientes en la tabla destino
 -------------------------------------------------------
 
-CREATE FLOW customers_cdc_flow AS 
-AUTO CDC INTO silver.customers                 -- Tabla destino a mantener
-FROM STREAM bronze.customers_clean             -- Eventos CDC origen
+CREATE FLOW customers_cdc_flow AS
+AUTO CDC INTO customers_silver                 -- Tabla destino a mantener
+FROM STREAM customers_clean                    -- Eventos CDC origen
   KEYS (customer_id)                           -- Clave primaria para hacer match
   APPLY AS DELETE WHEN operation = 'DELETE'    -- Manejar eliminaciones
   SEQUENCE BY timestamp_datetime               -- Orden de operaciones
@@ -107,7 +110,7 @@ FROM STREAM bronze.customers_clean             -- Eventos CDC origen
 -- Crear vistas de negocio desde el estado actual
 -------------------------------------------------------
 
-CREATE OR REFRESH MATERIALIZED VIEW gold.customer_summary
+CREATE OR REFRESH MATERIALIZED VIEW customer_summary_gold
   COMMENT "Resumen de clientes con métricas derivadas"
   TBLPROPERTIES ("quality" = "gold")
 AS 
@@ -118,7 +121,7 @@ SELECT
   city,
   -- Aquí pueden agregarse joins con pedidos/estatus si es necesario
   current_timestamp() AS last_refreshed
-FROM silver.customers;
+FROM customers_silver;
 
 -------------------------------------------------------
 -- CONCEPTOS CLAVE: AUTO CDC INTO
@@ -181,12 +184,12 @@ FROM silver.customers;
 -------------------------------------------------------
 -- Si quieres rastrear histórico, crea un flujo separado:
 --
--- CREATE OR REFRESH STREAMING TABLE 2_silver_db.customers_history
+-- CREATE OR REFRESH STREAMING TABLE customers_history_silver
 --   COMMENT "Histórico de clientes (SCD Tipo 2)";
 --
--- CREATE FLOW customers_cdc_flow_scd2 AS 
--- AUTO CDC INTO 2_silver_db.customers_history
--- FROM STREAM bronze.customers_clean
+-- CREATE FLOW customers_cdc_flow_scd2 AS
+-- AUTO CDC INTO customers_history_silver
+-- FROM STREAM customers_clean
 --   KEYS (customer_id)
 --   APPLY AS DELETE WHEN operation = 'DELETE'
 --   SEQUENCE BY timestamp_datetime

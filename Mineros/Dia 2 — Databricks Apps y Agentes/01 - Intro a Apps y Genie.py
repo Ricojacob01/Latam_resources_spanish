@@ -36,16 +36,18 @@ import re
 
 current_user = spark.sql("SELECT current_user()").collect()[0][0]
 clean_username = re.sub(r'[^a-z0-9]', '_', current_user.split("@")[0].lower())
-CATALOGO = f"sdp_workshop_{clean_username}"
+CATALOGO = "academia"
+ESQUEMA = clean_username
 
 try:
-    spark.sql(f"USE CATALOG `{CATALOGO}`")
-    tablas = [r["tableName"] for r in spark.sql("SHOW TABLES IN silver").collect()]
-    print(f"✓ Catálogo: {CATALOGO}")
-    print(f"✓ Tablas en silver: {tablas}")
+    spark.sql(f"USE CATALOG {CATALOGO}")
+    spark.sql(f"USE SCHEMA {ESQUEMA}")
+    tablas = [r["tableName"] for r in spark.sql(f"SHOW TABLES IN {CATALOGO}.{ESQUEMA}").collect()]
+    print(f"✓ Contexto: {CATALOGO}.{ESQUEMA}")
+    print(f"✓ Tablas: {tablas}")
     print("\nListo para la Lección 2 (construir la App).")
 except Exception as e:
-    print(f"⚠️  No encuentro tu catálogo del Día 1 ({CATALOGO}).")
+    print(f"⚠️  No encuentro tu esquema del Día 1 ({CATALOGO}.{ESQUEMA}).")
     print("   Ejecuta primero el Día 1 (Setup + pipeline). Detalle:", e)
 
 # COMMAND ----------

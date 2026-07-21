@@ -8,7 +8,7 @@
 # MAGIC
 # MAGIC **Objetivos:**
 # MAGIC - Crear un espacio Genie desde la UI (recomendado).
-# MAGIC - Conectarlo a las tablas `silver.orders_clean`, `silver.customers` y `gold.order_summary`.
+# MAGIC - Conectarlo a las tablas `orders_silver`, `customers_silver` y `order_summary_gold`.
 # MAGIC - Definir buenas *instructions* para respuestas en español y precisas.
 # MAGIC - Probar preguntas, JOINs, benchmarks y calificación de respuestas.
 # MAGIC
@@ -29,15 +29,17 @@ import re
 current_user = spark.sql("SELECT current_user()").collect()[0][0]
 clean_username = re.sub(r'[^a-z0-9]', '_', current_user.split("@")[0].lower())
 
-CATALOGO = f"sdp_workshop_{clean_username}"
-spark.sql(f"USE CATALOG `{CATALOGO}`")
+CATALOGO = "academia"           # catálogo compartido
+ESQUEMA = clean_username         # tu esquema
+spark.sql(f"USE CATALOG {CATALOGO}")
+spark.sql(f"USE SCHEMA {ESQUEMA}")
 
-print(f"Catálogo: {CATALOGO}")
+print(f"Catálogo: {CATALOGO}  ·  Esquema: {ESQUEMA}")
 print("Tablas que usará Genie:")
-print(f"  - {CATALOGO}.silver.orders_clean")
-print(f"  - {CATALOGO}.silver.customers")
-print(f"  - {CATALOGO}.gold.order_summary")
-print(f"  - {CATALOGO}.gold.customer_summary  (opcional)")
+print(f"  - {CATALOGO}.{ESQUEMA}.orders_silver")
+print(f"  - {CATALOGO}.{ESQUEMA}.customers_silver")
+print(f"  - {CATALOGO}.{ESQUEMA}.order_summary_gold")
+print(f"  - {CATALOGO}.{ESQUEMA}.customer_summary_gold  (opcional)")
 
 # COMMAND ----------
 
@@ -45,15 +47,15 @@ print(f"  - {CATALOGO}.gold.customer_summary  (opcional)")
 # MAGIC ## A. Crear el espacio Genie desde la UI (recomendado)
 # MAGIC 1. En el menú lateral, abre **Genie** (sección *SQL* / *AI*).
 # MAGIC 2. **New space** y ponle un nombre: `Genie Pedidos y Clientes - <TuApellido>`.
-# MAGIC 3. **Fuente de datos:** selecciona tu catálogo `sdp_workshop_<usuario>` y agrega estas tablas:
-# MAGIC    - `silver.orders_clean`
-# MAGIC    - `silver.customers`
-# MAGIC    - `gold.order_summary`
+# MAGIC 3. **Fuente de datos:** selecciona el catálogo `academia` → tu esquema `<tu_apellido>` y agrega estas tablas:
+# MAGIC    - `orders_silver`
+# MAGIC    - `customers_silver`
+# MAGIC    - `order_summary_gold`
 # MAGIC 4. **General instructions** sugeridas (cópialas):
 # MAGIC    - "Responde siempre en español."
-# MAGIC    - "El negocio es retail: `orders_clean` son pedidos y `customers` son clientes."
+# MAGIC    - "El negocio es retail: `orders_silver` son pedidos y `customers_silver` son clientes."
 # MAGIC    - "Une pedidos con clientes usando la columna `customer_id`."
-# MAGIC    - "`order_summary` ya está agregada por día (`order_date`); úsala para tendencias."
+# MAGIC    - "`order_summary_gold` ya está agregada por día (`order_date`); úsala para tendencias."
 # MAGIC    - "Si la pregunta es ambigua, pide una aclaración y sugiere filtros (fecha, ciudad, estado)."
 # MAGIC    - "Cuando aporte valor, sugiere una visualización (barras/series) y limita los resultados."
 # MAGIC 5. **Guarda** y prueba una primera pregunta.
@@ -65,8 +67,8 @@ print(f"  - {CATALOGO}.gold.customer_summary  (opcional)")
 # MAGIC Genie genera mejores consultas cuando conoce las relaciones. En las *instructions* del
 # MAGIC espacio, agrega explícitamente:
 # MAGIC
-# MAGIC - "`orders_clean.customer_id` se une con `customers.customer_id`."
-# MAGIC - "Para análisis geográfico de pedidos, une `orders_clean` con `customers` y agrupa por `city` o `state`."
+# MAGIC - "`orders_silver.customer_id` se une con `customers_silver.customer_id`."
+# MAGIC - "Para análisis geográfico de pedidos, une `orders_silver` con `customers_silver` y agrupa por `city` o `state`."
 # MAGIC
 # MAGIC La siguiente celda valida que el JOIN funciona (úsala tú, no Genie):
 
@@ -81,8 +83,8 @@ print(f"  - {CATALOGO}.gold.customer_summary  (opcional)")
 # MAGIC   c.name,
 # MAGIC   c.city,
 # MAGIC   c.state
-# MAGIC FROM silver.orders_clean o
-# MAGIC INNER JOIN silver.customers c
+# MAGIC FROM orders_silver o
+# MAGIC INNER JOIN customers_silver c
 # MAGIC   ON o.customer_id = c.customer_id
 # MAGIC LIMIT 20;
 
@@ -113,8 +115,8 @@ print(f"  - {CATALOGO}.gold.customer_summary  (opcional)")
 # MAGIC   c.city,
 # MAGIC   COUNT(o.order_id) AS total_pedidos,
 # MAGIC   COUNT(DISTINCT o.customer_id) AS clientes_unicos
-# MAGIC FROM silver.orders_clean o
-# MAGIC JOIN silver.customers c
+# MAGIC FROM orders_silver o
+# MAGIC JOIN customers_silver c
 # MAGIC   ON o.customer_id = c.customer_id
 # MAGIC GROUP BY c.city
 # MAGIC ORDER BY total_pedidos DESC
@@ -130,7 +132,7 @@ print(f"  - {CATALOGO}.gold.customer_summary  (opcional)")
 # MAGIC   total_daily_orders,
 # MAGIC   unique_customers,
 # MAGIC   RANK() OVER (ORDER BY total_daily_orders DESC) AS ranking_dia
-# MAGIC FROM gold.order_summary
+# MAGIC FROM order_summary_gold
 # MAGIC ORDER BY order_date;
 
 # COMMAND ----------
@@ -142,11 +144,11 @@ print(f"  - {CATALOGO}.gold.customer_summary  (opcional)")
 # MAGIC
 # MAGIC | # | Pregunta | Ground Truth (esperado) |
 # MAGIC |---|----------|--------------------------|
-# MAGIC | 1 | Total de pedidos | `SELECT COUNT(*) FROM silver.orders_clean` |
-# MAGIC | 2 | Pedidos por día | `SELECT order_date, total_daily_orders FROM gold.order_summary ORDER BY order_date` |
+# MAGIC | 1 | Total de pedidos | `SELECT COUNT(*) FROM orders_silver` |
+# MAGIC | 2 | Pedidos por día | `SELECT order_date, total_daily_orders FROM order_summary_gold ORDER BY order_date` |
 # MAGIC | 3 | Top 5 ciudades por pedidos | JOIN orders↔customers, GROUP BY city, ORDER BY count DESC LIMIT 5 |
-# MAGIC | 4 | Clientes únicos por estado | `SELECT state, COUNT(DISTINCT customer_id) FROM customers GROUP BY state` |
-# MAGIC | 5 | Día pico de pedidos | `SELECT order_date FROM gold.order_summary ORDER BY total_daily_orders DESC LIMIT 1` |
+# MAGIC | 4 | Clientes únicos por estado | `SELECT state, COUNT(DISTINCT customer_id) FROM customers_silver GROUP BY state` |
+# MAGIC | 5 | Día pico de pedidos | `SELECT order_date FROM order_summary_gold ORDER BY total_daily_orders DESC LIMIT 1` |
 # MAGIC
 # MAGIC Criterios de aceptación: columnas y tipos razonables, filtros correctos, orden/agrupación coherente, y que sugiera gráfico cuando aplique.
 
