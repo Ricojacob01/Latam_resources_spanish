@@ -38,11 +38,26 @@
 # MAGIC %md
 # MAGIC # Configuración del ambiente
 # MAGIC
-# MAGIC Vamos a comenzar seleccionando el catálogo y esquema donde se encuentran nuestros datos
+# MAGIC Trabajamos en el catálogo compartido `academia` y en **tu propio esquema** `academia.<tu_apellido>`
+# MAGIC — el mismo del Día 1 y del Lab 01 (donde cargaste `opiniones`, `clientes`, `productos`).
+# MAGIC
+# MAGIC La siguiente celda fija tu contexto y guarda el nombre del esquema para reutilizarlo.
 
 # COMMAND ----------
 
-# MAGIC %sql USE academia.ia
+import re
+
+current_user = spark.sql("SELECT current_user()").collect()[0][0]
+clean_username = re.sub(r'[^a-z0-9]', '_', current_user.split("@")[0].lower())
+
+CATALOGO = "academia"
+ESQUEMA = clean_username        # tu esquema (p. ej. john_doe)
+NS = f"{CATALOGO}.{ESQUEMA}"    # namespace completo para nombres calificados (índice VS, recursos MLflow)
+
+spark.sql(f"USE CATALOG {CATALOGO}")
+spark.sql(f"USE SCHEMA {ESQUEMA}")
+print(f"✓ Contexto: {NS}")
+print("  Las funciones y consultas SQL sin prefijo usarán este esquema automáticamente.")
 
 # COMMAND ----------
 
@@ -185,7 +200,7 @@
 # MAGIC %sql CREATE OR REPLACE FUNCTION consultar_cliente(id BIGINT)
 # MAGIC RETURNS TABLE (id_cliente BIGINT, nombre STRING, apellido STRING, num_pedidos INT)
 # MAGIC COMMENT 'Use esta función para consultar los datos de un cliente'
-# MAGIC RETURN SELECT id_cliente, nombre, apellido, num_pedidos FROM academia.ia.clientes c WHERE c.id_cliente = consultar_cliente.id
+# MAGIC RETURN SELECT id_cliente, nombre, apellido, num_pedidos FROM clientes c WHERE c.id_cliente = consultar_cliente.id
 
 # COMMAND ----------
 
@@ -229,12 +244,17 @@
 # MAGIC %md
 # MAGIC ### i. Creando un Vector Search endpoint
 # MAGIC
-# MAGIC Para crear el endpoint, siga los siguientes pasos:
+# MAGIC > ℹ️ **El endpoint de Vector Search es un recurso COMPARTIDO del workspace** (no vive dentro de
+# MAGIC > tu esquema). En un taller, **una sola persona (o el instructor) lo crea una vez** y todos lo
+# MAGIC > reutilizan. Si ya existe `academia-vs-endpoint`, salta este paso. Cada quien creará su **propio
+# MAGIC > índice** por usuario en el siguiente paso.
+# MAGIC
+# MAGIC Para crear el endpoint (si aún no existe), siga los siguientes pasos:
 # MAGIC
 # MAGIC 1. En el **menú principal** a la izquierda, haz clic en **Compute**
 # MAGIC 1. En la parte superior, haz clic en la pestaña **Vector Search**
 # MAGIC 1. En la esquina superior derecha, haz clic en **Create endpoint**
-# MAGIC 1. Escriba el nombre: `academia-vs-endpoint`
+# MAGIC 1. Escriba el nombre: `academia-vs-endpoint`  (compartido)
 # MAGIC 1. Haz clic en **Confirm**
 
 # COMMAND ----------
@@ -251,35 +271,39 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC Para crear el índice en Vector Search, siga los pasos a continuación:
+# MAGIC Cada participante crea su **propio índice** dentro de su esquema (`academia.<tu_apellido>.productos_index`),
+# MAGIC apuntando al endpoint **compartido**. Sigue los pasos:
 # MAGIC
 # MAGIC 1. En el **menu principal** de la izquierda, haz clic en **Catalog**
-# MAGIC 1. En la esquina superior izquierda, busque la tabla `productos`
+# MAGIC 1. Navega a tu esquema `academia.<tu_apellido>` y busca la tabla `productos`
 # MAGIC 1. En la esquina superior derecha, haz clic en  **Create** > **Vector search index**
 # MAGIC 1. Complete la siguiente información:
-# MAGIC     - **Name:** productos_index
+# MAGIC     - **Name:** productos_index  (se creará como `academia.<tu_apellido>.productos_index`)
 # MAGIC     - **Primary key:** id
 # MAGIC     - **Embedding source column:** producto
 # MAGIC     - **Embedding model:** databricks-gte-large-en
-# MAGIC     - **Vector search endpoint:** academia-vs-endpoint
+# MAGIC     - **Vector search endpoint:** academia-vs-endpoint  (el compartido)
 # MAGIC 1. Haz clic en **Create**
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC CREATE OR REPLACE FUNCTION buscar_prod_sim(descripcion STRING)
-# MAGIC RETURNS TABLE (id LONG, producto STRING, descripcion STRING, search_score DOUBLE)
-# MAGIC COMMENT 'Esta función recibe la descripción de un producto, que es utilizada para buscar productos similares'
-# MAGIC RETURN
-# MAGIC SELECT id, producto, descripcion, search_score
-# MAGIC FROM vector_search(
-# MAGIC   index => 'academia.ia.productos_index',
-# MAGIC   query_text => buscar_prod_sim.descripcion,
-# MAGIC   query_type => 'HYBRID',
-# MAGIC   num_results => 10
-# MAGIC )
-# MAGIC ORDER BY search_score DESC
-# MAGIC LIMIT 3;
+# El nombre del índice debe ir totalmente calificado dentro de vector_search(),
+# por eso construimos la función con f-string usando TU esquema.
+spark.sql(f"""
+CREATE OR REPLACE FUNCTION buscar_prod_sim(descripcion STRING)
+RETURNS TABLE (id LONG, producto STRING, descripcion STRING, search_score DOUBLE)
+COMMENT 'Esta función recibe la descripción de un producto, que es utilizada para buscar productos similares'
+RETURN
+SELECT id, producto, descripcion, search_score
+FROM vector_search(
+  index => '{NS}.productos_index',
+  query_text => buscar_prod_sim.descripcion,
+  query_type => 'HYBRID',
+  num_results => 10
+)
+ORDER BY search_score DESC
+LIMIT 3
+""")
 
 # COMMAND ----------
 
@@ -350,12 +374,12 @@
 # MAGIC     `Eres un asistente virtual de un e-commerce. Para responder a las preguntas, es necesario que el cliente proporcione un identificador válido. Si aún no tienes esa información, solicita el identificador educadamente. Tras validar el identificador, recuerda consultar los datos del cliente para personalizar sus respuestas. Si el identificador del cliente no existe en nuestra base, pide educadamente un nuevo identificador. Puedes responder preguntas sobre entrega, devolución de productos, estado de pedidos, entre otros. Si no sabes cómo responder la pregunta, di que no lo sabes. No inventes ni especules sobre nada. Siempre que se te pregunte sobre procedimientos, consulta nuestra base de conocimiento.`
 # MAGIC     <br>
 # MAGIC 1. Haz clic en **Tools** > **Add tool**
-# MAGIC 1. Añada las rutas a sus **herramientas**: 
-# MAGIC     - `academia.ia.valida_id`
-# MAGIC     - `academia.ia.consultar_cliente`
-# MAGIC     - `academia.ia.buscar_prod_sim`
-# MAGIC     - `academia.ia.generar_respuesta`
-# MAGIC 1. Haz clic en el icono **Save** 
+# MAGIC 1. Añada las rutas a sus **herramientas** (usa **tu** esquema `academia.<tu_apellido>`):
+# MAGIC     - `academia.<tu_apellido>.valida_id`
+# MAGIC     - `academia.<tu_apellido>.consultar_cliente`
+# MAGIC     - `academia.<tu_apellido>.buscar_prod_sim`
+# MAGIC     - `academia.<tu_apellido>.generar_respuesta`
+# MAGIC 1. Haz clic en el icono **Save**
 
 # COMMAND ----------
 
@@ -390,11 +414,11 @@
 # MAGIC     - Prerequisites
 # MAGIC     - Define the agent in code
 # MAGIC     - Test the agent
-# MAGIC 1. En la sección **Log the agent as an MLflow model**, agregue el índice de Vector Search y la tabla de clientes a los recursos del agente:
+# MAGIC 1. En la sección **Log the agent as an MLflow model**, agregue el índice de Vector Search y la tabla de clientes a los recursos del agente (usa **tu** esquema `academia.<tu_apellido>`):
 # MAGIC ```
 # MAGIC from mlflow.models.resources import DatabricksTable, DatabricksVectorSearchIndex
-# MAGIC resources.append(DatabricksTable('academia.ia.clientes'))
-# MAGIC resources.append(DatabricksVectorSearchIndex('academia.ia.productos_index'))
+# MAGIC resources.append(DatabricksTable('academia.<tu_apellido>.clientes'))
+# MAGIC resources.append(DatabricksVectorSearchIndex('academia.<tu_apellido>.productos_index'))
 # MAGIC ```
 # MAGIC 4. Ejecute las celdas de la sección **Evaluate the agent with Agent Evaluation** para evaluar el rendimiento del agente utilizando los AI Judges.
 # MAGIC 1. Haz clic en **View evaluation results** para analizar el resultado de la evaluación.
@@ -413,9 +437,9 @@
 # MAGIC
 # MAGIC Siga los pasos a continuación para implementar el agente:
 # MAGIC 1. En la sección **Register the model to Unity Catalog**:
-# MAGIC     - Complete las siguientes variables:
+# MAGIC     - Complete las siguientes variables (usa **tu** esquema para no pisar el de otros):
 # MAGIC         - **catalog:** academia
-# MAGIC         - **schema:** ia
+# MAGIC         - **schema:** `<tu_apellido>`
 # MAGIC         - **model_name:** agente_atencion_cliente
 # MAGIC     - Ejecute las celdas para registrar el agente en Unity Catalog.
 # MAGIC 1. En la sección **Deploy the agent**, habilite la opción de scale to zero, como se muestra a continuación, y ejecute las celdas para implementar el agente como una API REST:
@@ -431,6 +455,293 @@
 # MAGIC %md
 # MAGIC # ¡Felicidades!
 # MAGIC
-# MAGIC ¡Has completado el laboratorio de **Creando un agente**!
+# MAGIC ¡Has completado la construcción y el despliegue del agente!
 # MAGIC
-# MAGIC Ahora pasemos al siguiente laboratorio: [Lab 03 - Usando Batch Inference]($./Lab 03 - Usando Batch Inference)
+# MAGIC A continuación, en el **Apéndice** de este mismo laboratorio, veremos cómo aplicar
+# MAGIC estas mismas AI Functions **a escala** con Batch Inference sobre todo el conjunto de opiniones.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ---
+# MAGIC # 📎 Apéndice — Batch Inference con AI Functions
+# MAGIC ## Análisis de sentimiento, extracción de información y generación de texto a escala
+# MAGIC
+# MAGIC En la parte principal del laboratorio construimos un agente que usa herramientas de a una
+# MAGIC consulta. En este apéndice aplicamos las mismas ideas de IA Generativa **de forma masiva**
+# MAGIC (batch) sobre todas las opiniones usando **AI Functions** en SQL.
+# MAGIC
+# MAGIC ### Caso de uso: aumentar la satisfacción del cliente con análisis automático de valoraciones
+# MAGIC Tomamos las opiniones en texto libre y las enriquecemos con información extraída por LLMs.
+# MAGIC Para cada valoración:
+# MAGIC - Identificamos el sentimiento y extraemos los productos mencionados.
+# MAGIC - Generamos una respuesta personalizada (next best action) para atención al cliente.
+# MAGIC
+# MAGIC <img src="https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/product/sql-ai-functions/sql-ai-query-function-review.png" width="100%">
+# MAGIC
+# MAGIC > Usa el mismo dataset del laboratorio: tu esquema `academia.<tu_apellido>` (tablas **opiniones** y **clientes**).
+
+# COMMAND ----------
+
+# Reafirmar el contexto de tu esquema (por si ejecutas el apéndice de forma aislada)
+import re
+clean_username = re.sub(r'[^a-z0-9]', '_', spark.sql("SELECT current_user()").collect()[0][0].split("@")[0].lower())
+spark.sql("USE CATALOG academia")
+spark.sql(f"USE SCHEMA {clean_username}")
+print(f"✓ Contexto: academia.{clean_username}")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Ap.1 - Analizar el sentimiento y extraer información
+# MAGIC Queremos extraer, de cada opinión:
+# MAGIC - Productos mencionados
+# MAGIC - Sentimiento del cliente
+# MAGIC - Si es negativo, el motivo de la insatisfacción
+# MAGIC
+# MAGIC ### Usando AI Functions
+# MAGIC Las **[AI Functions](https://docs.databricks.com/en/large-language-models/ai-functions.html)**
+# MAGIC permiten ejecutar modelos de IA Generativa directamente desde SQL sobre tus tablas.
+# MAGIC
+# MAGIC | Gen AI SQL Function | Descripción |
+# MAGIC | -- | -- |
+# MAGIC | [ai_analyze_sentiment](https://docs.databricks.com/pt/sql/language-manual/functions/ai_analyze_sentiment.html) | Análisis de sentimiento |
+# MAGIC | [ai_classify](https://docs.databricks.com/pt/sql/language-manual/functions/ai_classify.html) | Clasifica el texto según categorías |
+# MAGIC | [ai_extract](https://docs.databricks.com/pt/sql/language-manual/functions/ai_extract.html) | Extrae la información deseada |
+# MAGIC | [ai_fix_grammar](https://docs.databricks.com/pt/sql/language-manual/functions/ai_fix_grammar.html) | Corrige la gramática |
+# MAGIC | [ai_gen](https://docs.databricks.com/pt/sql/language-manual/functions/ai_gen.html) | Genera texto según la instrucción |
+# MAGIC | [ai_mask](https://docs.databricks.com/pt/sql/language-manual/functions/ai_mask.html) | Enmascara datos sensibles |
+# MAGIC | [ai_query](https://docs.databricks.com/pt/sql/language-manual/functions/ai_query.html) | Envía instrucciones al modelo deseado |
+# MAGIC | [ai_similarity](https://docs.databricks.com/pt/sql/language-manual/functions/ai_similarity.html) | Similitud entre dos expresiones |
+# MAGIC | [ai_summarize](https://docs.databricks.com/pt/sql/language-manual/functions/ai_summarize.html) | Resume el texto |
+# MAGIC | [ai_translate](https://docs.databricks.com/pt/sql/language-manual/functions/ai_translate.html) | Traduce el texto |
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### A. Análisis de sentimiento
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT
+# MAGIC   opinion,
+# MAGIC   ai_analyze_sentiment(opinion) AS sentimiento
+# MAGIC FROM opiniones
+# MAGIC LIMIT 10;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### B. Extracción de los productos mencionados
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT
+# MAGIC   opinion,
+# MAGIC   ai_extract(opinion, array('producto')) AS productos_mencionados
+# MAGIC FROM opiniones
+# MAGIC LIMIT 10;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### C. Extracción del motivo de la insatisfacción
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT
+# MAGIC   opinion,
+# MAGIC   ai_extract(opinion, array('motivo de la insatisfacción del cliente')) AS motivo
+# MAGIC FROM opiniones
+# MAGIC LIMIT 10;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Ap.2 - Análisis y extracción a escala
+# MAGIC Encapsulamos toda la extracción en una función SQL con `ai_query()` para aplicarla sobre
+# MAGIC todo el conjunto de datos con una sola llamada por opinión.
+# MAGIC
+# MAGIC <img src="https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/product/sql-ai-functions/sql-ai-query-function-review-wrapper.png" width="1200px">
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### A. Crear una función para extraer toda la información
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE FUNCTION REVISAR_OPINION(opinion STRING)
+# MAGIC RETURNS STRUCT<
+# MAGIC   producto_nombre: STRING,
+# MAGIC   producto_categoria: STRING,
+# MAGIC   sentimiento: STRING,
+# MAGIC   motivo: STRING
+# MAGIC >
+# MAGIC RETURN FROM_JSON(
+# MAGIC   REGEXP_REPLACE(
+# MAGIC     AI_QUERY(
+# MAGIC       'databricks-meta-llama-3-3-70b-instruct',
+# MAGIC       CONCAT(
+# MAGIC         'Analiza la siguiente valoración y devuelve un JSON **válido y compacto**, sin texto adicional. ',
+# MAGIC         'Campos obligatorios: producto_nombre, producto_categoria, sentimiento, motivo. ',
+# MAGIC         'Formato exacto: {"producto_nombre":"","producto_categoria":"","sentimiento":"","motivo":""} ',
+# MAGIC         'Opinión: ', opinion
+# MAGIC       )
+# MAGIC     ),
+# MAGIC     '\\n', ''  -- eliminar saltos de línea
+# MAGIC   ),
+# MAGIC   'STRUCT<
+# MAGIC     producto_nombre: STRING,
+# MAGIC     producto_categoria: STRING,
+# MAGIC     sentimiento: STRING,
+# MAGIC     motivo: STRING
+# MAGIC   >'
+# MAGIC );
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### B. Probar el análisis de una opinión
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC SELECT
+# MAGIC   REVISAR_OPINION(
+# MAGIC     'Compré una aspiradora de la marca Electrolux y quedé muy decepcionada.
+# MAGIC     El producto hace mucho ruido y la succión es débil.
+# MAGIC     Esperaba más por el rango de precio.
+# MAGIC     Me gustaría que la empresa se pusiera en contacto para resolver el problema.'
+# MAGIC   ) AS resultado;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### C. Analizar todas las opiniones
+# MAGIC Ahora aplicamos la función sobre el conjunto de datos completo.
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE TABLE opiniones_revisadas AS
+# MAGIC SELECT *, resultado.*
+# MAGIC FROM (
+# MAGIC   SELECT
+# MAGIC     opinion,
+# MAGIC     REVISAR_OPINION(opinion) AS resultado
+# MAGIC   FROM opiniones
+# MAGIC   LIMIT 10
+# MAGIC );
+# MAGIC
+# MAGIC SELECT * FROM opiniones_revisadas;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Ap.3 - Generar una sugerencia de respuesta
+# MAGIC Con la información extraída (y datos estructurados de clientes) generamos borradores de
+# MAGIC respuesta personalizados para el equipo de atención.
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### A. Crear una función para generar la respuesta
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE FUNCTION GENERAR_RESPUESTA(
+# MAGIC     nombre STRING,
+# MAGIC     apellido STRING,
+# MAGIC     num_pedidos INT,
+# MAGIC     producto STRING,
+# MAGIC     motivo STRING
+# MAGIC )
+# MAGIC RETURNS TABLE(resposta STRING)
+# MAGIC COMMENT 'Si el cliente muestra insatisfacción con algún producto, use esta función para generar una respuesta personalizada'
+# MAGIC RETURN
+# MAGIC SELECT AI_QUERY(
+# MAGIC     'databricks-meta-llama-3-3-70b-instruct',
+# MAGIC     CONCAT(
+# MAGIC         'Eres un asistente virtual responsable de generar una respuesta amigable y profesional para un cliente que está insatisfecho. ',
+# MAGIC         'Tu objetivo es tranquilizar al cliente, reconocer el problema y, si corresponde, sugerir una solución o un cambio dentro de la política de la empresa. ',
+# MAGIC         'Evita generar información falsa o inventar detalles sobre el cliente o sus pedidos. ',
+# MAGIC         'Controla el tamaño del mensaje para que sea claro y objetivo (máx. 150 palabras). ',
+# MAGIC         'Usa un tono cordial, empático y profesional. ',
+# MAGIC         'Datos del cliente: Nombre: ', generar_respuesta.nombre, ' ', generar_respuesta.apellido,
+# MAGIC         ', Número de pedidos anteriores: ', CAST(generar_respuesta.num_pedidos AS STRING), '. ',
+# MAGIC         'Producto: ', generar_respuesta.producto, '. ',
+# MAGIC         'Motivo de la insatisfacción: ', generar_respuesta.motivo, '. ',
+# MAGIC         'Genere una respuesta personalizada considerando esta información.'
+# MAGIC     )
+# MAGIC );
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### B. Generar respuestas para todas las opiniones negativas
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE TABLE opiniones_revisadas AS
+# MAGIC SELECT
+# MAGIC   a.id_opinion,
+# MAGIC   a.id_cliente,
+# MAGIC   c.nombre,
+# MAGIC   c.apellido,
+# MAGIC   c.num_pedidos,
+# MAGIC   a.opinion,
+# MAGIC   REVISAR_OPINION(a.opinion) AS resultado
+# MAGIC FROM opiniones a
+# MAGIC JOIN clientes c ON a.id_cliente = c.id_cliente;
+# MAGIC
+# MAGIC SELECT * FROM opiniones_revisadas;
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE OR REPLACE TABLE respuestas AS
+# MAGIC SELECT
+# MAGIC   r.id_opinion,
+# MAGIC   r.id_cliente,
+# MAGIC   r.nombre,
+# MAGIC   r.apellido,
+# MAGIC   r.num_pedidos,
+# MAGIC   r.resultado.producto_nombre AS producto_nombre,
+# MAGIC   r.resultado.producto_categoria AS producto_categoria,
+# MAGIC   r.resultado.sentimiento AS sentimiento,
+# MAGIC   r.resultado.motivo AS motivo,
+# MAGIC   CASE
+# MAGIC     WHEN LOWER(r.resultado.sentimiento) = 'negativo' THEN (
+# MAGIC       SELECT * FROM GENERAR_RESPUESTA(
+# MAGIC         r.nombre,
+# MAGIC         r.apellido,
+# MAGIC         r.num_pedidos,
+# MAGIC         r.resultado.producto_nombre,
+# MAGIC         r.resultado.motivo
+# MAGIC       )
+# MAGIC     )
+# MAGIC     ELSE NULL
+# MAGIC   END AS borrador
+# MAGIC FROM opiniones_revisadas r;
+# MAGIC
+# MAGIC SELECT * FROM respuestas;
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC # ¡Felicidades! 🎉
+# MAGIC
+# MAGIC Completaste el laboratorio de **Creando un Agente** + el **Apéndice de Batch Inference**.
+# MAGIC
+# MAGIC Ahora sabes usar Foundation Models, Playground, herramientas de agente y AI Functions para
+# MAGIC analizar sentimiento, identificar motivos y generar respuestas personalizadas — de forma
+# MAGIC interactiva (agente) y a escala (batch).
+# MAGIC
+# MAGIC ➡️ **Siguiente:** `05 - Lab Agent Bricks`.

@@ -38,7 +38,7 @@ class WorkshopHelper:
     def __init__(self):
         self.username = username
         self.clean_username = clean_username
-        self.catalog_name = "classic_stable_paco_catalog"            # Catálogo COMPARTIDO
+        self.catalog_name = "academia"            # Catálogo COMPARTIDO
         self.schema_name = clean_username          # Esquema PROPIO de cada usuario
         self.volume_name = "raw"
 
@@ -272,3 +272,4 @@ Siguiente paso:
   Abre "02 - Lab Pipeline con Calidad de Datos" y crea tu primer pipeline.
 ================================================================================
 """)
+
