@@ -117,7 +117,6 @@
 
 # COMMAND ----------
 
-# DBTITLE 1,B. Revisar el código del pipeline de clientes (CDC)
 # MAGIC %md
 # MAGIC ## B. Revisar el código del pipeline de clientes (CDC)
 # MAGIC
@@ -125,8 +124,8 @@
 # MAGIC
 # MAGIC ### Paso 1: Abrir el archivo
 # MAGIC
-# MAGIC 1. En tu workspace, navega a la carpeta **`transformations/`** de tu copia del workshop
-# MAGIC 2. Abre **`customers_pipeline.es.sql.txt`**
+# MAGIC 1. En tu workspace, navega a **2 - CDC and Production**
+# MAGIC 2. Abre **customers_pipeline.sql**
 # MAGIC 3. Revisa la estructura
 # MAGIC
 # MAGIC ### Componentes clave:
@@ -134,7 +133,7 @@
 # MAGIC #### 1. Capa Bronze - Eventos CDC raw
 # MAGIC
 # MAGIC ```sql
-# MAGIC CREATE OR REFRESH STREAMING TABLE bronze.customers_raw
+# MAGIC CREATE OR REFRESH STREAMING TABLE customers_raw
 # MAGIC AS 
 # MAGIC SELECT *, current_timestamp() AS processing_time
 # MAGIC FROM STREAM read_files("${source}/customers", format => 'json');
@@ -147,14 +146,14 @@
 # MAGIC #### 2. Capa Bronze - Validación de calidad
 # MAGIC
 # MAGIC ```sql
-# MAGIC CREATE OR REFRESH STREAMING TABLE bronze.customers_clean
+# MAGIC CREATE OR REFRESH STREAMING TABLE customers_clean
 # MAGIC   (
 # MAGIC     CONSTRAINT valid_id EXPECT (customer_id IS NOT NULL) ON VIOLATION FAIL UPDATE,
 # MAGIC     CONSTRAINT valid_operation EXPECT (operation IS NOT NULL) ON VIOLATION DROP ROW,
 # MAGIC     CONSTRAINT valid_email EXPECT (rlike(email, '...') OR operation = 'DELETE')
 # MAGIC   )
 # MAGIC AS SELECT *, CAST(from_unixtime(timestamp) AS timestamp) AS timestamp_datetime
-# MAGIC FROM STREAM bronze.customers_raw;
+# MAGIC FROM STREAM customers_raw;
 # MAGIC ```
 # MAGIC
 # MAGIC **Crítico:** ¡Siempre valida los datos CDC ANTES de aplicarlos!
@@ -162,7 +161,7 @@
 # MAGIC #### 3. Capa Silver - Tabla destino
 # MAGIC
 # MAGIC ```sql
-# MAGIC CREATE OR REFRESH STREAMING TABLE silver.customers;
+# MAGIC CREATE OR REFRESH STREAMING TABLE customers_silver;
 # MAGIC ```
 # MAGIC
 # MAGIC **Definición simple**: ¡AUTO CDC gestionará su contenido!
@@ -171,8 +170,8 @@
 # MAGIC
 # MAGIC ```sql
 # MAGIC CREATE FLOW customers_cdc AS 
-# MAGIC AUTO CDC INTO silver.customers
-# MAGIC FROM STREAM bronze.customers_clean
+# MAGIC AUTO CDC INTO customers_silver
+# MAGIC FROM STREAM customers_clean
 # MAGIC   KEYS (customer_id)                    -- Primary key
 # MAGIC   APPLY AS DELETE WHEN operation = 'DELETE'
 # MAGIC   SEQUENCE BY timestamp_datetime
@@ -193,30 +192,22 @@
 
 # COMMAND ----------
 
-# DBTITLE 1,D. Agregar el pipeline de clientes a tu pipeline existente
 # MAGIC %md
 # MAGIC ## D. Agregar el pipeline de clientes a tu pipeline existente
 # MAGIC
-# MAGIC ### Paso 1: Renombrar el archivo
+# MAGIC ### Paso 1: Mover el archivo
 # MAGIC
-# MAGIC El archivo `customers_pipeline.es.sql.txt` ya está en la carpeta **`transformations/`** de tu copia del workshop.
-# MAGIC La extensión `.txt` es intencional — evita que el pipeline lo detecte automáticamente antes de que lo agregues.
+# MAGIC 1. En el explorador, ubica **Exercise_2/customers_pipeline.sql**
+# MAGIC 2. **Arrastra y suelta** (o corta/pega) a **transformations/**
+# MAGIC 3. Verifica que esté en la carpeta transformations
 # MAGIC
-# MAGIC 1. En el explorador del workspace, navega a la carpeta **`transformations/`** de tu workshop
-# MAGIC 2. Haz clic derecho sobre **`customers_pipeline.es.sql.txt`** → **Rename**
-# MAGIC 3. Renombra el archivo a **`customers_pipeline.es.sql`** (elimina únicamente la extensión `.txt`)
-# MAGIC
-# MAGIC > 💡 Una vez renombrado, el Lakeflow Pipelines Editor lo detectará automáticamente la próxima vez que abras o ejecutes tu pipeline.
-# MAGIC
-# MAGIC ### Paso 2: Verificar en tu pipeline
+# MAGIC ### Paso 2: Abrir tu pipeline
 # MAGIC
 # MAGIC 1. Regresa a tu pipeline de la Lección 1
 # MAGIC 2. En la pestaña **Pipeline** a la izquierda
 # MAGIC 3. Debes ver **dos archivos**:
-# MAGIC    - `orders_pipeline.es.sql`
-# MAGIC    - `customers_pipeline.es.sql`
-# MAGIC
-# MAGIC > ⚠️ Si el archivo no aparece, haz clic en el ícono **Refresh** (↺) en el explorador del pipeline.
+# MAGIC    - orders_pipeline.sql
+# MAGIC    - customers_pipeline.sql
 
 # COMMAND ----------
 
@@ -233,9 +224,9 @@
 # MAGIC
 # MAGIC ### Paso 2: Observar CDC
 # MAGIC
-# MAGIC - **bronze.customers_raw**: 27 registros (20 INSERT + 5 UPDATE + 2 DELETE)
-# MAGIC - **bronze.customers_clean**: 27 registros (validados)
-# MAGIC - **silver.customers**: **18 registros** (estado actual)
+# MAGIC - **customers_raw**: 27 registros (20 INSERT + 5 UPDATE + 2 DELETE)
+# MAGIC - **customers_clean**: 27 registros (validados)
+# MAGIC - **customers_silver**: **18 registros** (estado actual)
 # MAGIC   - 20 inserts iniciales
 # MAGIC   - 5 actualizaciones (mismo conteo, valores cambiados)
 # MAGIC   - 2 eliminados
@@ -249,7 +240,7 @@
 # MAGIC
 # MAGIC ### Paso 4: Métricas de calidad de datos
 # MAGIC
-# MAGIC - En **bronze.customers_clean** > pestaña **Table metrics**
+# MAGIC - En **customers_clean** > pestaña **Table metrics**
 # MAGIC - Verifica que todos los constraints pasaron:
 # MAGIC   - valid_id: 27
 # MAGIC   - valid_operation: 27
@@ -271,18 +262,18 @@
 # MAGIC current_user = spark.sql("SELECT current_user()").collect()[0][0]
 # MAGIC username = current_user.split("@")[0]
 # MAGIC clean_username = re.sub(r'[^a-z0-9]', '_', username.lower())
-# MAGIC catalog_name = f"sdp_workshop_{clean_username}"
 # MAGIC
-# MAGIC # Usar como catálogo por defecto
-# MAGIC spark.sql(f"USE CATALOG {catalog_name}")
-# MAGIC print(f"✓ Usando catálogo: {catalog_name}")
-# MAGIC print("  Todas las consultas SQL usarán este catálogo automáticamente")
+# MAGIC # Catálogo compartido + tu esquema como contexto por defecto
+# MAGIC spark.sql("USE CATALOG academia")
+# MAGIC spark.sql(f"USE SCHEMA {clean_username}")
+# MAGIC print(f"✓ Contexto: academia.{clean_username}")
+# MAGIC print("  Todas las consultas SQL sin prefijo usarán este esquema automáticamente")
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC -- Ver estado actual final
-# MAGIC SELECT * FROM silver.customers ORDER BY customer_id;
+# MAGIC SELECT * FROM customers_silver ORDER BY customer_id;
 
 # COMMAND ----------
 
@@ -290,22 +281,22 @@
 # MAGIC -- Verificar conteos
 # MAGIC SELECT 
 # MAGIC   'customers_raw' AS table_name, COUNT(*) AS row_count 
-# MAGIC FROM bronze.customers_raw
+# MAGIC FROM customers_raw
 # MAGIC UNION ALL
 # MAGIC SELECT 
 # MAGIC   'customers_clean' AS table_name, COUNT(*) AS row_count 
-# MAGIC FROM bronze.customers_clean
+# MAGIC FROM customers_clean
 # MAGIC UNION ALL
 # MAGIC SELECT 
 # MAGIC   'customers (current)' AS table_name, COUNT(*) AS row_count 
-# MAGIC FROM silver.customers;
+# MAGIC FROM customers_silver;
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC -- Clientes actualizados (con ciudad SF)
 # MAGIC SELECT customer_id, name, email, city, state
-# MAGIC FROM silver.customers
+# MAGIC FROM customers_silver
 # MAGIC WHERE city = 'San Francisco'
 # MAGIC ORDER BY customer_id;
 
@@ -314,11 +305,11 @@
 # MAGIC %sql
 # MAGIC -- Verificar que eliminados no existan
 # MAGIC SELECT customer_id 
-# MAGIC FROM bronze.customers_raw
+# MAGIC FROM customers_raw
 # MAGIC WHERE operation = 'DELETE'
 # MAGIC EXCEPT
 # MAGIC SELECT customer_id
-# MAGIC FROM silver.customers;
+# MAGIC FROM customers_silver;
 # MAGIC -- Debe devolver IDs eliminados (CUST0003, CUST0007)
 
 # COMMAND ----------
@@ -389,32 +380,35 @@
 # MAGIC %md
 # MAGIC ## (Opcional) Limpiar recursos del taller
 # MAGIC
-# MAGIC **IMPORTANTE:** Ejecuta esto solo si deseas eliminar TODOS los recursos del taller.
+# MAGIC **IMPORTANTE:** Ejecuta esto solo si deseas eliminar TU esquema del taller.
+# MAGIC
+# MAGIC ⚠️ El catálogo `academia` es **compartido** — NUNCA lo elimines. Aquí solo borramos
+# MAGIC **tu propio esquema** `academia.<tu_apellido>`.
 # MAGIC
 # MAGIC Esto eliminará:
-# MAGIC - Tu catálogo (sdp_workshop_<username>)
-# MAGIC - Todos los esquemas (bronze, silver, gold)
-# MAGIC - Todas las tablas y datos
-# MAGIC - El volumen raw y archivos fuente
-# MAGIC - Funciones UC (add_orders, add_status)
+# MAGIC - Tu esquema `academia.<tu_apellido>`
+# MAGIC - Todas tus tablas (orders_*, customers_*, *_gold) y datos
+# MAGIC - Tu volumen raw y archivos fuente
 # MAGIC
 # MAGIC **¡Esta acción no se puede deshacer!**
 
 # COMMAND ----------
 
-# Descomenta las líneas siguientes para limpiar todos los recursos del taller
+# Descomenta las líneas siguientes para limpiar TU esquema del taller
 
 # import re
 # current_user = spark.sql("SELECT current_user()").collect()[0][0]
 # username = current_user.split("@")[0]
 # clean_username = re.sub(r'[^a-z0-9]', '_', username.lower())
-# catalog_name = f"sdp_workshop_{clean_username}"
+# schema_fqn = f"academia.{clean_username}"
 #
-# print(f"ADVERTENCIA: Se eliminará el catálogo: {catalog_name}")
-# print("¡Esto removerá TODOS los datos, tablas y volúmenes del taller!")
-# print("\nDescomenta la línea DROP CATALOG para continuar...")
+# print(f"ADVERTENCIA: Se eliminará el esquema: {schema_fqn}")
+# print("¡Esto removerá TODAS tus tablas, datos y volúmenes del taller!")
+# print("El catálogo compartido 'academia' NO se toca.")
+# print("\nDescomenta la línea DROP SCHEMA para continuar...")
 #
 # # Descomenta para eliminar realmente:
-# # spark.sql(f"DROP CATALOG IF EXISTS {catalog_name} CASCADE")
-# # print(f"✓ Catálogo eliminado: {catalog_name}")
+# # spark.sql(f"DROP SCHEMA IF EXISTS {schema_fqn} CASCADE")
+# # print(f"✓ Esquema eliminado: {schema_fqn}")
 # # print("✓ Limpieza del taller completada")
+

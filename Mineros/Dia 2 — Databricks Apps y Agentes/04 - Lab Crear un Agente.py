@@ -35,13 +35,6 @@
 
 # COMMAND ----------
 
-# DBTITLE 1,Setup de datos para agentes
-# Carga los datos necesarios para este lab (academia.ia)
-# Si ya corriste este paso antes, se sobreescribe sin problema
-%run ./_data_setup_agentes
-
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC # Configuración del ambiente
 # MAGIC
@@ -435,10 +428,9 @@
 
 # COMMAND ----------
 
-# DBTITLE 1,Felicidades
 # MAGIC %md
 # MAGIC # ¡Felicidades!
 # MAGIC
 # MAGIC ¡Has completado el laboratorio de **Creando un agente**!
 # MAGIC
-# MAGIC Ahora pasemos al siguiente laboratorio: [APPENDICE - Batch Inference]($./APPENDICE - Batch Inference)
+# MAGIC Ahora pasemos al siguiente laboratorio: [Lab 03 - Usando Batch Inference]($./Lab 03 - Usando Batch Inference)

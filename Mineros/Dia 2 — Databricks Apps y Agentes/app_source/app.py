@@ -19,9 +19,13 @@ from databricks.sdk.core import Config
 # -----------------------------------------------------------------------------
 # Configuración (desde variables de entorno definidas en app.yaml)
 # -----------------------------------------------------------------------------
-CATALOG = os.getenv("CATALOG", "sdp_workshop_usuario")
+CATALOG = os.getenv("CATALOG", "academia")              # catálogo compartido
+SCHEMA = os.getenv("SCHEMA", "tu_apellido")             # tu esquema del Día 1
 SQL_HTTP_PATH = os.getenv("SQL_HTTP_PATH", "")          # /sql/1.0/warehouses/xxxx
 GENIE_SPACE_ID = os.getenv("GENIE_SPACE_ID", "")        # ID del espacio Genie (Día 1)
+
+# Prefijo de esquema totalmente calificado para las consultas
+NS = f"{CATALOG}.{SCHEMA}"
 
 cfg = Config()  # Resuelve host + credenciales del Service Principal de la App
 st.set_page_config(page_title="Pedidos & Clientes · Genie", layout="wide")
@@ -60,7 +64,7 @@ if http_path:
     # KPIs
     resumen = run_query(
         f"SELECT COUNT(*) AS total_pedidos, "
-        f"COUNT(DISTINCT customer_id) AS clientes FROM {CATALOG}.silver.orders_clean",
+        f"COUNT(DISTINCT customer_id) AS clientes FROM {NS}.orders_silver",
         conn,
     )
     c1, c2 = st.columns(2)
@@ -71,7 +75,7 @@ if http_path:
     st.subheader("Pedidos por día")
     tendencia = run_query(
         f"SELECT order_date, total_daily_orders "
-        f"FROM {CATALOG}.gold.order_summary ORDER BY order_date",
+        f"FROM {NS}.order_summary_gold ORDER BY order_date",
         conn,
     )
     if not tendencia.empty:
@@ -83,8 +87,8 @@ if http_path:
         f"""
         SELECT c.city, COUNT(o.order_id) AS total_pedidos,
                COUNT(DISTINCT o.customer_id) AS clientes_unicos
-        FROM {CATALOG}.silver.orders_clean o
-        JOIN {CATALOG}.silver.customers c ON o.customer_id = c.customer_id
+        FROM {NS}.orders_silver o
+        JOIN {NS}.customers_silver c ON o.customer_id = c.customer_id
         GROUP BY c.city ORDER BY total_pedidos DESC
         """,
         conn,

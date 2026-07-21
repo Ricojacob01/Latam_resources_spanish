@@ -30,7 +30,7 @@
 # MAGIC | 3:25–3:30 | Cierre y próximos pasos | `06 - Cierre y Próximos Pasos` |
 # MAGIC
 # MAGIC ## Prerrequisitos (del Día 1)
-# MAGIC - Tu catálogo `sdp_workshop_<usuario>` con las tablas Gold.
+# MAGIC - Tu esquema `academia.<tu_apellido>` con las tablas Gold.
 # MAGIC - Tu **Genie Space ID** y el **HTTP Path** de tu SQL Warehouse.
 # MAGIC
 # MAGIC > ℹ️ Los labs de agentes usan un dataset propio (clientes/productos/opiniones) que se

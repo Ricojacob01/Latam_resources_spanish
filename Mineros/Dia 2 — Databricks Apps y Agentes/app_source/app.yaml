@@ -3,7 +3,9 @@ command: ["streamlit", "run", "app.py"]
 env:
   # ── Edita estos valores para tu entorno ──────────────────────────────
   - name: CATALOG
-    value: "sdp_workshop_TU_USUARIO"        # tu catálogo del Día 1
+    value: "academia"                       # catálogo compartido
+  - name: SCHEMA
+    value: "TU_APELLIDO"                     # tu esquema del Día 1 (p. ej. john_doe)
   - name: SQL_HTTP_PATH
     value: "/sql/1.0/warehouses/XXXXXXXXXXXX"  # HTTP Path de tu SQL Warehouse
   - name: GENIE_SPACE_ID
