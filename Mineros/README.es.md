@@ -75,6 +75,7 @@ Recursos compartidos: **`_recursos/`** (datos de agentes, imágenes, utilidades)
 1. **Catálogo/esquema:** `academia.<tu_apellido>` (el esquema se deriva del usuario automáticamente).
 2. **Genie Space ID** (de la Lección 6).
 3. **HTTP Path** del SQL Warehouse.
+4. **Vector search endpoint** academia-vs-endpoint 
 
 Estos tres valores se usan en la App del Día 2 (`app_source/app.yaml`).
 
