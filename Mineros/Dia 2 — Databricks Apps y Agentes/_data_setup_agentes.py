@@ -40,23 +40,31 @@
 # MAGIC
 # MAGIC Primero, vamos crear una base de datos (o esquema; estos nombres se usan como sinónimos). Esta funcionará como un contenedor para guardar los datos que utilizaremos durante los ejercicios.
 # MAGIC
-# MAGIC
+# MAGIC **Aislamiento por usuario:** trabajamos en el catálogo compartido `academia` y en **tu propio
+# MAGIC esquema** `academia.<tu_apellido>` — el mismo que usaste en el Día 1. Así cada participante
+# MAGIC tiene sus propias tablas (`opiniones`, `clientes`, `productos`) sin pisar las de los demás.
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC CREATE SCHEMA IF NOT EXISTS `academia`.`ia`;
-# MAGIC
-# MAGIC CREATE VOLUME IF NOT EXISTS `academia`.`ia`.`archivos`;
+import re
 
-# COMMAND ----------
+# Catálogo compartido + esquema propio del usuario (igual que en el Día 1)
+current_user = spark.sql("SELECT current_user()").collect()[0][0]
+clean_username = re.sub(r'[^a-z0-9]', '_', current_user.split("@")[0].lower())
 
 catalog = "academia"
-schema = "ia"
+schema = clean_username        # tu esquema personal
 volume = "archivos"
+
+# Crear tu esquema y volumen (idempotente)
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{catalog}`.`{schema}`")
+spark.sql(f"CREATE VOLUME IF NOT EXISTS `{catalog}`.`{schema}`.`{volume}`")
 
 path_volume = "/Volumes/" + catalog + "/" + schema + "/" + volume
 path_table = catalog + "." + schema
+
+print(f"✓ Esquema: {catalog}.{schema}")
+print(f"✓ Volumen: {path_volume}")
 
 # COMMAND ----------
 
@@ -187,7 +195,7 @@ df.write.mode("overwrite").saveAsTable(f"{path_table}.{table_name}")
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC 2. En el menú de Unity Catalog de Databricks, busca el catálogo academia.ia y dentro del volúmen "archivos", haz clic en **Upload to this volumen**, como se muestra en la imagen y añade los 3 archivos csv que hemos descargado.
+# MAGIC 2. En el menú de Unity Catalog de Databricks, busca tu esquema `academia.<tu_apellido>` y dentro del volúmen "archivos", haz clic en **Upload to this volumen**, como se muestra en la imagen y añade los 3 archivos csv que hemos descargado.
 
 # COMMAND ----------
 

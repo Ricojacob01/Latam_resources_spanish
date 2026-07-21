@@ -34,10 +34,26 @@
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC CREATE SCHEMA IF NOT EXISTS `academia`.`agent_bricks`;
-# MAGIC
-# MAGIC CREATE VOLUME IF NOT EXISTS `academia`.`agent_bricks`.`archivos`;
+# MAGIC %md
+# MAGIC ## Configuración — tu esquema
+# MAGIC Reutilizamos **tu propio esquema** `academia.<tu_apellido>` (el mismo del Día 1 y de los labs
+# MAGIC anteriores). Guardaremos el PDF en tu volumen `archivos`.
+
+# COMMAND ----------
+
+import re
+
+current_user = spark.sql("SELECT current_user()").collect()[0][0]
+clean_username = re.sub(r'[^a-z0-9]', '_', current_user.split("@")[0].lower())
+
+catalog = "academia"
+schema = clean_username        # tu esquema personal
+volume = "archivos"
+
+# Crear tu esquema y volumen si aún no existen (idempotente)
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS `{catalog}`.`{schema}`")
+spark.sql(f"CREATE VOLUME IF NOT EXISTS `{catalog}`.`{schema}`.`{volume}`")
+print(f"✓ Esquema: {catalog}.{schema}")
 
 # COMMAND ----------
 
@@ -46,12 +62,6 @@
 # MAGIC En este paso vamos a cargar el PDF que utilizaremos durante el laboratorio de Agent Bricks.
 # MAGIC
 # MAGIC El documento contiene información relacionada con la economía mundial.
-
-# COMMAND ----------
-
-catalog = "academia"
-schema = "agent_bricks"
-volume = "archivos"
 
 # COMMAND ----------
 
@@ -78,7 +88,7 @@ dbutils.fs.cp(f"{download_url}", f"{path_volume}" + "/" + f"{file_name}")
 # MAGIC El documento contiene información relacionada con la economía mundial.
 # MAGIC
 # MAGIC 1. En el repositorio de GitHub, en la carpeta ../datos, haz clic en el nombre del archivo "economia_mundial.pdf" y luego haz clic en el botón de descarga del archivo.
-# MAGIC 2. En el menú de Unity Catalog de Databricks, busca el catálogo academia.agent_bricks y dentro del volúmen "archivos", haz clic en **Upload to this volumen**, y añade el archivo pdf que hemos descargado.
+# MAGIC 2. En el menú de Unity Catalog de Databricks, busca tu esquema `academia.<tu_apellido>` y dentro del volúmen "archivos", haz clic en **Upload to this volumen**, y añade el archivo pdf que hemos descargado.
 
 # COMMAND ----------
 
@@ -103,9 +113,9 @@ dbutils.fs.cp(f"{download_url}", f"{path_volume}" + "/" + f"{file_name}")
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC **Name**
+# MAGIC **Name** (añade tu apellido al final para que no choque con el de otros participantes)
 # MAGIC
-# MAGIC knowledge-assistant-2025-economia
+# MAGIC knowledge-assistant-2025-economia-`<tu_apellido>`
 # MAGIC
 # MAGIC **Description**
 # MAGIC

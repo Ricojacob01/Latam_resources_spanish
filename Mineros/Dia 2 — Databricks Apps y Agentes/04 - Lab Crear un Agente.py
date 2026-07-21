@@ -38,11 +38,26 @@
 # MAGIC %md
 # MAGIC # Configuración del ambiente
 # MAGIC
-# MAGIC Vamos a comenzar seleccionando el catálogo y esquema donde se encuentran nuestros datos
+# MAGIC Trabajamos en el catálogo compartido `academia` y en **tu propio esquema** `academia.<tu_apellido>`
+# MAGIC — el mismo del Día 1 y del Lab 01 (donde cargaste `opiniones`, `clientes`, `productos`).
+# MAGIC
+# MAGIC La siguiente celda fija tu contexto y guarda el nombre del esquema para reutilizarlo.
 
 # COMMAND ----------
 
-# MAGIC %sql USE academia.ia
+import re
+
+current_user = spark.sql("SELECT current_user()").collect()[0][0]
+clean_username = re.sub(r'[^a-z0-9]', '_', current_user.split("@")[0].lower())
+
+CATALOGO = "academia"
+ESQUEMA = clean_username        # tu esquema (p. ej. john_doe)
+NS = f"{CATALOGO}.{ESQUEMA}"    # namespace completo para nombres calificados (índice VS, recursos MLflow)
+
+spark.sql(f"USE CATALOG {CATALOGO}")
+spark.sql(f"USE SCHEMA {ESQUEMA}")
+print(f"✓ Contexto: {NS}")
+print("  Las funciones y consultas SQL sin prefijo usarán este esquema automáticamente.")
 
 # COMMAND ----------
 
@@ -185,7 +200,7 @@
 # MAGIC %sql CREATE OR REPLACE FUNCTION consultar_cliente(id BIGINT)
 # MAGIC RETURNS TABLE (id_cliente BIGINT, nombre STRING, apellido STRING, num_pedidos INT)
 # MAGIC COMMENT 'Use esta función para consultar los datos de un cliente'
-# MAGIC RETURN SELECT id_cliente, nombre, apellido, num_pedidos FROM academia.ia.clientes c WHERE c.id_cliente = consultar_cliente.id
+# MAGIC RETURN SELECT id_cliente, nombre, apellido, num_pedidos FROM clientes c WHERE c.id_cliente = consultar_cliente.id
 
 # COMMAND ----------
 
@@ -229,12 +244,17 @@
 # MAGIC %md
 # MAGIC ### i. Creando un Vector Search endpoint
 # MAGIC
-# MAGIC Para crear el endpoint, siga los siguientes pasos:
+# MAGIC > ℹ️ **El endpoint de Vector Search es un recurso COMPARTIDO del workspace** (no vive dentro de
+# MAGIC > tu esquema). En un taller, **una sola persona (o el instructor) lo crea una vez** y todos lo
+# MAGIC > reutilizan. Si ya existe `academia-vs-endpoint`, salta este paso. Cada quien creará su **propio
+# MAGIC > índice** por usuario en el siguiente paso.
+# MAGIC
+# MAGIC Para crear el endpoint (si aún no existe), siga los siguientes pasos:
 # MAGIC
 # MAGIC 1. En el **menú principal** a la izquierda, haz clic en **Compute**
 # MAGIC 1. En la parte superior, haz clic en la pestaña **Vector Search**
 # MAGIC 1. En la esquina superior derecha, haz clic en **Create endpoint**
-# MAGIC 1. Escriba el nombre: `academia-vs-endpoint`
+# MAGIC 1. Escriba el nombre: `academia-vs-endpoint`  (compartido)
 # MAGIC 1. Haz clic en **Confirm**
 
 # COMMAND ----------
@@ -251,35 +271,39 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC Para crear el índice en Vector Search, siga los pasos a continuación:
+# MAGIC Cada participante crea su **propio índice** dentro de su esquema (`academia.<tu_apellido>.productos_index`),
+# MAGIC apuntando al endpoint **compartido**. Sigue los pasos:
 # MAGIC
 # MAGIC 1. En el **menu principal** de la izquierda, haz clic en **Catalog**
-# MAGIC 1. En la esquina superior izquierda, busque la tabla `productos`
+# MAGIC 1. Navega a tu esquema `academia.<tu_apellido>` y busca la tabla `productos`
 # MAGIC 1. En la esquina superior derecha, haz clic en  **Create** > **Vector search index**
 # MAGIC 1. Complete la siguiente información:
-# MAGIC     - **Name:** productos_index
+# MAGIC     - **Name:** productos_index  (se creará como `academia.<tu_apellido>.productos_index`)
 # MAGIC     - **Primary key:** id
 # MAGIC     - **Embedding source column:** producto
 # MAGIC     - **Embedding model:** databricks-gte-large-en
-# MAGIC     - **Vector search endpoint:** academia-vs-endpoint
+# MAGIC     - **Vector search endpoint:** academia-vs-endpoint  (el compartido)
 # MAGIC 1. Haz clic en **Create**
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC CREATE OR REPLACE FUNCTION buscar_prod_sim(descripcion STRING)
-# MAGIC RETURNS TABLE (id LONG, producto STRING, descripcion STRING, search_score DOUBLE)
-# MAGIC COMMENT 'Esta función recibe la descripción de un producto, que es utilizada para buscar productos similares'
-# MAGIC RETURN
-# MAGIC SELECT id, producto, descripcion, search_score
-# MAGIC FROM vector_search(
-# MAGIC   index => 'academia.ia.productos_index',
-# MAGIC   query_text => buscar_prod_sim.descripcion,
-# MAGIC   query_type => 'HYBRID',
-# MAGIC   num_results => 10
-# MAGIC )
-# MAGIC ORDER BY search_score DESC
-# MAGIC LIMIT 3;
+# El nombre del índice debe ir totalmente calificado dentro de vector_search(),
+# por eso construimos la función con f-string usando TU esquema.
+spark.sql(f"""
+CREATE OR REPLACE FUNCTION buscar_prod_sim(descripcion STRING)
+RETURNS TABLE (id LONG, producto STRING, descripcion STRING, search_score DOUBLE)
+COMMENT 'Esta función recibe la descripción de un producto, que es utilizada para buscar productos similares'
+RETURN
+SELECT id, producto, descripcion, search_score
+FROM vector_search(
+  index => '{NS}.productos_index',
+  query_text => buscar_prod_sim.descripcion,
+  query_type => 'HYBRID',
+  num_results => 10
+)
+ORDER BY search_score DESC
+LIMIT 3
+""")
 
 # COMMAND ----------
 
@@ -350,12 +374,12 @@
 # MAGIC     `Eres un asistente virtual de un e-commerce. Para responder a las preguntas, es necesario que el cliente proporcione un identificador válido. Si aún no tienes esa información, solicita el identificador educadamente. Tras validar el identificador, recuerda consultar los datos del cliente para personalizar sus respuestas. Si el identificador del cliente no existe en nuestra base, pide educadamente un nuevo identificador. Puedes responder preguntas sobre entrega, devolución de productos, estado de pedidos, entre otros. Si no sabes cómo responder la pregunta, di que no lo sabes. No inventes ni especules sobre nada. Siempre que se te pregunte sobre procedimientos, consulta nuestra base de conocimiento.`
 # MAGIC     <br>
 # MAGIC 1. Haz clic en **Tools** > **Add tool**
-# MAGIC 1. Añada las rutas a sus **herramientas**: 
-# MAGIC     - `academia.ia.valida_id`
-# MAGIC     - `academia.ia.consultar_cliente`
-# MAGIC     - `academia.ia.buscar_prod_sim`
-# MAGIC     - `academia.ia.generar_respuesta`
-# MAGIC 1. Haz clic en el icono **Save** 
+# MAGIC 1. Añada las rutas a sus **herramientas** (usa **tu** esquema `academia.<tu_apellido>`):
+# MAGIC     - `academia.<tu_apellido>.valida_id`
+# MAGIC     - `academia.<tu_apellido>.consultar_cliente`
+# MAGIC     - `academia.<tu_apellido>.buscar_prod_sim`
+# MAGIC     - `academia.<tu_apellido>.generar_respuesta`
+# MAGIC 1. Haz clic en el icono **Save**
 
 # COMMAND ----------
 
@@ -390,11 +414,11 @@
 # MAGIC     - Prerequisites
 # MAGIC     - Define the agent in code
 # MAGIC     - Test the agent
-# MAGIC 1. En la sección **Log the agent as an MLflow model**, agregue el índice de Vector Search y la tabla de clientes a los recursos del agente:
+# MAGIC 1. En la sección **Log the agent as an MLflow model**, agregue el índice de Vector Search y la tabla de clientes a los recursos del agente (usa **tu** esquema `academia.<tu_apellido>`):
 # MAGIC ```
 # MAGIC from mlflow.models.resources import DatabricksTable, DatabricksVectorSearchIndex
-# MAGIC resources.append(DatabricksTable('academia.ia.clientes'))
-# MAGIC resources.append(DatabricksVectorSearchIndex('academia.ia.productos_index'))
+# MAGIC resources.append(DatabricksTable('academia.<tu_apellido>.clientes'))
+# MAGIC resources.append(DatabricksVectorSearchIndex('academia.<tu_apellido>.productos_index'))
 # MAGIC ```
 # MAGIC 4. Ejecute las celdas de la sección **Evaluate the agent with Agent Evaluation** para evaluar el rendimiento del agente utilizando los AI Judges.
 # MAGIC 1. Haz clic en **View evaluation results** para analizar el resultado de la evaluación.
@@ -413,9 +437,9 @@
 # MAGIC
 # MAGIC Siga los pasos a continuación para implementar el agente:
 # MAGIC 1. En la sección **Register the model to Unity Catalog**:
-# MAGIC     - Complete las siguientes variables:
+# MAGIC     - Complete las siguientes variables (usa **tu** esquema para no pisar el de otros):
 # MAGIC         - **catalog:** academia
-# MAGIC         - **schema:** ia
+# MAGIC         - **schema:** `<tu_apellido>`
 # MAGIC         - **model_name:** agente_atencion_cliente
 # MAGIC     - Ejecute las celdas para registrar el agente en Unity Catalog.
 # MAGIC 1. En la sección **Deploy the agent**, habilite la opción de scale to zero, como se muestra a continuación, y ejecute las celdas para implementar el agente como una API REST:
@@ -455,12 +479,16 @@
 # MAGIC
 # MAGIC <img src="https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/product/sql-ai-functions/sql-ai-query-function-review.png" width="100%">
 # MAGIC
-# MAGIC > Usa el mismo dataset del laboratorio: `academia.ia` (tablas **opiniones** y **clientes**).
+# MAGIC > Usa el mismo dataset del laboratorio: tu esquema `academia.<tu_apellido>` (tablas **opiniones** y **clientes**).
 
 # COMMAND ----------
 
-# MAGIC %sql
-# MAGIC USE academia.ia
+# Reafirmar el contexto de tu esquema (por si ejecutas el apéndice de forma aislada)
+import re
+clean_username = re.sub(r'[^a-z0-9]', '_', spark.sql("SELECT current_user()").collect()[0][0].split("@")[0].lower())
+spark.sql("USE CATALOG academia")
+spark.sql(f"USE SCHEMA {clean_username}")
+print(f"✓ Contexto: academia.{clean_username}")
 
 # COMMAND ----------
 
