@@ -272,3 +272,4 @@ Siguiente paso:
   Abre "02 - Lab Pipeline con Calidad de Datos" y crea tu primer pipeline.
 ================================================================================
 """)
+

@@ -175,3 +175,4 @@ display(spark.sql("SELECT * FROM app_notas_clientes ORDER BY actualizado DESC"))
 # MAGIC Tienes una Databricks App desplegada que **lee** el panel de analítica, **escribe** notas de
 # MAGIC seguimiento (write-back sobre una tabla propia) e **integra Genie** — todo sobre los datos del Día 1.
 # MAGIC En la siguiente lección pasamos de "chat sobre datos" a **agentes** que razonan y usan herramientas.
+

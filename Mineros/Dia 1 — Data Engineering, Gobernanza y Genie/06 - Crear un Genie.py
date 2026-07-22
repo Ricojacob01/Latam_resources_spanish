@@ -169,3 +169,4 @@ print(f"  - {CATALOGO}.{ESQUEMA}.customer_summary_gold  (opcional)")
 # MAGIC Ya tienes un Genie funcional sobre tus tablas Gold. **Anota el `Genie Space ID`**
 # MAGIC (está en la URL del espacio o en *Settings*): lo necesitarás el **Día 2** para
 # MAGIC incrustar el chat de Genie dentro de una Databricks App.
+

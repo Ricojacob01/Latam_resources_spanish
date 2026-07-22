@@ -30,3 +30,4 @@
 # MAGIC - Mosaic AI Agent Framework & Agent Bricks (docs)
 # MAGIC
 # MAGIC ¡Gracias por participar! 🎉
+

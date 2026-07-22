@@ -411,3 +411,4 @@
 # # spark.sql(f"DROP SCHEMA IF EXISTS {schema_fqn} CASCADE")
 # # print(f"✓ Esquema eliminado: {schema_fqn}")
 # # print("✓ Limpieza del taller completada")
+

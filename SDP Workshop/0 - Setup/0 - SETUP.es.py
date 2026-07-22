@@ -71,22 +71,6 @@ DA.print_config()
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Paso 2: Limpiar recursos previos del taller (si existen)
-
-# COMMAND ----------
-
-# Eliminar catálogo existente si existe (en cascada a todos los esquemas, tablas, volúmenes)
-try:
-    spark.sql(f"DROP CATALOG IF EXISTS {DA.catalog_name} CASCADE")
-    print(f"✓ Se limpió el catálogo existente: {DA.catalog_name}")
-except Exception as e:
-    print(f"Nota: No hay un catálogo previo que limpiar (esto es normal en la primera ejecución)")
-
-print(f"\nIniciando configuración desde cero para: {DA.catalog_name}")
-
-# COMMAND ----------
-
-# MAGIC %md
 # MAGIC ## Paso 3: Crear catálogo y esquemas
 
 # COMMAND ----------

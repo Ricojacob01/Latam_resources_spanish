@@ -61,3 +61,4 @@ except Exception as e:
 # MAGIC - Apps Cookbook y plantillas.
 # MAGIC
 # MAGIC ➡️ **Siguiente:** `02 - Lab App Streamlit + Genie`.
+

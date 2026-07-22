@@ -37,3 +37,4 @@
 # MAGIC > agente funcional, no ingeniería de producción (eso es un taller aparte).
 # MAGIC
 # MAGIC ➡️ **Siguiente:** `04 - Lab Crear un Agente`.
+
