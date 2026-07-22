@@ -32,7 +32,9 @@ Ejecutar **48 horas antes** del evento y **el día del taller** en el workspace 
 | 4 | `03_lakeflow_connect_demo.ipynb` | 10 min (demo) |
 | 5 | `04_ldp_medallion_lab.ipynb` | 45 min |
 | 6 | `99_incremental.ipynb` + re-run pipeline | 10 min |
-| 7 | `05_jobs_orquestacion.ipynb` | 30 min |
+| 7 | `05_genie_code_pipelines.ipynb` | 20 min |
+| 8 | `06_lakeflow_designer.ipynb` | 20 min |
+| 9 | `07 - Lakeflow Jobs/05_jobs_orquestacion.ipynb` | 25 min |
 
 ## Errores comunes y solución
 

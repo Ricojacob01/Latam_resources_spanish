@@ -14,6 +14,8 @@ Al finalizar, los participantes podrán:
 - Explorar **federación de datos** con Marketplace y Delta Sharing
 - Ingerir datos con **Auto Loader** (patrón equivalente a Lakeflow Connect)
 - Construir pipelines **Lakeflow Declarative Pipelines** con arquitectura **Medallón**
+- Extender pipelines con **Genie Code** (IA)
+- Preparar datos visualmente con **Lakeflow Designer** (sin código)
 - Orquestar cargas con **Lakeflow Jobs**, monitoreo y linaje
 
 ## Escenario: Transacciones Bancarias BNCR
@@ -50,7 +52,11 @@ Data Engineering/
 │       ├── 01-bronze.sql
 │       ├── 02-silver.sql
 │       └── 03-gold.sql
-├── 05 - Lakeflow Jobs/
+├── 05 - Genie Code/
+│   └── 05_genie_code_pipelines.ipynb
+├── 06 - Lakeflow Designer/
+│   └── 06_lakeflow_designer.ipynb
+├── 07 - Lakeflow Jobs/
 │   └── 05_jobs_orquestacion.ipynb
 └── Files/
     ├── initial/                    # Carga inicial (~20K transacciones)
@@ -66,6 +72,8 @@ Data Engineering/
 | SQL Warehouse | **Serverless Small**, auto-scale 1–10 |
 | Permisos UC | `CREATE CATALOG`, `CREATE SCHEMA`, `CREATE TABLE` |
 | Catálogo | **`BNS`** (cada participante lo crea en su workspace) |
+| **Genie Code** | Habilitado en workspace (modo Agent en Pipeline Editor) |
+| **Lakeflow Designer** | Habilitado en workspace |
 
 ## Primeros pasos
 
@@ -93,8 +101,10 @@ En Databricks: **Workspace → Import → Git folder** → carpeta `Data Enginee
 | 01 | Unity Catalog y Gobierno | 20 min |
 | 02 | Federación OneLake / Marketplace | 15 min |
 | 03 | Lakeflow Connect (demo instructor) | 15 min |
-| 04 | LDP — Arquitectura Medallón | 45 min |
-| 05 | Lakeflow Jobs | 30 min |
+| 04 | LDP — Arquitectura Medallón | 40 min |
+| 05 | Genie Code — Pipelines con IA | 20 min |
+| 06 | Lakeflow Designer — Visual | 20 min |
+| 07 | Lakeflow Jobs | 25 min |
 
 ## Configuración del Pipeline (Lab 04)
 
