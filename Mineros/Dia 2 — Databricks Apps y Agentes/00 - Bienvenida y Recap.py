@@ -37,4 +37,3 @@
 # MAGIC > carga en `04 - Lab Crear un Agente`. Los datos están en `../_recursos/datos_agentes`.
 # MAGIC
 # MAGIC ➡️ **Empieza con** `01 - Intro a Apps y Genie`.
-
