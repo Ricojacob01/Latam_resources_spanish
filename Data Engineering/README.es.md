@@ -79,10 +79,12 @@ En Databricks: **Workspace → Import → Git folder** → carpeta `Data Enginee
 
 ### 2. Ejecutar Setup
 
-1. Abrir `00 - Setup/00_variables.ipynb` → ejecutar todas las celdas
-2. Abrir `00 - Setup/00_setup.ipynb` → ejecutar todas las celdas
-3. Ejecutar la celda de carga de datos (`carga_datos("initial")`)
-4. Guardar la ruta del volumen: `/Volumes/BNS/raw/transacciones`
+1. Abrir `00 - Setup/00_setup.ipynb`
+2. **Run All** (ejecutar todas las celdas de arriba hacia abajo)
+3. Verificar en Catalog Explorer que existe el catálogo `BNS`
+4. (Opcional) Ejecutar `00 - Setup/00_PREFLIGHT.ipynb` para validar el entorno
+
+> **Importante:** No ejecute solo una celda aislada. El notebook valida variables antes de crear el catálogo.
 
 ### 3. Seguir los labs en orden
 
