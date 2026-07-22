@@ -41,7 +41,7 @@ Ejecutar **48 horas antes** del evento y **el día del taller** en el workspace 
 | Error | Solución |
 |-------|----------|
 | `catalog_name is not defined` | Ejecutar **Run All** en `00_setup` desde la celda 1 |
-| `carga_datos` falla | Subir `Files/initial/` manualmente al volumen |
+| `carga_datos` falla | Haga **Git Pull** y **Run All** en `00_setup`; la carga usa Git folder o GitHub API (sin `/tmp` local) |
 | Pipeline no encuentra archivos | Config: `catalog=BNS`, `schema=raw` |
 | `%run` falla por ruta | Usar Git folder con estructura de carpetas intacta |
 
