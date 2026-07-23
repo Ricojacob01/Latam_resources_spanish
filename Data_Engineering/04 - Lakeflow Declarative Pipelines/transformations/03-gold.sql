@@ -20,8 +20,8 @@ AS SELECT
   s.nombre AS nombre_sucursal,
   s.provincia,
   COUNT(*) AS total_transacciones,
-  SUM(t.monto) AS monto_total,
-  AVG(t.monto) AS monto_promedio,
+  CAST(SUM(t.monto) AS DECIMAL(19,2)) AS monto_total,
+  CAST(AVG(t.monto) AS DECIMAL(19,2)) AS monto_promedio,
   COUNT(DISTINCT t.cliente_id) AS clientes_unicos
 FROM transacciones t
 LEFT JOIN sucursales s ON t.sucursal_id = s.sucursal_id
@@ -42,8 +42,8 @@ AS SELECT
   producto,
   canal,
   COUNT(*) AS total_transacciones,
-  SUM(monto) AS monto_total,
-  MAX(monto) AS monto_maximo
+  CAST(SUM(monto) AS DECIMAL(19,2)) AS monto_total,
+  CAST(MAX(monto) AS DECIMAL(19,2)) AS monto_maximo
 FROM transacciones
 GROUP BY ALL;
 
@@ -58,8 +58,11 @@ COMMENT "Métricas agregadas por segmento de cliente."
 AS SELECT
   c.segmento,
   COUNT(DISTINCT c.customer_id) AS total_clientes,
-  AVG(cta.saldo) AS saldo_promedio,
-  COUNT(DISTINCT t.transaccion_id) / COUNT(DISTINCT c.customer_id) AS transacciones_promedio
+  CAST(AVG(cta.saldo) AS DECIMAL(19,2)) AS saldo_promedio,
+  CAST(
+    COUNT(DISTINCT t.transaccion_id) / COUNT(DISTINCT c.customer_id)
+    AS BIGINT
+  ) AS transacciones_promedio
 FROM clientes c
 LEFT JOIN cuentas cta ON c.customer_id = cta.cliente_id
 LEFT JOIN transacciones t ON c.customer_id = t.cliente_id

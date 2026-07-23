@@ -84,5 +84,5 @@ FROM STREAM(clientes_cdc_raw)
 KEYS (customer_id)
 APPLY AS DELETE WHEN operation = "DELETE"
 SEQUENCE BY to_timestamp(event_timestamp, 'MM-dd-yyyy HH:mm:ss')
-COLUMNS * EXCEPT (operation, event_timestamp, file_name)
+COLUMNS * EXCEPT (operation, event_timestamp, file_name, _rescued_data)
 STORED AS SCD TYPE 2;
