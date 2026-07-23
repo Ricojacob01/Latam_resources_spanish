@@ -3,7 +3,7 @@
 -- ==========================================================================
 
 -- Transacciones validadas
-CREATE OR REFRESH STREAMING TABLE transacciones (
+CREATE OR REFRESH STREAMING TABLE silver.transacciones (
   fecha_transaccion DATE COMMENT "Fecha de la transacción.",
   transaccion_id STRING COMMENT "Identificador único de la transacción.",
   cuenta_id STRING COMMENT "Cuenta asociada.",
@@ -31,10 +31,10 @@ AS SELECT
   canal,
   sucursal_id,
   producto
-FROM STREAM(transacciones_raw);
+FROM STREAM(bronze.transacciones_raw);
 
 -- Cuentas limpias
-CREATE OR REFRESH STREAMING TABLE cuentas (
+CREATE OR REFRESH STREAMING TABLE silver.cuentas (
   cuenta_id STRING COMMENT "Identificador de la cuenta.",
   cliente_id STRING COMMENT "Cliente titular.",
   tipo_cuenta STRING COMMENT "corriente o ahorro.",
@@ -51,10 +51,10 @@ AS SELECT
   CAST(saldo AS DECIMAL(19,2)) AS saldo,
   CAST(fecha_apertura AS DATE) AS fecha_apertura,
   estado
-FROM STREAM(cuentas_raw);
+FROM STREAM(bronze.cuentas_raw);
 
 -- Sucursales
-CREATE OR REFRESH STREAMING TABLE sucursales (
+CREATE OR REFRESH STREAMING TABLE silver.sucursales  (
   sucursal_id STRING COMMENT "Código de sucursal.",
   nombre STRING COMMENT "Nombre de la sucursal.",
   provincia STRING COMMENT "Provincia de Costa Rica.",
@@ -66,10 +66,10 @@ AS SELECT
   nombre,
   provincia,
   region
-FROM STREAM(sucursales_raw);
+FROM STREAM(bronze.sucursales_raw);
 
 -- AUTO CDC: Clientes (SCD Tipo 2)
-CREATE OR REFRESH STREAMING TABLE clientes (
+CREATE OR REFRESH STREAMING TABLE silver.clientes (
   customer_id STRING COMMENT "Identificador único del cliente.",
   nombre STRING COMMENT "Nombre completo.",
   cedula STRING COMMENT "Cédula de identidad.",
@@ -79,8 +79,8 @@ CREATE OR REFRESH STREAMING TABLE clientes (
 )
 COMMENT "Clientes con historial SCD Tipo 2.";
 
-CREATE FLOW clientes_cdc_flow AS AUTO CDC INTO clientes
-FROM STREAM(clientes_cdc_raw)
+CREATE FLOW clientes_cdc_flow AS AUTO CDC INTO silver.clientes
+FROM STREAM(bronze.clientes_cdc_raw)
 KEYS (customer_id)
 APPLY AS DELETE WHEN operation = "DELETE"
 SEQUENCE BY to_timestamp(event_timestamp, 'MM-dd-yyyy HH:mm:ss')

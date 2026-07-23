@@ -3,7 +3,7 @@
 -- ==========================================================================
 
 -- Resumen diario por sucursal
-CREATE OR REFRESH MATERIALIZED VIEW resumen_diario_sucursal (
+CREATE OR REFRESH MATERIALIZED VIEW gold.resumen_diario_sucursal (
   fecha_transaccion DATE COMMENT "Fecha de las transacciones.",
   sucursal_id STRING COMMENT "Código de sucursal.",
   nombre_sucursal STRING COMMENT "Nombre de la sucursal.",
@@ -23,12 +23,12 @@ AS SELECT
   CAST(SUM(t.monto) AS DECIMAL(19,2)) AS monto_total,
   CAST(AVG(t.monto) AS DECIMAL(19,2)) AS monto_promedio,
   COUNT(DISTINCT t.cliente_id) AS clientes_unicos
-FROM transacciones t
-LEFT JOIN sucursales s ON t.sucursal_id = s.sucursal_id
+FROM silver.transacciones t
+LEFT JOIN silver.sucursales s ON t.sucursal_id = s.sucursal_id
 GROUP BY ALL;
 
 -- Resumen por producto y canal
-CREATE OR REFRESH MATERIALIZED VIEW resumen_producto_canal (
+CREATE OR REFRESH MATERIALIZED VIEW gold.resumen_producto_canal (
   fecha_transaccion DATE COMMENT "Fecha.",
   producto STRING COMMENT "Producto bancario.",
   canal STRING COMMENT "Canal de transacción.",
@@ -44,11 +44,11 @@ AS SELECT
   COUNT(*) AS total_transacciones,
   CAST(SUM(monto) AS DECIMAL(19,2)) AS monto_total,
   CAST(MAX(monto) AS DECIMAL(19,2)) AS monto_maximo
-FROM transacciones
+FROM silver.transacciones
 GROUP BY ALL;
 
 -- Métricas de clientes por segmento
-CREATE OR REFRESH MATERIALIZED VIEW metricas_clientes (
+CREATE OR REFRESH MATERIALIZED VIEW gold.metricas_clientes (
   segmento STRING COMMENT "Segmento del cliente.",
   total_clientes BIGINT COMMENT "Total de clientes activos.",
   saldo_promedio DECIMAL(19,2) COMMENT "Saldo promedio de cuentas.",
@@ -63,7 +63,7 @@ AS SELECT
     COUNT(DISTINCT t.transaccion_id) / COUNT(DISTINCT c.customer_id)
     AS BIGINT
   ) AS transacciones_promedio
-FROM clientes c
-LEFT JOIN cuentas cta ON c.customer_id = cta.cliente_id
-LEFT JOIN transacciones t ON c.customer_id = t.cliente_id
+FROM silver.clientes c
+LEFT JOIN silver.cuentas cta ON c.customer_id = cta.cliente_id
+LEFT JOIN silver.transacciones t ON c.customer_id = t.cliente_id
 GROUP BY c.segmento;
