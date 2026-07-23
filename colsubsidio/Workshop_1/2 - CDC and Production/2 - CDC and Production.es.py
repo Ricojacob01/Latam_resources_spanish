@@ -425,3 +425,4 @@ print("  Todas las consultas SQL usarán este catálogo automáticamente")
 # # print("✓ Limpieza del taller completada")
 
 
+

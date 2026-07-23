@@ -419,12 +419,12 @@
 # DBTITLE 1,Agregar archivo de pedidos
 import sys, os, re
 
-# Determinar la raíz del pipeline automáticamente (un nivel arriba)
-pipeline_root = os.path.dirname(os.getcwd())
-sys.path.append(pipeline_root)
+# Agregar la carpeta _recursos al path para importar utils
+recursos_path = '/Workspace/Users/rico.martinez@databricks.com/Workshop/Mineros/_recursos'
+sys.path.insert(0, recursos_path)
 
 # Importar helper
-from utilities.utils import add_orders_file
+from utils import add_orders_file
 
 # Info de usuario actual
 current_user = spark.sql("SELECT current_user()").collect()[0][0]
@@ -433,7 +433,7 @@ username = current_user.split("@")[0]
 # Limpiar username para nombres (remover caracteres especiales)
 clean_username = re.sub(r'[^a-z0-9]', '_', username.lower())
 
-working_dir = f'/Volumes/academia/{clean_username}/raw'
+working_dir = f'/Volumes/classic_stable_paco_catalog/{clean_username}/raw'
 
 result = add_orders_file(spark, working_dir, file_number=1, num_orders=25)
 print(result)

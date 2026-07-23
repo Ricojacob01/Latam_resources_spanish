@@ -309,3 +309,4 @@ FROM churn_protected;
 -- MAGIC ### Compartir datos con organizaciones externas
 -- MAGIC
 -- MAGIC Compartir tus datos fuera de tus usuarios de Databricks es simple con Delta Sharing, y no requiere que los consumidores de datos usen Databricks: `dbdemos.install('delta-sharing-airlines')`
+

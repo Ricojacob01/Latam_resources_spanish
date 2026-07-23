@@ -556,3 +556,4 @@ SELECT
 -- MAGIC - Change Data Capture (CDC)
 -- MAGIC
 
+
