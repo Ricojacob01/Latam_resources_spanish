@@ -71,6 +71,10 @@ print(f"✔ Esquema de trabajo: {FQN}")
 
 # COMMAND ----------
 
+
+
+# COMMAND ----------
+
 # DBTITLE 1,Lectura de las bases (laboratorio vs SAP HANA)
 # ─────────────────────────────────────────────────────────────────────────────
 # Paso 1: Descubrimiento — ver qué tablas existen en el esquema HANA
@@ -222,6 +226,27 @@ print(f"✔ {len(REGLAS)} reglas de validación definidas")
 # DBTITLE 1,Ejecutar las reglas y construir el informe de inconsistencias
 from pyspark.sql import Row, functions as F
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Lectura desde el catálogo (classic_stable_paco_catalog.ws2_rico_martinez)
+# en lugar de SAP HANA vía JDBC. Creamos vistas temporales para que las REGLAS
+# (definidas con nombres sin prefijo) funcionen sin modificación.
+# ─────────────────────────────────────────────────────────────────────────────
+empresas       = spark.table(f"{FQN}.sap_empresas")
+afiliados      = spark.table(f"{FQN}.sap_afiliados")
+personas_cargo = spark.table(f"{FQN}.sap_personas_cargo")
+aportes        = spark.table(f"{FQN}.sap_aportes")
+
+empresas.createOrReplaceTempView("empresas")
+afiliados.createOrReplaceTempView("afiliados")
+personas_cargo.createOrReplaceTempView("personas_cargo")
+aportes.createOrReplaceTempView("aportes")
+
+print(f"✔ Datos leídos desde {FQN} (catálogo Unity Catalog)")
+print(f"  empresas       : {empresas.count():,} filas")
+print(f"  afiliados      : {afiliados.count():,} filas")
+print(f"  personas_cargo : {personas_cargo.count():,} filas")
+print(f"  aportes        : {aportes.count():,} filas")
+
 # Ejecutar cada regla de validación contra las vistas temporales.
 # Cada regla es un SELECT COUNT(*) que cuenta los registros que INCUMPLEN la regla.
 filas = []
@@ -285,8 +310,8 @@ display(
 # COMMAND ----------
 
 # DBTITLE 1,Detectar cambios de documento de identidad
-# Leer la base del periodo anterior directamente desde SAP HANA
-periodo_anterior = leer_desde_hana("AFILIADOS_PERIODO_ANTERIOR")
+# Leer la base del periodo anterior desde el catálogo Unity Catalog
+periodo_anterior = spark.table(f"{FQN}.sap_afiliados_periodo_anterior")
 periodo_anterior.createOrReplaceTempView("afiliados_periodo_anterior")
 
 cambios_documento = spark.sql("""

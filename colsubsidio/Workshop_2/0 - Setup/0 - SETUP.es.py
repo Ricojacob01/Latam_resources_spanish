@@ -33,7 +33,7 @@
 # COMMAND ----------
 
 # DBTITLE 1,Widgets — catálogo compartido y escala de datos
-dbutils.widgets.text("catalogo", "classic_stable_paco_catalog", "Catálogo compartido")
+dbutils.widgets.text("catalogo", "workshop", "Catálogo compartido")
 dbutils.widgets.dropdown("escala", "demo", ["demo", "full"], "Escala de datos")
 
 CATALOGO = dbutils.widgets.get("catalogo").strip()
@@ -382,4 +382,3 @@ print(f"  FQN      = {FQN}\n")
 print("✔ Setup completado. Continúa con:")
 print("   1 - Validación Regulatoria (ETL)")
 print("   2 - Pronóstico de Ventas (ETL + ML)")
-

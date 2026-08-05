@@ -2,9 +2,31 @@
 # MAGIC %md
 # MAGIC # 2.4 · Ciclo de vida del modelo en Unity Catalog
 # MAGIC
-# MAGIC Gestionamos el modelo registrado con **alias** (`@Challenger`, `@Champion`), descripciones y etiquetas —
-# MAGIC el patrón de MLOps del workshop de referencia. El alias indica en qué fase del ciclo de vida está cada
-# MAGIC versión, y permite que la inferencia (2.5) referencie siempre `@Champion` sin hardcodear números de versión.
+# MAGIC <img src="https://github.com/databricks-demos/dbdemos-resources/blob/main/images/product/mlops/mlops-uc-end2end-3-v2.png?raw=true" width="1000">
+# MAGIC
+# MAGIC ## 📘 El problema que resuelven los alias
+# MAGIC
+# MAGIC Uno de los grandes retos de MLOps es la falta de un **repositorio central** para modelos, sus versiones
+# MAGIC y su promoción a lo largo del ciclo de vida. **Modelos en Unity Catalog** resuelve esto: piensa en
+# MAGIC registrar un modelo como hacer *commit* de código en un control de versiones. Cada reentrenamiento crea
+# MAGIC una nueva **versión** (v1, v2, …), y los **alias** en texto libre (`@Challenger`, `@Champion`) marcan
+# MAGIC *qué versión está en qué fase*.
+# MAGIC
+# MAGIC | Concepto | Qué es | Para qué sirve |
+# MAGIC |----------|--------|----------------|
+# MAGIC | **Versión** | Cada modelo registrado (v1, v2…) | Historial inmutable y auditable |
+# MAGIC | **`@Challenger`** | Candidato recién entrenado | Se valida antes de promover |
+# MAGIC | **`@Champion`** | Modelo actualmente en producción | Lo que consume la inferencia (2.5) |
+# MAGIC | **Tags** | Metadatos (`val_r2`, `has_description`…) | Registrar qué pruebas pasó |
+# MAGIC
+# MAGIC **La gran ventaja:** la inferencia referencia `models:/<modelo>@Champion` — **nunca un número de versión
+# MAGIC fijo**. Cuando promueves un nuevo Champion, la inferencia usa el nuevo modelo automáticamente, sin tocar
+# MAGIC una sola línea del notebook de scoring. Así se desacopla el *entrenamiento* del *despliegue*.
+# MAGIC
+# MAGIC > **Humano en el circuito → automatización.** Al empezar con MLOps conviene un humano validando cada
+# MAGIC > promoción. A medida que el proceso madura, estos pasos se automatizan en un **Databricks Job** de
+# MAGIC > validación (documentación, umbral de métrica, pruebas Champion-Challenger). Aquí lo mostramos como
+# MAGIC > notebook interactivo con una regla de umbral simple.
 
 # COMMAND ----------
 
@@ -69,9 +91,17 @@ print(f"✔ Alias @Challenger → versión {ultima.version}")
 # MAGIC %md
 # MAGIC ## 2. Validar el Challenger y promover a Champion
 # MAGIC
-# MAGIC En producción, la promoción se automatiza en un notebook de validación dentro de un **Databricks Job**
-# MAGIC (pruebas de calidad, umbrales de métrica, etc.). Aquí aplicamos una **regla de umbral simple**: si el R²
-# MAGIC de validación supera el mínimo, promovemos el Challenger a **`@Champion`**.
+# MAGIC En MLOps real, validar un modelo es **más que la precisión**. Un notebook de validación típico
+# MAGIC comprueba, entre otros:
+# MAGIC
+# MAGIC * **Documentación** — ¿el modelo tiene descripción suficiente? (gobernanza)
+# MAGIC * **Métrica de desempeño** — ¿supera el umbral y/o al Champion actual?
+# MAGIC * **Inferencia sobre datos de producción** — ¿corre sin errores end-to-end?
+# MAGIC * **KPIs de negocio** — ¿el impacto económico es aceptable? (no confundir con A/B testing, que es online)
+# MAGIC
+# MAGIC Cada comprobación se registra como **tag** en la versión, dejando trazado qué se validó. Aquí aplicamos
+# MAGIC una **regla de umbral simple** sobre R²; si la primera versión no tiene Champion previo, se acepta como
+# MAGIC el primero (patrón "bootstrap").
 
 # COMMAND ----------
 
@@ -101,11 +131,26 @@ else:
 # COMMAND ----------
 
 # DBTITLE 1,Resumen de versiones y alias
-for v in sorted(client.search_model_versions(f"name = '{MODELO}'"), key=lambda v: int(v.version)):
+# Nota: los objetos de search_model_versions no exponen aliases/tags de forma fiable;
+# consultamos cada versión con get_model_version, que sí devuelve aliases (lista) y tags (dict).
+for sv in sorted(client.search_model_versions(f"name = '{MODELO}'"), key=lambda v: int(v.version)):
+    v = client.get_model_version(MODELO, sv.version)
     print(f"  v{v.version}  aliases={list(v.aliases)}  tags={dict(v.tags)}")
 
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ## 🔁 Cómo aplicar este marco a otros modelos
+# MAGIC
+# MAGIC La gestión del ciclo de vida es **totalmente independiente del tipo de modelo** — es pura gobernanza.
+# MAGIC El mismo notebook sirve tal cual para churn, fraude, riesgo de crédito, etc.; solo cambia:
+# MAGIC
+# MAGIC * El **nombre del modelo** (`MODELO`) y su descripción.
+# MAGIC * La **métrica** de la regla de promoción (R² para regresión → F1/AUC para clasificación).
+# MAGIC * Opcionalmente, **más comprobaciones** de validación según los requisitos regulatorios del caso.
+# MAGIC
+# MAGIC Los alias `@Challenger`/`@Champion`, las tags y el desacople entrenamiento↔despliegue funcionan igual
+# MAGIC para cualquier modelo del catálogo de Colsubsidio. En producción, este notebook se convierte en una
+# MAGIC **tarea de un Databricks Job** disparada tras cada reentrenamiento.
+# MAGIC
 # MAGIC **Siguiente:** `2.5 Inferencia batch + write-back a SAP HANA` — usa el modelo `@Champion`.
-

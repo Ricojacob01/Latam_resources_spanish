@@ -2,12 +2,30 @@
 # MAGIC %md
 # MAGIC # 2.5 · Inferencia batch + write-back a SAP HANA
 # MAGIC
-# MAGIC Generamos el pronóstico con el modelo **`@Champion`** usando **`fe.score_batch`** — que recupera
-# MAGIC automáticamente las features del Feature Store por sus claves — y escribimos el resultado **de vuelta a
-# MAGIC SAP HANA** para alimentar SAP Analytics Cloud.
+# MAGIC <img src="https://github.com/databricks-demos/dbdemos-resources/blob/main/images/product/mlops/mlops-uc-end2end-4-v2.png?raw=true" width="1000">
 # MAGIC
-# MAGIC > **Cierre del principio del taller:** los datos (histórico y pronóstico) viven en **SAP HANA**. En
-# MAGIC > Databricks quedan únicamente los **activos de ML**: la feature table y el modelo registrado.
+# MAGIC Último paso del ciclo: **poner el modelo a trabajar**. Generamos el pronóstico con el modelo
+# MAGIC **`@Champion`** usando **`fe.score_batch`** y entregamos el resultado a los consumidores de negocio.
+# MAGIC
+# MAGIC ## 📘 Por qué `fe.score_batch` en lugar de `model.predict`
+# MAGIC
+# MAGIC `fe.score_batch` es la pieza que cierra el círculo del Feature Store:
+# MAGIC
+# MAGIC 1. Le pasamos **solo las claves** `(producto_familia, fecha)` a puntuar — **no** las features.
+# MAGIC 2. El Feature Store **recupera automáticamente** las features de la tabla `ft_ventas_features`, usando
+# MAGIC    exactamente la **misma definición** con la que se entrenó (recuerda: el modelo se registró con su
+# MAGIC    `training_set` en 2.3).
+# MAGIC 3. Aplica el modelo `@Champion` y devuelve las predicciones.
+# MAGIC
+# MAGIC Esto **elimina el training-serving skew** por diseño: es imposible que la inferencia use una lógica de
+# MAGIC features distinta a la del entrenamiento, porque ambas leen de la misma feature table. Además, al
+# MAGIC referenciar `@Champion` (no un número de versión), este notebook usa siempre el modelo en producción sin
+# MAGIC modificaciones.
+# MAGIC
+# MAGIC > **Principio del taller:** los **datos de negocio** (histórico y pronóstico) pertenecen a **SAP HANA**.
+# MAGIC > En Databricks solo persisten los **activos de ML** (la feature table y el modelo). En el laboratorio,
+# MAGIC > como no hay un HANA conectado, escribimos el pronóstico a una tabla del catálogo para que puedas ver
+# MAGIC > el resultado; el bloque final muestra el **write-back real a SAP HANA** que se usaría en producción.
 
 # COMMAND ----------
 
@@ -84,15 +102,34 @@ display(
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 2. Write-back del pronóstico a SAP HANA
+# MAGIC ## 2. Entregar el pronóstico
 # MAGIC
-# MAGIC El resultado se escribe de vuelta a SAP HANA (`PRONOSTICO_VENTAS`) con la Databricks Connection — mismo
-# MAGIC patrón que los módulos ETL. **El modelo y las features quedan en Databricks; el pronóstico va a HANA.**
+# MAGIC Dos rutas, según el entorno:
+# MAGIC
+# MAGIC * **Laboratorio (celda A):** escribimos a una tabla del catálogo para poder inspeccionar el resultado,
+# MAGIC   ya que no hay un SAP HANA conectado.
+# MAGIC * **Producción (celda B, gated):** el write-back **real a SAP HANA** vía JDBC — la misma Databricks
+# MAGIC   Connection de los módulos ETL. Aquí es donde el pronóstico "regresa" a HANA para alimentar SAP
+# MAGIC   Analytics Cloud, respetando el principio de no dejar datos de negocio en Databricks.
 
 # COMMAND ----------
 
-# DBTITLE 1,Write-back JDBC (gated)
-ESCRIBIR_A_HANA = False
+# DBTITLE 1,A) Write-back al catálogo (laboratorio)
+# En el laboratorio escribimos a UC para poder ver el resultado (no hay HANA conectado).
+TABLA_PRONOSTICO = f"{FQN}.pronostico_ventas_lab"
+
+(pronostico.write
+    .mode("overwrite")
+    .option("overwriteSchema", "true")
+    .saveAsTable(TABLA_PRONOSTICO))
+
+print(f"✔ [LAB] Escrito a Unity Catalog → {TABLA_PRONOSTICO} ({pronostico.count():,} filas)")
+
+# COMMAND ----------
+
+# DBTITLE 1,B) Write-back real a SAP HANA (producción — gated)
+# En producción, el pronóstico se escribe DE VUELTA a SAP HANA (no se queda en Databricks).
+ESCRIBIR_A_HANA = False               # ← True cuando exista la conexión SAP HANA
 CONNECTION_NAME = "sap_bw_workshop"
 SAP_SCHEMA      = "WORKSHOP"
 
@@ -102,10 +139,10 @@ if ESCRIBIR_A_HANA:
         .option("dbtable", f'"{SAP_SCHEMA}"."PRONOSTICO_VENTAS"')
         .option("batchsize", 10000).option("numPartitions", 4)
         .mode("overwrite").save())
-    print(f"✔ Escrito a SAP HANA → {SAP_SCHEMA}.PRONOSTICO_VENTAS ({pronostico.count():,} filas)")
+    print(f"✔ [PROD] Escrito a SAP HANA → {SAP_SCHEMA}.PRONOSTICO_VENTAS ({pronostico.count():,} filas)")
 else:
     print(f"[SIMULADO] Se escribirían {pronostico.count():,} filas a SAP HANA.PRONOSTICO_VENTAS. "
-          f"Pon ESCRIBIR_A_HANA=True para el write-back real.")
+          f"Pon ESCRIBIR_A_HANA=True cuando exista la conexión.")
 
 # COMMAND ----------
 
@@ -120,4 +157,17 @@ else:
 # MAGIC
 # MAGIC **Activos persistidos en Databricks:** la **feature table** y el **modelo registrado** (con alias
 # MAGIC `@Champion`). Todos los datos de negocio — histórico y pronóstico — viven en **SAP HANA**.
-
+# MAGIC
+# MAGIC ## 🔁 Cómo aplicar este marco a otros modelos
+# MAGIC
+# MAGIC La inferencia batch con `fe.score_batch` es idéntica para cualquier modelo registrado con Feature Store.
+# MAGIC Para productivizar otro modelo:
+# MAGIC
+# MAGIC 1. Prepara el **spine** con las claves a puntuar (los afiliados del mes, las empresas activas, etc.).
+# MAGIC 2. Llama `fe.score_batch(model_uri="models:/<modelo>@Champion", df=spine)`.
+# MAGIC 3. Escribe el resultado **de vuelta a SAP HANA** con el mismo patrón JDBC.
+# MAGIC 4. **Automatízalo** en un Databricks Job programado (diario, mensual…) que encadene:
+# MAGIC    features → (reentrenamiento opcional) → validación/promoción → inferencia → write-back.
+# MAGIC
+# MAGIC Ese Job es la versión productiva de los notebooks 2.1–2.5. La **misma plantilla** sirve para todos los
+# MAGIC modelos de Colsubsidio — solo cambian el spine, el nombre del modelo y la tabla destino en HANA.
