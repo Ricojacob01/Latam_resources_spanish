@@ -1,0 +1,45 @@
+command: ["uv", "run", "start-server"]
+# databricks apps listen by default on port 8000. The agent server serves both
+# the JSON API (/invocations, /api/model-services) and the static chat UI (/).
+
+env:
+  - name: MLFLOW_TRACKING_URI
+    value: "databricks"
+  - name: MLFLOW_REGISTRY_URI
+    value: "databricks-uc"
+  - name: MLFLOW_EXPERIMENT_ID
+    valueFrom: "experiment"
+  # Unity Catalog schema(s) — comma-separated "catalog.schema" — whose model
+  # services the UI dropdown offers (the `<schema>.*` wildcard). Read by the
+  # /api/model-services route and by the agent, which only honors a requested
+  # model service if it lives in one of these schemas. Setting this also turns on
+  # gateway routing (use_ai_gateway). There is NO default model service — the
+  # learner creates the service and grants the app EXECUTE as a hands-on lab step.
+  # Leave EMPTY here: Classroom-Setup-1 / AppDeployer set the resolved course
+  # schema (catalog.schema) at deploy time, which replaces this file's env. A
+  # non-empty value here would only apply to local dev or an out-of-band redeploy.
+  - name: MODEL_SERVICE_SCHEMAS
+    value: ""
+  # The app's own service principal id (application/client id). AppDeployer sets
+  # this at deploy time so the onboarding overlay can probe whether the SP has
+  # been granted EXECUTE on the model service yet (the hands-on lab step). Leave
+  # empty for local dev — the overlay's access probe no-ops when the gateway is
+  # not configured.
+  - name: APP_SERVICE_PRINCIPAL_ID
+    value: ""
+  # Registered system prompt (MLflow Prompt Registry) metadata for the "My Agent"
+  # panel. Leave NAME and VERSION EMPTY here: Classroom-Setup-1 / AppDeployer set
+  # them per learner at deploy time (from the prompt registered in the resolved
+  # course catalog.schema), which replaces this file's env. Empty NAME => the app
+  # shows "Built-in default" and falls back to the bundled prompts/system_prompt.md.
+  # (A hard-coded value here would be wrong for any other learner's catalog and only
+  # ever applies to local dev or an out-of-band redeploy.)
+  - name: SYSTEM_PROMPT_NAME
+    value: ""
+  # Registered version the panel displays (a pure by-version read; the app SP can't
+  # do the write that an alias-load performs). Set at deploy time; empty here.
+  - name: SYSTEM_PROMPT_VERSION
+    value: ""
+  # Alias the panel shows next to the version (e.g. "v2 (@champion)").
+  - name: SYSTEM_PROMPT_ALIAS
+    value: "champion"

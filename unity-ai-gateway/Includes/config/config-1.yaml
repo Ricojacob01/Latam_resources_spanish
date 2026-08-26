@@ -1,0 +1,35 @@
+# Config for Notebook 2
+
+# Set to true for development (enables manifest validation + cleanup)
+dev_mode: false
+
+# Set to true to drop the catalog after setup (requires dev_mode: true)
+resource_cleanup: false
+
+# Set to true if this course uses the Medallion Lab pattern
+medallion_lab: false
+
+course_name: "Unity AI Gateway Foundations"
+serverless_compute_version: "5"
+
+catalog:
+  prefix: "labuser"
+  schema_name: "ts_ai_gateway"
+  
+agent_app:
+  deploy: true
+
+libraries:
+  groups:
+    - databricks-sdk
+    - unitycatalog-ai-databricks
+
+files:
+  file1: 
+    folder_name: "agent-app/scripts"
+    name: "__init__.py"
+    file1_contents: ""
+  file2: 
+    folder_name: "agent-app/agent_server"
+    name: "__init__.py"
+    file2_contents: ""

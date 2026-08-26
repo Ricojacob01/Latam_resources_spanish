@@ -1,0 +1,5 @@
+[databricks-sdk]
+databricks-sdk = "0.123.0"
+
+[unitycatalog-ai-databricks]
+"unitycatalog-ai[databricks]" = "0.3.2"

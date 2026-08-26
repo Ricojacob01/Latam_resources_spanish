@@ -1,0 +1,1871 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>md-sandbox Diagram Builder</title>
+    <style>
+      /* Databricks DuBois design tokens (subset), light + dark. */
+      :root {
+        --blue-500: #2e86c1;
+        --blue-600: #2272b4;
+        --blue-700: #0e538b;
+        --grey-050: #f6f7f9;
+        --grey-100: #e8ecf0;
+        --grey-200: #d1dce5;
+        --grey-400: #8d9fad;
+        --grey-800: #11171c;
+        --neutral-600: #525252;
+
+        --background: #ffffff;
+        --foreground: var(--grey-800);
+        --muted: var(--grey-050);
+        --muted-foreground: var(--neutral-600);
+        --border: var(--grey-100);
+        --primary: var(--blue-600);
+        --primary-foreground: #ffffff;
+        --primary-hover: var(--blue-700);
+        --secondary: var(--grey-050);
+        --sidebar-bg: var(--grey-050);
+        --radius: 0.25rem;
+        --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --background: var(--grey-800);
+          --foreground: var(--grey-100);
+          --muted: #2a3a45;
+          --muted-foreground: #bdcdd9;
+          --border: #2a3a45;
+          --primary: var(--blue-500);
+          --primary-hover: var(--blue-600);
+          --secondary: #1a2530;
+          --sidebar-bg: #0d141a;
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: var(--font);
+        font-size: 13px;
+        line-height: 20px;
+        background: var(--background);
+        color: var(--foreground);
+      }
+
+      /* App shell: fixed-width sidebar + flexible main column. */
+      .app {
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+        position: relative; /* anchor for the floating "open sidebar" button */
+      }
+
+      /* ---------------- Sidebar ---------------- */
+      .sidebar {
+        flex: 0 0 260px;
+        width: 260px;
+        background: var(--sidebar-bg);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        padding: 16px 14px;
+        gap: 18px;
+      }
+      /* Collapsed: slide the sidebar to zero width; a floating button reopens it. */
+      .app.sidebar-collapsed .sidebar {
+        flex-basis: 0;
+        width: 0;
+        min-width: 0;
+        padding-left: 0;
+        padding-right: 0;
+        border-right: none;
+        overflow: hidden;
+        opacity: 0;
+      }
+      /* Collapse control in the sidebar header + floating reopen control. */
+      .sidebar-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        color: var(--muted-foreground);
+        opacity: 0.8;
+        cursor: pointer;
+        padding: 2px;
+        border-radius: 6px;
+      }
+      .sidebar-toggle:hover {
+        color: var(--primary);
+        opacity: 1;
+        background: var(--border);
+      }
+      .sidebar-toggle svg {
+        width: 16px;
+        height: 16px;
+      }
+      .sidebar-open {
+        position: absolute;
+        top: 14px;
+        left: 12px;
+        z-index: 30;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--sidebar-bg);
+        color: var(--muted-foreground);
+        cursor: pointer;
+      }
+      .sidebar-open:hover {
+        color: var(--primary);
+        border-color: var(--grey-400);
+      }
+      .sidebar-open svg {
+        width: 16px;
+        height: 16px;
+      }
+      .app.sidebar-collapsed .sidebar-open {
+        display: inline-flex;
+      }
+      .sidebar .brand {
+        font-size: 15px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .sidebar .brand > svg { width: 18px; height: 18px; opacity: 0.85; }
+      .sidebar .brand .brand-name { flex: 1; }
+      .sidebar .brand .info-link {
+        display: inline-flex;
+        color: var(--muted-foreground);
+        opacity: 0.8;
+      }
+      .sidebar .brand .info-link:hover { color: var(--primary); opacity: 1; }
+      .sidebar .brand .info-link svg { width: 15px; height: 15px; }
+      .side-section { display: flex; flex-direction: column; gap: 8px; }
+      .side-section .side-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted-foreground);
+        font-weight: 600;
+      }
+      .sidebar select {
+        appearance: none;
+        width: 100%;
+        background: var(--background);
+        color: var(--foreground);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 7px 26px 7px 10px;
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='%238d9fad' d='M8 8.917 10.947 6 12 7.042 8 11 4 7.042 5.053 6z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 6px center;
+      }
+      .sidebar select:hover { border-color: var(--grey-400); }
+
+      /* MLflow experiment link in sidebar (hidden until a URL loads). */
+      .experiment-link {
+        display: none;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 10px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--background);
+        color: var(--foreground);
+        font-size: 12px;
+        text-decoration: none;
+      }
+      .experiment-link:hover { border-color: var(--grey-400); }
+      .experiment-link svg { width: 14px; height: 14px; opacity: 0.7; }
+
+      /* Palette swatches */
+      .palette-hint { font-size: 11px; color: var(--muted-foreground); line-height: 1.4; }
+      .palette-actions { display: flex; gap: 10px; margin-bottom: 2px; }
+      .palette-actions button {
+        background: none;
+        border: 0;
+        color: var(--primary);
+        font: inherit;
+        font-size: 11px;
+        cursor: pointer;
+        padding: 0;
+      }
+      .palette-actions button:hover { text-decoration: underline; }
+      .palette-group-label {
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted-foreground);
+        margin: 6px 0 3px;
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 6px;
+      }
+      .swatch {
+        position: relative;
+        aspect-ratio: 1;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        outline: 2px solid transparent;
+        outline-offset: 1px;
+      }
+      .swatch[aria-pressed="true"] { outline-color: var(--primary); }
+      .swatch[aria-pressed="false"] { opacity: 0.4; }
+      .swatch .check {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 11px;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+      }
+      .swatch[aria-pressed="true"] .check { display: flex; }
+
+      /* Rate-limit usage gauges */
+      .gauge { display: flex; flex-direction: column; gap: 4px; }
+      .gauge-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 11.5px;
+        color: var(--muted-foreground);
+      }
+      .gauge-val { font-variant-numeric: tabular-nums; color: var(--foreground); }
+      .gauge-track {
+        height: 6px;
+        border-radius: 999px;
+        background: var(--border);
+        overflow: hidden;
+      }
+      .gauge-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: 999px;
+        background: var(--primary);
+        transition: width 0.3s ease, background 0.3s ease;
+      }
+      .gauge-fill.warn { background: #dc6222; }
+      .gauge-fill.over { background: #e83a5f; }
+
+      /* ---------------- Main column ---------------- */
+      .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+      #messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; padding-top: 12px; }
+      /* Wide column so diagrams (authored up to ~1200px) render at full size. */
+      .col { width: 100%; max-width: 78rem; margin: 0 auto; padding: 0 24px; }
+      /* Keep prose/user bubbles readable; only diagram cards use the full width. */
+      .bubble > div { max-width: 52rem; }
+      #list { padding-top: 24px; padding-bottom: 8px; }
+      .row { display: flex; margin-bottom: 20px; }
+      .row.user { justify-content: flex-end; }
+      .bubble {
+        max-width: 100%;
+        border-radius: 8px;
+        padding: 12px 16px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .row.assistant .bubble { background: var(--secondary); color: var(--foreground); width: 100%; }
+      .row.user .bubble { background: var(--primary); color: var(--primary-foreground); }
+
+      /* Copy button on user messages — visible on hover. */
+      .row.user { position: relative; }
+      .user-copy-btn {
+        position: absolute;
+        left: -36px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--background);
+        color: var(--muted-foreground);
+        cursor: pointer;
+      }
+      .user-copy-btn svg { width: 14px; height: 14px; }
+      .row.user:hover .user-copy-btn { display: inline-flex; }
+
+      /* Collapsible diagram card. */
+      .diagram.collapsed iframe,
+      .diagram.collapsed pre { display: none !important; }
+      .diagram-collapse-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border: 0;
+        border-radius: 4px;
+        background: transparent;
+        color: var(--muted-foreground);
+        cursor: pointer;
+        margin-right: 4px;
+        transition: transform 0.2s ease;
+      }
+      .diagram-collapse-btn:hover { background: var(--border); }
+      .diagram-collapse-btn svg { width: 13px; height: 13px; }
+      .diagram.collapsed .diagram-collapse-btn { transform: rotate(-90deg); }
+      .diagram.collapsed .btns { display: none; }
+
+      /* "Model used:" footer under each assistant reply — makes gateway routing
+         visible (the service can be an opaque name that routes to any model). */
+      .model-used {
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px solid var(--border);
+        font-size: 12px;
+        color: var(--muted-foreground);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .model-used code {
+        font-family: Menlo, Monaco, Consolas, "Ubuntu Mono", monospace;
+        font-size: 11px;
+        background: rgba(127, 127, 127, 0.14);
+        padding: 1px 6px;
+        border-radius: 4px;
+      }
+
+
+      /* Rendered markdown inside assistant bubbles. */
+      .bubble > :first-child { margin-top: 0; }
+      .bubble > :last-child { margin-bottom: 0; }
+      .bubble p { margin: 0 0 10px; }
+      .bubble h1, .bubble h2, .bubble h3, .bubble h4 { margin: 16px 0 8px; line-height: 1.3; font-weight: 600; }
+      .bubble h1 { font-size: 20px; }
+      .bubble h2 { font-size: 17px; }
+      .bubble h3 { font-size: 15px; }
+      .bubble h4 { font-size: 13px; }
+      .bubble ul, .bubble ol { margin: 0 0 10px; padding-left: 22px; }
+      .bubble li { margin: 2px 0; }
+      .bubble a { color: var(--blue-500); text-decoration: underline; }
+      .row.user .bubble a { color: #fff; }
+      .bubble code {
+        font-family: Menlo, Monaco, Consolas, "Ubuntu Mono", monospace;
+        font-size: 0.85em;
+        background: rgba(127, 127, 127, 0.18);
+        padding: 1px 5px;
+        border-radius: 4px;
+      }
+      .bubble pre {
+        margin: 0 0 10px;
+        padding: 12px 14px;
+        background: rgba(127, 127, 127, 0.14);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow-x: auto;
+      }
+      .bubble pre code { background: none; padding: 0; font-size: 12px; }
+      .bubble blockquote {
+        margin: 0 0 10px;
+        padding: 2px 12px;
+        border-left: 3px solid var(--border);
+        color: var(--muted-foreground);
+      }
+      .bubble hr { border: 0; border-top: 1px solid var(--border); margin: 12px 0; }
+      .bubble table { border-collapse: collapse; margin: 0 0 10px; }
+      .bubble th, .bubble td { border: 1px solid var(--border); padding: 4px 8px; }
+
+      /* Rendered %md-sandbox diagram: live preview (iframe) + toolbar. */
+      .diagram {
+        margin: 4px 0 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+      .diagram-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 6px 8px 6px 12px;
+        background: var(--muted);
+        border-bottom: 1px solid var(--border);
+      }
+      .diagram-toolbar .label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted-foreground);
+      }
+      .diagram-toolbar .btns { display: flex; gap: 6px; }
+      .diagram-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        height: 26px;
+        padding: 0 10px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--background);
+        color: var(--foreground);
+        font: inherit;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .diagram-btn:hover { border-color: var(--grey-400); }
+      .diagram-btn svg { width: 13px; height: 13px; opacity: 0.75; }
+      .diagram iframe { display: block; width: 100%; border: 0; background: #ffffff; }
+      .diagram pre { margin: 0; border: 0; border-radius: 0; max-height: 360px; }
+
+      /* Empty-state greeting, vertically centered. */
+      #greeting {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--foreground);
+        padding: 0 16px 48px;
+        text-align: center;
+      }
+
+      /* Composer — sticky bottom, rounded input with inline send. */
+      footer { position: sticky; bottom: 0; background: var(--background); padding-bottom: 16px; }
+
+      /* "Editing diagram" pill above the composer (diagram-as-code as input). */
+      .edit-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+        padding: 4px 6px 4px 10px;
+        border: 1px solid var(--primary);
+        border-radius: 999px;
+        background: rgba(34, 114, 180, 0.08);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .edit-pill svg { width: 13px; height: 13px; }
+      .edit-pill button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        margin-left: 2px;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--primary);
+        font-size: 15px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .edit-pill button:hover { background: rgba(34, 114, 180, 0.18); }
+      form {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 8px 8px 8px 14px;
+        background: var(--background);
+        box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.06);
+      }
+      #input {
+        flex: 1;
+        border: 0;
+        outline: none;
+        resize: none;
+        background: transparent;
+        color: var(--foreground);
+        font: inherit;
+        font-size: 13px;
+        line-height: 20px;
+        max-height: 260px;
+        padding: 6px 0;
+      }
+      #input::placeholder { color: var(--muted-foreground); }
+      #send {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--primary);
+        color: var(--primary-foreground);
+        cursor: pointer;
+      }
+      #send:hover:not(:disabled) { background: var(--primary-hover); }
+      #send:disabled { opacity: 0.4; cursor: default; }
+      #send svg { width: 16px; height: 16px; }
+
+      /* ---------------- Expand modal ---------------- */
+      #modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: rgba(0, 0, 0, 0.55);
+        padding: 32px;
+      }
+      #modal.open { display: flex; align-items: stretch; justify-content: center; }
+      .modal-inner {
+        background: #ffffff;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 1240px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+      .modal-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 10px 8px 16px;
+        border-bottom: 1px solid var(--grey-100);
+        background: var(--grey-050);
+      }
+      .modal-bar .label { font-size: 12px; color: var(--neutral-600); }
+      .modal-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: var(--grey-800);
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .modal-close:hover { background: var(--grey-100); }
+      #modal iframe { display: block; width: 100%; flex: 1; border: 0; background: #fff; }
+
+      /* ---------------- Onboarding overlay ---------------- */
+      /* Full-screen gate shown until the app can route through Unity AI Gateway:
+         the learner must create a model service and grant the app SP EXECUTE. */
+      #gateway-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        background: rgba(11, 32, 38, 0.55);
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+      }
+      #gateway-overlay.open { display: flex; }
+      .gw-card {
+        background: var(--background);
+        color: var(--foreground);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        max-width: 560px;
+        width: 100%;
+        padding: 28px 30px 26px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+      .gw-badge {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--primary);
+        background: rgba(34, 114, 180, 0.1);
+        border-radius: 999px;
+        padding: 3px 10px;
+        margin-bottom: 12px;
+      }
+      .gw-card h2 {
+        margin: 0 0 10px;
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+      .gw-card p { margin: 0 0 14px; font-size: 14px; line-height: 1.5; color: var(--muted-foreground); }
+      .gw-card code {
+        font-family: Menlo, Monaco, Consolas, "Ubuntu Mono", monospace;
+        font-size: 0.85em;
+        background: rgba(127, 127, 127, 0.18);
+        padding: 1px 5px;
+        border-radius: 4px;
+        word-break: break-all;
+      }
+      .gw-steps { margin: 0 0 18px; padding-left: 20px; font-size: 14px; line-height: 1.6; }
+      .gw-steps li { margin: 4px 0; }
+      .gw-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+      .gw-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 34px;
+        padding: 0 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: var(--background);
+        color: var(--foreground);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .gw-btn:hover { border-color: var(--grey-400); }
+      .gw-btn.primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+      .gw-btn.primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+      .gw-btn svg { width: 14px; height: 14px; }
+      .gw-recheck-note { font-size: 12px; color: var(--muted-foreground); margin-left: 2px; }
+
+      /* ---------------- My Agent button (sidebar) ---------------- */
+      .agent-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        width: 100%;
+        height: 34px;
+        padding: 0 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--background);
+        color: var(--foreground);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .agent-btn:hover { border-color: var(--grey-400); }
+      .agent-btn svg { width: 15px; height: 15px; opacity: 0.8; }
+
+      /* ---------------- My Agent modal ---------------- */
+      #agent-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 55;
+        background: rgba(0, 0, 0, 0.55);
+        padding: 32px;
+      }
+      #agent-modal.open { display: flex; align-items: center; justify-content: center; }
+      .agent-modal-inner {
+        background: var(--background);
+        color: var(--foreground);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        width: 100%;
+        max-width: 520px;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+      .agent-modal-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 12px 12px 18px;
+        border-bottom: 1px solid var(--border);
+      }
+      .agent-modal-title { font-size: 15px; font-weight: 600; }
+      .agent-modal-body { padding: 18px; overflow-y: auto; }
+      .agent-field { margin-bottom: 18px; }
+      .agent-label,
+      .agent-section-label {
+        display: block;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted-foreground);
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      #agent-modal select {
+        appearance: none;
+        width: 100%;
+        background: var(--background);
+        color: var(--foreground);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 8px 26px 8px 10px;
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='%238d9fad' d='M8 8.917 10.947 6 12 7.042 8 11 4 7.042 5.053 6z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+      }
+      #agent-modal select:hover { border-color: var(--grey-400); }
+      .agent-caption { margin-top: 6px; font-size: 12px; color: var(--muted-foreground); }
+      .agent-section-label { margin-top: 4px; }
+      .agent-details { margin: 0 0 18px; }
+      .agent-detail-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 7px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+      }
+      .agent-detail-row dt { color: var(--muted-foreground); flex: 0 0 auto; }
+      .agent-detail-row dd {
+        margin: 0;
+        text-align: right;
+        font-family: Menlo, Monaco, Consolas, "Ubuntu Mono", monospace;
+        font-size: 12px;
+        word-break: break-all;
+      }
+      .agent-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+      .agent-prompt-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+      .agent-prompt-text {
+        margin: 0 0 18px;
+        padding: 12px 14px;
+        max-height: 260px;
+        overflow: auto;
+        background: rgba(127, 127, 127, 0.12);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-family: Menlo, Monaco, Consolas, "Ubuntu Mono", monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- ================= Sidebar ================= -->
+      <aside class="sidebar">
+        <div class="brand">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
+            <rect x="1.5" y="2.5" width="6" height="5" rx="1" /><rect x="8.5" y="8.5" width="6" height="5" rx="1" />
+            <path d="M4.5 7.5v3h4" />
+          </svg>
+          <span class="brand-name">Diagram-As-Code</span>
+          <a
+            class="info-link"
+            href="https://docs.databricks.com/aws/en/dev-tools/vscode-ext/notebooks#notebook-magics"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="About notebook magics (%md-sandbox)"
+            aria-label="About notebook magics"
+          >
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3">
+              <circle cx="8" cy="8" r="6.5" />
+              <path d="M8 7.2v4" stroke-linecap="round" />
+              <circle cx="8" cy="4.9" r="0.35" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+          <button
+            type="button"
+            id="sidebar-toggle"
+            class="sidebar-toggle"
+            title="Collapse sidebar"
+            aria-label="Collapse sidebar"
+            aria-expanded="true"
+          >
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1.8" y="2.5" width="12.4" height="11" rx="1.5" />
+              <path d="M6 2.5v11" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Model selector + MLflow link live in the "My Agent" modal, opened here. -->
+        <div class="side-section">
+          <button type="button" id="agent-btn" class="agent-btn" title="View and configure this agent">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="8" cy="5" r="2.6" /><path d="M2.8 13.5a5.2 5.2 0 0 1 10.4 0" />
+            </svg>
+            <span>My Agent</span>
+          </button>
+        </div>
+
+        <div class="side-section">
+          <span class="side-label">Color palette</span>
+          <div class="palette-hint">Selected colors are the only ones the agent uses (an explicit color you type still wins).</div>
+          <div class="palette-actions">
+            <button type="button" id="pal-all">Select all</button>
+            <button type="button" id="pal-none">Clear</button>
+          </div>
+          <div class="palette-group-label">Primary</div>
+          <div class="swatches" id="pal-primary"></div>
+          <div class="palette-group-label">Custom</div>
+          <div class="swatches" id="pal-custom"></div>
+        </div>
+
+        <!-- Rate-limit usage gauges (hidden until a limit is configured). -->
+        <div class="side-section" id="usage-section" style="display: none">
+          <span class="side-label">Rate limit — this session</span>
+          <div class="gauge" id="gauge-qpm">
+            <div class="gauge-head"><span class="gauge-label">Requests / min</span><span class="gauge-val" id="qpm-val"></span></div>
+            <div class="gauge-track"><div class="gauge-fill" id="qpm-fill"></div></div>
+          </div>
+          <div class="gauge" id="gauge-tpm">
+            <div class="gauge-head"><span class="gauge-label">Tokens / min</span><span class="gauge-val" id="tpm-val"></span></div>
+            <div class="gauge-track"><div class="gauge-fill" id="tpm-fill"></div></div>
+          </div>
+          <div class="palette-hint">Usage this app has sent in the last minute, against the shared service limit.</div>
+        </div>
+      </aside>
+
+      <!-- Floating control to reopen the sidebar (shown only when collapsed). -->
+      <button
+        type="button"
+        id="sidebar-open"
+        class="sidebar-open"
+        title="Open sidebar"
+        aria-label="Open sidebar"
+      >
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1.8" y="2.5" width="12.4" height="11" rx="1.5" />
+          <path d="M6 2.5v11" />
+        </svg>
+      </button>
+
+      <!-- ================= Main ================= -->
+      <div class="main">
+        <div id="messages">
+          <div id="greeting">Build like a Brickster</div>
+          <div class="col" id="list" style="display: none"></div>
+        </div>
+
+        <footer>
+          <div class="col">
+            <div id="edit-pill" class="edit-pill" style="display: none">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 2.5l2.5 2.5L6 12.5 3 13l.5-3z" />
+              </svg>
+              <span>Editing diagram</span>
+              <button type="button" id="edit-pill-clear" aria-label="Cancel edit">&times;</button>
+            </div>
+            <form id="composer">
+              <textarea id="input" rows="1" placeholder="Describe a diagram…" autocomplete="off"></textarea>
+              <button type="submit" id="send" title="Send" aria-label="Send">
+                <svg viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M1.724 1.053a.5.5 0 0 0-.714.596l1.86 5.301H8.5a.5.5 0 0 1 0 1H2.87l-1.86 5.301a.5.5 0 0 0 .714.596l13-6.5a.5.5 0 0 0 0-.894l-13-6.5z" />
+                </svg>
+              </button>
+            </form>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ================= Expand modal ================= -->
+    <div id="modal">
+      <div class="modal-inner">
+        <div class="modal-bar">
+          <span class="label">Full diagram</span>
+          <button type="button" class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+        </div>
+        <iframe id="modal-frame" sandbox="allow-scripts"></iframe>
+      </div>
+    </div>
+
+    <!-- ================= My Agent modal ================= -->
+    <div id="agent-modal">
+      <div class="agent-modal-inner">
+        <div class="agent-modal-bar">
+          <span class="agent-modal-title">My Agent</span>
+          <button type="button" class="modal-close" id="agent-modal-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="agent-modal-body">
+          <div class="agent-field">
+            <label class="agent-label" for="model">Model service</label>
+            <select id="model"><option>loading…</option></select>
+            <div class="agent-caption" id="agent-underlying-caption"></div>
+          </div>
+
+          <div class="agent-section-label">Details</div>
+          <dl class="agent-details" id="agent-details">
+            <div class="agent-detail-row"><dt>Model service</dt><dd id="ad-fullname">—</dd></div>
+            <div class="agent-detail-row"><dt>Catalog</dt><dd id="ad-catalog">—</dd></div>
+            <div class="agent-detail-row"><dt>Schema</dt><dd id="ad-schema">—</dd></div>
+            <div class="agent-detail-row"><dt>Underlying model</dt><dd id="ad-underlying">—</dd></div>
+            <div class="agent-detail-row" id="ad-desttype-row"><dt>Routing</dt><dd id="ad-desttype">—</dd></div>
+          </dl>
+
+          <div class="agent-section-label">System prompt</div>
+          <dl class="agent-details" id="agent-prompt-details">
+            <div class="agent-detail-row"><dt>Prompt</dt><dd id="ap-name">—</dd></div>
+            <div class="agent-detail-row"><dt>Version</dt><dd id="ap-version">—</dd></div>
+          </dl>
+          <div class="agent-prompt-actions">
+            <button type="button" id="ap-toggle" class="gw-btn" style="display:none">View prompt</button>
+          </div>
+          <pre id="ap-text" class="agent-prompt-text" style="display:none"></pre>
+
+          <div class="agent-actions">
+            <a id="agent-uc-link" class="gw-btn primary" target="_blank" rel="noopener noreferrer" style="display:none">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3H3.5A1.5 1.5 0 0 0 2 4.5v8A1.5 1.5 0 0 0 3.5 14h8a1.5 1.5 0 0 0 1.5-1.5V10" />
+                <path d="M9.5 2.5H13.5V6.5" /><path d="M13.5 2.5 7 9" />
+              </svg>
+              <span>Open in Unity Catalog</span>
+            </a>
+            <a id="experiment-link" class="gw-btn" target="_blank" rel="noopener noreferrer" style="display:none">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6.5 1.5v4L2.8 12a1 1 0 0 0 .87 1.5h8.66a1 1 0 0 0 .87-1.5L9.5 5.5v-4" />
+                <path d="M5.5 1.5h5" /><path d="M4.7 9.5h6.6" />
+              </svg>
+              <span>MLflow experiment</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Onboarding overlay (Unity AI Gateway not ready) ============ -->
+    <!-- Starts OPEN with a neutral "checking" state so the app never flashes into
+         view before the readiness check resolves; hidden only once state=ready. -->
+    <div id="gateway-overlay" class="open">
+      <div class="gw-card">
+        <span class="gw-badge">Unity AI Gateway</span>
+        <h2 id="gw-title">Checking Unity AI Gateway access…</h2>
+        <div id="gw-body"></div>
+        <div class="gw-actions" id="gw-actions" style="display:none">
+          <a id="gw-open" class="gw-btn primary" target="_blank" rel="noopener noreferrer" style="display:none">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3H3.5A1.5 1.5 0 0 0 2 4.5v8A1.5 1.5 0 0 0 3.5 14h8a1.5 1.5 0 0 0 1.5-1.5V10" />
+              <path d="M9.5 2.5H13.5V6.5" /><path d="M13.5 2.5 7 9" />
+            </svg>
+            <span id="gw-open-label">Open Unity AI Gateway</span>
+          </a>
+          <span class="gw-recheck-note" id="gw-reload-note">After completing these steps, reload this page.</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Conversation history in Responses-API item form. The backend flattens
+      // these for the chat_completions converter (see agent.py normalize_history).
+      const history = [];
+      let selectedModel = null;
+      const allowedColors = new Set(); // hexes the user allows; empty = full palette
+      let editingHtml = null; // diagram HTML being edited (behind the scenes, via the pill)
+
+      const els = {
+        model: document.getElementById('model'),
+        experimentLink: document.getElementById('experiment-link'),
+        messages: document.getElementById('messages'),
+        greeting: document.getElementById('greeting'),
+        list: document.getElementById('list'),
+        form: document.getElementById('composer'),
+        input: document.getElementById('input'),
+        send: document.getElementById('send'),
+        palPrimary: document.getElementById('pal-primary'),
+        palCustom: document.getElementById('pal-custom'),
+        palAll: document.getElementById('pal-all'),
+        palNone: document.getElementById('pal-none'),
+        modal: document.getElementById('modal'),
+        modalFrame: document.getElementById('modal-frame'),
+        modalClose: document.getElementById('modal-close'),
+        editPill: document.getElementById('edit-pill'),
+        editPillClear: document.getElementById('edit-pill-clear'),
+        usageSection: document.getElementById('usage-section'),
+        gaugeQpm: document.getElementById('gauge-qpm'),
+        gaugeTpm: document.getElementById('gauge-tpm'),
+        qpmVal: document.getElementById('qpm-val'),
+        qpmFill: document.getElementById('qpm-fill'),
+        tpmVal: document.getElementById('tpm-val'),
+        tpmFill: document.getElementById('tpm-fill'),
+        gwOverlay: document.getElementById('gateway-overlay'),
+        gwTitle: document.getElementById('gw-title'),
+        gwBody: document.getElementById('gw-body'),
+        gwActions: document.getElementById('gw-actions'),
+        gwOpen: document.getElementById('gw-open'),
+        gwOpenLabel: document.getElementById('gw-open-label'),
+        agentBtn: document.getElementById('agent-btn'),
+        agentModal: document.getElementById('agent-modal'),
+        agentModalClose: document.getElementById('agent-modal-close'),
+        agentUnderlyingCaption: document.getElementById('agent-underlying-caption'),
+        agentUcLink: document.getElementById('agent-uc-link'),
+        adFullname: document.getElementById('ad-fullname'),
+        adCatalog: document.getElementById('ad-catalog'),
+        adSchema: document.getElementById('ad-schema'),
+        adUnderlying: document.getElementById('ad-underlying'),
+        adDesttype: document.getElementById('ad-desttype'),
+        adDesttypeRow: document.getElementById('ad-desttype-row'),
+        apName: document.getElementById('ap-name'),
+        apVersion: document.getElementById('ap-version'),
+        apToggle: document.getElementById('ap-toggle'),
+        apText: document.getElementById('ap-text'),
+      };
+
+      // --- Rate-limit usage gauges ---------------------------------------
+      // The limit is service-level and per-minute; there's no live remaining-quota
+      // API, so we count THIS session's own requests + tokens in a rolling 60s
+      // window and render them against the configured limit. Events older than a
+      // minute are dropped so the meters decay on their own.
+      let rateLimit = { requests: null, tokens: null }; // for the selected model
+      const usageEvents = []; // { t: ms, tokens: int } per completed request
+
+      async function loadRateLimit() {
+        rateLimit = { requests: null, tokens: null };
+        if (!selectedModel) { renderGauges(); return; }
+        try {
+          const r = await fetch('/api/rate-limit?model=' + encodeURIComponent(selectedModel));
+          const d = await r.json();
+          rateLimit = { requests: d.requests, tokens: d.tokens };
+        } catch (e) { /* leave unset */ }
+        renderGauges();
+      }
+      function recordUsage(tokens) {
+        usageEvents.push({ t: Date.now(), tokens: tokens || 0 });
+        renderGauges();
+      }
+      function setGauge(gaugeEl, valEl, fillEl, used, limit, unit) {
+        if (limit == null) { gaugeEl.style.display = 'none'; return; }
+        gaugeEl.style.display = 'flex';
+        const pct = limit > 0 ? Math.min(100, (used / limit) * 100) : 0;
+        fillEl.style.width = pct + '%';
+        fillEl.className = 'gauge-fill' + (used >= limit ? ' over' : used / limit >= 0.7 ? ' warn' : '');
+        valEl.textContent = `${used} / ${limit}` + (unit ? ' ' + unit : '');
+      }
+      function renderGauges() {
+        const cutoff = Date.now() - 60000;
+        while (usageEvents.length && usageEvents[0].t < cutoff) usageEvents.shift();
+        const reqUsed = usageEvents.length;
+        const tokUsed = usageEvents.reduce((s, e) => s + e.tokens, 0);
+        const show = rateLimit.requests != null || rateLimit.tokens != null;
+        els.usageSection.style.display = show ? 'flex' : 'none';
+        setGauge(els.gaugeQpm, els.qpmVal, els.qpmFill, reqUsed, rateLimit.requests, '');
+        setGauge(els.gaugeTpm, els.tpmVal, els.tpmFill, tokUsed, rateLimit.tokens, 'tok');
+      }
+      // Decay the rolling window even when idle so meters drain visually.
+      setInterval(renderGauges, 5000);
+
+      // --- Model dropdown (the <schema>.* wildcard) ---
+      async function loadModels() {
+        try {
+          const res = await fetch('/api/model-services');
+          const { modelServices } = await res.json();
+          els.model.innerHTML = '';
+          if (!modelServices || modelServices.length === 0) {
+            els.model.innerHTML = '<option value="">(none found)</option>';
+            return;
+          }
+          for (const m of modelServices) {
+            const opt = document.createElement('option');
+            opt.value = m.fullName;
+            opt.textContent = m.label;
+            els.model.appendChild(opt);
+          }
+          selectedModel = modelServices[0].fullName;
+          loadRateLimit();
+          loadModelServiceDetail();
+        } catch (e) {
+          els.model.innerHTML = '<option value="">(error loading models)</option>';
+        }
+      }
+      els.model.addEventListener('change', () => {
+        selectedModel = els.model.value;
+        loadRateLimit();
+        loadModelServiceDetail();
+      });
+
+      // --- My Agent modal (model select + service details + links) ---
+      function setDetailRow(el, value) {
+        el.textContent = value || '—';
+      }
+      // Cache of model service full name -> underlying model, so the per-response
+      // "Model used:" footer can label each reply without a fetch every turn.
+      const underlyingModelCache = {};
+      async function resolveUnderlyingModel(fullName) {
+        if (!fullName) return null;
+        if (fullName in underlyingModelCache) return underlyingModelCache[fullName];
+        try {
+          const d = await (await fetch(
+            '/api/model-service-detail?model=' + encodeURIComponent(fullName)
+          )).json();
+          underlyingModelCache[fullName] = d.underlyingModel || null;
+        } catch (e) {
+          underlyingModelCache[fullName] = null;
+        }
+        return underlyingModelCache[fullName];
+      }
+      async function loadModelServiceDetail() {
+        // Reset to placeholders; fetch only when a real service is selected.
+        setDetailRow(els.adFullname, selectedModel);
+        setDetailRow(els.adCatalog, null);
+        setDetailRow(els.adSchema, null);
+        setDetailRow(els.adUnderlying, null);
+        setDetailRow(els.adDesttype, null);
+        els.agentUnderlyingCaption.textContent = '';
+        els.agentUcLink.style.display = 'none';
+        if (!selectedModel) return;
+        try {
+          const d = await (await fetch(
+            '/api/model-service-detail?model=' + encodeURIComponent(selectedModel)
+          )).json();
+          setDetailRow(els.adFullname, d.fullName);
+          setDetailRow(els.adCatalog, d.catalog);
+          setDetailRow(els.adSchema, d.schema);
+          setDetailRow(els.adUnderlying, d.underlyingModel);
+          underlyingModelCache[selectedModel] = d.underlyingModel || null;
+          setDetailRow(els.adDesttype, prettyDestType(d.destinationType));
+          els.adDesttypeRow.style.display = d.destinationType ? 'flex' : 'none';
+          els.agentUnderlyingCaption.textContent = d.underlyingModel
+            ? 'Routes to ' + d.underlyingModel
+            : '';
+          // Catalog Explorer deep-link to the model service securable.
+          if (d.fullName && workspaceHost) {
+            // A model service is its own securable type — the Catalog Explorer
+            // path is /explore/data/model-services/... (NOT /models/, which is a
+            // registered model).
+            const host = workspaceHost === '/' ? '' : workspaceHost;
+            els.agentUcLink.href =
+              host + '/explore/data/model-services/' + d.fullName.split('.').join('/');
+            els.agentUcLink.style.display = 'inline-flex';
+          }
+        } catch (e) { /* leave placeholders */ }
+      }
+      function prettyDestType(t) {
+        if (!t) return null;
+        // e.g. DESTINATION_TYPE_PAY_PER_TOKEN_FOUNDATION_MODEL -> "Pay per token foundation model"
+        const s = t.replace(/^DESTINATION_TYPE_/, '').replace(/_/g, ' ').toLowerCase();
+        return s.charAt(0).toUpperCase() + s.slice(1);
+      }
+      // --- System prompt (MLflow Prompt Registry) ---
+      async function loadSystemPrompt() {
+        setDetailRow(els.apName, '—');
+        setDetailRow(els.apVersion, '—');
+        els.apToggle.style.display = 'none';
+        els.apText.style.display = 'none';
+        els.apText.textContent = '';
+        try {
+          const d = await (await fetch('/api/system-prompt')).json();
+          els.apText.textContent = d.template || '';
+          if (d.template) {
+            els.apToggle.style.display = 'inline-flex';
+            els.apToggle.textContent = 'View prompt';
+          }
+          if (d.registered) {
+            setDetailRow(els.apName, d.name);
+            setDetailRow(els.apVersion, 'v' + d.version + (d.alias ? ' (@' + d.alias + ')' : ''));
+          } else {
+            setDetailRow(els.apName, 'Built-in default');
+            setDetailRow(els.apVersion, 'not registered');
+          }
+        } catch (e) { /* leave placeholders */ }
+      }
+      els.apToggle.addEventListener('click', () => {
+        const showing = els.apText.style.display !== 'none';
+        els.apText.style.display = showing ? 'none' : 'block';
+        els.apToggle.textContent = showing ? 'View prompt' : 'Hide prompt';
+      });
+
+      function openAgentModal() {
+        loadModelServiceDetail();
+        loadSystemPrompt();
+        els.agentModal.classList.add('open');
+      }
+      function closeAgentModal() {
+        els.agentModal.classList.remove('open');
+      }
+      els.agentBtn.addEventListener('click', openAgentModal);
+      els.agentModalClose.addEventListener('click', closeAgentModal);
+      els.agentModal.addEventListener('click', (e) => {
+        if (e.target === els.agentModal) closeAgentModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAgentModal();
+      });
+
+      // --- MLflow experiment button ---
+      async function loadExperiment() {
+        try {
+          const { url } = await (await fetch('/api/experiment')).json();
+          if (url) {
+            els.experimentLink.href = url;
+            els.experimentLink.style.display = 'inline-flex';
+          }
+        } catch (e) { /* leave hidden */ }
+      }
+
+      // --- Color palette swatches ---
+      function makeSwatch(color) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'swatch';
+        b.style.background = color.hex;
+        b.title = `${color.name} — ${color.hex}\n${color.usage}`;
+        b.setAttribute('aria-pressed', 'true'); // all selected by default
+        b.dataset.hex = color.hex;
+        b.innerHTML = '<span class="check">✓</span>';
+        allowedColors.add(color.hex);
+        b.addEventListener('click', () => {
+          const on = b.getAttribute('aria-pressed') === 'true';
+          b.setAttribute('aria-pressed', on ? 'false' : 'true');
+          if (on) allowedColors.delete(color.hex);
+          else allowedColors.add(color.hex);
+        });
+        return b;
+      }
+      async function loadPalette() {
+        try {
+          const { primary, custom } = await (await fetch('/api/palette')).json();
+          (primary || []).forEach((c) => els.palPrimary.appendChild(makeSwatch(c)));
+          (custom || []).forEach((c) => els.palCustom.appendChild(makeSwatch(c)));
+        } catch (e) { /* palette optional */ }
+      }
+      function setAllSwatches(on) {
+        document.querySelectorAll('.swatch').forEach((b) => {
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          if (on) allowedColors.add(b.dataset.hex);
+          else allowedColors.delete(b.dataset.hex);
+        });
+      }
+      els.palAll.addEventListener('click', () => setAllSwatches(true));
+      els.palNone.addEventListener('click', () => setAllSwatches(false));
+
+      // --- Minimal, XSS-safe markdown renderer ---
+      function escapeHtml(s) {
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+      function renderInline(s) {
+        const codes = [];
+        s = s.replace(/`([^`]+)`/g, (_, c) => { codes.push(c); return ' ' + (codes.length - 1) + ' '; });
+        s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+          (_, t, u) => `<a href="${u}" target="_blank" rel="noopener noreferrer">${t}</a>`);
+        s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        s = s.replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>');
+        s = s.replace(/_([^_]+)_/g, '<em>$1</em>');
+        s = s.replace(/ (\d+) /g, (_, i) => `<code>${codes[+i]}</code>`);
+        return s;
+      }
+      function renderMarkdown(src) {
+        const escaped = escapeHtml(src);
+        const lines = escaped.split('\n');
+        let html = '';
+        let i = 0;
+        let listType = null;
+        const closeList = () => { if (listType) { html += `</${listType}>`; listType = null; } };
+        while (i < lines.length) {
+          const line = lines[i];
+          const fence = line.match(/^```(.*)$/);
+          if (fence) {
+            closeList();
+            const buf = [];
+            i++;
+            while (i < lines.length && !/^```/.test(lines[i])) { buf.push(lines[i]); i++; }
+            i++;
+            html += `<pre><code>${buf.join('\n')}</code></pre>`;
+            continue;
+          }
+          const h = line.match(/^(#{1,4})\s+(.*)$/);
+          if (h) { closeList(); html += `<h${h[1].length}>${renderInline(h[2])}</h${h[1].length}>`; i++; continue; }
+          if (/^(---|\*\*\*|___)\s*$/.test(line)) { closeList(); html += '<hr>'; i++; continue; }
+          const bq = line.match(/^&gt;\s?(.*)$/);
+          if (bq) { closeList(); html += `<blockquote>${renderInline(bq[1])}</blockquote>`; i++; continue; }
+          const ul = line.match(/^\s*[-*+]\s+(.*)$/);
+          if (ul) {
+            if (listType !== 'ul') { closeList(); html += '<ul>'; listType = 'ul'; }
+            html += `<li>${renderInline(ul[1])}</li>`; i++; continue;
+          }
+          const ol = line.match(/^\s*\d+\.\s+(.*)$/);
+          if (ol) {
+            if (listType !== 'ol') { closeList(); html += '<ol>'; listType = 'ol'; }
+            html += `<li>${renderInline(ol[1])}</li>`; i++; continue;
+          }
+          if (/^\s*$/.test(line)) { closeList(); i++; continue; }
+          closeList();
+          const para = [line];
+          i++;
+          while (
+            i < lines.length &&
+            !/^\s*$/.test(lines[i]) &&
+            !/^(#{1,4}\s|```|&gt;\s?|\s*[-*+]\s|\s*\d+\.\s|(---|\*\*\*|___)\s*$)/.test(lines[i])
+          ) { para.push(lines[i]); i++; }
+          html += `<p>${renderInline(para.join('<br>'))}</p>`;
+        }
+        closeList();
+        return html;
+      }
+
+      // --- %md-sandbox diagram rendering ---
+      const ICON_COPY =
+        '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h2.5"/></svg>';
+      const ICON_EXPAND =
+        '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2H2v4M10 2h4v4M6 14H2v-4M10 14h4v-4"/></svg>';
+      const ICON_EDIT =
+        '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5l2.5 2.5L6 12.5 3 13l.5-3z"/></svg>';
+
+      function iframeDoc(htmlSource, heightId) {
+        // When heightId is given, embed the self-measuring script so the frame can
+        // report its content height back to the parent (see autoHeightIframe).
+        const script = heightId
+          ? '<script>var ID=' + heightId + ';<\/script>' + HEIGHT_SCRIPT
+          : '';
+        return (
+          '<!doctype html><html><head><meta charset="utf-8">' +
+          '<style>html,body{margin:0;padding:12px;background:#fff;' +
+          'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}</style>' +
+          '</head><body>' + htmlSource + script + '</body></html>'
+        );
+      }
+      // Auto-height: the iframe is sandboxed WITHOUT allow-same-origin (so the app
+      // can't read its contentDocument). Instead, a tiny script inside the iframe
+      // measures its own content and postMessages the height out; the parent sets
+      // the iframe height from that message. Each iframe gets a unique id so we
+      // route messages to the right frame. A ResizeObserver inside keeps it in sync
+      // as SVG/layout settles or the column width changes.
+      const HEIGHT_SCRIPT =
+        '<script>(function(){' +
+        'function send(){var h=Math.max(document.body.scrollHeight,' +
+        'document.documentElement.scrollHeight);' +
+        "parent.postMessage({t:'diagram-height',id:ID,h:h},'*');}" +
+        'window.addEventListener("load",send);' +
+        'if(window.ResizeObserver){new ResizeObserver(send).observe(document.body);}' +
+        'setTimeout(send,50);setTimeout(send,300);setTimeout(send,800);' +
+        '})();<\/script>';
+      window.addEventListener('message', (e) => {
+        const d = e.data;
+        if (!d || d.t !== 'diagram-height') return;
+        const frame = document.querySelector('iframe[data-diagram-id="' + d.id + '"]');
+        if (frame && d.h) frame.style.height = d.h + 8 + 'px';
+      });
+      let _diagramId = 0;
+      function autoHeightIframe(iframe) {
+        iframe.dataset.diagramId = String(++_diagramId);
+      }
+
+      // Databricks %md-sandbox runs the cell through a markdown processor BEFORE
+      // rendering HTML. A blank line inside an inline-HTML block terminates it, so
+      // strip blank lines to keep the whole SVG contiguous.
+      function notebookSafe(html) {
+        return html.split('\n').filter((line) => line.trim() !== '').join('\n');
+      }
+
+      function openModal(htmlSource) {
+        els.modalFrame.srcdoc = iframeDoc(htmlSource);
+        els.modal.classList.add('open');
+      }
+      function closeModal() {
+        els.modal.classList.remove('open');
+        els.modalFrame.srcdoc = '';
+      }
+      els.modalClose.addEventListener('click', closeModal);
+      els.modal.addEventListener('click', (e) => { if (e.target === els.modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+      // Enter "edit" mode: stash the diagram HTML behind the scenes and show a pill
+      // above the composer. The user just types their change; the textbox stays
+      // clean. On send we combine the stashed HTML + their instruction for the
+      // agent, while the chat bubble shows only what they typed.
+      function editDiagram(htmlSource) {
+        editingHtml = htmlSource;
+        els.editPill.style.display = 'inline-flex';
+        els.input.placeholder = 'Describe your change to the diagram…';
+        els.input.focus();
+      }
+      function clearEdit() {
+        editingHtml = null;
+        els.editPill.style.display = 'none';
+        els.input.placeholder = 'Describe a diagram…';
+      }
+      els.editPillClear.addEventListener('click', clearEdit);
+
+      function makeDiagramCard(rawHtml) {
+        const htmlSource = notebookSafe(rawHtml);
+        const cell = '%md-sandbox\n' + htmlSource;
+        const card = document.createElement('div');
+        card.className = 'diagram';
+
+        const toolbar = document.createElement('div');
+        toolbar.className = 'diagram-toolbar';
+        const label = document.createElement('span');
+        label.className = 'label';
+        label.textContent = 'Rendered diagram';
+        const btns = document.createElement('div');
+        btns.className = 'btns';
+
+        const expandBtn = document.createElement('button');
+        expandBtn.className = 'diagram-btn';
+        expandBtn.type = 'button';
+        expandBtn.innerHTML = ICON_EXPAND + '<span>Expand</span>';
+
+        const editBtn = document.createElement('button');
+        editBtn.className = 'diagram-btn';
+        editBtn.type = 'button';
+        editBtn.innerHTML = ICON_EDIT + '<span>Edit</span>';
+
+        const codeBtn = document.createElement('button');
+        codeBtn.className = 'diagram-btn';
+        codeBtn.type = 'button';
+        codeBtn.textContent = 'View code';
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'diagram-btn';
+        copyBtn.type = 'button';
+        copyBtn.innerHTML = ICON_COPY + '<span>Copy cell</span>';
+
+        btns.appendChild(expandBtn);
+        btns.appendChild(editBtn);
+        btns.appendChild(codeBtn);
+        btns.appendChild(copyBtn);
+        const collapseBtn = document.createElement('button');
+        collapseBtn.type = 'button';
+        collapseBtn.className = 'diagram-collapse-btn';
+        collapseBtn.title = 'Collapse diagram';
+        collapseBtn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>';
+        collapseBtn.addEventListener('click', () => {
+          card.classList.toggle('collapsed');
+          collapseBtn.title = card.classList.contains('collapsed') ? 'Expand diagram' : 'Collapse diagram';
+        });
+        toolbar.appendChild(collapseBtn);
+        toolbar.appendChild(label);
+        toolbar.appendChild(btns);
+        card.appendChild(toolbar);
+
+        // Live preview in a sandboxed iframe (scripts run, isolated from the app).
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('sandbox', 'allow-scripts');
+        iframe.style.height = '120px';
+        autoHeightIframe(iframe); // assigns data-diagram-id
+        iframe.srcdoc = iframeDoc(htmlSource, iframe.dataset.diagramId);
+        card.appendChild(iframe);
+
+        // Source view (hidden by default) — the exact cell that Copy yields.
+        const pre = document.createElement('pre');
+        pre.style.display = 'none';
+        const code = document.createElement('code');
+        code.textContent = cell;
+        pre.appendChild(code);
+        card.appendChild(pre);
+
+        expandBtn.addEventListener('click', () => openModal(htmlSource));
+        editBtn.addEventListener('click', () => editDiagram(htmlSource));
+        codeBtn.addEventListener('click', () => {
+          const showing = pre.style.display !== 'none';
+          pre.style.display = showing ? 'none' : 'block';
+          iframe.style.display = showing ? 'block' : 'none';
+          codeBtn.textContent = showing ? 'View code' : 'View diagram';
+        });
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(cell);
+          } catch (_) {
+            const ta = document.createElement('textarea');
+            ta.value = cell;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          copyBtn.innerHTML = ICON_COPY + '<span>Copied!</span>';
+          setTimeout(() => { copyBtn.innerHTML = ICON_COPY + '<span>Copy cell</span>'; }, 1800);
+        });
+
+        return card;
+      }
+
+      // --- Live diagram streaming ------------------------------------------
+      // While the agent writes an ```html/```svg block, show a live diagram card:
+      // prose above + a sandboxed iframe preview that re-mounts on a throttle so you
+      // watch the SVG take shape, with a View code / View diagram toggle. The card is
+      // built once (bubble.__live) then updated in place; finalizeMessage() replaces
+      // it with the full-featured card (Expand/Edit/Copy) once the reply completes.
+      function createLiveDiagram(bubble) {
+        bubble.innerHTML = '';
+        const prose = document.createElement('div');
+        prose.style.display = 'none';
+        bubble.appendChild(prose);
+
+        const card = document.createElement('div');
+        card.className = 'diagram';
+        const toolbar = document.createElement('div');
+        toolbar.className = 'diagram-toolbar';
+        const label = document.createElement('span');
+        label.className = 'label';
+        label.textContent = 'Building diagram…';
+        const btns = document.createElement('div');
+        btns.className = 'btns';
+        const codeBtn = document.createElement('button');
+        codeBtn.className = 'diagram-btn';
+        codeBtn.type = 'button';
+        codeBtn.textContent = 'View code';
+        btns.appendChild(codeBtn);
+        toolbar.appendChild(label);
+        toolbar.appendChild(btns);
+        card.appendChild(toolbar);
+
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('sandbox', 'allow-scripts');
+        iframe.style.height = '120px';
+        autoHeightIframe(iframe);
+        card.appendChild(iframe);
+
+        const pre = document.createElement('pre');
+        pre.style.display = 'none';
+        const code = document.createElement('code');
+        pre.appendChild(code);
+        card.appendChild(pre);
+
+        // Toggle between the live preview and the code being written.
+        codeBtn.addEventListener('click', () => {
+          const showing = pre.style.display !== 'none';
+          pre.style.display = showing ? 'none' : 'block';
+          iframe.style.display = showing ? 'block' : 'none';
+          codeBtn.textContent = showing ? 'View code' : 'View diagram';
+        });
+
+        bubble.appendChild(card);
+        return { prose, iframe, pre, code };
+      }
+      // Update the streaming view from the accumulated text so far. updatePreview
+      // gates the (expensive) iframe re-mount so it happens ~2x/sec, not per token.
+      function renderStreaming(bubble, full, updatePreview) {
+        // Leading prose, an opening fence + language, then the (possibly partial) body.
+        const m = full.match(/^([\s\S]*?)```(\w*)\n([\s\S]*)$/);
+        const lang = m ? (m[2] || '').toLowerCase() : null;
+        const isDiagram = !!m && (lang === 'html' || lang === '' || lang === 'svg');
+        if (!isDiagram) {
+          // No diagram block yet (or a non-diagram code block) — plain markdown.
+          bubble.__live = null;
+          bubble.innerHTML = renderMarkdown(full);
+          return;
+        }
+        const prose = m[1];
+        const codeBody = m[3].split(/\n```/)[0]; // drop a closing fence if present
+        let live = bubble.__live;
+        const justCreated = !live;
+        if (justCreated) {
+          live = createLiveDiagram(bubble);
+          bubble.__live = live;
+        }
+        if (prose.trim()) {
+          live.prose.style.display = 'block';
+          live.prose.innerHTML = renderMarkdown(prose);
+        } else {
+          live.prose.style.display = 'none';
+        }
+        live.code.textContent = codeBody; // the code as it's being written
+        if (updatePreview || justCreated) {
+          live.iframe.srcdoc = iframeDoc(notebookSafe(codeBody), live.iframe.dataset.diagramId);
+        }
+      }
+
+      // Render a completed assistant turn: markdown prose + diagram cards.
+      function finalizeMessage(bubble, src) {
+        bubble.__live = null;
+        bubble.innerHTML = '';
+        const flushMarkdown = (text) => {
+          if (!text.trim()) return;
+          const wrap = document.createElement('div');
+          wrap.innerHTML = renderMarkdown(text);
+          bubble.appendChild(wrap);
+        };
+        const addBlock = (lang, codeBody) => {
+          if (lang === 'html' || lang === '' || lang === 'svg') {
+            bubble.appendChild(makeDiagramCard(codeBody));
+          } else {
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+            code.textContent = codeBody;
+            pre.appendChild(code);
+            bubble.appendChild(pre);
+          }
+        };
+        const re = /```(\w*)\n([\s\S]*?)```/g;
+        let last = 0;
+        let m;
+        while ((m = re.exec(src)) !== null) {
+          flushMarkdown(src.slice(last, m.index));
+          addBlock((m[1] || '').toLowerCase(), m[2].replace(/\n$/, ''));
+          last = re.lastIndex;
+        }
+        // Unclosed fence tail (truncated diagram) still renders.
+        const tail = src.slice(last);
+        const open = tail.match(/```(\w*)\n([\s\S]*)$/);
+        if (open) {
+          flushMarkdown(tail.slice(0, open.index));
+          addBlock((open[1] || '').toLowerCase(), open[2]);
+        } else {
+          flushMarkdown(tail);
+        }
+      }
+
+      // Append a "Model used:" footer under a finalized assistant reply. Shows the
+      // underlying model the service routed to (e.g. system.ai.databricks-claude-opus-5),
+      // falling back to the service name — makes gateway routing visible per response.
+      async function addModelUsed(bubble, modelService) {
+        if (!modelService) return;
+        const footer = document.createElement('div');
+        footer.className = 'model-used';
+        footer.innerHTML = '<span>Model used: </span>';
+        const code = document.createElement('code');
+        code.textContent = modelService; // provisional; refined once resolved
+        footer.appendChild(code);
+        bubble.appendChild(footer);
+        const underlying = await resolveUnderlyingModel(modelService);
+        if (underlying) code.textContent = underlying;
+      }
+
+      // --- Render helpers ---
+      function addBubble(role) {
+        if (els.greeting) {
+          els.greeting.remove();
+          els.greeting = null;
+          els.list.style.display = 'block';
+        }
+        const row = document.createElement('div');
+        row.className = 'row ' + role;
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        row.appendChild(bubble);
+        els.list.appendChild(row);
+        els.messages.scrollTop = els.messages.scrollHeight;
+        return bubble;
+      }
+      function autosize() {
+        els.input.style.height = 'auto';
+        els.input.style.height = Math.min(els.input.scrollHeight, 260) + 'px';
+      }
+
+      // --- Send a message and stream the reply ---
+      async function send(text) {
+        // The chat shows what the user typed; when editing a diagram, the model
+        // additionally receives the current HTML so it modifies that exact diagram.
+        const editHtml = editingHtml;
+        const userBubble = addBubble('user');
+        userBubble.textContent = text;
+        const copyUserBtn = document.createElement('button');
+        copyUserBtn.type = 'button';
+        copyUserBtn.className = 'user-copy-btn';
+        copyUserBtn.title = 'Copy message';
+        copyUserBtn.innerHTML = ICON_COPY;
+        copyUserBtn.addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(text); } catch (_) {
+            const ta = document.createElement('textarea'); ta.value = text;
+            document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          copyUserBtn.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 9l3 3 6-7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          setTimeout(() => { copyUserBtn.innerHTML = ICON_COPY; }, 1500);
+        });
+        userBubble.parentElement.appendChild(copyUserBtn);
+        const modelText = editHtml
+          ? 'Edit this diagram per the instruction below, returning the full updated '
+            + 'HTML block.\nInstruction: ' + text + '\n```html\n' + editHtml + '\n```'
+          : text;
+        history.push({ role: 'user', content: modelText });
+        clearEdit();
+
+        const bubble = addBubble('assistant');
+        els.send.disabled = true;
+        let full = '';
+        let usageTokens = 0; // from the stream's response.completed usage block
+        const turnModel = selectedModel; // the model service used for THIS reply
+        let lastPreview = 0; // throttle live-diagram iframe re-mounts to ~2x/sec
+
+        try {
+          const customInputs = {};
+          if (selectedModel) customInputs.model_service = selectedModel;
+          // Send the allowed color subset unless everything is selected (full palette).
+          const total = document.querySelectorAll('.swatch').length;
+          if (allowedColors.size > 0 && allowedColors.size < total) {
+            customInputs.allowed_colors = [...allowedColors];
+          }
+
+          const res = await fetch('/invocations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ input: history, stream: true, custom_inputs: customInputs }),
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status + ': ' + (await res.text()));
+
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+          for (;;) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n');
+            buffer = lines.pop();
+            for (const line of lines) {
+              if (!line.startsWith('data:')) continue;
+              const payload = line.slice(5).trim();
+              if (payload === '[DONE]') continue;
+              let evt;
+              try { evt = JSON.parse(payload); } catch { continue; }
+              if (evt.type === 'response.output_text.delta' && evt.delta) {
+                full += evt.delta;
+                // Re-mount the live preview at most ~2x/sec (it's expensive); text
+                // and code views update every token inside renderStreaming.
+                const now = Date.now();
+                const doPreview = now - lastPreview > 500;
+                if (doPreview) lastPreview = now;
+                renderStreaming(bubble, full, doPreview);
+                els.messages.scrollTop = els.messages.scrollHeight;
+              } else if (evt.type === 'response.completed') {
+                // Real token counts for this turn, for the usage gauge.
+                const u = evt.response && evt.response.usage;
+                if (u && typeof u.total_tokens === 'number') usageTokens = u.total_tokens;
+              }
+            }
+          }
+          finalizeMessage(bubble, full);
+          addModelUsed(bubble, turnModel);
+          els.messages.scrollTop = els.messages.scrollHeight;
+        } catch (e) {
+          bubble.textContent = '⚠️ ' + e.message;
+          els.send.disabled = false;
+          recordUsage(usageTokens); // count the attempt (rate limits count requests, not successes)
+          return;
+        }
+        recordUsage(usageTokens);
+
+        history.push({ type: 'message', role: 'assistant', content: [{ type: 'output_text', text: full }] });
+        els.send.disabled = false;
+        els.input.focus();
+      }
+
+      els.form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = els.input.value.trim();
+        if (!text || els.send.disabled) return;
+        els.input.value = '';
+        autosize();
+        send(text);
+      });
+      els.input.addEventListener('input', autosize);
+      els.input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          els.form.requestSubmit();
+        }
+      });
+
+      // --- Onboarding overlay: Unity AI Gateway readiness gate -----------
+      // The app can only route calls once (1) a model service exists in the
+      // course schema and (2) the app's service principal has EXECUTE on it.
+      // Both are hands-on lab steps. /api/gateway-status reports which (if any)
+      // is still missing; we gate the app behind an overlay until it's ready.
+      let workspaceHost = '/'; // fallback: same-origin link opens the workspace
+      async function loadHost() {
+        try {
+          const { host } = await (await fetch('/api/host')).json();
+          if (host) workspaceHost = host;
+        } catch (e) { /* keep same-origin fallback */ }
+      }
+      function el(tag, html) {
+        const n = document.createElement(tag);
+        if (html != null) n.innerHTML = html;
+        return n;
+      }
+      function renderGatewayState(status) {
+        const state = status && status.state;
+        if (!state || state === 'ready') {
+          els.gwOverlay.classList.remove('open');
+          return;
+        }
+        els.gwBody.innerHTML = '';
+        // Link straight to the Unity AI Gateway page in the workspace.
+        els.gwOpen.href = (workspaceHost === '/' ? '' : workspaceHost) + '/ml/ai-gateway';
+        els.gwOpen.style.display = 'inline-flex';
+        els.gwActions.style.display = 'flex';
+
+        if (state === 'no_model_service') {
+          els.gwTitle.textContent = 'No model service connected';
+          els.gwBody.appendChild(el('p',
+            'No model service has been connected. Please configure a model service '
+            + 'through Unity AI Gateway, then reload this page to continue.'));
+          const steps = el('ol');
+          steps.className = 'gw-steps';
+          steps.innerHTML =
+            '<li>Open your Databricks workspace.</li>'
+            + '<li>Go to <strong>AI/ML &rarr; AI Gateway &rarr; + Model</strong>.</li>'
+            + '<li>Create a model service in your course schema'
+            + (status.schemas && status.schemas.length
+                ? ' (<code>' + status.schemas.map(escapeHtml).join('</code>, <code>') + '</code>)'
+                : '')
+            + '.</li>'
+            + '<li>Grant <strong>EXECUTE</strong> on the model service to this app’s '
+            + 'service principal.</li>';
+          els.gwBody.appendChild(steps);
+          els.gwOpenLabel.textContent = 'Open Unity AI Gateway';
+        } else if (state === 'no_execute') {
+          els.gwTitle.textContent = 'Grant the app access to the model service';
+          const svc = status.modelService ? '<code>' + escapeHtml(status.modelService) + '</code>' : 'the model service';
+          els.gwBody.appendChild(el('p',
+            'A model service is connected, but this app’s service principal does not '
+            + 'yet have <strong>EXECUTE</strong> on ' + svc + '. Grant it <strong>EXECUTE</strong> '
+            + 'on the model service, then reload this page.'));
+          const steps = el('ol');
+          steps.className = 'gw-steps';
+          steps.innerHTML =
+            '<li>Go to <strong>AI/ML &rarr; AI Gateway &rarr; + Model</strong> and open ' + svc + '.</li>'
+            + '<li>On its <strong>Permissions</strong>, grant <strong>EXECUTE</strong> to this app’s service principal.</li>'
+            + '<li>Reload this page.</li>';
+          els.gwBody.appendChild(steps);
+          els.gwOpenLabel.textContent = 'Open Unity AI Gateway';
+        }
+        els.gwOverlay.classList.add('open');
+      }
+      async function checkGatewayStatus() {
+        try {
+          const status = await (await fetch('/api/gateway-status')).json();
+          renderGatewayState(status);
+          return status && status.state;
+        } catch (e) {
+          // If the check itself fails, don't trap the user — leave the app usable.
+          els.gwOverlay.classList.remove('open');
+          return 'ready';
+        }
+      }
+      // --- Collapsible sidebar (state persisted across reloads) -----------
+      (function () {
+        const appEl = document.querySelector('.app');
+        const toggle = document.getElementById('sidebar-toggle');
+        const open = document.getElementById('sidebar-open');
+        function setCollapsed(collapsed) {
+          appEl.classList.toggle('sidebar-collapsed', collapsed);
+          toggle.setAttribute('aria-expanded', String(!collapsed));
+          try { localStorage.setItem('sidebarCollapsed', collapsed ? '1' : '0'); } catch (e) {}
+        }
+        toggle.addEventListener('click', () => setCollapsed(true));
+        open.addEventListener('click', () => setCollapsed(false));
+        // Restore prior choice on load.
+        try { if (localStorage.getItem('sidebarCollapsed') === '1') setCollapsed(true); } catch (e) {}
+      })();
+
+      loadModels();
+      loadExperiment();
+      loadPalette();
+      loadHost().then(checkGatewayStatus);
+    </script>
+  </body>
+</html>
