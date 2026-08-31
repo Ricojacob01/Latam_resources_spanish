@@ -58,7 +58,7 @@
 
 # COMMAND ----------
 
-# MAGIC %run ./Includes/Classroom-Setup-1 $catalog_override = "academy_rico" $schema_override = "ts_ai_gateway"
+# MAGIC %run ./Includes/Classroom-Setup-1 $catalog_override = "classic_stable_paco_catalog" $schema_override = "ts_ai_gateway"
 
 # COMMAND ----------
 
