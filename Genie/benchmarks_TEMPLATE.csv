@@ -1,0 +1,16 @@
+id,tier,pregunta,respuesta_esperada_o_sql,notas
+1,tier-1,<pregunta deal-breaker que los usuarios hacen siempre>,<SQL esperado o respuesta correcta>,Métrica crítica. Debe ser correcta.
+2,tier-1,,,
+3,tier-1,,,
+4,tier-1,,,
+5,tier-1,,,
+6,tier-2,<pregunta importante pero no crítica>,<SQL o respuesta>,
+7,tier-2,,,
+8,tier-2,,,
+9,tier-2,,,
+10,tier-2,,,
+11,tier-3,<pregunta de exploración / nice-to-have>,<SQL o respuesta>,
+12,tier-3,,,
+13,tier-3,,,
+14,tier-3,,,
+15,tier-3,,,

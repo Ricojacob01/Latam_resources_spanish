@@ -1,0 +1,95 @@
+{
+  "version": 2,
+  "config": {
+    "sample_questions": [
+      {"id": "10000000000000000000000000000001", "question": ["¿Cuál es la cobertura de pipeline por región?"]},
+      {"id": "10000000000000000000000000000002", "question": ["¿Qué representante tiene el mayor pipeline abierto?"]},
+      {"id": "10000000000000000000000000000003", "question": ["¿Cuánto hemos ganado por línea de producto?"]},
+      {"id": "10000000000000000000000000000004", "question": ["¿Cuál es el valor promedio de oportunidad por segmento?"]},
+      {"id": "10000000000000000000000000000005", "question": ["¿Qué regiones están por debajo de su meta?"]}
+    ]
+  },
+  "data_sources": {
+    "tables": [
+      {"identifier": "__CATALOG__.__SCHEMA__.dim_account"},
+      {"identifier": "__CATALOG__.__SCHEMA__.dim_rep"},
+      {"identifier": "__CATALOG__.__SCHEMA__.fact_opportunity"},
+      {"identifier": "__CATALOG__.__SCHEMA__.fact_region_target"}
+    ]
+  },
+  "instructions": {
+    "example_question_sqls": [
+      {
+        "id": "20000000000000000000000000000001",
+        "question": ["¿Cuál es la cobertura de pipeline por región?"],
+        "sql": [
+          "SELECT o.region,\n",
+          "       ROUND(SUM(CASE WHEN o.is_open THEN o.amount ELSE 0 END), 0) AS pipeline_abierto,\n",
+          "       ROUND(t.meta, 0) AS meta,\n",
+          "       ROUND(SUM(CASE WHEN o.is_open THEN o.amount ELSE 0 END) / t.meta, 2) AS cobertura\n",
+          "FROM __CATALOG__.__SCHEMA__.fact_opportunity o\n",
+          "JOIN (SELECT region, SUM(quota_amount) AS meta\n",
+          "      FROM __CATALOG__.__SCHEMA__.fact_region_target GROUP BY region) t\n",
+          "  ON o.region = t.region\n",
+          "GROUP BY o.region, t.meta\n",
+          "ORDER BY cobertura ASC"
+        ]
+      },
+      {
+        "id": "20000000000000000000000000000002",
+        "question": ["¿Qué representante tiene el mayor pipeline abierto?"],
+        "sql": [
+          "SELECT r.rep_name, r.region,\n",
+          "       ROUND(SUM(o.amount), 0) AS pipeline_abierto\n",
+          "FROM __CATALOG__.__SCHEMA__.fact_opportunity o\n",
+          "JOIN __CATALOG__.__SCHEMA__.dim_rep r ON o.rep_id = r.rep_id\n",
+          "WHERE o.is_open = true\n",
+          "GROUP BY r.rep_name, r.region\n",
+          "ORDER BY pipeline_abierto DESC\n",
+          "LIMIT 10"
+        ]
+      },
+      {
+        "id": "20000000000000000000000000000003",
+        "question": ["¿Cuánto hemos ganado por línea de producto?"],
+        "sql": [
+          "SELECT product_line,\n",
+          "       ROUND(SUM(amount), 0) AS ingresos_ganados,\n",
+          "       COUNT(*) AS oportunidades_ganadas\n",
+          "FROM __CATALOG__.__SCHEMA__.fact_opportunity\n",
+          "WHERE is_won = true\n",
+          "GROUP BY product_line\n",
+          "ORDER BY ingresos_ganados DESC"
+        ]
+      }
+    ],
+    "text_instructions": [
+      {
+        "id": "30000000000000000000000000000001",
+        "content": [
+          "Eres un asistente de analítica de ventas para líderes comerciales de LATAM. Responde en español, con montos en USD redondeados.\n",
+          "\n",
+          "DEFINICIONES DE NEGOCIO:\n",
+          "- 'Pipeline abierto' = SUM(amount) de fact_opportunity WHERE is_open = true (etapas distintas de 'Cerrada Ganada' y 'Cerrada Perdida').\n",
+          "- 'Cobertura de pipeline' = pipeline abierto / meta. La meta es SUM(quota_amount) de fact_region_target para la región.\n",
+          "- 'Ingresos ganados' = SUM(amount) de fact_opportunity WHERE is_won = true.\n",
+          "- 'Por debajo de su meta' significa cobertura < 1.0.\n",
+          "\n",
+          "DÓNDE ESTÁ CADA MÉTRICA:\n",
+          "- Cobertura y metas: fact_opportunity + fact_region_target.\n",
+          "- Ingresos y pipeline: fact_opportunity.\n",
+          "- Atributos de representante (nombre, gerente, meta individual): dim_rep. Atributos de cuenta (industria): dim_account.\n",
+          "\n",
+          "CLAVES DE UNIÓN:\n",
+          "- fact_opportunity.rep_id = dim_rep.rep_id\n",
+          "- fact_opportunity.account_id = dim_account.account_id\n",
+          "- fact_opportunity.region = fact_region_target.region (y fiscal_quarter cuando aplique)\n",
+          "\n",
+          "SINÓNIMOS: 'cobertura'=coverage; 'meta'='cuota'=quota=target; 'ganada'/'ganado'/'won'='Cerrada Ganada'; 'perdida'='Cerrada Perdida'; 'pipeline'='oportunidades abiertas'.\n",
+          "\n",
+          "Cuando el usuario no especifique periodo, usa todos los datos disponibles y acláralo en la respuesta."
+        ]
+      }
+    ]
+  }
+}
