@@ -1,10 +1,11 @@
 # Databricks notebook source
+# DBTITLE 1,Genie Code para distintas tareas
 # MAGIC %md
 # MAGIC # 03 · **Genie Code** para distintas tareas  ·  (no solo explorar)
 # MAGIC
 # MAGIC En `02` usamos Genie Code para **explorar**. Aquí lo usamos para **todo el ciclo** de construir el agente.
 # MAGIC Cada sección tiene: 🧞 **prompts para pegar en Genie Code**, ✍️ **qué capturar**, y una celda de
-# MAGIC **verificación opcional**. Todo corre sobre **tu esquema** del taller (`00_config`).
+# MAGIC **verificación opcional**. Todo corre sobre el esquema del taller configurado en `00_config`.
 # MAGIC
 # MAGIC | # | Tarea con Genie Code | Para qué sirve |
 # MAGIC |---|---|---|

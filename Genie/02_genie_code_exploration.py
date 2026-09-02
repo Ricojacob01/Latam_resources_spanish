@@ -1,4 +1,9 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "5"
+# ///
+# DBTITLE 1,Explora con Genie Code
 # MAGIC %md
 # MAGIC # 02 · Explora CUALQUIER dataset con **Genie Code**  ·  (reutilizable por cliente)
 # MAGIC
@@ -13,8 +18,8 @@
 # MAGIC > **Cómo usar Genie Code:** abre el panel ✨ *Assistant / Genie* del notebook, pega un prompt,
 # MAGIC > revisa el SQL que genera, ejecútalo y evalúa la respuesta. Cada corrida = consumo.
 # MAGIC
-# MAGIC 🔑 **Multi-usuario:** `00_config` (abajo con `%run`) fija tu catálogo compartido y tu esquema personal.
-# MAGIC Por defecto exploras **tu** esquema del taller; para explorar las tablas reales del cliente,
+# MAGIC 🔑 `00_config` (abajo con `%run`) fija el catálogo y esquema compartidos.
+# MAGIC Por defecto exploras el esquema del taller; para explorar las tablas reales del cliente,
 # MAGIC usa el widget `explorar_schema` (opcional).
 
 # COMMAND ----------
@@ -118,7 +123,7 @@ for t in tables:
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 5. Salida del Día 1 — Glosario / ontología (llenar con el champion)
+# MAGIC ## 5. Salida del Día 1 — Glosario / ontología 
 # MAGIC Todo lo aprendido con Genie Code se resume aquí y alimenta las *text_instructions* del agente.
 # MAGIC
 # MAGIC | Término de negocio | Definición | Tabla / columna | Sinónimos |

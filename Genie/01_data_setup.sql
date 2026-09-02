@@ -1,22 +1,23 @@
 -- Databricks notebook source
+-- DBTITLE 1,Datos de demo
 -- MAGIC %md
--- MAGIC # 01 · (OPCIONAL) Datos de demo  ·  se crean en TU esquema
+-- MAGIC # 01 · (OPCIONAL) Datos de demo  ·  se crean en el esquema compartido
 -- MAGIC
 -- MAGIC **El camino principal del taller es usar las tablas reales del cliente** (ver `02_genie_code_exploration`).
 -- MAGIC Este notebook es un **respaldo genérico**: genera un dataset sintético completo
 -- MAGIC (*Cobertura de pipeline por región*) para un *dry run* o cuando el dataset del champion aún no está listo.
 -- MAGIC Correrlo en vivo también **genera consumo el Día 1**.
 -- MAGIC
--- MAGIC 🔑 **Multi-usuario:** las tablas se crean en **tu propio esquema** (`taller_genie_<usuario>`) dentro del
--- MAGIC catálogo compartido. Cada participante corre este mismo notebook y obtiene **su propia copia** — sin pisarse.
+-- MAGIC 🔑 Las tablas se crean en el esquema compartido (`classic_stable_paco_catalog.ts_ai_gateway`).
 -- MAGIC La configuración la hace `00_config` (abajo con `%run`), así que aquí no hay nada que fijar.
 -- MAGIC
 -- MAGIC Modelo (estrella): `dim_rep`, `dim_account`, `fact_opportunity`, `fact_region_target`.
 
 -- COMMAND ----------
 
--- MAGIC %md ### 0. Configuración común (catálogo compartido + tu esquema)
--- MAGIC Corre `00_config` una vez. Si ves el widget **catalog** vacío arriba, llénalo y vuelve a correr.
+-- DBTITLE 1,Configuración común
+-- MAGIC %md ### 0. Configuración común (catálogo y esquema compartidos)
+-- MAGIC Corre `00_config` una vez. Si los widgets **catalog** o **schema** están vacíos, llénalos y vuelve a correr.
 
 -- COMMAND ----------
 
@@ -165,6 +166,7 @@ ORDER BY cobertura DESC;
 
 -- COMMAND ----------
 
+-- DBTITLE 1,Validación final
 -- MAGIC %md
--- MAGIC ✅ **Listo.** Tienes 4 tablas en tu esquema `taller_genie_<usuario>`.
+-- MAGIC ✅ **Listo.** Tienes 4 tablas en el esquema `ts_ai_gateway`.
 -- MAGIC Sigue con **`02_genie_code_exploration`** para explorarlas con **Genie Code**.
