@@ -1,0 +1,701 @@
+venta_id,fecha,tienda,ciudad,producto_id,cantidad,monto_total,medio_pago
+1,2025-06-13,Sucursal Plaza,Quito,10,6,19483.5,Tarjeta crédito
+2,2026-04-25,Sucursal Online,Lima,25,4,10438.96,Tarjeta crédito
+3,2026-07-04,Sucursal Sur,San José,8,6,15702.24,Efectivo
+4,2026-03-22,Sucursal Norte,Medellín,8,3,7851.12,Tarjeta crédito
+5,2025-07-02,Sucursal Online,Bogotá,17,5,11152.8,Efectivo
+6,2025-07-23,Sucursal Norte,Monterrey,33,5,17558.25,Tarjeta débito
+7,2025-01-01,Sucursal Online,Monterrey,35,5,9312.3,Transferencia
+8,2026-01-07,Sucursal Sur,Santiago,2,1,1136.37,Tarjeta crédito
+9,2025-03-22,Sucursal Centro,Montevideo,16,5,10840.5,Transferencia
+10,2025-05-09,Sucursal Norte,San José,5,5,8582.95,Transferencia
+11,2025-09-29,Sucursal Online,Quito,36,2,2048.36,Transferencia
+12,2025-07-25,Sucursal Sur,Guadalajara,14,5,16988.0,Efectivo
+13,2026-04-08,Sucursal Centro,Santiago,29,5,11249.75,Tarjeta débito
+14,2025-01-22,Sucursal Online,Córdoba,5,3,5149.77,Tarjeta débito
+15,2025-01-08,Sucursal Centro,Montevideo,38,2,7192.8,Tarjeta crédito
+16,2025-02-02,Sucursal Sur,Bogotá,15,1,3238.16,Tarjeta débito
+17,2026-05-13,Sucursal Norte,Córdoba,18,6,21285.18,Tarjeta débito
+18,2026-04-30,Sucursal Norte,Medellín,37,5,5439.15,Transferencia
+19,2025-04-10,Sucursal Plaza,Monterrey,13,1,416.35,Transferencia
+20,2025-02-25,Sucursal Centro,Ciudad de México,27,4,2781.76,Transferencia
+21,2025-09-12,Sucursal Norte,Santiago,22,1,1148.0,Transferencia
+22,2025-07-07,Sucursal Sur,Medellín,9,4,3682.96,Tarjeta débito
+23,2026-07-18,Sucursal Centro,Ciudad de México,5,4,6866.36,Tarjeta crédito
+24,2025-06-20,Sucursal Plaza,Medellín,6,2,1827.24,Transferencia
+25,2025-03-02,Sucursal Norte,Guadalajara,14,4,13590.4,Tarjeta crédito
+26,2026-04-11,Sucursal Sur,Guadalajara,25,3,7829.22,Transferencia
+27,2025-10-31,Sucursal Norte,Ciudad de México,10,2,6494.5,Tarjeta crédito
+28,2025-02-21,Sucursal Online,Medellín,21,1,3428.5,Tarjeta débito
+29,2025-03-24,Sucursal Norte,Bogotá,4,5,17870.55,Tarjeta crédito
+30,2025-05-03,Sucursal Online,Santiago,16,4,8672.4,Tarjeta crédito
+31,2026-03-06,Sucursal Online,Quito,40,1,1999.39,Efectivo
+32,2025-11-18,Sucursal Norte,Lima,17,2,4461.12,Transferencia
+33,2025-11-04,Sucursal Plaza,Monterrey,9,6,5524.44,Tarjeta crédito
+34,2026-07-31,Sucursal Centro,Bogotá,1,4,10302.96,Tarjeta débito
+35,2025-05-16,Sucursal Sur,Bogotá,33,3,10534.95,Tarjeta débito
+36,2025-06-11,Sucursal Plaza,Córdoba,24,3,8091.57,Efectivo
+37,2026-06-26,Sucursal Centro,San José,40,6,11996.34,Efectivo
+38,2025-09-28,Sucursal Centro,Bogotá,7,2,309.64,Tarjeta débito
+39,2025-08-04,Sucursal Sur,Santiago,18,3,10642.59,Efectivo
+40,2025-09-15,Sucursal Centro,Bogotá,33,4,14046.6,Transferencia
+41,2025-01-04,Sucursal Sur,Buenos Aires,18,1,3547.53,Efectivo
+42,2026-03-29,Sucursal Online,Montevideo,11,6,16845.9,Transferencia
+43,2025-04-25,Sucursal Centro,Montevideo,36,1,1024.18,Tarjeta débito
+44,2026-01-14,Sucursal Online,Córdoba,35,1,1862.46,Tarjeta débito
+45,2025-02-12,Sucursal Sur,Monterrey,28,2,7917.24,Tarjeta crédito
+46,2025-09-13,Sucursal Centro,Monterrey,23,2,1384.96,Transferencia
+47,2025-06-08,Sucursal Norte,Buenos Aires,40,6,11996.34,Tarjeta débito
+48,2025-07-03,Sucursal Sur,Guadalajara,27,1,695.44,Tarjeta débito
+49,2025-04-21,Sucursal Plaza,Ciudad de México,18,2,7095.06,Transferencia
+50,2026-04-17,Sucursal Sur,Lima,15,2,6476.32,Tarjeta débito
+51,2025-07-17,Sucursal Plaza,Monterrey,15,1,3238.16,Efectivo
+52,2025-12-26,Sucursal Online,Guadalajara,5,3,5149.77,Efectivo
+53,2025-09-25,Sucursal Norte,Quito,2,1,1136.37,Efectivo
+54,2026-03-21,Sucursal Sur,Montevideo,3,1,2959.06,Efectivo
+55,2026-06-08,Sucursal Centro,Guadalajara,28,5,19793.1,Tarjeta débito
+56,2026-03-23,Sucursal Centro,Córdoba,17,1,2230.56,Tarjeta débito
+57,2025-03-13,Sucursal Sur,Quito,24,4,10788.76,Efectivo
+58,2025-11-04,Sucursal Online,Lima,8,6,15702.24,Transferencia
+59,2025-10-30,Sucursal Online,Buenos Aires,21,4,13714.0,Tarjeta débito
+60,2026-01-24,Sucursal Norte,Quito,27,6,4172.64,Efectivo
+61,2025-01-01,Sucursal Sur,Lima,26,5,3630.0,Tarjeta débito
+62,2025-11-26,Sucursal Plaza,Medellín,28,5,19793.1,Transferencia
+63,2026-04-30,Sucursal Norte,San José,14,5,16988.0,Tarjeta crédito
+64,2025-12-10,Sucursal Centro,Santiago,19,5,4047.7,Efectivo
+65,2025-05-31,Sucursal Centro,Ciudad de México,15,2,6476.32,Tarjeta débito
+66,2025-03-16,Sucursal Plaza,Guadalajara,31,5,16480.6,Tarjeta débito
+67,2026-02-14,Sucursal Norte,Buenos Aires,25,4,10438.96,Tarjeta crédito
+68,2025-08-13,Sucursal Norte,Montevideo,7,4,619.28,Transferencia
+69,2025-09-13,Sucursal Centro,Medellín,4,5,17870.55,Tarjeta débito
+70,2026-06-28,Sucursal Online,Quito,30,6,20275.62,Efectivo
+71,2026-06-01,Sucursal Plaza,Córdoba,29,5,11249.75,Transferencia
+72,2026-05-02,Sucursal Plaza,Lima,11,6,16845.9,Tarjeta débito
+73,2026-05-12,Sucursal Norte,Lima,18,5,17737.65,Transferencia
+74,2025-10-20,Sucursal Norte,Lima,5,6,10299.54,Efectivo
+75,2025-03-24,Sucursal Norte,Buenos Aires,21,5,17142.5,Tarjeta débito
+76,2025-06-06,Sucursal Norte,Bogotá,25,6,15658.44,Transferencia
+77,2026-07-10,Sucursal Plaza,Guadalajara,27,3,2086.32,Tarjeta crédito
+78,2026-02-03,Sucursal Online,Montevideo,14,4,13590.4,Tarjeta crédito
+79,2026-05-04,Sucursal Centro,Monterrey,37,4,4351.32,Efectivo
+80,2026-07-06,Sucursal Online,Quito,25,4,10438.96,Tarjeta débito
+81,2025-10-07,Sucursal Plaza,Medellín,32,2,2215.16,Tarjeta crédito
+82,2026-02-19,Sucursal Norte,Medellín,25,3,7829.22,Tarjeta débito
+83,2025-01-28,Sucursal Plaza,Quito,40,5,9996.95,Tarjeta crédito
+84,2026-03-15,Sucursal Norte,Medellín,6,6,5481.72,Tarjeta débito
+85,2026-01-24,Sucursal Sur,Santiago,4,3,10722.33,Transferencia
+86,2026-01-24,Sucursal Sur,Guadalajara,21,3,10285.5,Efectivo
+87,2025-01-20,Sucursal Online,Ciudad de México,6,4,3654.48,Efectivo
+88,2025-03-12,Sucursal Centro,Ciudad de México,15,6,19428.96,Tarjeta débito
+89,2025-06-06,Sucursal Norte,Buenos Aires,13,1,416.35,Transferencia
+90,2025-08-12,Sucursal Plaza,Montevideo,8,5,13085.2,Efectivo
+91,2025-04-28,Sucursal Norte,Lima,24,2,5394.38,Tarjeta crédito
+92,2025-11-16,Sucursal Online,San José,38,1,3596.4,Transferencia
+93,2025-07-23,Sucursal Centro,Quito,26,6,4356.0,Tarjeta débito
+94,2025-11-05,Sucursal Online,Bogotá,7,6,928.92,Tarjeta crédito
+95,2026-03-15,Sucursal Sur,Bogotá,23,5,3462.4,Efectivo
+96,2026-05-17,Sucursal Centro,Guadalajara,1,4,10302.96,Efectivo
+97,2025-06-06,Sucursal Plaza,Buenos Aires,30,6,20275.62,Efectivo
+98,2026-05-11,Sucursal Plaza,Guadalajara,40,5,9996.95,Efectivo
+99,2025-03-30,Sucursal Sur,Medellín,21,2,6857.0,Tarjeta débito
+100,2026-01-24,Sucursal Sur,Ciudad de México,30,5,16896.35,Transferencia
+101,2026-05-15,Sucursal Norte,Monterrey,21,2,6857.0,Efectivo
+102,2025-10-10,Sucursal Online,Ciudad de México,22,3,3444.0,Tarjeta débito
+103,2026-02-21,Sucursal Plaza,Córdoba,6,2,1827.24,Tarjeta débito
+104,2026-05-18,Sucursal Plaza,Ciudad de México,31,6,19776.72,Tarjeta crédito
+105,2026-02-19,Sucursal Norte,Lima,19,2,1619.08,Efectivo
+106,2026-06-28,Sucursal Sur,Guadalajara,31,5,16480.6,Efectivo
+107,2026-04-10,Sucursal Sur,Lima,23,6,4154.88,Efectivo
+108,2025-07-17,Sucursal Sur,Bogotá,15,1,3238.16,Tarjeta débito
+109,2026-05-11,Sucursal Sur,Montevideo,13,2,832.7,Efectivo
+110,2025-10-31,Sucursal Norte,Monterrey,7,2,309.64,Tarjeta débito
+111,2026-07-01,Sucursal Norte,Lima,20,1,2661.99,Tarjeta crédito
+112,2025-10-27,Sucursal Norte,San José,4,5,17870.55,Transferencia
+113,2026-08-11,Sucursal Sur,Medellín,7,1,154.82,Transferencia
+114,2025-07-08,Sucursal Centro,Lima,29,3,6749.85,Transferencia
+115,2026-02-15,Sucursal Plaza,Bogotá,8,1,2617.04,Tarjeta crédito
+116,2026-07-31,Sucursal Sur,Bogotá,10,2,6494.5,Tarjeta débito
+117,2026-03-03,Sucursal Online,Quito,8,5,13085.2,Tarjeta débito
+118,2026-04-07,Sucursal Plaza,Lima,34,4,10555.92,Transferencia
+119,2025-03-03,Sucursal Online,Montevideo,20,5,13309.95,Tarjeta crédito
+120,2025-08-05,Sucursal Sur,San José,14,6,20385.6,Tarjeta crédito
+121,2025-06-27,Sucursal Online,Bogotá,11,2,5615.3,Tarjeta débito
+122,2026-04-07,Sucursal Online,Medellín,1,4,10302.96,Efectivo
+123,2025-10-23,Sucursal Sur,Montevideo,3,2,5918.12,Transferencia
+124,2025-08-28,Sucursal Sur,San José,5,6,10299.54,Tarjeta débito
+125,2026-07-12,Sucursal Norte,San José,28,1,3958.62,Tarjeta débito
+126,2025-03-15,Sucursal Centro,Buenos Aires,18,2,7095.06,Efectivo
+127,2026-08-06,Sucursal Sur,Medellín,39,6,5497.92,Tarjeta crédito
+128,2025-11-08,Sucursal Plaza,Lima,30,6,20275.62,Transferencia
+129,2025-02-10,Sucursal Plaza,Montevideo,29,1,2249.95,Efectivo
+130,2025-01-27,Sucursal Centro,Santiago,39,3,2748.96,Tarjeta crédito
+131,2025-02-11,Sucursal Norte,Medellín,18,5,17737.65,Transferencia
+132,2026-08-23,Sucursal Plaza,San José,18,2,7095.06,Transferencia
+133,2025-12-23,Sucursal Plaza,Monterrey,6,4,3654.48,Efectivo
+134,2025-12-04,Sucursal Plaza,Montevideo,7,2,309.64,Transferencia
+135,2026-02-15,Sucursal Online,Ciudad de México,19,6,4857.24,Transferencia
+136,2025-09-16,Sucursal Sur,Bogotá,6,3,2740.86,Transferencia
+137,2026-07-10,Sucursal Plaza,Guadalajara,33,1,3511.65,Tarjeta crédito
+138,2026-01-06,Sucursal Online,Medellín,13,5,2081.75,Transferencia
+139,2025-10-01,Sucursal Online,Buenos Aires,4,2,7148.22,Efectivo
+140,2026-05-12,Sucursal Centro,Ciudad de México,29,6,13499.7,Tarjeta débito
+141,2026-07-19,Sucursal Centro,Córdoba,11,3,8422.95,Transferencia
+142,2025-04-27,Sucursal Plaza,Bogotá,6,2,1827.24,Tarjeta débito
+143,2025-10-26,Sucursal Online,Montevideo,32,6,6645.48,Efectivo
+144,2026-04-29,Sucursal Norte,Medellín,27,4,2781.76,Tarjeta débito
+145,2026-06-05,Sucursal Norte,Bogotá,25,2,5219.48,Efectivo
+146,2026-06-04,Sucursal Sur,Ciudad de México,27,3,2086.32,Efectivo
+147,2026-08-17,Sucursal Plaza,Buenos Aires,20,5,13309.95,Transferencia
+148,2025-12-20,Sucursal Sur,Córdoba,35,4,7449.84,Transferencia
+149,2025-07-13,Sucursal Norte,Quito,30,3,10137.81,Transferencia
+150,2025-02-14,Sucursal Sur,Montevideo,15,4,12952.64,Transferencia
+151,2025-06-05,Sucursal Plaza,Ciudad de México,25,4,10438.96,Tarjeta débito
+152,2025-12-06,Sucursal Centro,Medellín,33,5,17558.25,Tarjeta crédito
+153,2025-01-16,Sucursal Norte,Guadalajara,34,4,10555.92,Tarjeta débito
+154,2025-09-29,Sucursal Sur,Quito,5,4,6866.36,Transferencia
+155,2026-07-01,Sucursal Plaza,Monterrey,6,3,2740.86,Transferencia
+156,2025-03-12,Sucursal Norte,San José,35,1,1862.46,Efectivo
+157,2025-04-03,Sucursal Plaza,Bogotá,15,6,19428.96,Tarjeta crédito
+158,2025-11-03,Sucursal Centro,Ciudad de México,29,2,4499.9,Efectivo
+159,2026-01-03,Sucursal Sur,Guadalajara,4,3,10722.33,Tarjeta débito
+160,2026-02-26,Sucursal Online,San José,16,5,10840.5,Tarjeta débito
+161,2025-03-22,Sucursal Online,Guadalajara,11,2,5615.3,Tarjeta débito
+162,2025-05-27,Sucursal Norte,Medellín,32,5,5537.9,Efectivo
+163,2025-01-10,Sucursal Plaza,Lima,30,3,10137.81,Tarjeta débito
+164,2025-12-20,Sucursal Online,Lima,5,4,6866.36,Transferencia
+165,2025-11-06,Sucursal Norte,Guadalajara,17,4,8922.24,Transferencia
+166,2026-01-26,Sucursal Online,Monterrey,7,2,309.64,Efectivo
+167,2026-02-10,Sucursal Sur,Ciudad de México,19,1,809.54,Tarjeta crédito
+168,2026-05-24,Sucursal Sur,Santiago,39,6,5497.92,Efectivo
+169,2025-07-14,Sucursal Online,Lima,15,6,19428.96,Tarjeta débito
+170,2025-02-10,Sucursal Sur,Medellín,7,6,928.92,Tarjeta crédito
+171,2025-05-15,Sucursal Centro,Lima,38,3,10789.2,Efectivo
+172,2025-07-25,Sucursal Norte,Córdoba,27,2,1390.88,Efectivo
+173,2025-10-07,Sucursal Norte,Lima,34,5,13194.9,Transferencia
+174,2025-12-13,Sucursal Centro,Medellín,19,6,4857.24,Tarjeta crédito
+175,2026-02-11,Sucursal Online,Monterrey,10,2,6494.5,Tarjeta crédito
+176,2025-09-28,Sucursal Online,Bogotá,26,1,726.0,Transferencia
+177,2025-09-26,Sucursal Online,Guadalajara,24,6,16183.14,Efectivo
+178,2025-08-28,Sucursal Plaza,Ciudad de México,7,6,928.92,Efectivo
+179,2025-03-06,Sucursal Plaza,Montevideo,40,2,3998.78,Efectivo
+180,2025-05-24,Sucursal Centro,Ciudad de México,27,1,695.44,Efectivo
+181,2025-04-10,Sucursal Norte,Córdoba,32,1,1107.58,Tarjeta débito
+182,2026-01-15,Sucursal Online,Guadalajara,25,4,10438.96,Tarjeta débito
+183,2025-04-12,Sucursal Plaza,Quito,27,6,4172.64,Transferencia
+184,2026-01-15,Sucursal Norte,Medellín,18,1,3547.53,Transferencia
+185,2025-04-12,Sucursal Sur,Córdoba,16,3,6504.3,Efectivo
+186,2025-10-10,Sucursal Norte,Bogotá,4,4,14296.44,Transferencia
+187,2025-08-06,Sucursal Online,Ciudad de México,6,6,5481.72,Tarjeta crédito
+188,2025-05-09,Sucursal Online,Santiago,22,2,2296.0,Tarjeta crédito
+189,2026-08-24,Sucursal Norte,Santiago,36,2,2048.36,Efectivo
+190,2025-01-03,Sucursal Sur,Buenos Aires,10,5,16236.25,Tarjeta débito
+191,2025-06-28,Sucursal Centro,San José,35,3,5587.38,Tarjeta crédito
+192,2026-01-02,Sucursal Norte,Quito,9,1,920.74,Efectivo
+193,2025-09-29,Sucursal Centro,Buenos Aires,2,2,2272.74,Transferencia
+194,2025-03-07,Sucursal Plaza,Medellín,34,1,2638.98,Efectivo
+195,2025-04-22,Sucursal Plaza,Córdoba,33,5,17558.25,Tarjeta débito
+196,2026-06-18,Sucursal Sur,Medellín,40,1,1999.39,Tarjeta crédito
+197,2026-02-16,Sucursal Plaza,San José,4,4,14296.44,Tarjeta crédito
+198,2026-03-31,Sucursal Centro,Bogotá,32,6,6645.48,Efectivo
+199,2025-03-09,Sucursal Norte,Lima,39,2,1832.64,Efectivo
+200,2026-06-28,Sucursal Sur,Medellín,25,5,13048.7,Transferencia
+201,2025-04-28,Sucursal Online,Montevideo,7,6,928.92,Tarjeta débito
+202,2025-08-22,Sucursal Plaza,Monterrey,28,4,15834.48,Transferencia
+203,2025-04-08,Sucursal Sur,Guadalajara,26,4,2904.0,Efectivo
+204,2025-06-06,Sucursal Plaza,Bogotá,17,3,6691.68,Tarjeta crédito
+205,2026-03-19,Sucursal Centro,Montevideo,6,1,913.62,Efectivo
+206,2025-03-03,Sucursal Online,Córdoba,9,5,4603.7,Efectivo
+207,2025-12-29,Sucursal Plaza,Montevideo,8,4,10468.16,Tarjeta crédito
+208,2025-11-16,Sucursal Sur,Bogotá,19,5,4047.7,Tarjeta débito
+209,2026-05-09,Sucursal Norte,Bogotá,10,6,19483.5,Efectivo
+210,2025-04-28,Sucursal Sur,Quito,36,3,3072.54,Tarjeta débito
+211,2026-07-25,Sucursal Centro,Quito,28,5,19793.1,Efectivo
+212,2025-10-07,Sucursal Sur,Monterrey,2,2,2272.74,Efectivo
+213,2025-05-27,Sucursal Online,San José,1,2,5151.48,Transferencia
+214,2025-02-01,Sucursal Centro,Montevideo,5,2,3433.18,Tarjeta débito
+215,2026-04-10,Sucursal Sur,Buenos Aires,25,4,10438.96,Efectivo
+216,2025-11-29,Sucursal Online,Quito,20,6,15971.94,Tarjeta crédito
+217,2025-06-11,Sucursal Online,Ciudad de México,4,2,7148.22,Tarjeta crédito
+218,2026-03-11,Sucursal Plaza,Quito,18,4,14190.12,Transferencia
+219,2025-08-09,Sucursal Online,Bogotá,27,3,2086.32,Efectivo
+220,2025-10-18,Sucursal Online,Medellín,28,1,3958.62,Efectivo
+221,2026-02-09,Sucursal Online,Ciudad de México,3,2,5918.12,Tarjeta crédito
+222,2025-08-05,Sucursal Norte,Lima,14,3,10192.8,Efectivo
+223,2025-01-08,Sucursal Plaza,Montevideo,21,1,3428.5,Transferencia
+224,2026-01-25,Sucursal Online,Montevideo,12,2,1328.28,Tarjeta débito
+225,2025-12-29,Sucursal Centro,Guadalajara,33,5,17558.25,Tarjeta crédito
+226,2026-04-16,Sucursal Centro,Monterrey,28,1,3958.62,Transferencia
+227,2026-03-04,Sucursal Sur,Bogotá,37,4,4351.32,Transferencia
+228,2025-06-25,Sucursal Online,Medellín,2,3,3409.11,Efectivo
+229,2025-04-19,Sucursal Norte,Guadalajara,6,4,3654.48,Transferencia
+230,2026-02-10,Sucursal Sur,Montevideo,34,1,2638.98,Efectivo
+231,2025-06-22,Sucursal Centro,Córdoba,15,3,9714.48,Tarjeta crédito
+232,2025-07-18,Sucursal Sur,Monterrey,34,5,13194.9,Tarjeta débito
+233,2025-05-30,Sucursal Sur,Santiago,16,1,2168.1,Tarjeta débito
+234,2025-03-19,Sucursal Norte,San José,39,2,1832.64,Transferencia
+235,2026-08-17,Sucursal Plaza,San José,30,5,16896.35,Efectivo
+236,2026-03-27,Sucursal Centro,Medellín,21,2,6857.0,Transferencia
+237,2025-02-27,Sucursal Sur,Córdoba,20,3,7985.97,Tarjeta crédito
+238,2026-04-08,Sucursal Centro,Ciudad de México,20,4,10647.96,Efectivo
+239,2025-04-03,Sucursal Online,Quito,19,1,809.54,Transferencia
+240,2026-07-22,Sucursal Centro,Medellín,30,5,16896.35,Tarjeta débito
+241,2026-05-03,Sucursal Online,Buenos Aires,21,5,17142.5,Tarjeta crédito
+242,2025-12-18,Sucursal Centro,Córdoba,29,1,2249.95,Tarjeta débito
+243,2026-03-25,Sucursal Plaza,Córdoba,3,2,5918.12,Tarjeta débito
+244,2025-10-17,Sucursal Plaza,Guadalajara,24,3,8091.57,Efectivo
+245,2025-12-09,Sucursal Centro,Monterrey,39,1,916.32,Tarjeta crédito
+246,2026-01-31,Sucursal Sur,Lima,36,6,6145.08,Tarjeta débito
+247,2026-08-20,Sucursal Norte,Monterrey,22,1,1148.0,Efectivo
+248,2025-03-28,Sucursal Sur,Córdoba,26,2,1452.0,Transferencia
+249,2026-06-24,Sucursal Centro,San José,22,2,2296.0,Transferencia
+250,2025-01-19,Sucursal Sur,Lima,33,3,10534.95,Tarjeta débito
+251,2026-05-13,Sucursal Norte,Santiago,14,3,10192.8,Tarjeta débito
+252,2025-10-30,Sucursal Centro,Córdoba,10,1,3247.25,Tarjeta crédito
+253,2025-05-15,Sucursal Online,Guadalajara,22,5,5740.0,Tarjeta débito
+254,2025-06-19,Sucursal Plaza,Ciudad de México,11,2,5615.3,Transferencia
+255,2025-09-01,Sucursal Plaza,Quito,24,6,16183.14,Efectivo
+256,2026-07-01,Sucursal Norte,Lima,29,2,4499.9,Transferencia
+257,2026-08-08,Sucursal Plaza,Medellín,13,3,1249.05,Efectivo
+258,2026-06-25,Sucursal Plaza,Buenos Aires,25,5,13048.7,Tarjeta débito
+259,2025-09-14,Sucursal Centro,San José,39,2,1832.64,Transferencia
+260,2025-04-16,Sucursal Online,Bogotá,24,5,13485.95,Efectivo
+261,2025-10-07,Sucursal Plaza,Córdoba,6,2,1827.24,Tarjeta débito
+262,2025-08-16,Sucursal Plaza,Monterrey,28,1,3958.62,Tarjeta crédito
+263,2026-02-10,Sucursal Online,Monterrey,27,1,695.44,Tarjeta débito
+264,2026-01-19,Sucursal Norte,Ciudad de México,25,1,2609.74,Efectivo
+265,2025-12-10,Sucursal Norte,Buenos Aires,7,6,928.92,Tarjeta crédito
+266,2025-05-23,Sucursal Plaza,Medellín,19,4,3238.16,Tarjeta crédito
+267,2025-09-20,Sucursal Norte,Buenos Aires,6,1,913.62,Transferencia
+268,2025-09-01,Sucursal Sur,Bogotá,8,3,7851.12,Tarjeta crédito
+269,2026-04-14,Sucursal Centro,Bogotá,16,4,8672.4,Transferencia
+270,2025-01-17,Sucursal Online,Quito,39,5,4581.6,Tarjeta débito
+271,2026-03-16,Sucursal Centro,Quito,10,3,9741.75,Efectivo
+272,2026-03-03,Sucursal Norte,San José,16,5,10840.5,Tarjeta crédito
+273,2025-03-11,Sucursal Online,Córdoba,34,3,7916.94,Tarjeta crédito
+274,2025-02-14,Sucursal Plaza,Monterrey,25,4,10438.96,Efectivo
+275,2025-03-11,Sucursal Sur,Santiago,2,3,3409.11,Tarjeta crédito
+276,2025-12-07,Sucursal Norte,Ciudad de México,38,6,21578.4,Efectivo
+277,2025-06-29,Sucursal Plaza,Montevideo,35,3,5587.38,Transferencia
+278,2025-03-06,Sucursal Plaza,Ciudad de México,12,2,1328.28,Efectivo
+279,2025-07-24,Sucursal Centro,Monterrey,13,1,416.35,Efectivo
+280,2026-07-11,Sucursal Plaza,Lima,33,4,14046.6,Tarjeta crédito
+281,2026-01-01,Sucursal Centro,San José,13,3,1249.05,Efectivo
+282,2026-01-12,Sucursal Plaza,Guadalajara,18,1,3547.53,Transferencia
+283,2025-07-11,Sucursal Plaza,Montevideo,25,3,7829.22,Transferencia
+284,2025-10-01,Sucursal Centro,Montevideo,24,5,13485.95,Transferencia
+285,2025-07-04,Sucursal Online,Lima,6,4,3654.48,Efectivo
+286,2025-12-02,Sucursal Sur,Lima,7,1,154.82,Transferencia
+287,2026-03-13,Sucursal Norte,Montevideo,39,6,5497.92,Transferencia
+288,2025-02-13,Sucursal Sur,Quito,23,4,2769.92,Transferencia
+289,2025-02-28,Sucursal Centro,San José,18,6,21285.18,Transferencia
+290,2025-06-13,Sucursal Centro,Buenos Aires,24,5,13485.95,Transferencia
+291,2025-03-10,Sucursal Norte,San José,3,2,5918.12,Efectivo
+292,2026-08-04,Sucursal Centro,Quito,24,4,10788.76,Tarjeta débito
+293,2026-01-16,Sucursal Plaza,Bogotá,29,3,6749.85,Tarjeta débito
+294,2026-02-12,Sucursal Sur,San José,34,3,7916.94,Efectivo
+295,2025-01-27,Sucursal Norte,Medellín,16,1,2168.1,Transferencia
+296,2025-09-26,Sucursal Sur,Montevideo,36,1,1024.18,Transferencia
+297,2025-10-20,Sucursal Plaza,Santiago,14,5,16988.0,Tarjeta crédito
+298,2026-04-08,Sucursal Norte,Montevideo,9,1,920.74,Transferencia
+299,2025-11-24,Sucursal Sur,Montevideo,6,6,5481.72,Tarjeta crédito
+300,2025-10-25,Sucursal Sur,Buenos Aires,36,5,5120.9,Tarjeta débito
+301,2025-08-18,Sucursal Centro,Santiago,24,5,13485.95,Tarjeta débito
+302,2025-01-27,Sucursal Sur,Córdoba,16,4,8672.4,Efectivo
+303,2025-05-13,Sucursal Online,Bogotá,30,5,16896.35,Tarjeta crédito
+304,2026-05-06,Sucursal Online,Guadalajara,20,4,10647.96,Transferencia
+305,2025-05-09,Sucursal Sur,San José,37,1,1087.83,Tarjeta crédito
+306,2026-06-14,Sucursal Sur,Buenos Aires,29,4,8999.8,Tarjeta débito
+307,2026-05-30,Sucursal Centro,Bogotá,9,4,3682.96,Tarjeta débito
+308,2025-06-15,Sucursal Sur,Montevideo,20,2,5323.98,Tarjeta débito
+309,2025-10-18,Sucursal Centro,Lima,23,5,3462.4,Tarjeta débito
+310,2025-05-09,Sucursal Sur,Quito,36,3,3072.54,Tarjeta crédito
+311,2025-06-22,Sucursal Online,Quito,33,6,21069.9,Tarjeta débito
+312,2025-12-12,Sucursal Online,Ciudad de México,11,6,16845.9,Tarjeta crédito
+313,2026-08-14,Sucursal Sur,San José,6,1,913.62,Tarjeta débito
+314,2025-02-01,Sucursal Plaza,San José,37,4,4351.32,Efectivo
+315,2025-09-08,Sucursal Plaza,Lima,20,4,10647.96,Transferencia
+316,2025-03-03,Sucursal Norte,Medellín,5,6,10299.54,Transferencia
+317,2025-07-28,Sucursal Sur,Quito,31,4,13184.48,Tarjeta débito
+318,2025-11-23,Sucursal Sur,Guadalajara,21,6,20571.0,Tarjeta débito
+319,2026-07-30,Sucursal Centro,Monterrey,24,5,13485.95,Tarjeta débito
+320,2025-10-01,Sucursal Plaza,Santiago,30,1,3379.27,Tarjeta débito
+321,2025-10-25,Sucursal Plaza,Quito,7,1,154.82,Transferencia
+322,2025-12-02,Sucursal Online,Montevideo,16,2,4336.2,Efectivo
+323,2026-05-26,Sucursal Online,Medellín,13,2,832.7,Transferencia
+324,2025-01-24,Sucursal Centro,Guadalajara,20,4,10647.96,Transferencia
+325,2026-08-21,Sucursal Sur,Ciudad de México,16,2,4336.2,Tarjeta crédito
+326,2026-04-27,Sucursal Sur,Córdoba,19,4,3238.16,Tarjeta crédito
+327,2025-05-18,Sucursal Sur,Montevideo,7,4,619.28,Efectivo
+328,2025-02-16,Sucursal Plaza,Ciudad de México,26,3,2178.0,Tarjeta débito
+329,2025-10-23,Sucursal Centro,Guadalajara,24,5,13485.95,Transferencia
+330,2025-05-02,Sucursal Norte,Bogotá,36,3,3072.54,Transferencia
+331,2026-07-26,Sucursal Sur,Buenos Aires,24,3,8091.57,Tarjeta débito
+332,2026-02-16,Sucursal Online,Ciudad de México,39,5,4581.6,Tarjeta crédito
+333,2025-12-08,Sucursal Plaza,Córdoba,3,2,5918.12,Transferencia
+334,2026-06-12,Sucursal Norte,Monterrey,10,5,16236.25,Efectivo
+335,2025-11-03,Sucursal Online,Monterrey,11,4,11230.6,Transferencia
+336,2026-05-02,Sucursal Centro,Monterrey,37,3,3263.49,Efectivo
+337,2026-08-21,Sucursal Sur,Montevideo,8,4,10468.16,Tarjeta crédito
+338,2025-09-29,Sucursal Online,Quito,39,4,3665.28,Tarjeta débito
+339,2026-05-07,Sucursal Norte,Córdoba,4,5,17870.55,Transferencia
+340,2025-09-06,Sucursal Centro,Quito,10,6,19483.5,Tarjeta crédito
+341,2026-03-28,Sucursal Sur,Guadalajara,13,1,416.35,Tarjeta débito
+342,2025-07-28,Sucursal Plaza,Córdoba,27,6,4172.64,Transferencia
+343,2025-05-22,Sucursal Online,Santiago,4,6,21444.66,Efectivo
+344,2026-01-21,Sucursal Sur,Buenos Aires,31,5,16480.6,Transferencia
+345,2026-07-14,Sucursal Sur,San José,35,3,5587.38,Efectivo
+346,2025-07-16,Sucursal Norte,Lima,40,4,7997.56,Efectivo
+347,2025-10-23,Sucursal Norte,Montevideo,15,3,9714.48,Transferencia
+348,2025-12-24,Sucursal Online,Montevideo,21,4,13714.0,Efectivo
+349,2026-08-11,Sucursal Online,Guadalajara,19,1,809.54,Transferencia
+350,2025-10-25,Sucursal Centro,Lima,23,2,1384.96,Tarjeta crédito
+351,2025-09-20,Sucursal Plaza,Santiago,23,4,2769.92,Tarjeta débito
+352,2026-07-30,Sucursal Sur,Buenos Aires,35,3,5587.38,Tarjeta crédito
+353,2026-08-24,Sucursal Norte,Santiago,40,6,11996.34,Tarjeta crédito
+354,2025-08-27,Sucursal Centro,Bogotá,34,2,5277.96,Transferencia
+355,2026-04-29,Sucursal Centro,San José,22,6,6888.0,Tarjeta débito
+356,2025-06-11,Sucursal Plaza,San José,1,5,12878.7,Transferencia
+357,2025-07-24,Sucursal Sur,Monterrey,31,6,19776.72,Efectivo
+358,2026-08-11,Sucursal Norte,Córdoba,4,1,3574.11,Tarjeta crédito
+359,2025-06-30,Sucursal Centro,Guadalajara,12,4,2656.56,Transferencia
+360,2025-10-24,Sucursal Centro,Ciudad de México,12,6,3984.84,Efectivo
+361,2025-04-20,Sucursal Sur,Lima,37,5,5439.15,Transferencia
+362,2026-05-21,Sucursal Norte,Córdoba,35,5,9312.3,Transferencia
+363,2025-04-26,Sucursal Sur,Buenos Aires,18,2,7095.06,Transferencia
+364,2025-07-10,Sucursal Centro,Montevideo,17,6,13383.36,Efectivo
+365,2025-07-17,Sucursal Norte,Quito,19,5,4047.7,Transferencia
+366,2025-12-02,Sucursal Centro,Guadalajara,28,5,19793.1,Tarjeta crédito
+367,2026-05-04,Sucursal Sur,Santiago,12,2,1328.28,Tarjeta crédito
+368,2025-08-30,Sucursal Plaza,Lima,17,4,8922.24,Efectivo
+369,2026-08-10,Sucursal Centro,Lima,20,5,13309.95,Efectivo
+370,2025-05-02,Sucursal Plaza,Lima,16,1,2168.1,Tarjeta débito
+371,2026-05-30,Sucursal Sur,Montevideo,26,6,4356.0,Tarjeta crédito
+372,2025-08-15,Sucursal Norte,Buenos Aires,19,3,2428.62,Transferencia
+373,2026-01-18,Sucursal Plaza,Montevideo,10,4,12989.0,Transferencia
+374,2025-08-12,Sucursal Norte,San José,35,6,11174.76,Tarjeta crédito
+375,2026-06-25,Sucursal Sur,Bogotá,34,4,10555.92,Tarjeta crédito
+376,2026-06-02,Sucursal Norte,Quito,4,5,17870.55,Tarjeta débito
+377,2026-06-17,Sucursal Plaza,Bogotá,11,3,8422.95,Tarjeta débito
+378,2025-04-04,Sucursal Online,Medellín,38,4,14385.6,Tarjeta crédito
+379,2026-06-10,Sucursal Plaza,Medellín,30,2,6758.54,Tarjeta crédito
+380,2025-11-12,Sucursal Centro,Guadalajara,36,4,4096.72,Efectivo
+381,2025-08-12,Sucursal Online,Bogotá,1,6,15454.44,Tarjeta crédito
+382,2025-03-07,Sucursal Online,Ciudad de México,28,3,11875.86,Tarjeta crédito
+383,2025-10-21,Sucursal Plaza,Buenos Aires,31,1,3296.12,Tarjeta débito
+384,2026-01-27,Sucursal Plaza,Guadalajara,27,3,2086.32,Transferencia
+385,2026-07-07,Sucursal Norte,San José,6,6,5481.72,Efectivo
+386,2026-07-05,Sucursal Plaza,Córdoba,8,2,5234.08,Tarjeta débito
+387,2025-01-24,Sucursal Sur,Medellín,15,1,3238.16,Transferencia
+388,2025-08-24,Sucursal Norte,Medellín,35,4,7449.84,Efectivo
+389,2025-07-13,Sucursal Centro,Ciudad de México,10,3,9741.75,Transferencia
+390,2025-09-04,Sucursal Norte,Bogotá,40,1,1999.39,Tarjeta crédito
+391,2026-04-03,Sucursal Online,San José,39,1,916.32,Tarjeta crédito
+392,2025-02-15,Sucursal Plaza,Medellín,16,6,13008.6,Tarjeta débito
+393,2025-02-27,Sucursal Norte,Córdoba,35,2,3724.92,Efectivo
+394,2026-08-13,Sucursal Sur,Quito,15,6,19428.96,Efectivo
+395,2025-05-27,Sucursal Online,Santiago,16,3,6504.3,Transferencia
+396,2025-03-04,Sucursal Online,Quito,20,3,7985.97,Tarjeta débito
+397,2026-05-23,Sucursal Centro,Monterrey,28,5,19793.1,Transferencia
+398,2026-03-03,Sucursal Plaza,Buenos Aires,34,3,7916.94,Efectivo
+399,2026-07-05,Sucursal Plaza,Santiago,25,2,5219.48,Tarjeta débito
+400,2025-05-28,Sucursal Plaza,Ciudad de México,20,6,15971.94,Transferencia
+401,2026-06-27,Sucursal Norte,Guadalajara,27,5,3477.2,Tarjeta débito
+402,2025-12-05,Sucursal Centro,Medellín,17,2,4461.12,Efectivo
+403,2025-07-15,Sucursal Centro,Lima,6,5,4568.1,Transferencia
+404,2025-02-10,Sucursal Centro,Santiago,39,5,4581.6,Tarjeta débito
+405,2025-12-07,Sucursal Sur,Ciudad de México,31,2,6592.24,Tarjeta débito
+406,2025-05-01,Sucursal Plaza,Santiago,13,6,2498.1,Tarjeta débito
+407,2026-07-20,Sucursal Sur,Lima,26,2,1452.0,Transferencia
+408,2026-01-03,Sucursal Sur,Lima,30,5,16896.35,Efectivo
+409,2026-04-23,Sucursal Centro,Montevideo,33,4,14046.6,Transferencia
+410,2026-01-15,Sucursal Sur,Guadalajara,21,2,6857.0,Tarjeta crédito
+411,2025-05-30,Sucursal Centro,Lima,37,2,2175.66,Transferencia
+412,2025-07-20,Sucursal Sur,Santiago,19,2,1619.08,Transferencia
+413,2026-05-27,Sucursal Online,San José,37,2,2175.66,Efectivo
+414,2026-05-18,Sucursal Plaza,Buenos Aires,17,4,8922.24,Efectivo
+415,2026-07-14,Sucursal Plaza,Buenos Aires,11,2,5615.3,Tarjeta crédito
+416,2025-03-18,Sucursal Centro,Ciudad de México,34,1,2638.98,Transferencia
+417,2025-08-25,Sucursal Centro,Montevideo,9,6,5524.44,Tarjeta débito
+418,2026-06-02,Sucursal Plaza,Monterrey,1,2,5151.48,Tarjeta crédito
+419,2026-05-10,Sucursal Plaza,Ciudad de México,40,6,11996.34,Tarjeta crédito
+420,2026-02-26,Sucursal Centro,Ciudad de México,35,5,9312.3,Efectivo
+421,2025-01-18,Sucursal Online,Montevideo,35,3,5587.38,Transferencia
+422,2025-04-09,Sucursal Online,Buenos Aires,12,1,664.14,Tarjeta débito
+423,2026-06-24,Sucursal Sur,Monterrey,13,5,2081.75,Efectivo
+424,2026-01-18,Sucursal Plaza,Medellín,26,1,726.0,Tarjeta débito
+425,2025-03-24,Sucursal Centro,Bogotá,15,3,9714.48,Transferencia
+426,2026-07-20,Sucursal Plaza,Ciudad de México,25,4,10438.96,Tarjeta crédito
+427,2026-05-27,Sucursal Plaza,San José,11,1,2807.65,Efectivo
+428,2026-06-25,Sucursal Centro,Santiago,37,1,1087.83,Tarjeta débito
+429,2025-10-05,Sucursal Centro,Bogotá,37,4,4351.32,Efectivo
+430,2025-02-03,Sucursal Norte,Monterrey,35,5,9312.3,Tarjeta crédito
+431,2025-05-28,Sucursal Plaza,Bogotá,14,5,16988.0,Efectivo
+432,2025-09-04,Sucursal Online,Guadalajara,11,5,14038.25,Efectivo
+433,2025-05-24,Sucursal Centro,Córdoba,25,6,15658.44,Efectivo
+434,2026-03-24,Sucursal Norte,Bogotá,4,1,3574.11,Efectivo
+435,2026-02-11,Sucursal Sur,Ciudad de México,39,5,4581.6,Efectivo
+436,2025-08-22,Sucursal Sur,Córdoba,29,4,8999.8,Transferencia
+437,2026-08-23,Sucursal Plaza,Bogotá,28,2,7917.24,Efectivo
+438,2025-03-17,Sucursal Centro,Lima,16,6,13008.6,Tarjeta débito
+439,2025-06-07,Sucursal Plaza,Monterrey,25,6,15658.44,Efectivo
+440,2025-01-06,Sucursal Sur,Medellín,7,1,154.82,Efectivo
+441,2025-05-16,Sucursal Centro,Buenos Aires,18,1,3547.53,Transferencia
+442,2026-07-23,Sucursal Online,Guadalajara,29,5,11249.75,Tarjeta crédito
+443,2025-12-29,Sucursal Online,Bogotá,2,1,1136.37,Efectivo
+444,2025-10-26,Sucursal Plaza,Guadalajara,25,1,2609.74,Tarjeta crédito
+445,2026-08-09,Sucursal Online,Buenos Aires,36,2,2048.36,Transferencia
+446,2025-10-03,Sucursal Sur,Lima,11,2,5615.3,Transferencia
+447,2025-06-21,Sucursal Plaza,Lima,10,1,3247.25,Transferencia
+448,2025-03-20,Sucursal Sur,Lima,20,4,10647.96,Tarjeta débito
+449,2025-07-20,Sucursal Plaza,Bogotá,32,5,5537.9,Tarjeta débito
+450,2026-02-10,Sucursal Sur,Quito,20,1,2661.99,Transferencia
+451,2025-12-09,Sucursal Plaza,San José,22,4,4592.0,Tarjeta débito
+452,2025-07-25,Sucursal Plaza,Monterrey,20,3,7985.97,Tarjeta débito
+453,2025-10-26,Sucursal Plaza,Quito,26,3,2178.0,Tarjeta débito
+454,2025-10-15,Sucursal Plaza,Monterrey,21,4,13714.0,Tarjeta crédito
+455,2026-07-13,Sucursal Norte,San José,37,2,2175.66,Tarjeta crédito
+456,2025-08-03,Sucursal Plaza,Lima,30,6,20275.62,Tarjeta crédito
+457,2026-05-27,Sucursal Norte,San José,27,6,4172.64,Efectivo
+458,2025-06-07,Sucursal Plaza,Guadalajara,16,3,6504.3,Tarjeta crédito
+459,2026-05-06,Sucursal Online,Guadalajara,29,5,11249.75,Transferencia
+460,2026-01-04,Sucursal Online,Quito,35,1,1862.46,Tarjeta crédito
+461,2025-12-30,Sucursal Norte,San José,7,2,309.64,Tarjeta crédito
+462,2026-02-14,Sucursal Sur,Guadalajara,37,6,6526.98,Tarjeta crédito
+463,2025-09-22,Sucursal Norte,Córdoba,1,1,2575.74,Tarjeta débito
+464,2026-02-05,Sucursal Plaza,San José,29,3,6749.85,Tarjeta débito
+465,2026-05-10,Sucursal Centro,Lima,23,1,692.48,Transferencia
+466,2025-05-26,Sucursal Sur,Lima,6,1,913.62,Efectivo
+467,2026-06-18,Sucursal Plaza,Monterrey,30,2,6758.54,Transferencia
+468,2026-04-09,Sucursal Sur,Bogotá,7,4,619.28,Efectivo
+469,2025-04-28,Sucursal Centro,Monterrey,3,6,17754.36,Tarjeta crédito
+470,2025-09-07,Sucursal Online,Buenos Aires,11,6,16845.9,Tarjeta débito
+471,2026-03-13,Sucursal Plaza,Santiago,22,5,5740.0,Transferencia
+472,2026-03-19,Sucursal Plaza,Ciudad de México,12,2,1328.28,Tarjeta débito
+473,2026-03-16,Sucursal Plaza,Ciudad de México,29,5,11249.75,Tarjeta débito
+474,2025-03-06,Sucursal Online,Bogotá,14,3,10192.8,Tarjeta débito
+475,2025-07-21,Sucursal Plaza,Bogotá,24,3,8091.57,Efectivo
+476,2025-11-17,Sucursal Online,Guadalajara,32,5,5537.9,Transferencia
+477,2025-12-23,Sucursal Sur,Medellín,38,1,3596.4,Tarjeta débito
+478,2025-03-28,Sucursal Norte,Monterrey,20,5,13309.95,Tarjeta crédito
+479,2025-04-30,Sucursal Norte,Monterrey,16,3,6504.3,Tarjeta débito
+480,2026-03-05,Sucursal Online,Buenos Aires,33,4,14046.6,Transferencia
+481,2026-05-14,Sucursal Online,Montevideo,28,2,7917.24,Tarjeta débito
+482,2026-05-17,Sucursal Sur,Buenos Aires,36,2,2048.36,Tarjeta débito
+483,2025-02-24,Sucursal Sur,Ciudad de México,21,4,13714.0,Transferencia
+484,2026-01-29,Sucursal Online,Córdoba,9,2,1841.48,Transferencia
+485,2026-05-19,Sucursal Plaza,Montevideo,27,6,4172.64,Transferencia
+486,2025-03-26,Sucursal Online,Ciudad de México,32,2,2215.16,Tarjeta débito
+487,2025-10-09,Sucursal Norte,Córdoba,19,1,809.54,Efectivo
+488,2026-08-03,Sucursal Plaza,Córdoba,11,4,11230.6,Tarjeta crédito
+489,2025-10-02,Sucursal Online,Monterrey,37,1,1087.83,Tarjeta crédito
+490,2025-08-12,Sucursal Plaza,Bogotá,29,5,11249.75,Tarjeta débito
+491,2026-04-06,Sucursal Sur,Monterrey,20,1,2661.99,Tarjeta crédito
+492,2025-08-31,Sucursal Norte,Montevideo,29,1,2249.95,Efectivo
+493,2026-03-15,Sucursal Norte,Quito,40,6,11996.34,Tarjeta débito
+494,2025-03-02,Sucursal Online,Monterrey,14,2,6795.2,Efectivo
+495,2025-06-22,Sucursal Sur,Montevideo,39,5,4581.6,Efectivo
+496,2025-10-01,Sucursal Online,San José,19,5,4047.7,Tarjeta crédito
+497,2025-03-02,Sucursal Sur,San José,9,4,3682.96,Tarjeta débito
+498,2025-05-30,Sucursal Sur,Santiago,9,2,1841.48,Transferencia
+499,2026-08-15,Sucursal Sur,San José,32,2,2215.16,Transferencia
+500,2025-03-19,Sucursal Centro,Guadalajara,25,4,10438.96,Efectivo
+501,2026-05-15,Sucursal Sur,Quito,24,4,10788.76,Tarjeta crédito
+502,2026-04-15,Sucursal Sur,Bogotá,6,6,5481.72,Transferencia
+503,2025-08-05,Sucursal Plaza,Lima,14,4,13590.4,Efectivo
+504,2026-07-15,Sucursal Online,Buenos Aires,19,3,2428.62,Transferencia
+505,2025-02-19,Sucursal Centro,Bogotá,22,6,6888.0,Transferencia
+506,2025-06-11,Sucursal Plaza,Medellín,2,1,1136.37,Tarjeta crédito
+507,2025-05-16,Sucursal Sur,Buenos Aires,28,2,7917.24,Efectivo
+508,2026-01-05,Sucursal Sur,Bogotá,6,6,5481.72,Efectivo
+509,2026-02-10,Sucursal Sur,Montevideo,11,1,2807.65,Tarjeta débito
+510,2025-04-04,Sucursal Centro,Ciudad de México,28,6,23751.72,Tarjeta débito
+511,2025-05-16,Sucursal Online,Santiago,31,1,3296.12,Transferencia
+512,2025-12-18,Sucursal Centro,Guadalajara,1,1,2575.74,Tarjeta débito
+513,2025-08-23,Sucursal Plaza,Bogotá,31,1,3296.12,Tarjeta crédito
+514,2026-01-12,Sucursal Sur,Buenos Aires,7,3,464.46,Transferencia
+515,2025-05-27,Sucursal Centro,Córdoba,9,6,5524.44,Tarjeta crédito
+516,2025-06-18,Sucursal Plaza,Monterrey,40,6,11996.34,Tarjeta débito
+517,2026-03-30,Sucursal Norte,Bogotá,10,4,12989.0,Tarjeta crédito
+518,2026-01-29,Sucursal Sur,Guadalajara,9,1,920.74,Efectivo
+519,2025-10-11,Sucursal Centro,Santiago,9,2,1841.48,Efectivo
+520,2025-11-05,Sucursal Norte,Córdoba,2,6,6818.22,Tarjeta débito
+521,2025-02-25,Sucursal Norte,Medellín,26,3,2178.0,Transferencia
+522,2026-05-27,Sucursal Online,Bogotá,8,2,5234.08,Tarjeta crédito
+523,2025-05-16,Sucursal Plaza,Quito,24,3,8091.57,Transferencia
+524,2025-06-26,Sucursal Plaza,Bogotá,24,5,13485.95,Tarjeta crédito
+525,2025-01-15,Sucursal Sur,Santiago,38,1,3596.4,Tarjeta crédito
+526,2026-06-03,Sucursal Sur,San José,4,4,14296.44,Transferencia
+527,2026-02-16,Sucursal Centro,San José,28,6,23751.72,Tarjeta débito
+528,2025-11-14,Sucursal Centro,Córdoba,18,1,3547.53,Tarjeta débito
+529,2025-12-01,Sucursal Plaza,Quito,10,5,16236.25,Tarjeta crédito
+530,2026-03-24,Sucursal Norte,Ciudad de México,20,6,15971.94,Tarjeta débito
+531,2025-04-29,Sucursal Plaza,Quito,6,4,3654.48,Tarjeta crédito
+532,2025-06-29,Sucursal Centro,Ciudad de México,20,6,15971.94,Tarjeta débito
+533,2026-05-24,Sucursal Sur,Córdoba,1,2,5151.48,Efectivo
+534,2025-05-10,Sucursal Sur,Montevideo,11,3,8422.95,Tarjeta crédito
+535,2026-03-16,Sucursal Sur,Córdoba,2,3,3409.11,Tarjeta crédito
+536,2026-08-14,Sucursal Centro,Medellín,17,6,13383.36,Transferencia
+537,2025-02-26,Sucursal Plaza,Quito,33,3,10534.95,Tarjeta débito
+538,2025-09-19,Sucursal Centro,Quito,24,2,5394.38,Tarjeta crédito
+539,2026-06-06,Sucursal Centro,Ciudad de México,15,6,19428.96,Tarjeta crédito
+540,2026-04-29,Sucursal Sur,Guadalajara,16,1,2168.1,Tarjeta débito
+541,2026-07-21,Sucursal Plaza,Santiago,12,1,664.14,Efectivo
+542,2025-11-24,Sucursal Sur,Bogotá,16,4,8672.4,Efectivo
+543,2025-02-23,Sucursal Norte,Santiago,8,5,13085.2,Tarjeta crédito
+544,2026-04-22,Sucursal Sur,Lima,26,1,726.0,Efectivo
+545,2026-04-13,Sucursal Centro,Monterrey,6,5,4568.1,Tarjeta débito
+546,2025-11-08,Sucursal Online,Santiago,19,5,4047.7,Transferencia
+547,2026-05-21,Sucursal Norte,Montevideo,24,5,13485.95,Tarjeta débito
+548,2026-02-24,Sucursal Centro,Santiago,10,1,3247.25,Efectivo
+549,2025-01-02,Sucursal Plaza,Montevideo,1,3,7727.22,Efectivo
+550,2026-06-27,Sucursal Norte,Guadalajara,7,2,309.64,Transferencia
+551,2025-10-14,Sucursal Centro,Ciudad de México,4,2,7148.22,Tarjeta débito
+552,2026-01-17,Sucursal Plaza,Montevideo,34,4,10555.92,Tarjeta crédito
+553,2026-06-02,Sucursal Norte,San José,38,1,3596.4,Transferencia
+554,2026-08-05,Sucursal Centro,Guadalajara,5,5,8582.95,Tarjeta débito
+555,2025-09-25,Sucursal Sur,Guadalajara,16,3,6504.3,Efectivo
+556,2025-10-06,Sucursal Norte,Bogotá,21,4,13714.0,Tarjeta débito
+557,2025-04-22,Sucursal Norte,Bogotá,9,5,4603.7,Tarjeta débito
+558,2025-11-18,Sucursal Plaza,Bogotá,29,4,8999.8,Efectivo
+559,2025-11-12,Sucursal Plaza,Lima,14,4,13590.4,Tarjeta crédito
+560,2025-11-08,Sucursal Online,Ciudad de México,6,2,1827.24,Tarjeta débito
+561,2025-04-04,Sucursal Norte,Monterrey,21,2,6857.0,Transferencia
+562,2025-11-03,Sucursal Sur,Buenos Aires,33,1,3511.65,Tarjeta crédito
+563,2026-07-24,Sucursal Online,Santiago,26,4,2904.0,Tarjeta crédito
+564,2025-05-24,Sucursal Centro,Ciudad de México,30,1,3379.27,Tarjeta crédito
+565,2025-07-22,Sucursal Plaza,Monterrey,15,2,6476.32,Tarjeta crédito
+566,2025-09-23,Sucursal Centro,Ciudad de México,38,5,17982.0,Tarjeta crédito
+567,2026-03-31,Sucursal Norte,Bogotá,13,6,2498.1,Efectivo
+568,2026-04-18,Sucursal Centro,Buenos Aires,8,1,2617.04,Transferencia
+569,2025-01-31,Sucursal Plaza,San José,26,4,2904.0,Transferencia
+570,2025-08-08,Sucursal Norte,Lima,12,3,1992.42,Efectivo
+571,2025-02-05,Sucursal Online,Quito,29,2,4499.9,Tarjeta débito
+572,2026-02-26,Sucursal Online,Medellín,19,4,3238.16,Tarjeta crédito
+573,2026-01-28,Sucursal Norte,Guadalajara,6,3,2740.86,Tarjeta débito
+574,2026-07-11,Sucursal Centro,Guadalajara,34,2,5277.96,Efectivo
+575,2026-05-12,Sucursal Sur,Quito,31,5,16480.6,Efectivo
+576,2025-07-04,Sucursal Centro,Monterrey,25,3,7829.22,Tarjeta débito
+577,2025-03-01,Sucursal Plaza,Córdoba,2,3,3409.11,Efectivo
+578,2025-06-13,Sucursal Centro,Santiago,38,2,7192.8,Tarjeta débito
+579,2025-02-27,Sucursal Norte,Quito,18,5,17737.65,Transferencia
+580,2025-06-30,Sucursal Norte,Quito,23,2,1384.96,Efectivo
+581,2025-01-29,Sucursal Sur,Quito,23,5,3462.4,Tarjeta débito
+582,2026-05-20,Sucursal Online,Lima,37,2,2175.66,Tarjeta débito
+583,2025-04-03,Sucursal Centro,Santiago,32,1,1107.58,Tarjeta débito
+584,2026-05-05,Sucursal Centro,Monterrey,2,5,5681.85,Tarjeta débito
+585,2025-07-01,Sucursal Sur,Ciudad de México,9,3,2762.22,Tarjeta crédito
+586,2025-05-26,Sucursal Centro,Córdoba,10,5,16236.25,Efectivo
+587,2026-02-10,Sucursal Online,Bogotá,5,3,5149.77,Efectivo
+588,2025-05-20,Sucursal Norte,Montevideo,20,3,7985.97,Transferencia
+589,2025-11-21,Sucursal Norte,Montevideo,32,6,6645.48,Efectivo
+590,2025-06-29,Sucursal Plaza,Lima,15,6,19428.96,Efectivo
+591,2025-01-02,Sucursal Online,Guadalajara,9,2,1841.48,Tarjeta crédito
+592,2025-11-22,Sucursal Online,Santiago,12,5,3320.7,Tarjeta crédito
+593,2025-12-06,Sucursal Centro,Santiago,32,2,2215.16,Efectivo
+594,2025-04-01,Sucursal Sur,Medellín,21,2,6857.0,Tarjeta crédito
+595,2025-09-13,Sucursal Centro,Monterrey,17,2,4461.12,Efectivo
+596,2025-01-02,Sucursal Centro,Guadalajara,7,6,928.92,Transferencia
+597,2026-02-28,Sucursal Plaza,Guadalajara,27,2,1390.88,Efectivo
+598,2025-04-14,Sucursal Plaza,Quito,35,4,7449.84,Tarjeta débito
+599,2025-03-17,Sucursal Centro,Lima,11,4,11230.6,Tarjeta crédito
+600,2025-04-18,Sucursal Centro,Monterrey,21,3,10285.5,Tarjeta débito
+601,2025-03-18,Sucursal Online,Bogotá,25,2,5219.48,Efectivo
+602,2026-05-10,Sucursal Centro,Guadalajara,39,5,4581.6,Tarjeta débito
+603,2025-06-10,Sucursal Centro,Bogotá,39,4,3665.28,Efectivo
+604,2026-02-24,Sucursal Online,Montevideo,14,2,6795.2,Efectivo
+605,2025-09-01,Sucursal Centro,Ciudad de México,19,3,2428.62,Transferencia
+606,2026-05-18,Sucursal Norte,Ciudad de México,37,5,5439.15,Efectivo
+607,2025-03-31,Sucursal Sur,San José,1,4,10302.96,Transferencia
+608,2025-01-27,Sucursal Norte,Buenos Aires,13,1,416.35,Efectivo
+609,2025-04-29,Sucursal Sur,Guadalajara,6,4,3654.48,Transferencia
+610,2025-09-29,Sucursal Centro,San José,32,6,6645.48,Transferencia
+611,2026-01-26,Sucursal Sur,Buenos Aires,12,3,1992.42,Transferencia
+612,2026-03-27,Sucursal Plaza,Lima,3,3,8877.18,Tarjeta débito
+613,2025-03-05,Sucursal Norte,Montevideo,18,5,17737.65,Tarjeta crédito
+614,2025-12-19,Sucursal Online,Guadalajara,6,6,5481.72,Tarjeta débito
+615,2026-02-01,Sucursal Online,Guadalajara,36,1,1024.18,Transferencia
+616,2026-05-03,Sucursal Sur,Bogotá,37,2,2175.66,Transferencia
+617,2026-08-08,Sucursal Online,Quito,3,5,14795.3,Tarjeta débito
+618,2025-06-27,Sucursal Norte,Santiago,8,4,10468.16,Tarjeta débito
+619,2026-03-10,Sucursal Centro,San José,9,1,920.74,Transferencia
+620,2025-06-01,Sucursal Online,Lima,13,6,2498.1,Efectivo
+621,2026-02-02,Sucursal Online,Guadalajara,5,1,1716.59,Efectivo
+622,2026-04-15,Sucursal Centro,Montevideo,18,5,17737.65,Transferencia
+623,2025-06-03,Sucursal Norte,Quito,8,4,10468.16,Tarjeta crédito
+624,2025-04-14,Sucursal Sur,Córdoba,7,5,774.1,Efectivo
+625,2026-01-28,Sucursal Plaza,Quito,27,3,2086.32,Transferencia
+626,2025-10-10,Sucursal Plaza,Buenos Aires,3,2,5918.12,Transferencia
+627,2025-12-06,Sucursal Norte,Ciudad de México,3,4,11836.24,Transferencia
+628,2025-01-21,Sucursal Sur,Lima,18,3,10642.59,Efectivo
+629,2025-04-11,Sucursal Norte,Buenos Aires,18,4,14190.12,Efectivo
+630,2025-10-03,Sucursal Plaza,Quito,29,3,6749.85,Tarjeta crédito
+631,2025-08-05,Sucursal Plaza,Montevideo,13,4,1665.4,Transferencia
+632,2025-02-27,Sucursal Online,Buenos Aires,34,3,7916.94,Tarjeta crédito
+633,2026-06-03,Sucursal Plaza,Buenos Aires,20,6,15971.94,Tarjeta crédito
+634,2025-07-25,Sucursal Centro,Santiago,12,2,1328.28,Tarjeta crédito
+635,2026-01-05,Sucursal Norte,Lima,30,1,3379.27,Efectivo
+636,2026-02-11,Sucursal Centro,San José,30,5,16896.35,Tarjeta crédito
+637,2026-05-16,Sucursal Online,Medellín,16,3,6504.3,Tarjeta débito
+638,2026-07-19,Sucursal Sur,Monterrey,31,5,16480.6,Tarjeta débito
+639,2025-04-03,Sucursal Sur,Ciudad de México,17,6,13383.36,Transferencia
+640,2026-08-09,Sucursal Norte,Santiago,4,2,7148.22,Tarjeta débito
+641,2026-02-24,Sucursal Online,Ciudad de México,14,3,10192.8,Tarjeta crédito
+642,2025-06-27,Sucursal Online,Ciudad de México,31,2,6592.24,Tarjeta débito
+643,2025-11-09,Sucursal Sur,Guadalajara,17,5,11152.8,Transferencia
+644,2025-09-16,Sucursal Norte,Medellín,23,4,2769.92,Efectivo
+645,2026-02-11,Sucursal Online,Bogotá,34,5,13194.9,Tarjeta crédito
+646,2026-01-19,Sucursal Online,San José,33,6,21069.9,Efectivo
+647,2025-04-21,Sucursal Plaza,Bogotá,20,6,15971.94,Efectivo
+648,2025-11-29,Sucursal Sur,Lima,18,6,21285.18,Efectivo
+649,2026-06-14,Sucursal Norte,Ciudad de México,13,2,832.7,Transferencia
+650,2025-05-24,Sucursal Centro,San José,21,6,20571.0,Transferencia
+651,2026-03-05,Sucursal Plaza,Guadalajara,19,3,2428.62,Tarjeta crédito
+652,2026-08-09,Sucursal Norte,Monterrey,38,6,21578.4,Tarjeta débito
+653,2026-05-03,Sucursal Sur,Córdoba,35,6,11174.76,Efectivo
+654,2026-07-26,Sucursal Norte,Lima,11,6,16845.9,Tarjeta crédito
+655,2025-09-22,Sucursal Online,Buenos Aires,31,2,6592.24,Efectivo
+656,2025-12-30,Sucursal Norte,Montevideo,6,2,1827.24,Efectivo
+657,2026-01-16,Sucursal Sur,Quito,27,3,2086.32,Efectivo
+658,2026-04-27,Sucursal Centro,San José,30,1,3379.27,Tarjeta crédito
+659,2026-05-28,Sucursal Centro,San José,31,2,6592.24,Transferencia
+660,2026-02-28,Sucursal Centro,Buenos Aires,34,3,7916.94,Tarjeta débito
+661,2026-02-24,Sucursal Online,Medellín,13,3,1249.05,Tarjeta débito
+662,2025-07-04,Sucursal Centro,Medellín,21,6,20571.0,Efectivo
+663,2025-03-01,Sucursal Centro,Medellín,12,3,1992.42,Efectivo
+664,2026-08-14,Sucursal Norte,Medellín,14,2,6795.2,Tarjeta crédito
+665,2026-03-21,Sucursal Plaza,Guadalajara,9,5,4603.7,Transferencia
+666,2025-01-05,Sucursal Centro,Córdoba,31,4,13184.48,Tarjeta débito
+667,2025-11-26,Sucursal Online,Santiago,24,1,2697.19,Tarjeta crédito
+668,2025-09-12,Sucursal Norte,Montevideo,1,6,15454.44,Efectivo
+669,2025-04-16,Sucursal Plaza,Córdoba,20,2,5323.98,Efectivo
+670,2025-02-16,Sucursal Sur,Lima,11,1,2807.65,Transferencia
+671,2026-06-21,Sucursal Sur,Guadalajara,34,5,13194.9,Tarjeta débito
+672,2026-01-03,Sucursal Norte,Buenos Aires,22,4,4592.0,Transferencia
+673,2025-08-18,Sucursal Norte,Santiago,2,2,2272.74,Tarjeta crédito
+674,2025-06-23,Sucursal Centro,Monterrey,38,5,17982.0,Tarjeta crédito
+675,2025-09-19,Sucursal Online,Quito,25,6,15658.44,Tarjeta crédito
+676,2025-04-21,Sucursal Centro,Ciudad de México,39,1,916.32,Tarjeta crédito
+677,2026-01-25,Sucursal Centro,Córdoba,27,4,2781.76,Efectivo
+678,2025-06-06,Sucursal Norte,Montevideo,31,6,19776.72,Tarjeta crédito
+679,2025-04-14,Sucursal Online,Lima,20,4,10647.96,Tarjeta débito
+680,2026-06-08,Sucursal Online,Bogotá,27,1,695.44,Efectivo
+681,2026-05-25,Sucursal Norte,Quito,8,1,2617.04,Tarjeta débito
+682,2025-07-26,Sucursal Sur,Montevideo,17,5,11152.8,Transferencia
+683,2025-02-10,Sucursal Online,Medellín,19,2,1619.08,Tarjeta débito
+684,2025-08-29,Sucursal Centro,Ciudad de México,31,3,9888.36,Tarjeta crédito
+685,2026-05-21,Sucursal Norte,Bogotá,8,5,13085.2,Tarjeta crédito
+686,2025-08-25,Sucursal Plaza,Lima,7,3,464.46,Efectivo
+687,2025-04-13,Sucursal Norte,Ciudad de México,30,1,3379.27,Efectivo
+688,2025-11-17,Sucursal Plaza,Montevideo,24,6,16183.14,Tarjeta crédito
+689,2025-01-10,Sucursal Norte,San José,7,1,154.82,Tarjeta débito
+690,2026-03-25,Sucursal Online,Lima,22,3,3444.0,Tarjeta crédito
+691,2025-07-07,Sucursal Centro,Guadalajara,24,3,8091.57,Transferencia
+692,2026-01-30,Sucursal Plaza,Guadalajara,30,3,10137.81,Tarjeta débito
+693,2025-03-02,Sucursal Norte,Bogotá,8,2,5234.08,Transferencia
+694,2026-08-06,Sucursal Plaza,Buenos Aires,38,4,14385.6,Transferencia
+695,2025-01-30,Sucursal Norte,Medellín,23,5,3462.4,Transferencia
+696,2026-03-28,Sucursal Centro,Bogotá,8,4,10468.16,Efectivo
+697,2026-06-22,Sucursal Online,Montevideo,21,1,3428.5,Tarjeta débito
+698,2026-06-20,Sucursal Online,Bogotá,22,5,5740.0,Transferencia
+699,2025-12-21,Sucursal Plaza,Buenos Aires,16,4,8672.4,Tarjeta crédito
+700,2025-06-10,Sucursal Online,Medellín,1,6,15454.44,Transferencia

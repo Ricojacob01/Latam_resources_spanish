@@ -1,0 +1,91 @@
+suscriptor_id,nombre_suscriptor,plan,ciudad,antiguedad_meses,estado_cuenta
+5001,Sofía Romero,Pospago 5GB,Córdoba,76,Activo
+5002,Isabela Rodríguez,Pospago 5GB,Montevideo,94,Suspendido
+5003,Camila González,Prepago,Córdoba,45,Baja
+5004,Juan Gómez,Pospago Ilimitado,Ciudad de México,41,Suspendido
+5005,Daniela González,Prepago,Quito,19,Activo
+5006,Andrés Romero,Prepago,Montevideo,74,Activo
+5007,Luis Martínez,Pospago Ilimitado,Santiago,91,Suspendido
+5008,Javier Torres,Prepago,Medellín,22,Activo
+5009,Sofía Torres,Pospago Ilimitado,Buenos Aires,65,Activo
+5010,Miguel Rivera,Pospago 5GB,Ciudad de México,8,Activo
+5011,Fernando Herrera,Control,Buenos Aires,89,Suspendido
+5012,Isabela Ramírez,Prepago,Buenos Aires,54,Activo
+5013,Paula Medina,Pospago 5GB,Ciudad de México,62,Activo
+5014,Luis Gómez,Prepago,Bogotá,15,Baja
+5015,Andrés García,Control,Medellín,14,Baja
+5016,María Rivera,Control,Guadalajara,11,Baja
+5017,Luis Gómez,Control,Medellín,7,Baja
+5018,Sofía Sánchez,Prepago,Ciudad de México,60,Activo
+5019,Javier Rivera,Prepago,Ciudad de México,62,Suspendido
+5020,María Herrera,Pospago 5GB,Córdoba,92,Suspendido
+5021,Juan Ramírez,Control,Quito,67,Suspendido
+5022,Javier Medina,Control,Guadalajara,45,Activo
+5023,Pablo Torres,Pospago 5GB,Medellín,15,Suspendido
+5024,María Herrera,Control,Medellín,26,Suspendido
+5025,Miguel Martínez,Control,Montevideo,10,Activo
+5026,Camila Rivera,Prepago,Buenos Aires,46,Baja
+5027,Pablo Díaz,Control,San José,24,Activo
+5028,Isabela Flores,Control,Montevideo,47,Suspendido
+5029,Camila Herrera,Control,Monterrey,20,Suspendido
+5030,Daniela Rodríguez,Pospago Ilimitado,Lima,70,Suspendido
+5031,Luis Vargas,Pospago Ilimitado,Santiago,76,Baja
+5032,Mateo Torres,Pospago 5GB,Córdoba,65,Activo
+5033,Miguel Flores,Control,Monterrey,30,Suspendido
+5034,Juan Díaz,Control,Córdoba,7,Suspendido
+5035,Lucía Rodríguez,Pospago Ilimitado,Medellín,36,Baja
+5036,Luis Díaz,Pospago 5GB,Medellín,80,Suspendido
+5037,Andrés Martínez,Pospago 5GB,Guadalajara,21,Activo
+5038,Gabriela Pérez,Prepago,Quito,5,Baja
+5039,Lucía Rivera,Prepago,Ciudad de México,64,Baja
+5040,Juan García,Prepago,Santiago,13,Activo
+5041,Carlos Castro,Pospago Ilimitado,Bogotá,77,Baja
+5042,Ana González,Pospago 5GB,Lima,91,Suspendido
+5043,Paula Rodríguez,Control,Buenos Aires,82,Activo
+5044,Paula Gómez,Control,Monterrey,35,Baja
+5045,María Pérez,Prepago,Bogotá,86,Activo
+5046,Diego Castro,Pospago 5GB,Quito,46,Activo
+5047,Ana Pérez,Pospago Ilimitado,Montevideo,7,Activo
+5048,Lucía López,Pospago 5GB,Santiago,93,Activo
+5049,Andrés Torres,Pospago Ilimitado,San José,80,Suspendido
+5050,Luis Castro,Pospago 5GB,Ciudad de México,64,Activo
+5051,Isabela Sánchez,Control,Medellín,77,Baja
+5052,Luis Gómez,Pospago 5GB,San José,4,Activo
+5053,María Rodríguez,Prepago,Guadalajara,37,Baja
+5054,Pablo Sánchez,Pospago 5GB,Montevideo,2,Activo
+5055,Gabriela López,Prepago,Lima,45,Activo
+5056,Luis Sánchez,Pospago Ilimitado,Ciudad de México,65,Baja
+5057,Juan Martínez,Prepago,Córdoba,39,Baja
+5058,Pablo López,Control,San José,44,Baja
+5059,Pablo Pérez,Pospago 5GB,Monterrey,32,Suspendido
+5060,Gabriela Rivera,Control,Ciudad de México,47,Suspendido
+5061,María Rodríguez,Prepago,Guadalajara,63,Baja
+5062,Gabriela García,Prepago,Guadalajara,74,Suspendido
+5063,Miguel Rodríguez,Prepago,Córdoba,50,Baja
+5064,Isabela Romero,Pospago 5GB,Ciudad de México,90,Activo
+5065,Fernando Herrera,Pospago 5GB,Montevideo,88,Activo
+5066,Valentina Sánchez,Pospago 5GB,Lima,75,Baja
+5067,Andrés Ramírez,Prepago,Ciudad de México,51,Suspendido
+5068,Isabela Díaz,Control,Monterrey,42,Activo
+5069,Valentina Pérez,Pospago 5GB,Ciudad de México,10,Suspendido
+5070,Valentina Díaz,Pospago 5GB,Lima,17,Suspendido
+5071,Diego Flores,Prepago,Medellín,69,Suspendido
+5072,Diego Rodríguez,Control,San José,74,Baja
+5073,Sofía Ramírez,Control,Lima,43,Activo
+5074,María García,Prepago,Quito,6,Baja
+5075,Javier Rodríguez,Pospago 5GB,Santiago,1,Baja
+5076,Miguel Medina,Pospago Ilimitado,Córdoba,33,Activo
+5077,Ana González,Prepago,Bogotá,50,Suspendido
+5078,Isabela Ramírez,Control,Quito,1,Suspendido
+5079,Lucía Castro,Pospago 5GB,Quito,72,Baja
+5080,Isabela Rivera,Control,Bogotá,22,Baja
+5081,Gabriela Vargas,Pospago 5GB,Buenos Aires,51,Activo
+5082,Mateo Ramírez,Pospago Ilimitado,San José,23,Activo
+5083,Sofía Castro,Pospago 5GB,Monterrey,67,Activo
+5084,María Torres,Pospago Ilimitado,Medellín,4,Baja
+5085,Pablo González,Prepago,Medellín,15,Activo
+5086,Andrés Pérez,Control,Montevideo,71,Activo
+5087,Diego Sánchez,Pospago Ilimitado,Montevideo,22,Activo
+5088,Pablo Pérez,Prepago,Monterrey,68,Activo
+5089,Daniela Romero,Prepago,San José,47,Baja
+5090,Carlos Vargas,Prepago,Bogotá,65,Suspendido

@@ -1,0 +1,651 @@
+atencion_id,fecha_ingreso,paciente_id,especialidad,diagnostico,costo,dias_estancia
+1,2025-07-06,2020,Oncología,Seguimiento tumoral,11903.19,2
+2,2025-11-03,2068,Medicina General,Chequeo general,11913.56,11
+3,2025-01-14,2044,Ginecología,Control prenatal,7383.2,2
+4,2025-02-02,2008,Medicina General,Chequeo general,15223.09,2
+5,2025-01-12,2065,Pediatría,Infección respiratoria,10090.85,6
+6,2026-07-22,2088,Ginecología,Control prenatal,17871.75,4
+7,2025-11-10,2074,Neurología,Migraña,17821.01,6
+8,2025-04-05,2021,Traumatología,Fractura,13181.08,2
+9,2025-02-27,2028,Ginecología,Control prenatal,5706.99,2
+10,2025-03-21,2072,Neurología,Migraña,20469.0,7
+11,2026-02-19,2062,Traumatología,Fractura,20733.17,2
+12,2026-01-16,2007,Oncología,Seguimiento tumoral,16272.19,3
+13,2025-04-17,2035,Cardiología,Hipertensión,2221.87,9
+14,2025-09-03,2043,Cardiología,Hipertensión,7270.51,8
+15,2025-08-05,2014,Cardiología,Hipertensión,15048.64,12
+16,2026-07-19,2040,Pediatría,Infección respiratoria,5282.63,14
+17,2025-10-03,2005,Pediatría,Infección respiratoria,2400.47,9
+18,2026-08-01,2073,Cardiología,Hipertensión,24666.4,7
+19,2025-11-19,2006,Cardiología,Hipertensión,2602.31,4
+20,2025-10-17,2002,Traumatología,Fractura,23980.85,8
+21,2026-02-05,2025,Traumatología,Fractura,18224.5,2
+22,2025-04-10,2090,Medicina General,Chequeo general,8483.56,14
+23,2026-05-30,2065,Cardiología,Hipertensión,20245.11,2
+24,2026-01-27,2004,Neurología,Migraña,12080.74,13
+25,2025-06-15,2005,Traumatología,Fractura,4042.98,7
+26,2025-04-06,2011,Medicina General,Chequeo general,23834.61,3
+27,2025-05-25,2028,Oncología,Seguimiento tumoral,19290.0,2
+28,2026-06-20,2065,Neurología,Migraña,23276.61,5
+29,2025-05-15,2058,Oncología,Seguimiento tumoral,8673.81,5
+30,2026-03-18,2080,Oncología,Seguimiento tumoral,1288.32,11
+31,2025-09-02,2088,Ginecología,Control prenatal,5457.87,9
+32,2025-06-06,2078,Cardiología,Hipertensión,14302.45,7
+33,2025-01-16,2013,Oncología,Seguimiento tumoral,3822.78,13
+34,2025-03-31,2040,Neurología,Migraña,12623.13,7
+35,2025-10-30,2041,Pediatría,Infección respiratoria,4288.37,4
+36,2025-12-28,2074,Traumatología,Fractura,2503.96,2
+37,2026-04-30,2059,Traumatología,Fractura,24468.55,12
+38,2025-05-24,2057,Medicina General,Chequeo general,23513.79,9
+39,2026-01-08,2063,Cardiología,Hipertensión,21517.38,6
+40,2025-05-13,2053,Oncología,Seguimiento tumoral,11188.44,8
+41,2026-01-18,2080,Traumatología,Fractura,2362.22,6
+42,2025-09-27,2065,Ginecología,Control prenatal,21971.99,10
+43,2025-02-28,2006,Neurología,Migraña,18603.75,3
+44,2026-07-29,2090,Oncología,Seguimiento tumoral,496.19,13
+45,2026-01-20,2014,Traumatología,Fractura,4207.68,6
+46,2026-02-02,2010,Pediatría,Infección respiratoria,21891.72,10
+47,2026-04-23,2012,Traumatología,Fractura,11871.67,8
+48,2025-03-29,2060,Cardiología,Hipertensión,4752.75,1
+49,2026-03-20,2051,Oncología,Seguimiento tumoral,5226.93,5
+50,2025-12-17,2009,Traumatología,Fractura,24912.02,7
+51,2026-05-03,2028,Medicina General,Chequeo general,3123.86,7
+52,2025-06-09,2005,Neurología,Migraña,23728.78,2
+53,2025-11-24,2082,Pediatría,Infección respiratoria,14334.7,9
+54,2026-01-06,2049,Cardiología,Hipertensión,19802.11,7
+55,2025-08-05,2028,Cardiología,Hipertensión,21740.11,12
+56,2025-10-04,2088,Ginecología,Control prenatal,6526.16,2
+57,2025-03-12,2011,Pediatría,Infección respiratoria,7065.46,1
+58,2026-04-08,2039,Oncología,Seguimiento tumoral,21820.84,8
+59,2025-09-23,2028,Medicina General,Chequeo general,4846.73,0
+60,2025-12-17,2012,Ginecología,Control prenatal,24095.13,4
+61,2025-12-24,2022,Pediatría,Infección respiratoria,23565.96,7
+62,2025-06-14,2061,Neurología,Migraña,24150.07,6
+63,2026-08-08,2046,Medicina General,Chequeo general,9911.71,0
+64,2025-07-23,2072,Oncología,Seguimiento tumoral,2221.88,10
+65,2025-05-29,2075,Neurología,Migraña,8296.19,13
+66,2025-06-04,2041,Cardiología,Hipertensión,22443.58,14
+67,2025-11-21,2019,Ginecología,Control prenatal,3106.09,10
+68,2026-06-18,2053,Traumatología,Fractura,18140.47,7
+69,2026-04-06,2017,Medicina General,Chequeo general,16081.23,9
+70,2025-08-12,2013,Cardiología,Hipertensión,18718.98,3
+71,2026-07-14,2054,Medicina General,Chequeo general,19427.29,9
+72,2025-12-23,2049,Pediatría,Infección respiratoria,5481.15,3
+73,2025-01-15,2087,Neurología,Migraña,9445.33,5
+74,2025-11-11,2003,Traumatología,Fractura,12701.5,13
+75,2026-05-27,2016,Medicina General,Chequeo general,16328.12,7
+76,2025-12-27,2053,Ginecología,Control prenatal,8999.62,8
+77,2025-12-10,2055,Neurología,Migraña,3100.49,2
+78,2026-01-18,2059,Ginecología,Control prenatal,4669.31,9
+79,2026-03-23,2021,Neurología,Migraña,9724.61,13
+80,2026-03-24,2085,Medicina General,Chequeo general,15962.45,11
+81,2025-04-12,2080,Oncología,Seguimiento tumoral,24885.47,12
+82,2025-01-17,2014,Cardiología,Hipertensión,15521.63,6
+83,2026-07-12,2014,Ginecología,Control prenatal,2762.64,7
+84,2025-02-03,2065,Neurología,Migraña,16792.44,13
+85,2025-08-17,2054,Pediatría,Infección respiratoria,19488.94,8
+86,2025-07-20,2049,Cardiología,Hipertensión,21451.66,1
+87,2026-04-21,2045,Oncología,Seguimiento tumoral,10499.49,13
+88,2026-02-10,2083,Medicina General,Chequeo general,487.85,5
+89,2025-10-18,2029,Neurología,Migraña,6909.95,10
+90,2026-03-01,2034,Traumatología,Fractura,16930.53,0
+91,2025-01-16,2054,Cardiología,Hipertensión,948.3,12
+92,2026-06-16,2048,Oncología,Seguimiento tumoral,20554.85,9
+93,2025-06-24,2041,Traumatología,Fractura,23991.27,6
+94,2026-02-05,2031,Neurología,Migraña,5058.71,10
+95,2025-02-22,2051,Oncología,Seguimiento tumoral,20092.89,9
+96,2026-02-04,2055,Pediatría,Infección respiratoria,24440.68,2
+97,2026-06-14,2052,Traumatología,Fractura,4213.56,3
+98,2025-05-10,2013,Medicina General,Chequeo general,12755.15,10
+99,2026-02-06,2074,Oncología,Seguimiento tumoral,21122.86,10
+100,2026-07-21,2034,Oncología,Seguimiento tumoral,4228.61,5
+101,2025-04-06,2027,Cardiología,Hipertensión,933.31,0
+102,2025-06-06,2081,Oncología,Seguimiento tumoral,987.11,11
+103,2026-08-09,2070,Cardiología,Hipertensión,9745.4,11
+104,2026-01-02,2017,Ginecología,Control prenatal,4907.91,10
+105,2025-07-18,2029,Traumatología,Fractura,13524.81,3
+106,2025-09-24,2049,Oncología,Seguimiento tumoral,16583.67,4
+107,2025-01-24,2011,Pediatría,Infección respiratoria,16068.15,9
+108,2026-04-16,2014,Cardiología,Hipertensión,23201.82,1
+109,2025-10-17,2014,Pediatría,Infección respiratoria,6771.27,2
+110,2026-05-22,2012,Cardiología,Hipertensión,21162.2,14
+111,2025-04-14,2027,Ginecología,Control prenatal,12428.61,0
+112,2026-05-14,2053,Cardiología,Hipertensión,23992.66,1
+113,2026-03-06,2027,Medicina General,Chequeo general,9568.78,5
+114,2025-06-14,2082,Ginecología,Control prenatal,4741.22,0
+115,2026-08-04,2023,Medicina General,Chequeo general,15890.97,13
+116,2025-12-18,2005,Cardiología,Hipertensión,24845.37,7
+117,2026-07-14,2079,Neurología,Migraña,423.86,8
+118,2025-07-17,2033,Cardiología,Hipertensión,15270.94,8
+119,2026-06-09,2003,Neurología,Migraña,19095.74,3
+120,2025-08-11,2047,Cardiología,Hipertensión,1028.59,2
+121,2025-05-10,2029,Cardiología,Hipertensión,6909.49,7
+122,2025-12-23,2026,Cardiología,Hipertensión,17789.66,10
+123,2026-05-23,2038,Ginecología,Control prenatal,11070.73,6
+124,2025-06-27,2025,Traumatología,Fractura,5187.55,13
+125,2025-04-16,2036,Ginecología,Control prenatal,14716.11,12
+126,2025-06-19,2076,Traumatología,Fractura,19914.26,11
+127,2026-04-02,2063,Ginecología,Control prenatal,10766.31,11
+128,2025-11-23,2035,Oncología,Seguimiento tumoral,15685.9,9
+129,2025-07-24,2050,Ginecología,Control prenatal,14308.41,5
+130,2025-03-07,2081,Oncología,Seguimiento tumoral,11400.26,14
+131,2025-09-17,2005,Neurología,Migraña,14795.67,4
+132,2026-06-28,2078,Oncología,Seguimiento tumoral,9000.66,0
+133,2025-11-27,2015,Pediatría,Infección respiratoria,10905.85,2
+134,2025-03-16,2046,Pediatría,Infección respiratoria,5615.05,5
+135,2025-11-18,2048,Pediatría,Infección respiratoria,3320.9,5
+136,2025-12-03,2089,Cardiología,Hipertensión,5580.18,9
+137,2026-07-30,2042,Pediatría,Infección respiratoria,1936.01,4
+138,2026-06-24,2078,Pediatría,Infección respiratoria,5671.35,8
+139,2025-03-18,2036,Medicina General,Chequeo general,14476.53,10
+140,2026-03-22,2054,Medicina General,Chequeo general,8149.25,5
+141,2025-02-20,2026,Pediatría,Infección respiratoria,20127.31,7
+142,2026-03-08,2006,Traumatología,Fractura,3245.7,7
+143,2025-12-01,2022,Neurología,Migraña,14901.93,3
+144,2025-10-19,2074,Cardiología,Hipertensión,740.56,12
+145,2026-04-18,2074,Cardiología,Hipertensión,7323.84,13
+146,2026-07-01,2052,Cardiología,Hipertensión,22975.45,0
+147,2025-01-17,2044,Medicina General,Chequeo general,2015.52,1
+148,2025-11-05,2054,Medicina General,Chequeo general,7084.44,12
+149,2025-03-23,2045,Ginecología,Control prenatal,14044.32,5
+150,2025-02-18,2064,Neurología,Migraña,10015.19,11
+151,2025-05-05,2059,Ginecología,Control prenatal,21123.97,9
+152,2025-08-18,2014,Cardiología,Hipertensión,1481.51,0
+153,2025-11-27,2018,Cardiología,Hipertensión,21576.3,11
+154,2025-06-24,2056,Pediatría,Infección respiratoria,2474.01,11
+155,2026-07-05,2048,Oncología,Seguimiento tumoral,24742.26,14
+156,2025-02-23,2089,Oncología,Seguimiento tumoral,6714.29,12
+157,2025-02-19,2006,Cardiología,Hipertensión,23694.48,1
+158,2026-01-24,2034,Traumatología,Fractura,6966.83,2
+159,2026-04-17,2018,Neurología,Migraña,3261.57,5
+160,2026-08-22,2019,Oncología,Seguimiento tumoral,22228.62,14
+161,2026-04-03,2053,Medicina General,Chequeo general,16805.41,8
+162,2026-08-15,2068,Pediatría,Infección respiratoria,12104.79,7
+163,2026-05-10,2036,Traumatología,Fractura,5878.01,4
+164,2025-03-26,2038,Medicina General,Chequeo general,9019.34,13
+165,2025-07-30,2032,Medicina General,Chequeo general,17465.64,1
+166,2025-08-06,2064,Cardiología,Hipertensión,624.26,3
+167,2026-01-30,2060,Oncología,Seguimiento tumoral,4941.56,1
+168,2026-06-25,2044,Pediatría,Infección respiratoria,12994.0,5
+169,2026-04-10,2040,Medicina General,Chequeo general,16485.65,13
+170,2025-05-14,2065,Cardiología,Hipertensión,5703.99,5
+171,2026-06-10,2050,Ginecología,Control prenatal,5314.61,6
+172,2025-10-12,2025,Cardiología,Hipertensión,10750.42,10
+173,2026-08-15,2040,Oncología,Seguimiento tumoral,16315.06,2
+174,2025-04-23,2060,Cardiología,Hipertensión,6241.89,14
+175,2025-10-01,2059,Pediatría,Infección respiratoria,1006.08,10
+176,2025-12-27,2068,Ginecología,Control prenatal,6859.79,14
+177,2025-12-29,2071,Cardiología,Hipertensión,10957.4,2
+178,2026-03-18,2051,Neurología,Migraña,12845.79,0
+179,2026-01-14,2057,Traumatología,Fractura,2715.97,10
+180,2026-03-09,2049,Medicina General,Chequeo general,5090.11,3
+181,2025-10-10,2052,Pediatría,Infección respiratoria,13380.2,7
+182,2025-04-22,2067,Ginecología,Control prenatal,17124.66,10
+183,2025-08-13,2032,Cardiología,Hipertensión,3145.14,14
+184,2025-09-30,2005,Neurología,Migraña,6197.55,8
+185,2025-08-20,2013,Traumatología,Fractura,22100.23,11
+186,2026-02-07,2052,Ginecología,Control prenatal,2802.22,11
+187,2026-05-23,2089,Traumatología,Fractura,5380.92,12
+188,2025-10-22,2027,Traumatología,Fractura,17734.58,4
+189,2025-07-09,2001,Cardiología,Hipertensión,12730.03,11
+190,2025-11-09,2080,Ginecología,Control prenatal,21358.33,11
+191,2025-11-19,2031,Pediatría,Infección respiratoria,17131.63,2
+192,2026-04-12,2024,Traumatología,Fractura,3803.29,0
+193,2026-03-15,2086,Ginecología,Control prenatal,8551.14,2
+194,2025-06-24,2034,Cardiología,Hipertensión,17076.31,13
+195,2025-12-27,2002,Neurología,Migraña,24247.68,9
+196,2025-09-11,2001,Ginecología,Control prenatal,11972.44,0
+197,2025-10-25,2003,Neurología,Migraña,20933.37,8
+198,2025-05-31,2065,Pediatría,Infección respiratoria,19448.84,1
+199,2025-12-10,2039,Oncología,Seguimiento tumoral,11479.62,11
+200,2025-09-21,2045,Neurología,Migraña,16686.19,4
+201,2025-01-14,2047,Ginecología,Control prenatal,20745.41,4
+202,2026-05-11,2043,Neurología,Migraña,3085.2,10
+203,2025-01-22,2067,Medicina General,Chequeo general,3953.14,6
+204,2025-05-26,2029,Medicina General,Chequeo general,9122.7,0
+205,2026-03-18,2032,Neurología,Migraña,9177.67,11
+206,2026-01-22,2012,Pediatría,Infección respiratoria,16076.72,4
+207,2026-07-12,2081,Medicina General,Chequeo general,22510.77,7
+208,2025-09-29,2068,Pediatría,Infección respiratoria,22785.09,5
+209,2026-03-04,2043,Ginecología,Control prenatal,23648.08,4
+210,2025-02-12,2040,Pediatría,Infección respiratoria,14614.07,11
+211,2025-05-06,2044,Oncología,Seguimiento tumoral,11006.45,7
+212,2025-12-22,2073,Oncología,Seguimiento tumoral,7423.69,0
+213,2025-05-31,2064,Medicina General,Chequeo general,11818.04,2
+214,2026-07-26,2067,Traumatología,Fractura,16708.71,4
+215,2025-03-08,2063,Traumatología,Fractura,20054.69,0
+216,2025-08-11,2059,Cardiología,Hipertensión,7290.53,9
+217,2026-05-16,2016,Cardiología,Hipertensión,7853.79,6
+218,2025-01-01,2046,Medicina General,Chequeo general,1532.58,2
+219,2026-05-30,2045,Traumatología,Fractura,16733.55,12
+220,2025-03-30,2072,Pediatría,Infección respiratoria,17915.97,2
+221,2026-08-23,2026,Ginecología,Control prenatal,22981.02,4
+222,2026-04-30,2029,Cardiología,Hipertensión,23343.49,3
+223,2026-01-31,2087,Medicina General,Chequeo general,10737.31,14
+224,2025-11-06,2013,Traumatología,Fractura,15046.86,2
+225,2025-11-27,2073,Ginecología,Control prenatal,20168.19,2
+226,2025-07-24,2088,Oncología,Seguimiento tumoral,6475.51,6
+227,2025-11-05,2071,Pediatría,Infección respiratoria,7833.4,4
+228,2026-04-18,2073,Medicina General,Chequeo general,13782.02,6
+229,2025-05-22,2056,Cardiología,Hipertensión,13306.31,11
+230,2026-01-02,2041,Neurología,Migraña,11868.96,6
+231,2026-02-25,2060,Ginecología,Control prenatal,11693.71,14
+232,2026-03-08,2072,Cardiología,Hipertensión,2484.2,2
+233,2025-09-06,2079,Traumatología,Fractura,14633.96,5
+234,2026-07-11,2017,Neurología,Migraña,22527.84,14
+235,2026-02-07,2038,Cardiología,Hipertensión,3410.62,10
+236,2026-06-15,2001,Ginecología,Control prenatal,11667.45,0
+237,2025-10-04,2011,Cardiología,Hipertensión,20798.39,10
+238,2025-04-10,2014,Traumatología,Fractura,20601.92,9
+239,2025-12-06,2062,Medicina General,Chequeo general,21648.56,1
+240,2026-06-08,2075,Medicina General,Chequeo general,18562.28,0
+241,2026-06-13,2090,Pediatría,Infección respiratoria,3860.55,11
+242,2025-08-17,2064,Pediatría,Infección respiratoria,22407.79,10
+243,2025-11-15,2020,Traumatología,Fractura,18062.81,14
+244,2026-05-12,2001,Oncología,Seguimiento tumoral,15704.5,3
+245,2025-01-01,2015,Cardiología,Hipertensión,4079.65,14
+246,2025-04-10,2016,Neurología,Migraña,6405.99,1
+247,2026-06-02,2061,Cardiología,Hipertensión,11262.25,0
+248,2026-02-19,2016,Traumatología,Fractura,12247.87,2
+249,2026-07-14,2031,Oncología,Seguimiento tumoral,6728.71,9
+250,2025-05-07,2088,Ginecología,Control prenatal,10979.14,10
+251,2025-05-26,2003,Pediatría,Infección respiratoria,20518.19,10
+252,2026-06-08,2031,Pediatría,Infección respiratoria,18619.12,8
+253,2026-05-07,2026,Ginecología,Control prenatal,7463.89,10
+254,2026-05-20,2013,Neurología,Migraña,9373.28,4
+255,2025-04-20,2051,Ginecología,Control prenatal,11759.9,13
+256,2025-01-29,2055,Pediatría,Infección respiratoria,7300.53,1
+257,2025-01-12,2073,Ginecología,Control prenatal,14639.29,0
+258,2026-04-01,2083,Medicina General,Chequeo general,1353.01,14
+259,2026-04-25,2046,Pediatría,Infección respiratoria,22095.88,7
+260,2025-06-12,2036,Cardiología,Hipertensión,9136.37,13
+261,2025-12-24,2065,Pediatría,Infección respiratoria,22593.0,8
+262,2025-03-06,2050,Neurología,Migraña,4610.07,2
+263,2026-07-31,2046,Medicina General,Chequeo general,8680.49,11
+264,2025-11-07,2018,Traumatología,Fractura,23109.88,1
+265,2026-01-21,2083,Ginecología,Control prenatal,24075.11,9
+266,2026-08-13,2085,Pediatría,Infección respiratoria,17799.95,8
+267,2025-09-23,2085,Neurología,Migraña,3496.72,5
+268,2025-12-23,2076,Neurología,Migraña,14736.98,13
+269,2025-02-16,2052,Cardiología,Hipertensión,1029.19,11
+270,2025-04-09,2021,Pediatría,Infección respiratoria,16731.95,7
+271,2025-11-28,2087,Ginecología,Control prenatal,19069.76,12
+272,2025-06-28,2031,Cardiología,Hipertensión,18285.63,6
+273,2025-03-05,2054,Cardiología,Hipertensión,15414.02,1
+274,2025-03-16,2005,Oncología,Seguimiento tumoral,11205.75,5
+275,2025-01-31,2078,Medicina General,Chequeo general,23111.71,5
+276,2026-04-06,2014,Medicina General,Chequeo general,9627.43,10
+277,2025-07-24,2074,Neurología,Migraña,5134.23,7
+278,2025-10-20,2057,Medicina General,Chequeo general,5869.76,11
+279,2026-06-26,2021,Ginecología,Control prenatal,20274.2,3
+280,2025-01-25,2012,Neurología,Migraña,15839.16,10
+281,2025-02-04,2013,Pediatría,Infección respiratoria,20307.22,14
+282,2026-02-22,2001,Traumatología,Fractura,14336.89,13
+283,2025-07-09,2010,Traumatología,Fractura,17154.32,14
+284,2026-05-24,2083,Neurología,Migraña,4996.38,3
+285,2026-05-01,2074,Oncología,Seguimiento tumoral,12671.0,5
+286,2025-05-22,2080,Neurología,Migraña,20099.42,7
+287,2026-01-21,2055,Medicina General,Chequeo general,21887.23,9
+288,2026-06-14,2011,Pediatría,Infección respiratoria,7666.21,1
+289,2025-02-22,2064,Pediatría,Infección respiratoria,15156.79,5
+290,2025-10-24,2003,Pediatría,Infección respiratoria,23080.15,4
+291,2026-01-02,2050,Medicina General,Chequeo general,1978.43,13
+292,2025-03-18,2021,Traumatología,Fractura,13500.27,3
+293,2026-05-28,2067,Neurología,Migraña,8012.31,9
+294,2025-04-24,2008,Neurología,Migraña,14694.48,14
+295,2025-01-31,2034,Medicina General,Chequeo general,1097.19,6
+296,2025-12-09,2034,Pediatría,Infección respiratoria,22234.29,0
+297,2026-07-15,2018,Pediatría,Infección respiratoria,20474.03,5
+298,2025-08-30,2085,Cardiología,Hipertensión,12490.81,12
+299,2025-02-06,2073,Neurología,Migraña,8842.39,1
+300,2025-03-24,2054,Neurología,Migraña,22221.71,7
+301,2025-02-12,2017,Traumatología,Fractura,2870.31,7
+302,2025-12-25,2065,Pediatría,Infección respiratoria,10958.43,4
+303,2025-02-26,2030,Cardiología,Hipertensión,950.94,12
+304,2026-01-24,2026,Neurología,Migraña,17143.95,11
+305,2026-05-09,2003,Neurología,Migraña,1587.87,12
+306,2025-05-09,2049,Medicina General,Chequeo general,10914.05,6
+307,2025-04-29,2071,Pediatría,Infección respiratoria,11117.44,14
+308,2025-12-27,2079,Traumatología,Fractura,5083.05,6
+309,2025-08-26,2008,Pediatría,Infección respiratoria,2572.17,0
+310,2026-07-04,2030,Ginecología,Control prenatal,14330.8,12
+311,2025-09-13,2002,Oncología,Seguimiento tumoral,20371.76,1
+312,2026-03-26,2008,Pediatría,Infección respiratoria,4760.66,0
+313,2025-09-08,2041,Traumatología,Fractura,24952.79,2
+314,2026-05-06,2078,Ginecología,Control prenatal,16542.3,10
+315,2025-09-14,2010,Cardiología,Hipertensión,23477.74,3
+316,2026-01-01,2064,Medicina General,Chequeo general,22471.71,13
+317,2025-11-06,2029,Ginecología,Control prenatal,23553.25,12
+318,2025-09-08,2071,Traumatología,Fractura,13313.05,4
+319,2026-07-09,2041,Medicina General,Chequeo general,12735.1,0
+320,2026-05-13,2045,Ginecología,Control prenatal,7210.66,3
+321,2026-06-18,2018,Oncología,Seguimiento tumoral,5994.24,11
+322,2025-05-06,2071,Pediatría,Infección respiratoria,9498.03,13
+323,2025-08-29,2019,Cardiología,Hipertensión,17549.05,10
+324,2025-01-22,2059,Cardiología,Hipertensión,12623.02,0
+325,2026-01-29,2035,Traumatología,Fractura,7720.2,1
+326,2026-01-29,2008,Traumatología,Fractura,12535.33,13
+327,2026-03-31,2049,Ginecología,Control prenatal,1397.06,3
+328,2026-03-18,2049,Pediatría,Infección respiratoria,13452.55,10
+329,2026-07-09,2040,Cardiología,Hipertensión,19146.01,14
+330,2025-12-11,2004,Neurología,Migraña,23090.66,14
+331,2025-08-10,2034,Oncología,Seguimiento tumoral,19004.13,5
+332,2026-03-14,2080,Ginecología,Control prenatal,19630.53,14
+333,2025-04-22,2008,Oncología,Seguimiento tumoral,13966.37,11
+334,2026-07-02,2087,Traumatología,Fractura,11748.51,9
+335,2026-06-16,2073,Oncología,Seguimiento tumoral,6724.49,6
+336,2025-09-01,2060,Medicina General,Chequeo general,3557.26,0
+337,2025-10-08,2036,Oncología,Seguimiento tumoral,2412.76,3
+338,2025-12-12,2070,Traumatología,Fractura,14405.74,0
+339,2026-01-06,2079,Traumatología,Fractura,6938.06,4
+340,2025-01-13,2084,Oncología,Seguimiento tumoral,3370.37,9
+341,2025-09-28,2085,Traumatología,Fractura,21235.54,7
+342,2026-03-27,2060,Cardiología,Hipertensión,519.11,0
+343,2026-07-24,2046,Ginecología,Control prenatal,5680.71,0
+344,2025-10-11,2075,Cardiología,Hipertensión,22456.99,8
+345,2026-03-28,2041,Cardiología,Hipertensión,4741.16,12
+346,2026-05-22,2036,Traumatología,Fractura,3442.4,10
+347,2025-02-20,2023,Pediatría,Infección respiratoria,6047.01,10
+348,2026-06-03,2005,Pediatría,Infección respiratoria,21556.09,9
+349,2026-07-21,2041,Cardiología,Hipertensión,18018.74,0
+350,2025-01-17,2034,Traumatología,Fractura,17056.18,13
+351,2025-02-15,2046,Neurología,Migraña,15134.3,5
+352,2026-06-04,2014,Cardiología,Hipertensión,11262.17,8
+353,2025-07-28,2010,Pediatría,Infección respiratoria,8346.99,5
+354,2025-03-15,2088,Ginecología,Control prenatal,16154.61,14
+355,2025-01-26,2037,Pediatría,Infección respiratoria,8365.55,12
+356,2026-02-22,2047,Traumatología,Fractura,22465.59,5
+357,2025-02-01,2061,Traumatología,Fractura,4259.73,0
+358,2025-01-27,2038,Pediatría,Infección respiratoria,2923.93,3
+359,2026-06-05,2041,Neurología,Migraña,19651.64,11
+360,2026-01-23,2045,Pediatría,Infección respiratoria,20818.95,0
+361,2025-06-03,2085,Medicina General,Chequeo general,9712.91,10
+362,2025-08-18,2011,Cardiología,Hipertensión,14265.44,9
+363,2026-03-05,2081,Neurología,Migraña,13612.49,1
+364,2025-02-22,2068,Oncología,Seguimiento tumoral,15295.42,10
+365,2026-03-28,2068,Neurología,Migraña,8128.4,3
+366,2025-09-07,2074,Traumatología,Fractura,8418.51,12
+367,2026-04-12,2047,Pediatría,Infección respiratoria,8075.96,1
+368,2026-04-01,2089,Pediatría,Infección respiratoria,18400.12,14
+369,2025-03-23,2053,Traumatología,Fractura,8994.02,8
+370,2026-05-11,2010,Traumatología,Fractura,15248.9,7
+371,2026-08-07,2054,Pediatría,Infección respiratoria,20747.18,2
+372,2026-02-22,2069,Pediatría,Infección respiratoria,16950.4,10
+373,2025-09-24,2018,Neurología,Migraña,19957.64,5
+374,2025-03-25,2041,Cardiología,Hipertensión,10390.02,8
+375,2026-05-22,2019,Neurología,Migraña,15925.96,12
+376,2026-04-10,2026,Pediatría,Infección respiratoria,683.15,1
+377,2026-07-22,2054,Traumatología,Fractura,17871.13,7
+378,2025-02-04,2013,Pediatría,Infección respiratoria,20896.31,0
+379,2025-03-16,2089,Pediatría,Infección respiratoria,3569.73,13
+380,2026-03-09,2068,Ginecología,Control prenatal,9052.88,6
+381,2025-09-05,2090,Neurología,Migraña,17885.99,1
+382,2025-12-11,2044,Oncología,Seguimiento tumoral,14909.51,9
+383,2025-02-16,2014,Medicina General,Chequeo general,2121.69,14
+384,2026-02-23,2046,Ginecología,Control prenatal,15881.55,11
+385,2026-05-04,2056,Traumatología,Fractura,17592.81,11
+386,2026-06-06,2024,Medicina General,Chequeo general,2369.6,14
+387,2026-01-14,2001,Neurología,Migraña,16945.51,7
+388,2026-03-26,2049,Traumatología,Fractura,4665.04,11
+389,2025-04-10,2076,Traumatología,Fractura,6036.91,7
+390,2026-08-01,2044,Cardiología,Hipertensión,13086.64,8
+391,2026-03-13,2075,Neurología,Migraña,7345.85,6
+392,2025-07-02,2041,Oncología,Seguimiento tumoral,23851.79,0
+393,2026-06-16,2027,Ginecología,Control prenatal,7172.93,14
+394,2025-04-12,2079,Traumatología,Fractura,8879.44,2
+395,2025-10-08,2016,Traumatología,Fractura,12319.9,3
+396,2025-09-23,2022,Traumatología,Fractura,24723.5,12
+397,2025-10-13,2014,Pediatría,Infección respiratoria,3782.78,3
+398,2026-06-05,2071,Oncología,Seguimiento tumoral,18945.16,0
+399,2026-07-07,2077,Cardiología,Hipertensión,13586.52,3
+400,2025-01-27,2001,Ginecología,Control prenatal,9427.65,4
+401,2026-04-01,2074,Ginecología,Control prenatal,13166.08,13
+402,2025-04-23,2059,Traumatología,Fractura,17991.4,14
+403,2026-03-19,2016,Ginecología,Control prenatal,12483.41,1
+404,2025-04-30,2018,Traumatología,Fractura,24220.46,12
+405,2025-08-16,2011,Medicina General,Chequeo general,18265.83,5
+406,2025-12-10,2021,Neurología,Migraña,7119.87,10
+407,2025-03-17,2066,Medicina General,Chequeo general,17758.2,5
+408,2025-04-13,2005,Ginecología,Control prenatal,23329.49,12
+409,2025-07-14,2067,Traumatología,Fractura,21083.35,10
+410,2025-01-09,2081,Cardiología,Hipertensión,6374.07,9
+411,2025-08-14,2049,Oncología,Seguimiento tumoral,16931.69,4
+412,2026-05-12,2061,Pediatría,Infección respiratoria,20402.56,11
+413,2025-05-15,2064,Traumatología,Fractura,5204.75,14
+414,2025-08-08,2012,Neurología,Migraña,378.98,1
+415,2025-08-02,2063,Neurología,Migraña,17836.77,0
+416,2025-09-27,2054,Medicina General,Chequeo general,15450.44,10
+417,2025-12-24,2075,Pediatría,Infección respiratoria,12260.56,10
+418,2025-08-26,2024,Traumatología,Fractura,21913.47,10
+419,2026-02-06,2063,Ginecología,Control prenatal,15066.7,8
+420,2025-04-09,2062,Traumatología,Fractura,5707.58,14
+421,2026-04-03,2037,Ginecología,Control prenatal,8337.31,10
+422,2025-06-30,2055,Cardiología,Hipertensión,11778.98,5
+423,2025-12-22,2085,Cardiología,Hipertensión,17515.12,11
+424,2026-05-11,2017,Oncología,Seguimiento tumoral,21050.98,13
+425,2026-02-26,2063,Neurología,Migraña,17274.38,0
+426,2026-06-04,2038,Traumatología,Fractura,5613.12,13
+427,2026-07-30,2053,Cardiología,Hipertensión,19363.43,4
+428,2026-02-26,2087,Traumatología,Fractura,9967.05,7
+429,2025-09-24,2055,Ginecología,Control prenatal,22835.51,4
+430,2025-08-13,2063,Medicina General,Chequeo general,8694.09,13
+431,2026-04-04,2006,Traumatología,Fractura,10422.35,9
+432,2025-07-31,2022,Neurología,Migraña,19554.93,1
+433,2025-12-04,2079,Neurología,Migraña,3491.62,8
+434,2025-01-22,2003,Medicina General,Chequeo general,20119.6,1
+435,2026-07-21,2043,Traumatología,Fractura,1867.58,0
+436,2026-01-06,2067,Pediatría,Infección respiratoria,13526.17,2
+437,2025-08-23,2069,Ginecología,Control prenatal,7467.63,2
+438,2026-02-28,2048,Traumatología,Fractura,5625.69,11
+439,2025-02-06,2032,Cardiología,Hipertensión,21183.4,12
+440,2026-05-29,2068,Cardiología,Hipertensión,10129.05,7
+441,2025-10-17,2006,Pediatría,Infección respiratoria,7746.22,3
+442,2025-09-11,2081,Oncología,Seguimiento tumoral,1134.32,11
+443,2026-01-22,2016,Oncología,Seguimiento tumoral,16485.32,2
+444,2025-03-28,2035,Oncología,Seguimiento tumoral,2190.22,8
+445,2025-01-16,2054,Cardiología,Hipertensión,18643.5,8
+446,2025-04-08,2078,Pediatría,Infección respiratoria,18476.07,12
+447,2025-11-16,2051,Pediatría,Infección respiratoria,19683.86,6
+448,2025-01-24,2066,Medicina General,Chequeo general,7763.2,7
+449,2025-09-28,2026,Cardiología,Hipertensión,24240.78,9
+450,2025-10-26,2061,Ginecología,Control prenatal,10909.5,3
+451,2025-10-13,2053,Neurología,Migraña,12238.73,14
+452,2026-06-03,2090,Neurología,Migraña,6341.97,0
+453,2026-02-08,2064,Medicina General,Chequeo general,23801.0,12
+454,2025-04-21,2070,Medicina General,Chequeo general,11471.08,9
+455,2025-08-26,2004,Ginecología,Control prenatal,11343.01,7
+456,2025-11-15,2073,Cardiología,Hipertensión,8511.16,12
+457,2025-04-08,2081,Cardiología,Hipertensión,14153.87,3
+458,2025-09-13,2063,Neurología,Migraña,2372.05,6
+459,2026-04-30,2079,Oncología,Seguimiento tumoral,13228.12,13
+460,2025-08-27,2073,Oncología,Seguimiento tumoral,1755.64,7
+461,2025-11-15,2033,Ginecología,Control prenatal,18590.62,13
+462,2025-11-26,2020,Cardiología,Hipertensión,17318.24,9
+463,2025-01-06,2053,Oncología,Seguimiento tumoral,6923.18,3
+464,2026-05-16,2072,Oncología,Seguimiento tumoral,13776.04,5
+465,2025-11-26,2084,Pediatría,Infección respiratoria,11695.89,7
+466,2025-03-25,2066,Neurología,Migraña,23054.39,6
+467,2026-01-20,2090,Cardiología,Hipertensión,3443.88,0
+468,2025-05-05,2021,Neurología,Migraña,4405.07,7
+469,2026-03-11,2015,Cardiología,Hipertensión,12531.06,10
+470,2025-05-24,2068,Ginecología,Control prenatal,18800.14,8
+471,2025-01-10,2054,Ginecología,Control prenatal,7629.75,6
+472,2025-10-05,2038,Medicina General,Chequeo general,13205.26,9
+473,2025-06-19,2048,Neurología,Migraña,3795.48,8
+474,2026-01-16,2088,Pediatría,Infección respiratoria,13128.68,4
+475,2025-08-04,2061,Ginecología,Control prenatal,23424.2,14
+476,2026-06-21,2018,Pediatría,Infección respiratoria,17962.51,7
+477,2026-03-03,2002,Traumatología,Fractura,4726.88,7
+478,2025-11-16,2009,Cardiología,Hipertensión,17626.18,3
+479,2026-07-05,2089,Cardiología,Hipertensión,11627.26,1
+480,2026-04-25,2008,Neurología,Migraña,14983.03,1
+481,2026-07-27,2045,Medicina General,Chequeo general,22118.58,5
+482,2025-07-17,2081,Cardiología,Hipertensión,7082.14,13
+483,2025-11-10,2055,Neurología,Migraña,9371.69,12
+484,2026-07-29,2052,Traumatología,Fractura,13663.12,10
+485,2025-06-06,2026,Cardiología,Hipertensión,2843.51,3
+486,2025-09-27,2036,Pediatría,Infección respiratoria,14222.4,2
+487,2026-01-28,2067,Neurología,Migraña,8454.96,12
+488,2025-10-11,2076,Neurología,Migraña,24176.47,11
+489,2026-04-30,2079,Medicina General,Chequeo general,5469.88,0
+490,2025-04-04,2030,Pediatría,Infección respiratoria,23259.81,9
+491,2025-06-18,2019,Pediatría,Infección respiratoria,12043.96,0
+492,2025-02-23,2042,Cardiología,Hipertensión,3683.28,12
+493,2026-04-29,2057,Ginecología,Control prenatal,8379.11,8
+494,2026-07-28,2016,Pediatría,Infección respiratoria,10013.19,12
+495,2026-05-01,2050,Medicina General,Chequeo general,9068.29,13
+496,2026-06-28,2067,Traumatología,Fractura,2231.53,9
+497,2025-10-12,2028,Pediatría,Infección respiratoria,17870.29,13
+498,2026-03-29,2056,Neurología,Migraña,12405.31,12
+499,2025-05-04,2033,Medicina General,Chequeo general,14080.26,6
+500,2025-07-02,2084,Traumatología,Fractura,924.8,5
+501,2025-12-21,2060,Oncología,Seguimiento tumoral,18293.74,3
+502,2025-07-15,2079,Neurología,Migraña,9746.7,2
+503,2026-03-29,2002,Pediatría,Infección respiratoria,9216.49,3
+504,2025-11-14,2001,Neurología,Migraña,8412.75,14
+505,2026-05-30,2048,Traumatología,Fractura,23062.63,9
+506,2025-10-09,2035,Cardiología,Hipertensión,16149.35,6
+507,2025-09-17,2006,Medicina General,Chequeo general,7072.09,0
+508,2025-02-01,2074,Oncología,Seguimiento tumoral,21620.68,14
+509,2026-04-11,2061,Neurología,Migraña,12410.42,7
+510,2026-07-13,2083,Oncología,Seguimiento tumoral,20243.54,0
+511,2025-06-06,2048,Cardiología,Hipertensión,17729.3,2
+512,2026-03-06,2017,Cardiología,Hipertensión,20901.39,1
+513,2025-03-05,2008,Ginecología,Control prenatal,8061.64,13
+514,2025-07-18,2070,Traumatología,Fractura,16481.1,11
+515,2025-11-21,2003,Traumatología,Fractura,22474.09,2
+516,2026-01-11,2076,Medicina General,Chequeo general,13053.61,10
+517,2025-03-04,2052,Ginecología,Control prenatal,1904.39,13
+518,2025-10-01,2065,Pediatría,Infección respiratoria,2374.03,7
+519,2025-07-23,2006,Traumatología,Fractura,17311.3,6
+520,2025-01-04,2023,Medicina General,Chequeo general,7985.76,8
+521,2025-12-16,2045,Cardiología,Hipertensión,11816.43,13
+522,2026-08-03,2090,Cardiología,Hipertensión,23277.74,1
+523,2025-07-06,2015,Cardiología,Hipertensión,18319.89,2
+524,2025-01-21,2041,Neurología,Migraña,19238.05,12
+525,2026-01-19,2002,Pediatría,Infección respiratoria,11670.62,14
+526,2025-07-15,2032,Traumatología,Fractura,18760.99,11
+527,2025-02-24,2017,Traumatología,Fractura,9668.97,4
+528,2025-05-24,2023,Traumatología,Fractura,14256.49,6
+529,2025-07-12,2029,Oncología,Seguimiento tumoral,7038.15,3
+530,2025-09-23,2023,Traumatología,Fractura,17529.69,4
+531,2025-12-30,2012,Ginecología,Control prenatal,14593.8,5
+532,2026-04-06,2083,Neurología,Migraña,20788.65,10
+533,2026-08-23,2022,Cardiología,Hipertensión,9826.31,8
+534,2026-03-21,2073,Pediatría,Infección respiratoria,8868.96,12
+535,2025-10-23,2088,Oncología,Seguimiento tumoral,5423.94,11
+536,2025-10-03,2065,Neurología,Migraña,2541.71,12
+537,2025-08-12,2027,Traumatología,Fractura,11851.9,0
+538,2025-07-10,2015,Neurología,Migraña,12037.68,7
+539,2026-01-17,2076,Traumatología,Fractura,14225.1,10
+540,2025-11-27,2076,Cardiología,Hipertensión,17621.82,10
+541,2025-01-09,2046,Oncología,Seguimiento tumoral,4221.14,7
+542,2025-04-13,2043,Traumatología,Fractura,4921.65,5
+543,2026-04-24,2040,Pediatría,Infección respiratoria,13805.42,12
+544,2026-04-13,2003,Ginecología,Control prenatal,14961.3,11
+545,2026-02-13,2056,Medicina General,Chequeo general,11997.23,3
+546,2026-01-18,2033,Medicina General,Chequeo general,15143.27,7
+547,2025-11-04,2087,Ginecología,Control prenatal,1291.19,14
+548,2026-06-04,2030,Oncología,Seguimiento tumoral,2964.03,6
+549,2026-02-15,2035,Neurología,Migraña,14948.98,2
+550,2025-11-04,2066,Pediatría,Infección respiratoria,22198.9,11
+551,2026-08-05,2068,Pediatría,Infección respiratoria,18870.7,2
+552,2025-02-25,2085,Traumatología,Fractura,24267.03,4
+553,2025-12-21,2019,Oncología,Seguimiento tumoral,11630.22,2
+554,2025-06-01,2059,Cardiología,Hipertensión,5250.04,2
+555,2025-03-24,2039,Traumatología,Fractura,4859.46,13
+556,2025-04-03,2027,Ginecología,Control prenatal,18186.12,2
+557,2026-01-19,2088,Neurología,Migraña,422.14,2
+558,2026-04-28,2045,Cardiología,Hipertensión,13880.78,6
+559,2026-04-29,2090,Pediatría,Infección respiratoria,16810.39,13
+560,2025-09-06,2060,Medicina General,Chequeo general,19147.49,1
+561,2025-11-22,2050,Pediatría,Infección respiratoria,19147.19,2
+562,2025-12-01,2052,Oncología,Seguimiento tumoral,22481.13,13
+563,2026-03-11,2087,Medicina General,Chequeo general,15044.39,8
+564,2026-05-16,2010,Traumatología,Fractura,16845.95,9
+565,2025-07-02,2004,Pediatría,Infección respiratoria,19265.74,5
+566,2026-05-29,2047,Traumatología,Fractura,20633.98,9
+567,2026-02-12,2077,Oncología,Seguimiento tumoral,22890.27,10
+568,2026-05-27,2030,Pediatría,Infección respiratoria,4942.87,3
+569,2025-04-06,2039,Ginecología,Control prenatal,8687.79,10
+570,2025-06-04,2024,Ginecología,Control prenatal,7338.61,6
+571,2026-05-08,2087,Oncología,Seguimiento tumoral,1160.22,6
+572,2026-02-12,2023,Pediatría,Infección respiratoria,17153.79,13
+573,2025-03-26,2014,Ginecología,Control prenatal,8853.29,11
+574,2026-02-19,2013,Medicina General,Chequeo general,20147.69,0
+575,2025-05-12,2021,Traumatología,Fractura,14494.65,6
+576,2025-01-12,2088,Ginecología,Control prenatal,12307.64,10
+577,2025-02-25,2052,Ginecología,Control prenatal,7782.98,4
+578,2026-04-07,2082,Cardiología,Hipertensión,12700.92,12
+579,2025-12-10,2061,Medicina General,Chequeo general,21150.96,5
+580,2025-07-03,2015,Oncología,Seguimiento tumoral,24524.14,8
+581,2025-03-23,2050,Oncología,Seguimiento tumoral,4014.56,5
+582,2025-07-22,2076,Traumatología,Fractura,13017.94,9
+583,2025-02-19,2059,Ginecología,Control prenatal,11779.65,0
+584,2026-05-17,2016,Oncología,Seguimiento tumoral,11668.19,0
+585,2026-01-14,2077,Medicina General,Chequeo general,6532.47,5
+586,2025-01-25,2087,Traumatología,Fractura,13705.89,2
+587,2026-03-04,2038,Traumatología,Fractura,732.72,5
+588,2025-02-06,2039,Medicina General,Chequeo general,15015.74,5
+589,2026-02-10,2005,Neurología,Migraña,6441.08,1
+590,2025-05-10,2069,Cardiología,Hipertensión,18251.65,10
+591,2025-10-09,2064,Ginecología,Control prenatal,8831.04,7
+592,2025-09-07,2089,Neurología,Migraña,22993.75,14
+593,2026-04-15,2068,Neurología,Migraña,1303.83,5
+594,2025-05-31,2048,Cardiología,Hipertensión,15351.03,11
+595,2025-04-14,2082,Oncología,Seguimiento tumoral,9733.25,11
+596,2025-11-06,2011,Traumatología,Fractura,10736.49,0
+597,2025-09-21,2024,Medicina General,Chequeo general,18123.37,11
+598,2026-03-20,2011,Oncología,Seguimiento tumoral,24139.45,12
+599,2025-09-25,2025,Neurología,Migraña,24874.48,9
+600,2025-09-07,2066,Neurología,Migraña,17448.15,0
+601,2026-04-30,2048,Neurología,Migraña,5615.67,14
+602,2025-07-10,2056,Traumatología,Fractura,7138.29,10
+603,2026-02-13,2006,Neurología,Migraña,22770.74,10
+604,2025-01-06,2037,Traumatología,Fractura,10357.41,0
+605,2025-05-13,2054,Medicina General,Chequeo general,7086.79,7
+606,2025-11-22,2077,Oncología,Seguimiento tumoral,2699.55,3
+607,2025-11-29,2003,Medicina General,Chequeo general,5760.13,9
+608,2026-04-17,2037,Medicina General,Chequeo general,14821.48,10
+609,2026-07-09,2077,Traumatología,Fractura,9909.28,14
+610,2025-12-18,2072,Cardiología,Hipertensión,8712.72,5
+611,2026-04-19,2057,Pediatría,Infección respiratoria,21402.59,7
+612,2025-06-24,2027,Neurología,Migraña,16922.75,4
+613,2026-08-09,2052,Cardiología,Hipertensión,24202.77,10
+614,2025-12-20,2063,Neurología,Migraña,2352.37,11
+615,2025-11-08,2068,Traumatología,Fractura,7508.03,5
+616,2026-04-24,2058,Medicina General,Chequeo general,1030.24,9
+617,2025-12-27,2075,Pediatría,Infección respiratoria,14252.84,6
+618,2025-10-18,2003,Oncología,Seguimiento tumoral,14044.06,7
+619,2026-07-05,2031,Ginecología,Control prenatal,3552.93,9
+620,2026-02-10,2016,Cardiología,Hipertensión,5692.14,1
+621,2025-07-02,2074,Traumatología,Fractura,21662.86,12
+622,2026-02-23,2052,Neurología,Migraña,8995.01,3
+623,2025-10-13,2054,Neurología,Migraña,8189.27,5
+624,2025-11-22,2081,Cardiología,Hipertensión,12706.93,8
+625,2026-02-18,2051,Pediatría,Infección respiratoria,12522.38,7
+626,2026-04-06,2037,Oncología,Seguimiento tumoral,4177.1,13
+627,2025-10-23,2023,Ginecología,Control prenatal,382.43,13
+628,2026-04-21,2043,Oncología,Seguimiento tumoral,16507.91,10
+629,2026-08-18,2013,Ginecología,Control prenatal,16431.67,6
+630,2025-01-30,2053,Pediatría,Infección respiratoria,15586.24,2
+631,2026-05-31,2079,Neurología,Migraña,24973.07,9
+632,2026-02-23,2074,Medicina General,Chequeo general,23653.58,5
+633,2025-06-20,2079,Pediatría,Infección respiratoria,14361.86,7
+634,2026-01-15,2088,Cardiología,Hipertensión,861.17,9
+635,2026-07-20,2084,Ginecología,Control prenatal,12929.99,3
+636,2026-01-13,2021,Ginecología,Control prenatal,18159.58,3
+637,2025-07-24,2023,Ginecología,Control prenatal,8271.29,4
+638,2025-07-31,2009,Cardiología,Hipertensión,14566.78,7
+639,2026-03-31,2032,Medicina General,Chequeo general,24745.92,12
+640,2026-05-28,2023,Ginecología,Control prenatal,16142.07,12
+641,2025-12-06,2078,Oncología,Seguimiento tumoral,21840.51,14
+642,2026-04-19,2021,Pediatría,Infección respiratoria,18134.54,1
+643,2025-02-03,2001,Medicina General,Chequeo general,17145.98,6
+644,2026-01-30,2067,Ginecología,Control prenatal,2038.03,6
+645,2026-07-05,2034,Medicina General,Chequeo general,3288.25,12
+646,2026-07-01,2078,Medicina General,Chequeo general,17954.68,7
+647,2025-03-03,2062,Oncología,Seguimiento tumoral,7536.19,6
+648,2026-02-14,2006,Traumatología,Fractura,18000.63,8
+649,2026-03-27,2081,Medicina General,Chequeo general,10886.14,1
+650,2025-09-26,2014,Pediatría,Infección respiratoria,19021.13,9

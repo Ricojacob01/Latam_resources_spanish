@@ -1,0 +1,91 @@
+paciente_id,nombre_paciente,sexo,edad,ciudad,aseguradora
+2001,Juan Gómez,F,1,Monterrey,MetLife
+2002,Paula Gómez,F,13,Guadalajara,Sin seguro
+2003,Valentina Martínez,F,53,Bogotá,Sin seguro
+2004,Ana González,M,29,Medellín,Sin seguro
+2005,Andrés Flores,M,55,Buenos Aires,AXA
+2006,Camila López,M,85,Medellín,MetLife
+2007,Sofía Gómez,M,1,Monterrey,MetLife
+2008,Carlos Sánchez,M,6,Buenos Aires,Sin seguro
+2009,Javier Rivera,F,21,San José,MetLife
+2010,Fernando Torres,F,54,Medellín,AXA
+2011,Fernando González,M,52,Córdoba,Sin seguro
+2012,Sofía López,F,3,Buenos Aires,MetLife
+2013,Andrés Herrera,F,88,Santiago,Seguro Público
+2014,Lucía Vargas,F,56,Medellín,Sura
+2015,Juan Romero,F,55,Santiago,AXA
+2016,Sofía Herrera,F,32,Lima,Seguro Público
+2017,Camila Ramírez,M,26,Medellín,Seguro Público
+2018,Daniela Pérez,F,76,San José,MetLife
+2019,Mateo López,F,52,Ciudad de México,Sura
+2020,Valentina González,M,3,Quito,MetLife
+2021,María Rodríguez,M,53,Córdoba,Sura
+2022,Mateo Ramírez,M,55,Medellín,Seguro Público
+2023,Daniela Vargas,F,39,Bogotá,Sura
+2024,Andrés Torres,M,92,Guadalajara,MetLife
+2025,Lucía Rodríguez,F,6,Ciudad de México,Seguro Público
+2026,Lucía Sánchez,M,61,Lima,AXA
+2027,Carlos Vargas,F,33,Medellín,Sura
+2028,Lucía Flores,F,13,San José,Seguro Público
+2029,Miguel González,M,47,Montevideo,Sura
+2030,Gabriela Herrera,M,31,San José,Sura
+2031,Valentina Díaz,F,14,Buenos Aires,AXA
+2032,Carlos Rodríguez,F,25,Montevideo,Sin seguro
+2033,Carlos Martínez,M,39,Montevideo,Sin seguro
+2034,Valentina Medina,F,6,Buenos Aires,MetLife
+2035,Javier Medina,M,72,Monterrey,Sura
+2036,Isabela López,M,9,Medellín,Sin seguro
+2037,Daniela Herrera,F,22,Quito,Sura
+2038,Sofía Flores,F,73,Ciudad de México,MetLife
+2039,Paula Romero,F,22,Medellín,AXA
+2040,Paula Medina,M,52,Quito,Sura
+2041,Valentina Pérez,F,21,Quito,MetLife
+2042,Gabriela García,M,65,Montevideo,AXA
+2043,Camila Flores,F,38,Montevideo,Sura
+2044,Miguel López,F,29,Ciudad de México,AXA
+2045,Mateo Flores,F,82,Buenos Aires,Sura
+2046,Sofía Torres,F,83,Santiago,MetLife
+2047,Miguel López,F,84,Monterrey,AXA
+2048,Andrés Rivera,F,91,Córdoba,Sura
+2049,Sofía Vargas,M,42,Ciudad de México,Seguro Público
+2050,Andrés Ramírez,M,23,Lima,Seguro Público
+2051,Miguel López,M,84,Lima,AXA
+2052,Miguel Sánchez,M,29,Monterrey,Sura
+2053,Valentina Díaz,F,58,Santiago,Sin seguro
+2054,Andrés González,M,12,Medellín,MetLife
+2055,Isabela Pérez,F,25,Quito,Sin seguro
+2056,Diego Flores,F,40,Buenos Aires,MetLife
+2057,Paula Sánchez,F,19,Bogotá,Sin seguro
+2058,Mateo Castro,M,13,Montevideo,AXA
+2059,Sofía García,F,49,Guadalajara,Seguro Público
+2060,Carlos García,F,17,Santiago,Seguro Público
+2061,Camila González,F,2,Bogotá,AXA
+2062,Lucía Martínez,F,18,Medellín,AXA
+2063,Isabela Pérez,M,43,Medellín,MetLife
+2064,Mateo Rodríguez,M,81,Córdoba,Seguro Público
+2065,Ana Rodríguez,F,70,Lima,Seguro Público
+2066,Daniela Vargas,F,1,Santiago,Seguro Público
+2067,Mateo Vargas,M,19,Monterrey,Sura
+2068,Mateo Díaz,F,63,Buenos Aires,Seguro Público
+2069,Mateo López,M,46,Bogotá,AXA
+2070,Lucía López,M,11,Ciudad de México,AXA
+2071,Sofía Pérez,M,68,Monterrey,AXA
+2072,Diego Vargas,F,86,San José,Sura
+2073,Pablo Flores,M,14,Lima,Sin seguro
+2074,Andrés Torres,F,1,Buenos Aires,MetLife
+2075,Lucía González,M,58,Montevideo,Sin seguro
+2076,María López,M,94,Lima,MetLife
+2077,María Rivera,F,24,Guadalajara,Sura
+2078,Lucía Romero,M,62,Montevideo,Sin seguro
+2079,Pablo Rivera,F,84,Santiago,Sin seguro
+2080,Javier Medina,M,69,Córdoba,Sin seguro
+2081,Miguel Medina,F,50,Bogotá,AXA
+2082,Javier Herrera,F,90,Bogotá,MetLife
+2083,Andrés García,F,3,Monterrey,AXA
+2084,Fernando González,F,8,Monterrey,Sura
+2085,Sofía Flores,M,19,Córdoba,Sin seguro
+2086,Mateo Sánchez,F,8,Montevideo,MetLife
+2087,Carlos González,M,94,Ciudad de México,Sin seguro
+2088,Andrés Rodríguez,F,85,Quito,Seguro Público
+2089,Fernando Pérez,F,19,Monterrey,MetLife
+2090,María Ramírez,F,2,Quito,Sin seguro

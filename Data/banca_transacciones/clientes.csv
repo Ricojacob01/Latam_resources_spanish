@@ -1,0 +1,81 @@
+cuenta_id,nombre_cliente,segmento,ciudad,edad,fecha_alta
+1001,Diego Martínez,Premium,Monterrey,33,2021-09-17
+1002,Camila Rodríguez,PyME,Córdoba,59,2022-03-31
+1003,Paula Ramírez,Personal,Medellín,46,2024-06-05
+1004,Isabela Martínez,Premium,Medellín,38,2019-05-02
+1005,Fernando García,Personal,Guadalajara,44,2018-05-27
+1006,Miguel Medina,Personal,Bogotá,68,2024-10-10
+1007,Pablo Flores,PyME,San José,60,2023-02-12
+1008,Lucía Gómez,Personal,Santiago,72,2023-02-05
+1009,Lucía Medina,Premium,Montevideo,60,2022-01-28
+1010,Isabela López,Personal,San José,32,2018-01-09
+1011,Lucía Gómez,Empresarial,Córdoba,51,2022-03-12
+1012,Carlos Rodríguez,PyME,Medellín,26,2022-08-04
+1013,Carlos Torres,PyME,Santiago,25,2022-05-29
+1014,Valentina Castro,PyME,Montevideo,39,2019-03-18
+1015,Javier Rodríguez,Personal,Medellín,47,2024-08-10
+1016,Daniela González,Premium,Ciudad de México,51,2018-07-18
+1017,Miguel Vargas,Premium,Córdoba,67,2019-12-27
+1018,Gabriela Pérez,PyME,Bogotá,42,2024-09-25
+1019,Pablo Rivera,Premium,Guadalajara,56,2020-10-13
+1020,Camila Díaz,Empresarial,Lima,46,2019-07-01
+1021,Sofía Vargas,Empresarial,Montevideo,53,2021-07-09
+1022,Miguel Sánchez,PyME,Santiago,57,2021-04-05
+1023,Andrés González,PyME,Córdoba,52,2021-08-13
+1024,Carlos Gómez,Premium,Quito,54,2022-09-06
+1025,Miguel Flores,Premium,Ciudad de México,51,2019-03-13
+1026,Ana Díaz,PyME,Ciudad de México,60,2018-08-20
+1027,Valentina Torres,PyME,Lima,61,2020-10-23
+1028,Sofía Rodríguez,Empresarial,Santiago,66,2024-01-26
+1029,Luis Gómez,Premium,Bogotá,57,2024-04-20
+1030,Mateo Medina,Premium,Santiago,50,2021-03-24
+1031,Luis Díaz,Premium,Guadalajara,68,2021-07-04
+1032,Miguel Rodríguez,Personal,Montevideo,34,2020-04-11
+1033,Pablo Castro,PyME,San José,63,2022-02-15
+1034,Gabriela Medina,PyME,Montevideo,30,2021-04-19
+1035,Isabela Pérez,Personal,Buenos Aires,29,2023-10-06
+1036,Carlos Díaz,Personal,Guadalajara,35,2024-03-29
+1037,Camila González,PyME,Quito,72,2020-11-10
+1038,Ana Rivera,Premium,Montevideo,27,2018-06-13
+1039,Sofía Rivera,Personal,San José,57,2021-05-18
+1040,Fernando Medina,Empresarial,Bogotá,68,2021-07-25
+1041,Daniela Ramírez,PyME,Córdoba,22,2023-09-01
+1042,Diego Vargas,Premium,Bogotá,40,2020-06-25
+1043,Valentina Rivera,Empresarial,Monterrey,36,2020-06-13
+1044,Pablo Herrera,Premium,Córdoba,70,2018-02-06
+1045,Carlos Gómez,Premium,Santiago,75,2020-09-25
+1046,Luis Rivera,Premium,Bogotá,42,2020-11-16
+1047,Miguel Flores,Personal,Córdoba,70,2022-03-16
+1048,Daniela Herrera,Premium,Medellín,20,2021-04-29
+1049,Valentina Rivera,Personal,Bogotá,28,2024-01-13
+1050,Miguel García,Personal,Santiago,60,2020-05-23
+1051,Javier López,PyME,Córdoba,71,2022-11-18
+1052,María González,Personal,Medellín,63,2021-09-20
+1053,Luis Martínez,Personal,Ciudad de México,29,2020-10-28
+1054,Miguel Martínez,PyME,Lima,44,2022-05-09
+1055,Isabela Díaz,Premium,Monterrey,19,2022-05-15
+1056,Carlos Medina,Personal,San José,64,2018-09-17
+1057,Gabriela Rodríguez,Personal,Monterrey,50,2019-03-11
+1058,Juan Flores,Personal,Lima,66,2022-11-28
+1059,Paula Díaz,Personal,Medellín,28,2023-12-26
+1060,Mateo González,Premium,Córdoba,36,2019-08-14
+1061,Juan Gómez,Personal,Córdoba,73,2024-03-23
+1062,Sofía López,Personal,Ciudad de México,54,2024-09-09
+1063,Paula Medina,Personal,Lima,31,2021-11-09
+1064,Valentina Vargas,PyME,Buenos Aires,29,2020-06-23
+1065,Pablo Torres,PyME,Bogotá,29,2024-05-12
+1066,Luis Medina,Premium,San José,53,2018-10-27
+1067,Juan Martínez,Empresarial,Bogotá,30,2024-07-06
+1068,Fernando Rivera,Empresarial,Buenos Aires,60,2020-08-18
+1069,Carlos Flores,Personal,Santiago,38,2023-06-14
+1070,Isabela Rivera,Empresarial,Montevideo,55,2019-09-17
+1071,Gabriela Gómez,Empresarial,Guadalajara,28,2018-01-20
+1072,Lucía Ramírez,PyME,Montevideo,65,2022-11-22
+1073,Camila Gómez,PyME,San José,64,2021-09-20
+1074,Fernando Castro,Premium,Monterrey,67,2021-06-05
+1075,Fernando Medina,Personal,Buenos Aires,59,2024-10-20
+1076,María Torres,PyME,Córdoba,30,2020-12-14
+1077,María Martínez,Personal,Córdoba,58,2018-05-08
+1078,Gabriela Díaz,PyME,Ciudad de México,53,2020-12-03
+1079,Miguel Medina,Premium,San José,67,2019-09-01
+1080,Andrés Díaz,PyME,Quito,64,2021-04-06

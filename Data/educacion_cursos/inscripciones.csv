@@ -1,0 +1,751 @@
+inscripcion_id,fecha_inscripcion,estudiante_id,curso,nota_final,horas_completadas,estado
+1,2025-06-21,7045,Gestión de proyectos,,11,En curso
+2,2025-11-16,7084,SQL para datos,,0,En curso
+3,2026-01-08,7018,Cloud Computing,,31,Abandonado
+4,2026-04-23,7009,Cloud Computing,,33,Abandonado
+5,2026-03-13,7068,Marketing digital,,38,En curso
+6,2026-08-07,7037,Visualización,,3,Abandonado
+7,2025-04-19,7004,Gestión de proyectos,,27,En curso
+8,2026-02-16,7058,Visualización,,23,En curso
+9,2025-10-31,7047,Machine Learning,,54,Abandonado
+10,2025-03-30,7024,Finanzas personales,,9,En curso
+11,2025-05-17,7050,Gestión de proyectos,,25,En curso
+12,2025-01-09,7047,Finanzas personales,4.8,1,Completado
+13,2025-10-09,7085,SQL para datos,3.6,53,Completado
+14,2026-01-23,7029,Marketing digital,9.9,55,Completado
+15,2025-02-11,7024,Finanzas personales,,49,En curso
+16,2026-02-26,7014,Marketing digital,3.0,34,Completado
+17,2025-04-13,7077,Finanzas personales,7.7,8,Completado
+18,2026-02-22,7069,Machine Learning,3.1,12,Completado
+19,2025-04-24,7065,SQL para datos,,22,Abandonado
+20,2025-05-27,7085,Machine Learning,4.0,11,Completado
+21,2025-06-08,7023,Cloud Computing,,0,Abandonado
+22,2026-04-28,7069,Gestión de proyectos,,55,En curso
+23,2025-07-17,7020,Gestión de proyectos,,38,Abandonado
+24,2025-11-01,7076,Python básico,,0,Abandonado
+25,2026-07-22,7035,Cloud Computing,3.3,28,Completado
+26,2025-04-15,7078,SQL para datos,4.6,59,Completado
+27,2025-01-31,7032,Gestión de proyectos,,12,En curso
+28,2025-05-30,7041,Machine Learning,,49,En curso
+29,2025-05-15,7083,Python básico,,50,Abandonado
+30,2025-05-01,7056,Gestión de proyectos,,31,En curso
+31,2026-04-21,7072,Visualización,7.2,1,Completado
+32,2025-01-18,7017,SQL para datos,,1,Abandonado
+33,2025-12-04,7039,Visualización,7.4,19,Completado
+34,2025-12-07,7010,Machine Learning,,50,Abandonado
+35,2025-09-26,7066,Cloud Computing,9.5,30,Completado
+36,2026-04-11,7072,Cloud Computing,,46,En curso
+37,2025-06-29,7081,SQL para datos,6.9,41,Completado
+38,2026-07-23,7066,Visualización,,1,Abandonado
+39,2026-05-25,7050,Python básico,8.3,43,Completado
+40,2026-07-26,7030,SQL para datos,,42,En curso
+41,2026-04-01,7019,Cloud Computing,4.6,59,Completado
+42,2026-02-17,7031,Python básico,,20,Abandonado
+43,2025-11-27,7043,Gestión de proyectos,,58,Abandonado
+44,2026-08-09,7064,Cloud Computing,,44,En curso
+45,2025-10-12,7003,Machine Learning,,36,Abandonado
+46,2026-03-17,7001,Python básico,,44,En curso
+47,2025-06-06,7039,Marketing digital,,0,En curso
+48,2026-02-02,7049,Gestión de proyectos,8.1,26,Completado
+49,2025-10-07,7059,Gestión de proyectos,4.6,28,Completado
+50,2025-05-28,7006,Finanzas personales,5.8,26,Completado
+51,2026-07-28,7012,SQL para datos,5.9,19,Completado
+52,2025-03-01,7076,Machine Learning,,22,Abandonado
+53,2025-01-21,7029,Cloud Computing,,12,Abandonado
+54,2026-02-13,7062,Machine Learning,,40,Abandonado
+55,2025-10-30,7079,Cloud Computing,,19,En curso
+56,2025-07-04,7059,Gestión de proyectos,,51,En curso
+57,2025-10-16,7002,Machine Learning,,15,Abandonado
+58,2025-06-28,7019,Visualización,,19,En curso
+59,2025-10-08,7066,SQL para datos,8.4,29,Completado
+60,2025-04-24,7017,Gestión de proyectos,,21,En curso
+61,2025-04-21,7032,Gestión de proyectos,,34,En curso
+62,2026-04-15,7044,Cloud Computing,,54,En curso
+63,2026-05-26,7075,Marketing digital,5.7,0,Completado
+64,2025-06-18,7021,Gestión de proyectos,,28,En curso
+65,2025-08-07,7008,Visualización,10.0,42,Completado
+66,2025-12-13,7019,Cloud Computing,,22,Abandonado
+67,2025-11-26,7024,Machine Learning,8.9,33,Completado
+68,2025-01-21,7050,Machine Learning,3.3,38,Completado
+69,2025-07-08,7056,SQL para datos,,28,En curso
+70,2025-06-10,7021,Machine Learning,6.4,53,Completado
+71,2026-02-22,7017,Finanzas personales,5.1,34,Completado
+72,2025-09-04,7023,Machine Learning,5.5,57,Completado
+73,2025-08-03,7052,Finanzas personales,,54,En curso
+74,2025-08-15,7001,Machine Learning,,52,En curso
+75,2025-05-05,7046,Visualización,9.8,37,Completado
+76,2025-02-16,7021,Cloud Computing,,34,Abandonado
+77,2025-02-16,7046,Marketing digital,4.3,6,Completado
+78,2025-02-19,7086,SQL para datos,,36,Abandonado
+79,2025-09-07,7031,Visualización,,23,Abandonado
+80,2026-05-14,7080,SQL para datos,6.4,38,Completado
+81,2025-01-23,7008,Machine Learning,3.4,45,Completado
+82,2025-12-16,7075,Marketing digital,,6,Abandonado
+83,2025-12-15,7049,Marketing digital,4.3,45,Completado
+84,2026-05-20,7087,SQL para datos,,32,En curso
+85,2025-11-13,7048,Python básico,,46,En curso
+86,2025-05-27,7058,Visualización,,0,Abandonado
+87,2025-08-11,7037,Machine Learning,,47,En curso
+88,2026-04-25,7030,Finanzas personales,9.7,58,Completado
+89,2026-01-21,7069,Cloud Computing,5.0,28,Completado
+90,2025-05-02,7037,Cloud Computing,6.1,60,Completado
+91,2025-04-17,7046,SQL para datos,7.7,42,Completado
+92,2026-03-15,7058,Marketing digital,,45,En curso
+93,2025-03-01,7055,Gestión de proyectos,,11,En curso
+94,2026-03-05,7085,SQL para datos,,8,En curso
+95,2025-06-13,7004,SQL para datos,,52,Abandonado
+96,2025-11-25,7090,Finanzas personales,,35,Abandonado
+97,2025-03-17,7008,Python básico,,9,En curso
+98,2025-04-27,7017,Marketing digital,3.5,30,Completado
+99,2026-03-29,7081,Python básico,,24,Abandonado
+100,2026-03-14,7081,Visualización,,21,En curso
+101,2026-05-13,7032,SQL para datos,4.1,34,Completado
+102,2025-06-09,7046,SQL para datos,,55,Abandonado
+103,2026-06-14,7018,Cloud Computing,,41,En curso
+104,2026-03-01,7066,Visualización,,58,En curso
+105,2025-06-05,7064,Cloud Computing,3.6,12,Completado
+106,2025-09-08,7003,Finanzas personales,3.2,53,Completado
+107,2026-07-05,7044,Machine Learning,7.0,55,Completado
+108,2025-03-16,7032,Visualización,,9,Abandonado
+109,2025-12-19,7034,Marketing digital,,24,En curso
+110,2026-05-06,7079,Cloud Computing,3.9,6,Completado
+111,2026-07-22,7063,Visualización,,51,Abandonado
+112,2026-02-27,7088,Gestión de proyectos,,36,En curso
+113,2025-08-04,7010,Machine Learning,,2,En curso
+114,2025-02-01,7013,Marketing digital,8.5,51,Completado
+115,2026-02-07,7046,Cloud Computing,7.9,11,Completado
+116,2025-08-14,7056,Gestión de proyectos,,4,En curso
+117,2025-07-07,7019,Cloud Computing,,20,En curso
+118,2025-09-12,7045,Finanzas personales,9.7,60,Completado
+119,2026-02-06,7047,Gestión de proyectos,,59,Abandonado
+120,2026-04-26,7050,Marketing digital,,16,Abandonado
+121,2026-06-08,7068,Cloud Computing,,37,En curso
+122,2026-08-15,7055,Cloud Computing,4.2,45,Completado
+123,2026-02-21,7048,Machine Learning,3.2,20,Completado
+124,2026-08-16,7001,Machine Learning,,36,En curso
+125,2026-01-28,7054,Gestión de proyectos,,54,En curso
+126,2025-02-25,7015,Marketing digital,8.7,49,Completado
+127,2026-03-04,7017,Finanzas personales,,11,En curso
+128,2025-01-23,7077,Finanzas personales,8.2,37,Completado
+129,2025-10-03,7028,Machine Learning,,4,En curso
+130,2025-04-23,7017,Cloud Computing,,27,Abandonado
+131,2025-01-05,7085,Machine Learning,,9,En curso
+132,2026-05-21,7026,Finanzas personales,,35,En curso
+133,2025-01-07,7089,Cloud Computing,,58,Abandonado
+134,2026-08-04,7045,Finanzas personales,,54,En curso
+135,2025-04-30,7018,Cloud Computing,,44,En curso
+136,2025-07-28,7084,Visualización,6.2,41,Completado
+137,2025-05-18,7079,SQL para datos,,18,Abandonado
+138,2025-05-28,7058,Visualización,,12,Abandonado
+139,2025-06-09,7057,Python básico,,59,Abandonado
+140,2025-10-04,7073,Gestión de proyectos,,4,Abandonado
+141,2026-02-14,7051,Finanzas personales,,0,En curso
+142,2025-08-13,7051,Machine Learning,5.8,54,Completado
+143,2025-07-25,7067,Python básico,,7,En curso
+144,2025-06-05,7009,Python básico,9.2,52,Completado
+145,2026-06-15,7007,Cloud Computing,,32,Abandonado
+146,2025-09-17,7035,Visualización,5.7,13,Completado
+147,2026-04-08,7028,Marketing digital,,1,En curso
+148,2026-07-08,7066,Marketing digital,9.6,31,Completado
+149,2026-01-26,7082,Python básico,7.9,54,Completado
+150,2025-09-17,7043,Cloud Computing,,57,Abandonado
+151,2025-05-17,7056,Python básico,,35,Abandonado
+152,2025-10-14,7048,Python básico,,7,En curso
+153,2026-01-14,7025,SQL para datos,4.8,58,Completado
+154,2025-01-01,7073,SQL para datos,5.6,6,Completado
+155,2026-02-05,7043,SQL para datos,,30,En curso
+156,2025-03-03,7045,Python básico,,13,Abandonado
+157,2026-06-06,7068,Python básico,,18,Abandonado
+158,2025-03-11,7033,Python básico,,18,Abandonado
+159,2025-09-05,7008,SQL para datos,,22,En curso
+160,2026-06-06,7052,Gestión de proyectos,,4,En curso
+161,2025-07-15,7088,SQL para datos,8.8,17,Completado
+162,2025-08-11,7066,Finanzas personales,,19,Abandonado
+163,2025-12-27,7059,Python básico,,12,En curso
+164,2025-01-13,7006,SQL para datos,,59,Abandonado
+165,2025-11-22,7052,Marketing digital,,18,Abandonado
+166,2026-04-07,7058,Cloud Computing,6.4,2,Completado
+167,2025-02-08,7012,Machine Learning,,56,Abandonado
+168,2025-04-16,7060,Marketing digital,,57,Abandonado
+169,2026-07-27,7078,Visualización,,30,Abandonado
+170,2025-04-20,7090,Gestión de proyectos,6.1,33,Completado
+171,2026-06-14,7050,Marketing digital,,7,En curso
+172,2026-08-08,7011,Finanzas personales,,52,Abandonado
+173,2025-12-31,7050,Visualización,,42,En curso
+174,2026-05-03,7026,Python básico,5.9,46,Completado
+175,2026-07-04,7042,Visualización,5.3,23,Completado
+176,2026-01-01,7025,SQL para datos,,37,En curso
+177,2025-12-02,7045,Finanzas personales,,45,En curso
+178,2026-01-14,7020,Visualización,,23,Abandonado
+179,2026-06-06,7031,Machine Learning,7.0,18,Completado
+180,2026-02-14,7021,Machine Learning,,6,En curso
+181,2026-05-09,7060,Gestión de proyectos,,35,Abandonado
+182,2026-07-07,7006,Cloud Computing,7.8,59,Completado
+183,2026-07-16,7055,Finanzas personales,,38,En curso
+184,2025-07-27,7027,Python básico,8.7,9,Completado
+185,2025-07-29,7066,Machine Learning,,57,En curso
+186,2026-01-29,7060,Marketing digital,6.4,37,Completado
+187,2025-08-16,7072,Cloud Computing,,20,Abandonado
+188,2026-01-15,7009,Python básico,,10,Abandonado
+189,2026-01-15,7041,Cloud Computing,9.1,27,Completado
+190,2026-07-12,7014,Finanzas personales,3.0,52,Completado
+191,2026-08-01,7025,Finanzas personales,6.7,8,Completado
+192,2026-04-13,7002,Visualización,,35,Abandonado
+193,2026-05-02,7022,Finanzas personales,,29,En curso
+194,2026-05-29,7015,Cloud Computing,9.2,8,Completado
+195,2026-05-08,7041,Marketing digital,7.9,12,Completado
+196,2025-03-04,7001,Python básico,,28,Abandonado
+197,2025-05-25,7011,Cloud Computing,3.5,9,Completado
+198,2025-10-25,7025,Finanzas personales,,13,En curso
+199,2026-05-11,7087,Finanzas personales,5.4,30,Completado
+200,2026-03-14,7013,SQL para datos,,43,Abandonado
+201,2026-05-02,7075,SQL para datos,,24,Abandonado
+202,2026-03-21,7047,Gestión de proyectos,,49,Abandonado
+203,2026-04-12,7052,Marketing digital,,18,En curso
+204,2026-01-22,7006,Visualización,,12,Abandonado
+205,2025-01-17,7037,Python básico,,39,En curso
+206,2025-10-16,7047,Machine Learning,4.1,43,Completado
+207,2026-01-09,7049,Visualización,,49,Abandonado
+208,2025-07-25,7059,Machine Learning,,8,Abandonado
+209,2025-03-19,7012,Cloud Computing,,15,Abandonado
+210,2025-01-14,7080,Finanzas personales,,1,Abandonado
+211,2025-10-19,7047,Finanzas personales,,42,Abandonado
+212,2025-02-21,7032,SQL para datos,,21,En curso
+213,2026-08-24,7064,SQL para datos,,5,Abandonado
+214,2025-04-09,7043,Python básico,8.2,4,Completado
+215,2025-06-05,7051,Marketing digital,,0,Abandonado
+216,2025-02-03,7004,Machine Learning,,25,Abandonado
+217,2026-08-09,7045,Visualización,,42,Abandonado
+218,2025-12-11,7034,Finanzas personales,,55,En curso
+219,2025-10-23,7072,Visualización,4.5,22,Completado
+220,2025-04-21,7063,Cloud Computing,7.2,36,Completado
+221,2026-08-07,7052,SQL para datos,,52,En curso
+222,2025-09-06,7033,Marketing digital,,40,En curso
+223,2025-09-03,7050,Machine Learning,,1,En curso
+224,2026-05-22,7027,Machine Learning,9.6,52,Completado
+225,2026-03-10,7085,Gestión de proyectos,,9,En curso
+226,2026-07-06,7067,Gestión de proyectos,5.2,16,Completado
+227,2026-05-26,7076,Machine Learning,9.9,18,Completado
+228,2025-05-25,7001,Python básico,8.7,34,Completado
+229,2025-02-20,7051,SQL para datos,,19,Abandonado
+230,2026-01-22,7086,Python básico,,20,Abandonado
+231,2025-01-25,7012,Gestión de proyectos,,17,Abandonado
+232,2025-04-28,7027,Marketing digital,6.5,41,Completado
+233,2025-02-28,7026,Visualización,,15,Abandonado
+234,2025-08-11,7041,Marketing digital,,38,En curso
+235,2025-03-01,7026,Python básico,3.6,46,Completado
+236,2025-02-23,7005,Visualización,,4,Abandonado
+237,2026-06-18,7071,SQL para datos,,46,En curso
+238,2026-06-29,7001,Python básico,,11,En curso
+239,2025-08-25,7068,Gestión de proyectos,,44,Abandonado
+240,2025-07-04,7036,Python básico,5.3,39,Completado
+241,2025-08-14,7030,Finanzas personales,9.5,26,Completado
+242,2026-03-04,7055,Marketing digital,4.7,10,Completado
+243,2025-01-26,7069,SQL para datos,,8,Abandonado
+244,2026-03-16,7018,SQL para datos,,22,Abandonado
+245,2026-04-15,7074,Cloud Computing,,49,En curso
+246,2025-08-14,7059,SQL para datos,9.1,53,Completado
+247,2026-07-16,7012,Visualización,9.9,43,Completado
+248,2026-03-20,7032,Finanzas personales,9.0,59,Completado
+249,2026-04-04,7026,Cloud Computing,,8,Abandonado
+250,2026-08-22,7013,SQL para datos,,47,Abandonado
+251,2025-08-27,7040,Finanzas personales,7.7,26,Completado
+252,2025-01-30,7046,SQL para datos,,25,Abandonado
+253,2026-05-06,7063,SQL para datos,,32,En curso
+254,2026-02-12,7064,Machine Learning,,42,En curso
+255,2025-08-10,7068,Marketing digital,,59,Abandonado
+256,2026-07-12,7031,Gestión de proyectos,,1,En curso
+257,2026-02-11,7012,Machine Learning,,29,Abandonado
+258,2025-07-08,7052,Marketing digital,7.1,27,Completado
+259,2026-06-12,7056,Python básico,,36,En curso
+260,2025-07-19,7090,Finanzas personales,,41,Abandonado
+261,2025-11-29,7051,Machine Learning,9.6,11,Completado
+262,2026-07-05,7071,Python básico,,29,Abandonado
+263,2026-08-21,7038,Visualización,,51,Abandonado
+264,2026-07-03,7041,SQL para datos,,8,Abandonado
+265,2026-05-04,7042,Finanzas personales,,29,En curso
+266,2025-11-27,7020,Finanzas personales,,24,En curso
+267,2025-07-12,7038,Gestión de proyectos,6.8,47,Completado
+268,2025-03-16,7069,Cloud Computing,5.2,7,Completado
+269,2026-02-01,7057,Gestión de proyectos,9.2,30,Completado
+270,2025-07-12,7071,SQL para datos,,52,Abandonado
+271,2025-12-27,7018,Marketing digital,,22,Abandonado
+272,2026-06-30,7012,Finanzas personales,,5,Abandonado
+273,2025-11-12,7083,Marketing digital,8.9,2,Completado
+274,2026-01-05,7008,Python básico,,0,Abandonado
+275,2025-07-05,7078,Finanzas personales,4.8,35,Completado
+276,2026-04-20,7063,Python básico,,40,En curso
+277,2025-01-18,7030,Machine Learning,,37,Abandonado
+278,2025-06-03,7026,Gestión de proyectos,3.9,40,Completado
+279,2026-02-05,7002,Python básico,7.5,31,Completado
+280,2025-01-24,7036,Marketing digital,7.0,42,Completado
+281,2025-12-19,7083,Machine Learning,,11,Abandonado
+282,2026-02-22,7021,Visualización,9.0,52,Completado
+283,2026-07-29,7016,Python básico,,24,Abandonado
+284,2026-05-26,7022,Visualización,3.1,1,Completado
+285,2025-06-26,7018,Marketing digital,,41,En curso
+286,2026-08-11,7055,Finanzas personales,4.8,23,Completado
+287,2025-10-23,7031,Python básico,,44,En curso
+288,2025-04-05,7042,Cloud Computing,,19,En curso
+289,2026-01-12,7051,Marketing digital,,43,Abandonado
+290,2025-02-20,7064,Marketing digital,,34,En curso
+291,2025-11-08,7064,Cloud Computing,5.5,60,Completado
+292,2025-03-09,7048,Cloud Computing,4.8,24,Completado
+293,2026-07-17,7084,Marketing digital,,22,En curso
+294,2025-10-02,7066,Visualización,7.7,50,Completado
+295,2025-08-23,7038,Gestión de proyectos,,41,Abandonado
+296,2025-06-13,7071,Marketing digital,,53,En curso
+297,2026-02-06,7064,Cloud Computing,6.0,33,Completado
+298,2026-04-17,7041,Finanzas personales,4.1,23,Completado
+299,2025-01-05,7068,Cloud Computing,,15,En curso
+300,2026-02-23,7021,Visualización,,42,Abandonado
+301,2025-11-04,7084,Visualización,,55,En curso
+302,2025-12-12,7056,Python básico,,22,Abandonado
+303,2025-11-09,7004,Gestión de proyectos,,51,Abandonado
+304,2025-02-02,7008,Machine Learning,,34,En curso
+305,2026-04-20,7035,Machine Learning,,46,En curso
+306,2025-10-15,7002,Machine Learning,6.2,58,Completado
+307,2026-04-24,7078,Finanzas personales,7.0,14,Completado
+308,2025-11-19,7063,Cloud Computing,8.9,40,Completado
+309,2025-01-05,7045,Visualización,,35,Abandonado
+310,2025-12-10,7004,Gestión de proyectos,6.0,7,Completado
+311,2025-01-05,7046,Cloud Computing,7.7,21,Completado
+312,2025-07-09,7003,SQL para datos,,19,Abandonado
+313,2025-08-21,7027,SQL para datos,,8,En curso
+314,2025-09-29,7060,Visualización,,52,Abandonado
+315,2025-12-05,7029,Visualización,,5,En curso
+316,2025-12-28,7013,Python básico,4.0,17,Completado
+317,2026-01-02,7022,Machine Learning,,56,En curso
+318,2025-06-02,7059,Marketing digital,,53,En curso
+319,2025-07-07,7087,Gestión de proyectos,,7,En curso
+320,2026-05-23,7089,Visualización,6.7,33,Completado
+321,2025-12-25,7025,Gestión de proyectos,,18,Abandonado
+322,2026-03-18,7044,Python básico,4.8,51,Completado
+323,2025-03-24,7078,Visualización,,20,Abandonado
+324,2025-11-08,7013,Gestión de proyectos,6.3,53,Completado
+325,2025-08-14,7046,Finanzas personales,,44,En curso
+326,2025-05-19,7005,Finanzas personales,,11,En curso
+327,2025-07-24,7070,Visualización,5.9,28,Completado
+328,2025-04-08,7033,Machine Learning,,54,En curso
+329,2025-11-22,7012,Finanzas personales,,23,Abandonado
+330,2025-06-20,7055,Marketing digital,,16,Abandonado
+331,2025-01-30,7013,Cloud Computing,8.3,33,Completado
+332,2026-03-29,7016,Marketing digital,,10,Abandonado
+333,2025-03-02,7002,Marketing digital,,36,Abandonado
+334,2026-03-18,7030,Visualización,7.2,1,Completado
+335,2025-12-11,7031,SQL para datos,,27,Abandonado
+336,2025-02-03,7064,Gestión de proyectos,5.2,46,Completado
+337,2026-07-07,7079,Machine Learning,,58,Abandonado
+338,2026-03-05,7017,Finanzas personales,,14,Abandonado
+339,2025-08-09,7087,Cloud Computing,9.6,50,Completado
+340,2026-07-24,7030,Python básico,,19,Abandonado
+341,2025-04-03,7065,Cloud Computing,,41,En curso
+342,2025-09-06,7020,Marketing digital,4.0,19,Completado
+343,2025-05-29,7047,Machine Learning,9.0,50,Completado
+344,2025-05-16,7031,Finanzas personales,4.7,23,Completado
+345,2026-01-23,7048,Finanzas personales,,11,En curso
+346,2025-03-07,7078,SQL para datos,,45,Abandonado
+347,2025-01-25,7043,Cloud Computing,,40,En curso
+348,2026-06-18,7034,Visualización,9.3,41,Completado
+349,2026-01-17,7039,Visualización,6.1,58,Completado
+350,2025-06-10,7011,Finanzas personales,7.8,30,Completado
+351,2025-04-20,7016,Gestión de proyectos,,1,Abandonado
+352,2025-04-28,7053,Finanzas personales,7.8,38,Completado
+353,2025-12-14,7017,SQL para datos,,58,En curso
+354,2026-06-06,7058,SQL para datos,9.0,53,Completado
+355,2025-03-27,7055,Python básico,7.8,46,Completado
+356,2025-08-23,7065,Machine Learning,,10,En curso
+357,2026-07-18,7013,Visualización,,25,Abandonado
+358,2026-03-30,7073,Visualización,8.5,43,Completado
+359,2026-05-11,7059,SQL para datos,,49,En curso
+360,2025-05-21,7004,Finanzas personales,,31,En curso
+361,2025-10-27,7001,Gestión de proyectos,,54,En curso
+362,2025-03-24,7077,Gestión de proyectos,,55,Abandonado
+363,2025-11-22,7026,Python básico,4.8,0,Completado
+364,2026-01-22,7023,Visualización,3.9,35,Completado
+365,2025-02-05,7064,Visualización,,47,Abandonado
+366,2025-12-21,7040,Python básico,,10,Abandonado
+367,2026-05-31,7077,Marketing digital,,28,En curso
+368,2025-02-18,7051,Cloud Computing,4.7,0,Completado
+369,2025-07-30,7078,Cloud Computing,,26,Abandonado
+370,2026-04-16,7088,Gestión de proyectos,,19,Abandonado
+371,2025-05-30,7081,Visualización,6.8,50,Completado
+372,2026-06-02,7055,SQL para datos,,2,Abandonado
+373,2025-05-16,7010,Finanzas personales,8.8,11,Completado
+374,2025-11-18,7010,SQL para datos,9.1,15,Completado
+375,2026-01-20,7032,Python básico,,6,En curso
+376,2025-06-13,7070,Machine Learning,,0,En curso
+377,2026-07-15,7013,Machine Learning,6.7,23,Completado
+378,2026-07-18,7031,Visualización,3.2,43,Completado
+379,2026-02-01,7010,SQL para datos,,46,Abandonado
+380,2025-08-16,7082,Marketing digital,,53,En curso
+381,2025-03-30,7002,Finanzas personales,6.8,15,Completado
+382,2025-01-13,7049,Finanzas personales,,47,Abandonado
+383,2025-11-10,7066,Finanzas personales,,27,Abandonado
+384,2025-01-24,7062,Gestión de proyectos,3.3,8,Completado
+385,2025-04-13,7011,Python básico,,30,En curso
+386,2025-04-27,7002,Marketing digital,,15,En curso
+387,2026-01-09,7035,Python básico,,50,Abandonado
+388,2026-06-30,7084,Gestión de proyectos,,6,Abandonado
+389,2026-06-26,7024,Gestión de proyectos,6.2,5,Completado
+390,2025-03-24,7015,Cloud Computing,,51,Abandonado
+391,2026-01-06,7083,Cloud Computing,,59,En curso
+392,2026-04-29,7047,Machine Learning,,39,En curso
+393,2025-12-13,7051,Marketing digital,,52,En curso
+394,2025-07-10,7015,Finanzas personales,,27,Abandonado
+395,2026-04-02,7064,SQL para datos,4.7,44,Completado
+396,2026-05-28,7087,Marketing digital,,48,Abandonado
+397,2025-09-04,7019,Gestión de proyectos,,25,En curso
+398,2026-01-26,7014,Finanzas personales,8.2,34,Completado
+399,2026-05-22,7029,Visualización,5.6,29,Completado
+400,2026-06-22,7013,Finanzas personales,6.8,47,Completado
+401,2025-05-24,7037,Visualización,4.2,43,Completado
+402,2025-10-23,7084,Marketing digital,,4,Abandonado
+403,2026-02-05,7039,Marketing digital,,11,En curso
+404,2025-07-29,7064,Visualización,,0,En curso
+405,2025-04-24,7038,SQL para datos,,51,Abandonado
+406,2025-04-10,7059,Cloud Computing,,11,En curso
+407,2025-04-15,7081,Gestión de proyectos,,11,Abandonado
+408,2025-08-21,7038,SQL para datos,,38,Abandonado
+409,2026-03-08,7051,Visualización,,56,Abandonado
+410,2026-05-06,7054,Python básico,,53,En curso
+411,2025-11-17,7033,Marketing digital,,34,En curso
+412,2026-06-07,7073,Finanzas personales,,59,En curso
+413,2026-07-27,7003,Visualización,5.6,0,Completado
+414,2026-07-09,7004,Visualización,,31,En curso
+415,2025-08-22,7088,Marketing digital,,46,Abandonado
+416,2025-03-22,7030,Gestión de proyectos,,36,Abandonado
+417,2025-05-29,7024,SQL para datos,,42,Abandonado
+418,2025-03-01,7083,Marketing digital,6.4,21,Completado
+419,2025-02-14,7077,Cloud Computing,5.0,3,Completado
+420,2025-05-29,7049,SQL para datos,,5,Abandonado
+421,2025-06-24,7070,Machine Learning,,32,En curso
+422,2026-05-07,7021,SQL para datos,,33,En curso
+423,2025-04-27,7025,Finanzas personales,3.6,44,Completado
+424,2025-02-24,7075,Finanzas personales,,21,En curso
+425,2026-06-23,7087,Cloud Computing,,53,En curso
+426,2025-10-19,7074,Finanzas personales,,39,En curso
+427,2025-05-19,7077,SQL para datos,5.2,31,Completado
+428,2026-02-24,7016,Gestión de proyectos,5.0,26,Completado
+429,2025-04-08,7046,SQL para datos,,60,Abandonado
+430,2025-03-20,7002,Finanzas personales,,13,En curso
+431,2025-11-17,7081,Marketing digital,,55,Abandonado
+432,2025-07-24,7032,SQL para datos,10.0,10,Completado
+433,2026-01-11,7077,Gestión de proyectos,,28,En curso
+434,2026-03-01,7023,SQL para datos,,26,Abandonado
+435,2026-02-25,7077,Visualización,,31,En curso
+436,2025-03-14,7072,SQL para datos,,36,Abandonado
+437,2026-08-18,7028,Python básico,,25,Abandonado
+438,2025-04-27,7068,Visualización,7.9,41,Completado
+439,2025-03-20,7002,Marketing digital,,31,En curso
+440,2025-06-25,7045,SQL para datos,8.6,24,Completado
+441,2025-07-19,7029,Marketing digital,,58,Abandonado
+442,2026-06-24,7016,Gestión de proyectos,3.5,17,Completado
+443,2025-02-16,7075,Cloud Computing,8.3,44,Completado
+444,2025-06-17,7078,Gestión de proyectos,4.7,47,Completado
+445,2026-06-13,7038,Gestión de proyectos,,32,En curso
+446,2026-03-08,7029,Visualización,,43,En curso
+447,2026-07-16,7077,SQL para datos,,9,Abandonado
+448,2025-08-12,7062,Machine Learning,,9,En curso
+449,2025-04-19,7042,Finanzas personales,,51,En curso
+450,2025-07-08,7035,Gestión de proyectos,8.8,35,Completado
+451,2025-09-18,7009,Finanzas personales,,55,Abandonado
+452,2025-04-19,7054,Machine Learning,9.3,45,Completado
+453,2025-02-08,7025,SQL para datos,,44,En curso
+454,2025-08-27,7070,Cloud Computing,,22,En curso
+455,2026-07-23,7034,Cloud Computing,8.8,20,Completado
+456,2025-08-11,7030,Python básico,5.2,38,Completado
+457,2026-04-27,7032,Marketing digital,9.3,33,Completado
+458,2025-12-12,7085,Python básico,,41,Abandonado
+459,2025-11-10,7076,Gestión de proyectos,,56,En curso
+460,2026-04-21,7075,Machine Learning,,40,Abandonado
+461,2025-02-02,7036,Machine Learning,,44,Abandonado
+462,2026-05-11,7014,Visualización,,21,En curso
+463,2026-06-05,7084,SQL para datos,5.9,4,Completado
+464,2026-04-27,7027,Visualización,9.7,59,Completado
+465,2025-01-30,7055,Finanzas personales,,44,En curso
+466,2025-08-20,7018,Cloud Computing,6.4,0,Completado
+467,2025-05-16,7024,Machine Learning,,41,En curso
+468,2025-10-04,7022,SQL para datos,,44,Abandonado
+469,2025-08-24,7079,Python básico,,26,Abandonado
+470,2025-08-29,7087,Marketing digital,4.3,20,Completado
+471,2026-07-12,7040,SQL para datos,3.7,41,Completado
+472,2025-10-02,7040,Machine Learning,,18,En curso
+473,2025-06-09,7071,Python básico,,10,En curso
+474,2025-09-08,7089,Gestión de proyectos,,0,En curso
+475,2025-11-12,7090,Finanzas personales,,26,Abandonado
+476,2025-04-04,7045,SQL para datos,,42,Abandonado
+477,2025-03-08,7066,Gestión de proyectos,,26,En curso
+478,2026-08-13,7036,Cloud Computing,7.3,6,Completado
+479,2025-12-26,7040,Visualización,,39,En curso
+480,2025-03-08,7070,Visualización,,29,Abandonado
+481,2025-11-15,7005,Machine Learning,,19,En curso
+482,2025-02-27,7042,Machine Learning,7.8,24,Completado
+483,2025-03-14,7010,Python básico,,41,Abandonado
+484,2026-01-28,7026,Gestión de proyectos,,39,En curso
+485,2025-06-29,7035,Python básico,8.2,40,Completado
+486,2026-01-26,7023,Marketing digital,6.4,37,Completado
+487,2025-06-27,7085,Machine Learning,,36,En curso
+488,2026-01-28,7045,SQL para datos,4.6,36,Completado
+489,2026-07-09,7033,Visualización,8.8,38,Completado
+490,2025-08-25,7087,Cloud Computing,8.9,8,Completado
+491,2025-06-02,7036,Cloud Computing,,0,Abandonado
+492,2025-07-01,7049,Visualización,,17,En curso
+493,2025-11-04,7053,Visualización,4.4,60,Completado
+494,2025-08-02,7031,Finanzas personales,,23,En curso
+495,2026-06-24,7014,Marketing digital,,27,Abandonado
+496,2025-02-08,7079,Marketing digital,,49,En curso
+497,2025-06-29,7047,Cloud Computing,,15,En curso
+498,2025-05-17,7072,Gestión de proyectos,5.7,21,Completado
+499,2025-10-03,7003,Visualización,,21,En curso
+500,2025-12-22,7003,Machine Learning,,48,Abandonado
+501,2026-06-20,7072,Gestión de proyectos,,38,Abandonado
+502,2025-01-09,7035,Visualización,,36,En curso
+503,2026-03-09,7055,Cloud Computing,,20,Abandonado
+504,2025-04-09,7027,Finanzas personales,,25,En curso
+505,2025-05-08,7043,Visualización,4.8,0,Completado
+506,2025-12-15,7005,Cloud Computing,,8,Abandonado
+507,2026-04-12,7071,Visualización,,59,Abandonado
+508,2026-02-16,7036,Marketing digital,,33,En curso
+509,2026-04-06,7056,Cloud Computing,,29,En curso
+510,2025-04-20,7003,Finanzas personales,,44,En curso
+511,2026-03-20,7083,Python básico,9.1,5,Completado
+512,2026-03-27,7034,SQL para datos,,5,Abandonado
+513,2025-09-24,7004,Finanzas personales,8.6,6,Completado
+514,2026-05-07,7044,Gestión de proyectos,,26,En curso
+515,2025-11-30,7056,Python básico,,41,Abandonado
+516,2026-06-02,7044,Marketing digital,6.8,60,Completado
+517,2025-04-09,7003,Marketing digital,,31,Abandonado
+518,2025-09-25,7085,Machine Learning,,13,En curso
+519,2025-08-01,7037,Gestión de proyectos,,39,Abandonado
+520,2026-08-13,7082,Gestión de proyectos,,1,En curso
+521,2025-01-18,7036,Gestión de proyectos,,50,En curso
+522,2026-08-14,7053,Visualización,,31,En curso
+523,2025-02-16,7044,Machine Learning,,52,En curso
+524,2026-03-22,7034,SQL para datos,8.6,30,Completado
+525,2025-06-21,7090,Gestión de proyectos,,51,Abandonado
+526,2025-02-04,7058,Machine Learning,5.1,21,Completado
+527,2025-09-04,7008,Gestión de proyectos,,55,Abandonado
+528,2025-06-26,7063,Marketing digital,,55,En curso
+529,2025-03-15,7039,Marketing digital,,48,Abandonado
+530,2025-10-22,7032,Visualización,,48,Abandonado
+531,2025-02-23,7053,Marketing digital,,12,Abandonado
+532,2025-12-26,7042,Visualización,,1,Abandonado
+533,2025-05-25,7011,Finanzas personales,8.4,35,Completado
+534,2025-12-08,7074,SQL para datos,,51,En curso
+535,2025-08-02,7079,Python básico,,48,Abandonado
+536,2026-05-31,7038,Gestión de proyectos,,9,Abandonado
+537,2025-12-25,7063,Marketing digital,,48,En curso
+538,2026-02-01,7061,Gestión de proyectos,9.2,26,Completado
+539,2026-03-09,7019,Visualización,9.6,16,Completado
+540,2025-10-16,7039,Visualización,,40,Abandonado
+541,2026-02-17,7077,Marketing digital,,47,En curso
+542,2025-03-15,7032,Machine Learning,3.7,12,Completado
+543,2026-03-27,7029,Marketing digital,,5,En curso
+544,2025-02-18,7062,Finanzas personales,,56,Abandonado
+545,2025-11-05,7029,Cloud Computing,9.2,55,Completado
+546,2026-04-18,7046,Marketing digital,,11,En curso
+547,2025-05-20,7087,Marketing digital,,15,En curso
+548,2026-07-06,7051,Gestión de proyectos,,44,En curso
+549,2026-07-22,7006,Finanzas personales,,52,Abandonado
+550,2026-05-23,7064,Gestión de proyectos,,39,En curso
+551,2025-10-21,7035,Visualización,,60,Abandonado
+552,2025-12-09,7037,Machine Learning,,37,Abandonado
+553,2026-04-16,7046,Cloud Computing,6.1,56,Completado
+554,2026-04-22,7004,Marketing digital,6.3,35,Completado
+555,2025-01-26,7061,Cloud Computing,,55,En curso
+556,2026-05-07,7020,Marketing digital,9.7,29,Completado
+557,2026-04-01,7046,Gestión de proyectos,5.2,12,Completado
+558,2026-04-28,7039,Visualización,3.5,41,Completado
+559,2025-03-01,7027,Python básico,7.4,41,Completado
+560,2025-10-12,7006,Python básico,,50,Abandonado
+561,2026-02-12,7053,Gestión de proyectos,,46,En curso
+562,2025-10-25,7065,Cloud Computing,4.7,21,Completado
+563,2025-12-08,7032,Marketing digital,,23,Abandonado
+564,2025-07-04,7032,Visualización,,55,En curso
+565,2026-03-17,7087,Python básico,9.6,40,Completado
+566,2025-01-14,7088,Python básico,,16,Abandonado
+567,2026-08-08,7060,SQL para datos,9.0,4,Completado
+568,2025-09-09,7008,Cloud Computing,,37,Abandonado
+569,2026-03-08,7086,SQL para datos,,5,En curso
+570,2026-05-29,7077,Marketing digital,,53,Abandonado
+571,2025-04-15,7041,Gestión de proyectos,3.6,32,Completado
+572,2026-04-04,7028,Cloud Computing,,25,Abandonado
+573,2025-11-10,7055,Finanzas personales,5.2,28,Completado
+574,2026-02-23,7055,Finanzas personales,6.6,42,Completado
+575,2026-04-18,7001,Marketing digital,,25,En curso
+576,2026-01-28,7086,Machine Learning,,45,Abandonado
+577,2025-05-17,7079,Gestión de proyectos,8.2,25,Completado
+578,2026-08-24,7044,Gestión de proyectos,,1,Abandonado
+579,2025-03-11,7068,Cloud Computing,,45,Abandonado
+580,2025-08-27,7022,Visualización,,0,Abandonado
+581,2025-07-10,7024,Finanzas personales,,27,Abandonado
+582,2026-05-08,7037,Visualización,5.2,39,Completado
+583,2025-06-28,7069,Machine Learning,,4,En curso
+584,2025-08-10,7033,SQL para datos,5.5,34,Completado
+585,2025-02-03,7050,Cloud Computing,,31,En curso
+586,2025-09-07,7040,Visualización,,35,En curso
+587,2026-05-28,7076,Gestión de proyectos,4.8,10,Completado
+588,2025-11-03,7034,Cloud Computing,,52,En curso
+589,2025-09-26,7017,Cloud Computing,4.3,6,Completado
+590,2025-06-20,7003,Visualización,,50,Abandonado
+591,2025-08-20,7065,Gestión de proyectos,,5,En curso
+592,2026-02-21,7069,Marketing digital,,19,Abandonado
+593,2025-11-06,7064,SQL para datos,,13,En curso
+594,2025-03-20,7012,Visualización,9.4,0,Completado
+595,2026-06-11,7019,Gestión de proyectos,,12,En curso
+596,2025-11-22,7035,SQL para datos,,22,En curso
+597,2026-06-24,7027,Gestión de proyectos,,40,Abandonado
+598,2025-05-02,7022,Finanzas personales,,35,Abandonado
+599,2025-12-18,7078,Python básico,,51,En curso
+600,2025-11-07,7074,SQL para datos,,58,Abandonado
+601,2026-01-20,7022,Gestión de proyectos,,23,Abandonado
+602,2025-12-20,7067,Machine Learning,5.6,13,Completado
+603,2025-04-10,7069,Visualización,9.6,19,Completado
+604,2025-04-04,7069,Python básico,,46,Abandonado
+605,2025-03-08,7008,Cloud Computing,9.7,55,Completado
+606,2025-06-27,7050,Cloud Computing,4.8,58,Completado
+607,2026-01-14,7021,Finanzas personales,7.8,47,Completado
+608,2025-04-15,7031,Machine Learning,8.9,4,Completado
+609,2025-06-08,7066,Finanzas personales,,57,En curso
+610,2025-04-03,7025,SQL para datos,,18,En curso
+611,2025-03-27,7052,Gestión de proyectos,4.4,56,Completado
+612,2026-01-07,7083,Visualización,,54,En curso
+613,2025-02-09,7007,Visualización,5.2,3,Completado
+614,2025-01-11,7040,Finanzas personales,,28,En curso
+615,2025-04-13,7069,Python básico,7.7,39,Completado
+616,2026-07-17,7053,Cloud Computing,,42,En curso
+617,2026-04-13,7041,Marketing digital,,47,En curso
+618,2025-11-09,7056,Gestión de proyectos,8.2,56,Completado
+619,2025-07-08,7039,SQL para datos,8.5,9,Completado
+620,2025-10-01,7053,Gestión de proyectos,,9,Abandonado
+621,2025-11-11,7008,SQL para datos,,59,En curso
+622,2025-04-16,7080,Python básico,,26,Abandonado
+623,2026-01-27,7014,Marketing digital,,44,Abandonado
+624,2026-06-24,7079,Machine Learning,3.1,10,Completado
+625,2025-05-18,7086,SQL para datos,,25,En curso
+626,2026-05-31,7069,Machine Learning,5.9,9,Completado
+627,2026-05-27,7088,Gestión de proyectos,7.4,59,Completado
+628,2025-06-24,7082,Marketing digital,,53,En curso
+629,2026-01-26,7080,Machine Learning,,1,Abandonado
+630,2026-05-24,7068,SQL para datos,7.4,47,Completado
+631,2025-08-24,7001,Machine Learning,5.4,42,Completado
+632,2025-12-27,7082,Finanzas personales,,8,Abandonado
+633,2026-04-12,7017,Python básico,,45,Abandonado
+634,2025-02-17,7026,Finanzas personales,4.0,58,Completado
+635,2025-12-14,7035,Finanzas personales,,47,Abandonado
+636,2025-07-15,7017,Finanzas personales,,60,En curso
+637,2025-04-01,7016,Cloud Computing,7.3,21,Completado
+638,2025-02-15,7024,Gestión de proyectos,,43,Abandonado
+639,2025-01-24,7066,Machine Learning,,58,Abandonado
+640,2026-02-14,7081,Python básico,,51,Abandonado
+641,2025-01-30,7049,Machine Learning,5.0,50,Completado
+642,2025-01-14,7024,Marketing digital,,50,En curso
+643,2026-05-04,7046,Cloud Computing,,28,En curso
+644,2025-12-16,7052,Python básico,,45,Abandonado
+645,2025-03-27,7075,Gestión de proyectos,4.8,27,Completado
+646,2025-09-23,7051,Visualización,,2,Abandonado
+647,2025-12-04,7013,Gestión de proyectos,,27,En curso
+648,2026-05-19,7018,Finanzas personales,6.6,46,Completado
+649,2026-03-12,7049,Visualización,,4,En curso
+650,2025-02-23,7027,Marketing digital,,41,En curso
+651,2025-01-24,7017,SQL para datos,8.9,6,Completado
+652,2026-01-27,7025,Python básico,,59,Abandonado
+653,2025-10-11,7036,Finanzas personales,,57,En curso
+654,2025-01-16,7011,Visualización,,32,Abandonado
+655,2025-09-20,7003,Gestión de proyectos,5.3,46,Completado
+656,2025-06-22,7032,Cloud Computing,,19,Abandonado
+657,2025-05-05,7010,Cloud Computing,,29,Abandonado
+658,2025-02-18,7073,Gestión de proyectos,,14,Abandonado
+659,2025-05-12,7040,Visualización,,37,En curso
+660,2026-02-23,7046,Finanzas personales,9.7,13,Completado
+661,2025-12-06,7082,Visualización,8.7,8,Completado
+662,2026-02-08,7085,Finanzas personales,,0,Abandonado
+663,2026-06-07,7072,Marketing digital,,52,En curso
+664,2026-02-28,7081,Gestión de proyectos,,24,Abandonado
+665,2025-06-02,7089,Machine Learning,,23,Abandonado
+666,2026-07-02,7085,Machine Learning,,55,Abandonado
+667,2025-06-18,7021,Python básico,,48,Abandonado
+668,2025-08-12,7015,Machine Learning,,15,Abandonado
+669,2026-06-07,7048,Gestión de proyectos,3.3,27,Completado
+670,2025-11-02,7069,Marketing digital,,31,Abandonado
+671,2026-05-23,7053,Python básico,,39,Abandonado
+672,2025-11-28,7052,Visualización,,30,En curso
+673,2025-10-15,7035,Gestión de proyectos,,53,Abandonado
+674,2025-12-09,7074,Machine Learning,,5,En curso
+675,2025-07-25,7030,SQL para datos,,60,En curso
+676,2025-12-19,7062,Gestión de proyectos,,38,En curso
+677,2026-05-16,7081,Cloud Computing,9.5,34,Completado
+678,2025-03-31,7059,SQL para datos,,45,En curso
+679,2026-06-24,7082,Marketing digital,,43,En curso
+680,2026-03-31,7021,Gestión de proyectos,,48,En curso
+681,2025-05-01,7016,Finanzas personales,,27,Abandonado
+682,2025-08-18,7033,Cloud Computing,,39,En curso
+683,2025-11-22,7053,SQL para datos,,49,En curso
+684,2026-03-23,7046,Cloud Computing,,56,Abandonado
+685,2026-02-17,7015,Finanzas personales,,33,Abandonado
+686,2025-09-01,7077,Python básico,,58,En curso
+687,2025-07-31,7007,Gestión de proyectos,,47,Abandonado
+688,2025-04-23,7065,Marketing digital,3.4,50,Completado
+689,2025-12-02,7025,Finanzas personales,3.6,41,Completado
+690,2025-10-15,7082,Machine Learning,4.2,8,Completado
+691,2026-07-09,7068,Visualización,,19,En curso
+692,2025-06-21,7085,Finanzas personales,,24,Abandonado
+693,2025-02-19,7053,Cloud Computing,,27,Abandonado
+694,2025-02-20,7084,SQL para datos,,51,Abandonado
+695,2025-02-04,7082,Cloud Computing,,0,Abandonado
+696,2026-07-21,7027,Python básico,9.4,4,Completado
+697,2025-09-05,7043,Gestión de proyectos,6.1,50,Completado
+698,2026-02-14,7068,Finanzas personales,,6,En curso
+699,2025-09-25,7045,Cloud Computing,,26,En curso
+700,2025-09-08,7003,Machine Learning,,57,En curso
+701,2026-03-24,7051,Finanzas personales,7.3,54,Completado
+702,2026-02-17,7035,Machine Learning,,31,Abandonado
+703,2025-07-31,7018,Marketing digital,7.4,59,Completado
+704,2026-08-11,7090,SQL para datos,,6,En curso
+705,2025-06-06,7077,Gestión de proyectos,,26,Abandonado
+706,2025-06-07,7057,Gestión de proyectos,,47,Abandonado
+707,2026-01-01,7006,Gestión de proyectos,9.9,46,Completado
+708,2025-08-11,7084,Visualización,,55,Abandonado
+709,2026-05-25,7003,Finanzas personales,,21,Abandonado
+710,2025-05-23,7041,SQL para datos,,58,Abandonado
+711,2025-07-06,7021,Marketing digital,,16,En curso
+712,2026-01-15,7028,Marketing digital,,30,Abandonado
+713,2025-10-01,7083,Cloud Computing,,47,Abandonado
+714,2025-01-23,7051,Finanzas personales,6.1,53,Completado
+715,2026-07-31,7044,SQL para datos,7.7,38,Completado
+716,2026-01-19,7065,Gestión de proyectos,6.2,4,Completado
+717,2025-10-11,7020,Cloud Computing,,6,Abandonado
+718,2025-06-19,7040,Gestión de proyectos,,13,Abandonado
+719,2025-10-10,7087,Machine Learning,6.0,33,Completado
+720,2025-12-11,7087,Finanzas personales,6.6,17,Completado
+721,2026-03-21,7057,Gestión de proyectos,,24,En curso
+722,2025-02-07,7041,Finanzas personales,,1,Abandonado
+723,2025-11-07,7047,Cloud Computing,,41,En curso
+724,2025-11-10,7027,Visualización,,49,Abandonado
+725,2026-04-28,7056,Finanzas personales,,6,Abandonado
+726,2026-08-01,7044,Machine Learning,,60,En curso
+727,2025-01-03,7019,Cloud Computing,,49,Abandonado
+728,2025-09-04,7079,Cloud Computing,6.4,55,Completado
+729,2025-08-04,7015,Gestión de proyectos,,37,En curso
+730,2025-05-08,7060,Python básico,,42,En curso
+731,2025-12-08,7007,Cloud Computing,3.9,29,Completado
+732,2025-09-27,7059,Visualización,8.4,42,Completado
+733,2025-09-26,7010,Finanzas personales,,8,Abandonado
+734,2026-01-10,7023,Finanzas personales,,32,En curso
+735,2025-09-18,7044,SQL para datos,,14,En curso
+736,2026-05-15,7044,Cloud Computing,,6,En curso
+737,2025-12-03,7051,Gestión de proyectos,,29,Abandonado
+738,2025-11-18,7028,Machine Learning,,15,Abandonado
+739,2026-01-11,7019,Gestión de proyectos,,22,Abandonado
+740,2026-08-20,7071,Gestión de proyectos,8.8,31,Completado
+741,2026-05-15,7077,Gestión de proyectos,,59,En curso
+742,2026-02-17,7065,Python básico,7.6,9,Completado
+743,2025-05-01,7068,Visualización,,26,En curso
+744,2025-11-06,7022,Finanzas personales,4.5,0,Completado
+745,2025-09-15,7039,Marketing digital,6.3,51,Completado
+746,2025-04-09,7076,Cloud Computing,,46,En curso
+747,2026-05-16,7064,Visualización,,18,Abandonado
+748,2025-12-24,7016,Gestión de proyectos,,36,Abandonado
+749,2025-08-10,7044,Finanzas personales,6.6,60,Completado
+750,2026-02-17,7037,Python básico,,7,En curso

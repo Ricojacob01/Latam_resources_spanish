@@ -1,0 +1,91 @@
+estudiante_id,nombre_estudiante,edad,ciudad,nivel,programa
+7001,María Medina,45,Bogotá,Bachillerato,Salud
+7002,Paula Herrera,36,Guadalajara,Pregrado,Negocios
+7003,Lucía Castro,19,Guadalajara,Posgrado,Salud
+7004,Ana González,43,Quito,Posgrado,Negocios
+7005,Mateo Martínez,39,Lima,Bachillerato,Negocios
+7006,Ana Díaz,18,Ciudad de México,Bachillerato,Negocios
+7007,Luis Pérez,48,Guadalajara,Pregrado,Datos y IA
+7008,Ana Rivera,24,Buenos Aires,Pregrado,Ingeniería
+7009,Carlos Flores,25,Ciudad de México,Pregrado,Diseño
+7010,Fernando Rodríguez,22,Monterrey,Bachillerato,Datos y IA
+7011,Lucía González,17,Bogotá,Pregrado,Diseño
+7012,Mateo Sánchez,49,Buenos Aires,Bachillerato,Negocios
+7013,Sofía Torres,18,Ciudad de México,Pregrado,Negocios
+7014,Gabriela González,27,San José,Bachillerato,Ingeniería
+7015,Andrés Díaz,24,San José,Bachillerato,Ingeniería
+7016,Pablo Rodríguez,20,Bogotá,Bachillerato,Datos y IA
+7017,Miguel Flores,29,Santiago,Posgrado,Ingeniería
+7018,Valentina Ramírez,27,Monterrey,Bachillerato,Salud
+7019,Paula López,29,Buenos Aires,Bachillerato,Salud
+7020,Camila Rivera,42,San José,Pregrado,Datos y IA
+7021,Sofía Sánchez,35,Buenos Aires,Posgrado,Diseño
+7022,Juan Flores,55,Medellín,Pregrado,Ingeniería
+7023,Diego Torres,53,Córdoba,Pregrado,Diseño
+7024,Valentina Torres,27,Montevideo,Bachillerato,Salud
+7025,Andrés Ramírez,43,Medellín,Posgrado,Diseño
+7026,Mateo Torres,52,Córdoba,Posgrado,Datos y IA
+7027,Diego Romero,30,Monterrey,Pregrado,Ingeniería
+7028,Lucía Pérez,40,Guadalajara,Pregrado,Datos y IA
+7029,Gabriela Martínez,33,Medellín,Pregrado,Negocios
+7030,Andrés Ramírez,48,Ciudad de México,Posgrado,Diseño
+7031,Javier Flores,22,Lima,Pregrado,Datos y IA
+7032,Mateo Ramírez,41,Quito,Posgrado,Datos y IA
+7033,Diego Flores,44,Lima,Pregrado,Diseño
+7034,Lucía Ramírez,37,Santiago,Posgrado,Salud
+7035,Javier González,52,Córdoba,Pregrado,Negocios
+7036,Sofía Flores,28,Montevideo,Pregrado,Diseño
+7037,Gabriela González,35,Bogotá,Pregrado,Diseño
+7038,María Pérez,45,San José,Posgrado,Diseño
+7039,Valentina Medina,30,Monterrey,Pregrado,Negocios
+7040,Juan Vargas,51,Monterrey,Posgrado,Diseño
+7041,Mateo García,42,Bogotá,Pregrado,Salud
+7042,Sofía Flores,52,Medellín,Posgrado,Negocios
+7043,Pablo Medina,20,Guadalajara,Bachillerato,Datos y IA
+7044,Mateo Herrera,21,Bogotá,Pregrado,Salud
+7045,Valentina Castro,21,Ciudad de México,Bachillerato,Ingeniería
+7046,Fernando Sánchez,46,Buenos Aires,Pregrado,Ingeniería
+7047,Fernando Pérez,16,Bogotá,Pregrado,Salud
+7048,Pablo Vargas,46,Córdoba,Posgrado,Ingeniería
+7049,Miguel González,40,Montevideo,Pregrado,Salud
+7050,Valentina López,24,Bogotá,Pregrado,Diseño
+7051,Valentina Flores,44,Guadalajara,Bachillerato,Datos y IA
+7052,Camila González,53,San José,Bachillerato,Diseño
+7053,Juan Gómez,41,Santiago,Bachillerato,Salud
+7054,Carlos Castro,24,Montevideo,Posgrado,Salud
+7055,Juan García,29,Guadalajara,Posgrado,Datos y IA
+7056,Daniela Martínez,23,Buenos Aires,Posgrado,Diseño
+7057,Paula Flores,52,Medellín,Bachillerato,Salud
+7058,Javier Castro,17,Guadalajara,Posgrado,Salud
+7059,Mateo Sánchez,37,Santiago,Posgrado,Ingeniería
+7060,Luis López,40,Bogotá,Bachillerato,Datos y IA
+7061,Gabriela García,23,Guadalajara,Posgrado,Negocios
+7062,Gabriela Torres,53,Ciudad de México,Bachillerato,Negocios
+7063,Mateo Ramírez,33,Lima,Bachillerato,Diseño
+7064,Javier Romero,29,San José,Pregrado,Salud
+7065,Carlos Flores,18,Quito,Posgrado,Datos y IA
+7066,María Rodríguez,20,Guadalajara,Pregrado,Salud
+7067,Valentina Rodríguez,20,Lima,Posgrado,Ingeniería
+7068,Carlos Díaz,16,Lima,Posgrado,Salud
+7069,María García,19,Lima,Posgrado,Negocios
+7070,Luis González,49,Córdoba,Pregrado,Diseño
+7071,Carlos Díaz,50,Ciudad de México,Posgrado,Ingeniería
+7072,Pablo Rodríguez,31,Lima,Bachillerato,Ingeniería
+7073,Valentina Torres,48,Montevideo,Pregrado,Datos y IA
+7074,Miguel Torres,25,Ciudad de México,Bachillerato,Datos y IA
+7075,Valentina Martínez,43,Ciudad de México,Posgrado,Diseño
+7076,Gabriela López,47,Quito,Bachillerato,Negocios
+7077,Miguel Díaz,19,Bogotá,Pregrado,Diseño
+7078,Carlos Martínez,47,Bogotá,Bachillerato,Negocios
+7079,Carlos Flores,17,Buenos Aires,Pregrado,Diseño
+7080,Ana Pérez,49,Córdoba,Posgrado,Ingeniería
+7081,Juan Martínez,23,Buenos Aires,Posgrado,Diseño
+7082,Juan Rivera,24,Medellín,Posgrado,Ingeniería
+7083,Pablo Sánchez,43,Medellín,Posgrado,Datos y IA
+7084,Fernando Díaz,34,Guadalajara,Bachillerato,Salud
+7085,María Ramírez,51,Bogotá,Bachillerato,Diseño
+7086,Juan López,40,Bogotá,Posgrado,Datos y IA
+7087,Diego Ramírez,25,Bogotá,Pregrado,Datos y IA
+7088,Luis Martínez,31,Bogotá,Pregrado,Negocios
+7089,Lucía Rodríguez,42,Quito,Posgrado,Diseño
+7090,Diego Díaz,20,Guadalajara,Posgrado,Datos y IA
