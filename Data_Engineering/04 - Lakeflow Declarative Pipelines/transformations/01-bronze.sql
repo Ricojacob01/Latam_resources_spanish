@@ -10,7 +10,7 @@ AS SELECT
   _metadata.file_name AS file_name,
   *
 FROM STREAM READ_FILES(
-  "/Volumes/${catalog}/${user_suffix}_raw/transacciones/transacciones/*.csv",
+  "/Volumes/${catalogo}/${user_suffix}_raw/transacciones/transacciones/*.csv",
   FORMAT => "csv",
   HEADER => true
 );
@@ -22,7 +22,7 @@ AS SELECT
   _metadata.file_name AS file_name,
   *
 FROM STREAM READ_FILES(
-  "/Volumes/${catalog}/${user_suffix}_raw/transacciones/cuentas/*.json",
+  "/Volumes/${catalogo}/${user_suffix}_raw/transacciones/cuentas/*.json",
   FORMAT => "json"
 );
 
@@ -33,7 +33,7 @@ AS SELECT
   _metadata.file_name AS file_name,
   *
 FROM STREAM READ_FILES(
-  "/Volumes/${catalog}/${user_suffix}_raw/transacciones/sucursales/*.json",
+  "/Volumes/${catalogo}/${user_suffix}_raw/transacciones/sucursales/*.json",
   FORMAT => "json"
 );
 
@@ -44,6 +44,6 @@ AS SELECT
   _metadata.file_name AS file_name,
   *
 FROM STREAM READ_FILES(
-  "/Volumes/${catalog}/${user_suffix}_raw/transacciones/clientes_cdc/*.json",
+  "/Volumes/${catalogo}/${user_suffix}_raw/transacciones/clientes_cdc/*.json",
   FORMAT => "json"
 );

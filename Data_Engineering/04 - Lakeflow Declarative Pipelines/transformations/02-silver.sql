@@ -75,7 +75,9 @@ CREATE OR REFRESH STREAMING TABLE ${user_suffix}_silver.clientes (
   cedula STRING COMMENT "Cédula de identidad.",
   segmento STRING COMMENT "Segmento: retail, premium, empresarial.",
   email STRING COMMENT "Correo electrónico.",
-  telefono STRING COMMENT "Teléfono de contacto."
+  telefono STRING COMMENT "Teléfono de contacto.",
+  __START_AT TIMESTAMP COMMENT "Inicio de validez del registro (SCD Tipo 2).",
+  __END_AT TIMESTAMP COMMENT "Fin de validez del registro (SCD Tipo 2)."
 )
 COMMENT "Clientes con historial SCD Tipo 2.";
 
