@@ -1,10 +1,10 @@
 -- ==========================================================================
 -- GOLD: Resumen diario de transacciones por canal (CRC)
 -- Vista materializada con agregaciones por fecha y canal de transacción.
--- Fuente: bns.silver.transacciones | Destino: bns.gold.resumen_por_canal
+-- Fuente: ${catalog}.${user_suffix}_silver.transacciones | Destino: ${catalog}.${user_suffix}_gold.resumen_por_canal
 -- ==========================================================================
 
-CREATE OR REFRESH MATERIALIZED VIEW bns.gold.resumen_por_canal
+CREATE OR REFRESH MATERIALIZED VIEW ${catalog}.${user_suffix}_gold.resumen_por_canal
 (
   CONSTRAINT fecha_no_nula EXPECT (fecha_transaccion IS NOT NULL),
   CONSTRAINT canal_no_nulo EXPECT (canal IS NOT NULL),
@@ -18,6 +18,6 @@ SELECT
   canal,
   COUNT(*) AS total_transacciones,
   SUM(monto) AS monto_total_crc
-FROM bns.silver.transacciones
+FROM ${catalog}.${user_suffix}_silver.transacciones
 WHERE moneda = 'CRC'
 GROUP BY ALL;
