@@ -50,6 +50,12 @@ print(f"Volumen: {vol_path}")
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ##EXPECTCION & DATA QUALITY
+# MAGIC https://docs.databricks.com/aws/en/ldp/expectations
+
+# COMMAND ----------
+
 # DBTITLE 1,Verificar tablas
 # MAGIC %md
 # MAGIC ## C. Verificar tablas (después de que el pipeline termine)
@@ -99,8 +105,15 @@ for schema, table in tables:
 
 # DBTITLE 1,Segunda ejecución
 # MAGIC %md
-# MAGIC ## E. Segunda ejecución
+# MAGIC ## E. Segunda ejecución — Carga incremental
 # MAGIC
-# MAGIC 1. Ejecutar `99_incremental.ipynb`
-# MAGIC 2. Re-ejecutar el pipeline
-# MAGIC 3. Comparar métricas de calidad
+# MAGIC 1. Ejecute la celda siguiente para cargar datos incrementales al volumen
+# MAGIC 2. Re-ejecute el pipeline en **Jobs & Pipelines**
+# MAGIC 3. Compare métricas de calidad (filas nuevas, Data Quality tab)
+
+# COMMAND ----------
+
+# DBTITLE 1,Cargar datos incrementales
+# Carga archivos incrementales (transacciones + clientes CDC) al volumen
+# Equivale a ejecutar 99_incremental.ipynb — las variables ya están cargadas
+carga_datos("incremental")
